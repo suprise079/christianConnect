@@ -1,0 +1,32 @@
+.searchFellowship {
+    /* background-color: yellow; */
+    padding: .8em 0em;
+    /* padding: .2em .8em; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-bottom: .1em solid black;
+}
+
+.searchFellowship p {
+    margin: 0em;
+}
+
+.searchFellowship .fellowshipName {
+    /* background-color: blue; */
+    padding: .1em 0em;
+}
+
+.searchFellowship .subInfo {
+    /* background-color: red; */
+    margin: 0em;
+    font-size: .75em;
+}
+
+.searchFellowship .viewInfo {
+    background-color: yellow;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: .5em;
+}

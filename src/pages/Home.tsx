@@ -2,24 +2,34 @@ import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/rea
 import React from 'react';
 import './Home.css';
 
+
+// import component
+import SearchFellowship from '../components/searchFellowship/searchFellowship';
+
 const Home: React.FC = () => {
   return (
     <IonPage>
       
       <IonHeader>
-        <IonToolbar>
-          <IonTitle>Blank</IonTitle>
-        </IonToolbar>
+        <div className="searchField" >
+          <p >Search Fellowship</p>
+          <input type="text" placeholder="Search........" />
+        </div>
       </IonHeader>
 
 
       <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Blank</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-        <ExploreContainer />
+        <div className="mapContainer" >
+          <p className="header" >Showing Fellowship near you:</p>
+          <p className="map" >Map</p>
+        </div>
+
+        <div className="fellowships" >
+
+          <SearchFellowship />
+          <SearchFellowship />
+          <SearchFellowship />
+        </div>
       </IonContent>
 
 

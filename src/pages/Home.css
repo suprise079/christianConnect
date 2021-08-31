@@ -1,0 +1,74 @@
+* {
+    --ion-background-color: #ffffff;
+    --ion-color: black;
+}
+
+ion-header {
+    background-color: #348d63;
+    padding: 1em .5em .5em .5em;
+    border-radius: 0em 0em 1.5em 1.5em;
+    /* box-shadow: 0 0 0 white; */
+    border: 0em;
+}
+
+.searchField {
+    text-align: center;
+    outline-width: 0em;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    /* background-color: yellow; */
+    padding: 1em 0em 0em 0em;
+    margin: 1em 0em 0em 0em;
+}
+
+.searchField p {
+    /* background-color: red; */
+    margin: 0em;
+    font-size: .9em;
+}
+
+.searchField input {
+    width: 90%;
+    border-radius: 1em;
+    border: 0em;
+    padding: .4em 1em;
+    margin: auto;
+}
+
+input:hover,
+input:focus {
+    outline-width: 0em;
+}
+
+
+/* main content */
+
+ion-content {
+    /* --ion-background-color: red; */
+    --ion-text-color: black;
+    --ion-text-color-rgb: 255, 255, 255;
+}
+
+ion-content .mapContainer {
+    /* background-color: red; */
+    display: flex;
+    flex-direction: column;
+    padding: 1.5em 0em;
+}
+
+ion-content .mapContainer .map {
+    background-color: aquamarine;
+    margin: 0em;
+}
+
+ion-content .mapContainer .header {
+    /* background-color: aquamarine; */
+    font-weight: bold;
+    margin: 0em;
+}
+
+ion-content .fellowships {
+    background-color: inherit;
+    padding: .2em .8em;
+}
