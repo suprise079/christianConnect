@@ -5,7 +5,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    border-bottom: .1em solid black;
+    border-bottom: .1em solid rgb(92, 92, 92);
 }
 
 .searchFellowship p {
@@ -24,9 +24,15 @@
 }
 
 .searchFellowship .viewInfo {
-    background-color: yellow;
+    /* background-color: yellow; */
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    padding: .5em;
+    justify-content: space-evenly;
+}
+
+.searchFellowship .viewInfo ion-tab-button {
+    background-color: #348d63;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 }

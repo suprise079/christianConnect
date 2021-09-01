@@ -1,22 +1,34 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { IonContent, IonHeader, IonIcon, IonLabel, IonPage, IonTabBar, IonTabButton, IonTabs, IonTitle, 
+  IonToolbar 
+} from '@ionic/react';
+
 import React from 'react';
 import './Home.css';
 
 
+// import icons
+import {
+  home, arrowForward
+} from 'ionicons/icons'
+
 // import component
 import SearchFellowship from '../components/searchFellowship/searchFellowship';
+import TabBar from '../components/tabBar/tabBar';
+
+
+
+
 
 const Home: React.FC = () => {
   return (
     <IonPage>
-      
+
       <IonHeader>
         <div className="searchField" >
           <p >Search Fellowship</p>
           <input type="text" placeholder="Search........" />
         </div>
       </IonHeader>
-
 
       <IonContent fullscreen>
         <div className="mapContainer" >
@@ -25,13 +37,20 @@ const Home: React.FC = () => {
         </div>
 
         <div className="fellowships" >
-
-          <SearchFellowship />
           <SearchFellowship />
           <SearchFellowship />
         </div>
-      </IonContent>
 
+        {/* the button component tabbar for navigation */}
+        <TabBar />
+
+
+        <div className="moreFellowshipBtn" >
+          More Fellowships 
+          <IonIcon icon={ arrowForward } ></IonIcon>
+        </div>
+
+      </IonContent>
 
     </IonPage>
   );

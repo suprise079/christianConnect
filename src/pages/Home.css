@@ -72,3 +72,18 @@ ion-content .fellowships {
     background-color: inherit;
     padding: .2em .8em;
 }
+
+ion-tab-bar {
+    color: white;
+}
+
+ion-content .moreFellowshipBtn {
+    background-color: #348d63;
+    width: 70%;
+    margin: auto;
+    position: absolute;
+    bottom: 5em;
+    left: 3em;
+    right: 4em;
+    text-align: center;
+}

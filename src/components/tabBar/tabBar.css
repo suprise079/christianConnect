@@ -1,0 +1,7 @@
+.tabBarContainer {
+    background-color: yellow;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    /* padding: 1em 0em; */
+}
