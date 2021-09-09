@@ -42,7 +42,7 @@ const Welcome = () => {
       <img src={logo} alt="Logo" />
       <div className="Buttons">
         <Buttons
-        routerLink="/SignUgit p"
+        routerLink="/SignUp"
           onClick={() => {
             console.log("Hello RichMan");
           }}
