@@ -6,6 +6,7 @@ import { albums, home, person } from 'ionicons/icons';
 
 import Tab2 from './pages/Tab2';
 import './pages/Tab2.css';
+import './tabBar.css';
 
 const TabBar: React.FC = () => (
   <IonApp>

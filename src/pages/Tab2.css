@@ -13,24 +13,6 @@
 }
 
 
-/* tab */
-
-/* tab-bg-color */
-.ion-color-favorite {
-    --ion-color-base: var(--ion-color-favorite);
-}
-
-.ion-color-tabBtn {
-    --ion-color-base: var(--ion-color-tabBtn);
-}
-
-.ion-color-tabBtn:hover {
-    --ion-color-base: var(--ion-color-tabBtnHover);
-}
-#home{
-    color: white;
-}
-
 /* button color */
 .ion-color-btn{
     --ion-color-base:var(--ion-color-btn);

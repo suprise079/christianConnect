@@ -1,5 +1,5 @@
 import { IonContent, IonGrid, IonRow, IonCol, IonHeader, IonPage, IonTitle, IonToolbar, IonButton, IonIcon } from '@ionic/react';
-import { arrowForward, arrowForwardCircle, arrowForwardCircleSharp, arrowForwardOutline } from 'ionicons/icons';
+import { play } from 'ionicons/icons';
 import church from './church.jpeg';
 import './Tab2.css';
 
@@ -24,7 +24,7 @@ const Tab2: React.FC = () => {
             <IonCol id='2'><img className='highlightImg' src={church} alt='fellow2' /></IonCol>
             <IonCol id='3'><img className='highlightImg' src={church} alt='fellow3' /></IonCol>
             <IonCol id='4'><img className='highlightImg' src={church} alt='fellow4' /></IonCol>
-            <IonCol id='5' className='viewBtn'>View All<IonIcon icon={arrowForwardOutline}/> </IonCol>
+            <IonCol id='5' className='viewBtn'>View All<IonIcon icon={play} /> </IonCol>
           </IonRow>
       </IonGrid>
       

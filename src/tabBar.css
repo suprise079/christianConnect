@@ -1,0 +1,24 @@
+/* variables */
+:root {
+    --ion-color-favorite: #348D63;
+    --ion-color-tabBtn: #000000;
+    --ion-color-tabBtnHover: #ffffff;
+
+}
+
+
+/* tab */
+
+/* tab-bg-color */
+.ion-color-favorite {
+    --ion-color-base: var(--ion-color-favorite);
+}
+
+.ion-color-tabBtn {
+    --ion-color-base: var(--ion-color-tabBtn);
+}
+
+.ion-color-tabBtn:hover {
+    --ion-color-base: var(--ion-color-tabBtnHover);
+}
+
