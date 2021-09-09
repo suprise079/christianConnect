@@ -1,4 +1,4 @@
-import { IonContent, IonHeader, IonIcon, IonLabel, IonPage, IonTabBar, IonTabButton, IonTabs, IonTitle, 
+import { IonButton, IonContent, IonHeader, IonIcon, IonLabel, IonPage, IonTabBar, IonTabButton, IonTabs, IonTitle, 
   IonToolbar 
 } from '@ionic/react';
 
@@ -8,7 +8,7 @@ import './Home.css';
 
 // import icons
 import {
-  home, arrowForward
+  home, arrowForward, arrowForwardOutline, 
 } from 'ionicons/icons'
 
 // import component
@@ -45,11 +45,13 @@ const Home: React.FC = () => {
         <TabBar />
 
 
-        <div className="moreFellowshipBtn" >
-          More Fellowships 
-          <IonIcon icon={ arrowForward } ></IonIcon>
-        </div>
-
+        {/* <div className="moreFellowshipBtn" > */}
+          <button className="moreFellowshipBtn" >
+            More Fellowships <IonIcon icon={ arrowForward } >  </IonIcon>
+          </button>
+          
+          
+        {/* </div> */}
       </IonContent>
 
     </IonPage>

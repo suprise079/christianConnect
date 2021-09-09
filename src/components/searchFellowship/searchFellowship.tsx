@@ -2,7 +2,7 @@ import { IonButton, IonIcon, IonLabel, IonTabButton
  } from '@ionic/react';
 
 import { 
-  home
+  home, codeDownload, downloadSharp, download
 } from 'ionicons/icons';
 
 import React from 'react'
@@ -24,7 +24,7 @@ const SearchFellowship: React.FC = () => {
 
       <div className="viewInfo" >
         <IonTabButton >
-          <IonIcon icon={ home } ></IonIcon> <br />
+          <IonIcon icon={ downloadSharp } ></IonIcon> <br />
           <IonLabel >VIew</IonLabel>
         </IonTabButton>
       </div>

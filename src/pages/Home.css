@@ -48,6 +48,7 @@ ion-content {
     /* --ion-background-color: red; */
     --ion-text-color: black;
     --ion-text-color-rgb: 255, 255, 255;
+    padding: 10em;
 }
 
 ion-content .mapContainer {
@@ -77,13 +78,24 @@ ion-tab-bar {
     color: white;
 }
 
+input:hover,
+input:focus {
+    outline-width: 0em;
+    border: 0em;
+}
+
 ion-content .moreFellowshipBtn {
-    background-color: #348d63;
+    background-color: #16e9e6;
     width: 70%;
     margin: auto;
-    position: absolute;
-    bottom: 5em;
+    position: fixed;
+    bottom: 6em;
     left: 3em;
     right: 4em;
     text-align: center;
+    padding: .7em;
+    border-radius: 5em;
+    display: flex;
+    justify-content: center;
+    box-shadow: 0em 0em .3em rgb(162, 162, 162);
 }

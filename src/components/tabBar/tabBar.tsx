@@ -1,10 +1,9 @@
 import { IonTabBar, IonTabButton, IonIcon, IonLabel
- } from '@ionic/react';
-
-
-
-import { home, mail, person } from 'ionicons/icons';
-
+} from '@ionic/react';
+import { home, mail, person, shareSocialOutline } from 'ionicons/icons';
+import styled from 'styled-components';
+import { FaHome } from 'react-icons/fa';
+// impor } from 'react-icons/hi';
 
 import React from 'react';
 
@@ -15,25 +14,56 @@ const TabBar: React.FC = () => {
 
   return (
     <div className="tabBarContainer" >
-      <IonTabBar >
-          {/* href="/home" */}
-          <IonTabButton >
-            <IonIcon icon={ home } ></IonIcon>
-            <IonLabel >Home</IonLabel>
-          </IonTabButton>
-          {/* href="/subscription" */}
-          <IonTabButton >
-            <IonIcon icon={ mail } ></IonIcon>
-            <IonLabel >Subscription</IonLabel>
-          </IonTabButton>
-          {/* href="/" */}
-          <IonTabButton >
-            <IonIcon icon={ person } ></IonIcon>
-            <IonLabel >Profile</IonLabel>
-          </IonTabButton>
-        </IonTabBar>
+      <div >
+        {/* <IonIcon icon={ home } ></IonIcon> */}
+        <i > <FaHome /> </i> 
+        <IonLabel > Home </IonLabel>
+      </div>
+
+      <div >
+        <i >
+          <IonIcon icon={ mail } ></IonIcon>
+        </i>
+        
+        <IonLabel > Subscription </IonLabel>
+      </div>
+
+      <div >
+        <i >
+          <IonIcon icon={ person } ></IonIcon>
+        </i>
+        <IonLabel > Profile </IonLabel>
+      </div>
     </div>
   );
 }
 
 export default TabBar;
+
+
+
+
+{/* <IonTabBar > */}
+  {/* href="/home" */}
+  // <IonTabButton >
+    {/* <button > */}
+      // <IonIcon icon={
+        //  home} ></IonIcon>
+      // <IonLabel >Home</IonLabel>
+    {/* </button> */}
+  // </IonTabButton>
+
+  {/* href="/subscription" */}
+  // <IonTabButton >
+    // <IonIcon icon={ 
+      // mail } ></IonIcon>
+    // <IonLabel >Subscription</IonLabel>
+  // </IonTabButton>
+
+  {/* href="/" */}
+  // <IonTabButton >
+    // <IonIcon icon={ 
+      // person } ></IonIcon>
+    // <IonLabel >Profile</IonLabel>
+  // </IonTabButton>
+// </IonTabBar>

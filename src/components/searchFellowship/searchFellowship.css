@@ -36,3 +36,11 @@
     flex-direction: column;
     justify-content: space-around;
 }
+
+.searchFellowship .viewInfo ion-tab-button:hover {
+    color: white;
+}
+
+.searchFellowship .viewInfo ion-tab-button ion-label {
+    font-size: 1.1em;
+}
