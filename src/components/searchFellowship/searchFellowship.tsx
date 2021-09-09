@@ -23,9 +23,10 @@ const SearchFellowship: React.FC = () => {
       </div>
 
       <div className="viewInfo" >
-        <IonTabButton >
+        <IonTabButton href="/aboutFellowship" >
+
           <IonIcon icon={ downloadSharp } ></IonIcon> <br />
-          <IonLabel >VIew</IonLabel>
+          <IonLabel >View</IonLabel>
         </IonTabButton>
       </div>
     </div>

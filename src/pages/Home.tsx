@@ -15,10 +15,6 @@ import {
 import SearchFellowship from '../components/searchFellowship/searchFellowship';
 import TabBar from '../components/tabBar/tabBar';
 
-
-
-
-
 const Home: React.FC = () => {
   return (
     <IonPage>
@@ -38,7 +34,7 @@ const Home: React.FC = () => {
 
         <div className="fellowships" >
           <SearchFellowship />
-          <SearchFellowship />
+          {/* <SearchFellowship /> */}
         </div>
 
         {/* the button component tabbar for navigation */}

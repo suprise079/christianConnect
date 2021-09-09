@@ -1,0 +1,18 @@
+.aboutFellowship {
+    background-color: yellow;
+}
+
+.aboutFellowship .navigator {
+    display: flex;
+    justify-content: space-between;
+    /* background-color: #348d63; */
+    background-color: red;
+}
+
+.aboutFellowship .navigator button {
+    border: 0em;
+    padding: .7em 1em;
+    /* background-color: inherit; */
+    background-color: #348d63;
+    color: white;
+}
