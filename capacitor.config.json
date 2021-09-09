@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "ChristianConnect",
+	"webDir": "build",
+	"bundledWebRuntime": false
+}
