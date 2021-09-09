@@ -1,5 +1,5 @@
-import { IonPage } from "@ionic/react";
-import "./Welcome.css";
+import { IonButton, IonPage } from "@ionic/react";
+import "../../pages/StylesForPages.css";
 import logo from "./Logo_transp.png";
 import styled from "styled-components";
 
@@ -29,8 +29,7 @@ const Body = styled(IonPage)`
     width: 100%;
   }
 `;
-const Buttons = styled.button`
-  /* position: absolute; */
+const Buttons = styled(IonButton)`
   width: 151px;
   height: 35px;
   border-radius: 10px;
@@ -43,6 +42,7 @@ const Welcome = () => {
       <img src={logo} alt="Logo" />
       <div className="Buttons">
         <Buttons
+        routerLink="/SignUgit p"
           onClick={() => {
             console.log("Hello RichMan");
           }}
