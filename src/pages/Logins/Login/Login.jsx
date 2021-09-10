@@ -9,7 +9,9 @@ import {
 } from "@ionic/react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import "../../pages/StylesForPages.css";
+import { useState } from "react";
+import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
+import "../StylesForPages.css";
 import bg from "./bg.png";
 
 const Body = styled(IonPage)`
@@ -42,6 +44,7 @@ const Body = styled(IonPage)`
   label {
     text-shadow: none;
     margin: 1.2% 5%;
+    
   }
   input[type="submit"] {
     width: 30vw;
@@ -63,6 +66,8 @@ const handleSubmit = (e) => {
   console.log(e.target);
 };
 const Login = () => {
+  const [showPassword, setshowPassword] = useState(false);
+  const [pswdType, setpswdType] = useState("password");
   return (
     <Body>
       <IonHeader color="white" className="ion-no-border">
@@ -89,11 +94,24 @@ const Login = () => {
             clearInput="true"
             className="inputField"
           ></IonInput>
-
-          <label htmlFor="Password">Password</label>
+          <label htmlFor="Password">
+            Password
+            <span
+              onClick={() => {
+                setshowPassword(showPassword ? false : true);
+                setpswdType(showPassword ? "password" : "text");
+              }}
+            >
+              {showPassword ? (
+                <AiFillEyeInvisible size="23px" />
+              ) : (
+                <AiFillEye size="23px" />
+              )}
+            </span>
+          </label>
           <IonInput
             required
-            type="password"
+            type={pswdType}
             clearInput="true"
             className="inputField"
           ></IonInput>
@@ -102,9 +120,10 @@ const Login = () => {
         </form>
       </div>
       <div className="haveAcc">
-        Don't have an account ? <Link to="/home">Login</Link>
+        Don't have an account ? <Link to="/home">Register</Link>
       </div>
       <div className="haveAcc">
+        {/* set forgot password page */}
         <Link to="/home">Forgot password ?</Link>
       </div>
     </Body>

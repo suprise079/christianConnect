@@ -1,5 +1,5 @@
 import { IonButton, IonPage } from "@ionic/react";
-import "../../pages/StylesForPages.css";
+import "../StylesForPages.css";
 import logo from "./Logo_transp.png";
 import styled from "styled-components";
 

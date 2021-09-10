@@ -10,7 +10,7 @@ import {
   import styled from "styled-components";
   import { Link } from "react-router-dom";
   import {AiFillEyeInvisible,AiFillEye} from "react-icons";
-  import "../../pages/StylesForPages.css";
+  import "../StylesForPages.css";
   
   const Body = styled(IonPage)`
     position: relative;

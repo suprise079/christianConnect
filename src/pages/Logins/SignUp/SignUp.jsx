@@ -9,7 +9,10 @@ import {
 } from "@ionic/react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import "../../pages/StylesForPages.css";
+
+import { useState } from "react";
+import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
+import "../StylesForPages.css";
 
 const Body = styled(IonPage)`
   position: relative;
@@ -27,6 +30,9 @@ const Body = styled(IonPage)`
 `;
 
 const SignUp = () => {
+  const [showPassword, setshowPassword] = useState(false);
+  const [pswdType, setpswdType] = useState("password");
+
   return (
     <Body>
       <IonHeader color="inherit" className="ion-no-border">
@@ -42,7 +48,7 @@ const SignUp = () => {
         <form action="/" method="post">
           <label htmlFor="name">Name of fellowship</label>
           <IonInput
-          required
+            required
             name="name"
             clearInput="true"
             className="inputField"
@@ -50,7 +56,7 @@ const SignUp = () => {
 
           <label htmlFor="First name">First name</label>
           <IonInput
-          required
+            required
             name="First name"
             clearInput="true"
             className="inputField"
@@ -58,7 +64,7 @@ const SignUp = () => {
 
           <label htmlFor="Last name">Last name</label>
           <IonInput
-          required
+            required
             name="Last name"
             clearInput="true"
             className="inputField"
@@ -67,7 +73,7 @@ const SignUp = () => {
           <label htmlFor="Phone number">Phone number</label>
           {/* will use regex validation to format to NUMBERS ONLY */}
           <IonInput
-          required
+            required
             name="Phone number"
             clearInput="true"
             className="inputField"
@@ -75,24 +81,52 @@ const SignUp = () => {
 
           <label htmlFor="Email address">Email address</label>
           <IonInput
-          required
+            required
             type="email"
             name="Email address"
             clearInput="true"
             className="inputField"
           ></IonInput>
 
-          <label htmlFor="Password">Password</label>
+          <label htmlFor="Password">
+            Password{" "}
+            <span
+              onClick={() => {
+                setshowPassword(showPassword ? false : true);
+                setpswdType(showPassword ? "password" : "text");
+              }}
+            >
+              {showPassword ? (
+                <AiFillEyeInvisible size="23px" />
+              ) : (
+                <AiFillEye size="23px" />
+              )}
+            </span>
+          </label>
           <IonInput
-          required
-            type="password"
+            required
+            type={pswdType}
             clearInput="true"
             className="inputField"
           ></IonInput>
 
-          <label htmlFor="Confirm password">Confirm password</label>
+          <label htmlFor="Confirm password">
+            Confirm password
+            <span
+              onClick={() => {
+                setshowPassword(showPassword ? false : true);
+                setpswdType(showPassword ? "password" : "text");
+              }}
+            >
+              {showPassword ? (
+                <AiFillEyeInvisible size="23px" />
+              ) : (
+                <AiFillEye size="23px" />
+              )}
+            </span>
+          </label>
           <IonInput
-          required
+            required
             type="password"
             name="Confirm password"
             clearInput="true"
