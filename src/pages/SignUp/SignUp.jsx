@@ -42,6 +42,7 @@ const SignUp = () => {
         <form action="/" method="post">
           <label htmlFor="name">Name of fellowship</label>
           <IonInput
+          required
             name="name"
             clearInput="true"
             className="inputField"
@@ -49,6 +50,7 @@ const SignUp = () => {
 
           <label htmlFor="First name">First name</label>
           <IonInput
+          required
             name="First name"
             clearInput="true"
             className="inputField"
@@ -56,6 +58,7 @@ const SignUp = () => {
 
           <label htmlFor="Last name">Last name</label>
           <IonInput
+          required
             name="Last name"
             clearInput="true"
             className="inputField"
@@ -64,6 +67,7 @@ const SignUp = () => {
           <label htmlFor="Phone number">Phone number</label>
           {/* will use regex validation to format to NUMBERS ONLY */}
           <IonInput
+          required
             name="Phone number"
             clearInput="true"
             className="inputField"
@@ -71,6 +75,7 @@ const SignUp = () => {
 
           <label htmlFor="Email address">Email address</label>
           <IonInput
+          required
             type="email"
             name="Email address"
             clearInput="true"
@@ -79,6 +84,7 @@ const SignUp = () => {
 
           <label htmlFor="Password">Password</label>
           <IonInput
+          required
             type="password"
             clearInput="true"
             className="inputField"
@@ -86,6 +92,7 @@ const SignUp = () => {
 
           <label htmlFor="Confirm password">Confirm password</label>
           <IonInput
+          required
             type="password"
             name="Confirm password"
             clearInput="true"
@@ -94,7 +101,7 @@ const SignUp = () => {
           <input type="submit" value="Create a Fellowship" />
         </form>
         <div className="haveAcc">
-          Have an account ? <Link to="/home">Login</Link>
+          Have an account ? <Link to="/Login">Login</Link>
         </div>
       </div>
     </Body>

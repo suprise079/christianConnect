@@ -42,14 +42,14 @@ const Welcome = () => {
       <img src={logo} alt="Logo" />
       <div className="Buttons">
         <Buttons
-        routerLink="/SignUp"
+          routerLink="/SignUp"
           onClick={() => {
             console.log("Hello RichMan");
           }}
         >
           Leaders
         </Buttons>
-        <Buttons>Users</Buttons>
+        <Buttons routerLink="/SignUpU">Users</Buttons>
       </div>
     </Body>
   );

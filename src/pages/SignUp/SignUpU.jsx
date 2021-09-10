@@ -9,6 +9,7 @@ import {
   } from "@ionic/react";
   import styled from "styled-components";
   import { Link } from "react-router-dom";
+  import {AiFillEyeInvisible,AiFillEye} from "react-icons";
   import "../../pages/StylesForPages.css";
   
   const Body = styled(IonPage)`
@@ -34,18 +35,13 @@ import {
             <IonButtons slot="start">
               <IonBackButton defaultHref="/" />
             </IonButtons>
-            <IonTitle>Register your fellowship</IonTitle>
+            <IonTitle>Create your account</IonTitle>
           </IonToolbar>
         </IonHeader>
   
         <div id="inputs">
           <form action="/" method="post">
-            <label htmlFor="name">Name of fellowship</label>
-            <IonInput
-              name="name"
-              clearInput="true"
-              className="inputField"
-            ></IonInput>
+            
   
             <label htmlFor="First name">First name</label>
             <IonInput
@@ -84,17 +80,17 @@ import {
               className="inputField"
             ></IonInput>
   
-            <label htmlFor="Confirm password">Confirm password</label>
+            <label htmlFor="Confirm password">Confirm Password</label>
             <IonInput
               type="password"
               name="Confirm password"
               clearInput="true"
               className="inputField"
             ></IonInput>
-            <input type="submit" value="Create a Fellowship" />
+            <input type="submit" value="Register" />
           </form>
           <div className="haveAcc">
-            Have an account ? <Link to="/home">Login</Link>
+            Have an account ? <Link to="/Login">Login</Link>
           </div>
         </div>
       </Body>
