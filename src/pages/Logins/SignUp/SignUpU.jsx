@@ -9,7 +9,8 @@ import {
   } from "@ionic/react";
   import styled from "styled-components";
   import { Link } from "react-router-dom";
-  import {AiFillEyeInvisible,AiFillEye} from "react-icons";
+  import { useState } from "react";
+  import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
   import "../StylesForPages.css";
   
   const Body = styled(IonPage)`
@@ -28,6 +29,11 @@ import {
   `;
   
   const SignUpU = () => {
+    const [showPassword, setshowPassword] = useState(false);
+    const [pswdType, setpswdType] = useState("password");
+    const [confpswd, setconfpswd] = useState("password");
+    const [showConf, setshowConf] = useState(false);
+
     return (
       <Body>
         <IonHeader color="inherit" className="ion-no-border">
@@ -73,20 +79,50 @@ import {
               className="inputField"
             ></IonInput>
   
-            <label htmlFor="Password">Password</label>
-            <IonInput
-              type="password"
-              clearInput="true"
-              className="inputField"
-            ></IonInput>
-  
-            <label htmlFor="Confirm password">Confirm Password</label>
-            <IonInput
-              type="password"
-              name="Confirm password"
-              clearInput="true"
-              className="inputField"
-            ></IonInput>
+  <label htmlFor="Password">
+            Password{" "}
+            <span
+              onClick={() => {
+                setshowPassword(showPassword ? false : true);
+                setpswdType(showPassword ? "password" : "text");
+              }}
+            >
+              {showPassword ? (
+                <AiFillEyeInvisible size="23px" />
+              ) : (
+                <AiFillEye size="23px" />
+              )}
+            </span>
+          </label>
+          <IonInput
+            required
+            type={pswdType}
+            clearInput="true"
+            className="inputField"
+          ></IonInput>
+
+          <label htmlFor="Confirm password">
+            Confirm password
+            <span
+              onClick={() => {
+                setshowConf(showConf ? false : true);
+                setconfpswd(showConf ? "password" : "text");
+              }}
+            >
+              {showConf ? (
+                <AiFillEyeInvisible size="23px" />
+              ) : (
+                <AiFillEye size="23px" />
+              )}
+            </span>
+          </label>
+          <IonInput
+            required
+            type={confpswd}
+            name="Confirm password"
+            clearInput="true"
+            className="inputField"
+          ></IonInput>
             <input type="submit" value="Register" />
           </form>
           <div className="haveAcc">

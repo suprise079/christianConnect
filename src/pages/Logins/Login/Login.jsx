@@ -44,7 +44,10 @@ const Body = styled(IonPage)`
   label {
     text-shadow: none;
     margin: 1.2% 5%;
-    
+    width:70%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
   }
   input[type="submit"] {
     width: 30vw;
@@ -52,13 +55,6 @@ const Body = styled(IonPage)`
     margin: 20px 5%;
     color: #348d63;
     background: transparent;
-    // background: rgb(164, 204, 185);
-    // background: linear-gradient(
-    //   345deg,
-    //   rgba(164, 204, 185, 1) 26%,
-    //   rgba(52, 141, 99, 1) 60%,
-    //   rgba(52, 141, 99, 1) 100%
-    // );
   }
 `;
 const handleSubmit = (e) => {

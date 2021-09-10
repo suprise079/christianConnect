@@ -32,6 +32,8 @@ const Body = styled(IonPage)`
 const SignUp = () => {
   const [showPassword, setshowPassword] = useState(false);
   const [pswdType, setpswdType] = useState("password");
+  const [confpswd, setconfpswd] = useState("password");
+  const [showConf, setshowConf] = useState(false);
 
   return (
     <Body>
@@ -114,11 +116,11 @@ const SignUp = () => {
             Confirm password
             <span
               onClick={() => {
-                setshowPassword(showPassword ? false : true);
-                setpswdType(showPassword ? "password" : "text");
+                setshowConf(showConf ? false : true);
+                setconfpswd(showConf ? "password" : "text");
               }}
             >
-              {showPassword ? (
+              {showConf ? (
                 <AiFillEyeInvisible size="23px" />
               ) : (
                 <AiFillEye size="23px" />
@@ -127,7 +129,7 @@ const SignUp = () => {
           </label>
           <IonInput
             required
-            type="password"
+            type={confpswd}
             name="Confirm password"
             clearInput="true"
             className="inputField"
