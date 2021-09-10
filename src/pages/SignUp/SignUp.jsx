@@ -7,8 +7,9 @@ import {
   IonToolbar,
   IonTitle,
 } from "@ionic/react";
-import "../../pages/StylesForPages.css";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
+import "../../pages/StylesForPages.css";
 
 const Body = styled(IonPage)`
   position: relative;
@@ -90,8 +91,11 @@ const SignUp = () => {
             clearInput="true"
             className="inputField"
           ></IonInput>
-          <input type="submit" value="Create a Fellowship"/>
+          <input type="submit" value="Create a Fellowship" />
         </form>
+        <div className="haveAcc">
+          Have an account ? <Link to="/home">Login</Link>
+        </div>
       </div>
     </Body>
   );

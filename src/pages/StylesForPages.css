@@ -39,3 +39,10 @@ input[type=submit]{
   border:2px solid #348d60;
   background:none;
 }
+.haveAcc{
+  text-align: center;
+  width: 100%;
+}
+.haveAcc a{
+  color: #348d60;
+}
