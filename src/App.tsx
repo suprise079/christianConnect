@@ -2,7 +2,6 @@ import { Redirect, Route } from 'react-router-dom';
 import { IonApp, IonRouterOutlet } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import Home from './pages/Home';
-import AboutFellowship from './pages/aboutFellowship/aboutFellowship';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -22,6 +21,8 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import AboutFellowship from './pages/aboutFellowship/aboutFellowship';
+import FellowshipPhotos from './pages/fellowshipPhotos/fellowshipPhotos';
 
 const App: React.FC = () => (
   <IonApp>
@@ -33,6 +34,10 @@ const App: React.FC = () => (
 
         <Route exact path="/aboutFellowship" >
           <AboutFellowship />
+        </Route>
+
+        <Route exact path="/FellowshipPhotos" >
+          <FellowshipPhotos />
         </Route>
 
         <Route exact path="/">

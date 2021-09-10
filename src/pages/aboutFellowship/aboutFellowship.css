@@ -1,18 +1,103 @@
+* {
+    --ion-background-color: #348d63;
+    /* --ion-color: black; */
+}
+
+p {
+    margin: 0em;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+ion-page {
+    --ion-background-color: #ffffff;
+}
+
 .aboutFellowship {
-    background-color: yellow;
+    background-color: #438d63;
+    font-size: 1em;
+}
+
+.aboutFellowship .topbar {
+    background-color: #438d63;
+    display: flex;
+    justify-content: space-between;
+    padding: .5em 1em;
+}
+
+
+/* .aboutFellowship .topbar ion-button {
+    background-color: red;
+    display: flex;
+    justify-content: space-between;
+    padding: 0em 1em;
+} */
+
+.aboutFellowship .photos {
+    display: flex;
+    background-color: #438d63;
+    justify-content: space-between;
+    /* padding: 1em 0em; */
+    /* background-color: red; */
+}
+
+.aboutFellowship .photos>p {
+    display: flex;
+    background-color: lightgray;
+    padding: 2em 3em;
+    border-radius: 1em 0em 0em 0em;
+}
+
+.aboutFellowship .photos div {
+    display: flex;
+    /* background-color: red; */
+    flex-direction: column;
+}
+
+.aboutFellowship .photos div>p:first-child {
+    background-color: lightgray;
+    padding: 1em 3em;
+    border-radius: 0em 1em 0em 0em;
+    margin: 0em 0em .1em 0em;
+}
+
+.aboutFellowship .photos div .moreImage {
+    background-color: lightgray;
+    padding: 1em 3em;
+    /* border-radius: 0em 1em 0em 0em; */
+    margin: .1em 0em 0em 0em;
 }
 
 .aboutFellowship .navigator {
     display: flex;
-    justify-content: space-between;
-    /* background-color: #348d63; */
-    background-color: red;
+    justify-content: space-around;
+    background-color: #127647;
+    /* background-color: inherit; */
+    box-shadow: 0em 0em .1em white;
+    margin: 1em 0em;
+    color: white;
+}
+
+.aboutFellowship .view {
+    /* background-color: red; */
+    color: white;
 }
 
 .aboutFellowship .navigator button {
     border: 0em;
-    padding: .7em 1em;
-    /* background-color: inherit; */
-    background-color: #348d63;
+    padding: .8em 1em;
+    /* background-color: #348d63; */
+    background-color: inherit;
     color: white;
 }
+
+
+/* .aboutFellowship .navigator ion-buttons {
+    display: flex;
+    justify-content: space-between;
+    background-color: #348d63;
+    background-color: blue;
+} */
