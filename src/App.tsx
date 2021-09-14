@@ -11,7 +11,8 @@ import SignUp from "./pages/Logins/SignUp";
 import SignUpU from "./pages/Logins/SignUp/SignUpU";
 import Login from "./pages/Logins/Login";
 import UploadAnnouncement from "./pages/Profile/UploadAnnouncement";
-import PickerExample from "./pages/Profile/UploadSermons"
+import PickerExample from "./pages/Profile/UploadEvents"
+import UploadSermon from "./pages/Profile/UploadSermons/index";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -42,7 +43,8 @@ const App = () => (
         <Route exact path="/SignUpU" component={SignUpU} />
         <Route exact path="/Login" component={Login} />
         <Route exact path="/UploadAnnouncement" component={UploadAnnouncement} />
-        <Route exact path="/ok" component={PickerExample} />
+        <Route exact path="/UploadSermon" component={UploadSermon} />
+        <Route exact path="/UploadEvent" component={PickerExample} />
         
         <Redirect exact from="/" to="/home" />
       </IonRouterOutlet>

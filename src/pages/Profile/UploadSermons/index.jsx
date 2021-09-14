@@ -12,17 +12,17 @@ import {
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { FaCalendarAlt } from "react-icons/fa";
-import { IoMdCloudUpload } from "react-icons/io";
+import { MdAddCircle } from "react-icons/md";
+import { RiVideoUploadFill } from "react-icons/ri";
 import "../styles.css";
 
 const handleSubmit = (e) => {
   e.preventDefault();
   console.log(e.target);
 };
-const UploadAnnouncement = () => {
-  const [date, setdate] = useState("Date");
-  const [text, setText] = useState("");
+const UploadSermon = () => {
+  const [addYt, setaddYt] = useState(false);
+  const [text, setText] = useState(""); /* This is the sermon in text format */
   return (
     <IonPage
       style={{
@@ -41,7 +41,7 @@ const UploadAnnouncement = () => {
           <IonButtons slot="start">
             <IonBackButton defaultHref="/" />
           </IonButtons>
-          <IonTitle>Upload announcements</IonTitle>
+          <IonTitle>Upload Sermons</IonTitle>
         </IonToolbar>
       </IonHeader>
 
@@ -63,7 +63,8 @@ const UploadAnnouncement = () => {
               className="inputField"
             ></IonInput>
           </div>
-          <div className="datePicker">
+          {/* DATE TIME PICKER ==> POTENTIAL COMPONENT TO BE */}
+          {/* <div className="datePicker">
             <span className="date">{date}</span>
             <span className="icon">
               <FaCalendarAlt size="25px" />
@@ -82,20 +83,42 @@ const UploadAnnouncement = () => {
               className="inputField"
               placeholder=" "
             ></input>
-          </div>
+          </div> */}
+
           <IonTextarea
             rows="7"
-            placeholder="Description..."
+            placeholder="Type or paste a sermon..."
             className="textArea"
             value={text}
             onIonChange={(e) => setText(e.target.value)}
           ></IonTextarea>
-
-          <button type="submit"><span>Post</span> <IoMdCloudUpload size="20px"/></button>
+          <div className="addYt">
+            <span className="text">Add a youtube link</span>
+            <span className="add" onClick={()=>{setaddYt(!addYt)}}>
+              <MdAddCircle color="white" size="25px" />
+            </span>
+          </div>
+          {addYt ? (
+            <div className="youtubeLink">
+              <IonInput
+                required
+                type="text"
+                name="Title"
+                clearInput="true"
+                placeholder="https://www.youtube.com/sermon123"
+                className="inputField ytLink"
+              ></IonInput>
+            </div>
+          ) : (
+            ""
+          )}
+          <button type="submit">
+            <span>Upload</span> <RiVideoUploadFill size="20px" />
+          </button>
         </form>
       </div>
     </IonPage>
   );
 };
 
-export default UploadAnnouncement;
+export default UploadSermon;
