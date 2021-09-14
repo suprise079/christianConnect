@@ -1,10 +1,14 @@
 import { IonContent, IonGrid, IonRow, IonCol, IonHeader, IonPage, IonTitle, IonToolbar, IonButton, IonIcon } from '@ionic/react';
-import { play } from 'ionicons/icons';
+import { logoClosedCaptioning, play } from 'ionicons/icons';
 import church from './church.jpeg';
+import hope from './hope.jpg'
+import mpumi from './mpumi.jpg'
 import './Tab2.css';
 
 
 const Tab2: React.FC = () => {
+
+  var loop = [1,2,3,4,,5,6]
   return (
     <IonPage>
       <IonContent fullscreen>
@@ -19,81 +23,46 @@ const Tab2: React.FC = () => {
 
 
       <IonGrid>
+        <div className="scrollSubscriptions">
+          {/* show only ten and find the rest in view all */}
           <IonRow>
-            <IonCol id='1'><img className='highlightImg' src={church} alt='fellow1' /></IonCol>
-            <IonCol id='2'><img className='highlightImg' src={church} alt='fellow2' /></IonCol>
-            <IonCol id='3'><img className='highlightImg' src={church} alt='fellow3' /></IonCol>
-            <IonCol id='4'><img className='highlightImg' src={church} alt='fellow4' /></IonCol>
-            <IonCol id='5' className='viewBtn'>View All<IonIcon icon={play} /> </IonCol>
+            <IonCol id='1'><img className='highlightImg' src={hope} alt='fellow1' /><br />Hope fellowship</IonCol>
+            <IonCol id='2'><img className='highlightImg' src={mpumi} alt='fellow2' /><br />Mpumelelo fellowship</IonCol>
+            <IonCol id='1'><img className='highlightImg' src={hope} alt='fellow1' /><br />Hope fellowship</IonCol>
+            <IonCol id='2'><img className='highlightImg' src={mpumi} alt='fellow2' /><br />Mpumelelo fellowship</IonCol>
+            <IonCol id='1'><img className='highlightImg' src={hope} alt='fellow1' /><br />Hope fellowship</IonCol>
+            <IonCol id='2'><img className='highlightImg' src={mpumi} alt='fellow2' /><br />Mpumelelo fellowship</IonCol>
+            <IonCol id='1'><img className='highlightImg' src={hope} alt='fellow1' /><br />Hope fellowship</IonCol>
+            <IonCol id='2'><img className='highlightImg' src={mpumi} alt='fellow2' /><br />Mpumelelo fellowship</IonCol>
+            
           </IonRow>
+        </div>
+        <button id="viewAll">View All</button>
       </IonGrid>
       
       {/* <IonButton color='favorite'>View all</IonButton> */}
      
       
-      <div className='ann-container' >
+     {
+       loop.map((annoce) => {
+        return(
+          <div className='ann-container' >
         
-        {/* image */}
-        <img className='announceImg' src={church} />
+            {/* image */}
+            <img className='announceImg' src={hope} />
 
-        {/* content */}
-        <div className='announceContent'>
-          <h4>Gents Night</h4>
-          <h5>Mpumelelo Prayer Meeting</h5>
-          {/* button */}
-          <IonButton size='small' color='btn' className='btn'> Set Reminder </IonButton>
-        </div>
-          
-      </div>
+            {/* content */}
+            <div className='announceContent'>
+              <h4>Gents Night</h4>
+              <h6>Mpumelelo Prayer Meeting</h6>
+              {/* button */}
+              <IonButton size='small' color='btn' className='btn p-1'> Set Reminder </IonButton>
+            </div>
 
-
-      <div className='ann-container' >
-        
-        {/* image */}
-        <img className='announceImg' src={church} />
-
-
-        {/* content */}
-        <div className='announceContent'>
-          <h4>Gents Night</h4>
-          <h5>Mpumelelo Prayer Meeting</h5>
-          {/* button */}
-          <IonButton size='small' color='btn' className='btn'> Set Reminder </IonButton>
-        </div>
-          
-      </div>
-
-      <div className='ann-container' >
-        
-        {/* image */}
-        <img className='announceImg' src={church} />
-
-        {/* content */}
-        <div className='announceContent'>
-          <h4>Gents Night</h4>
-          <h5>Mpumelelo Prayer Meeting</h5>
-          {/* button */}
-          <IonButton size='small' color='btn' className='btn'> Set Reminder </IonButton>
-        </div>
-          
-      </div>
-
-      <div className='ann-container' >
-        
-        {/* image */}
-        <img className='announceImg' src={church} />
-
-        {/* content */}
-        <div className='announceContent'>
-          <h4>Gents Night</h4>
-          <h5>Mpumelelo Prayer Meeting</h5>
-          {/* button */}
-          <IonButton size='small' color='btn' className='btn'> Set Reminder </IonButton>
-        </div>
-          
-      </div>
-
-
+          </div>
+        )
+       })
+     }
 
       </IonContent>
 

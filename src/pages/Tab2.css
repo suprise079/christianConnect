@@ -12,6 +12,39 @@
 
 }
 
+/* subscriptions scroll */
+ion-row {
+    width: 1000px;
+    
+}
+
+ion-row {
+    max-width: 200%;
+    text-align:center
+}
+
+ion-col {
+    height: 5em;
+    width: 30px;
+    font-size: 8pt;
+}
+
+
+.scrollSubscriptions {
+    height: 6em;
+    overflow-x: scroll;
+    max-width: 85%;
+    float: left;
+}
+
+#viewAll {
+    width: 15%;
+    float: right;
+    clear:right;
+    border: none;
+    background-color: var(--ion-color-favorite);
+    height: 5em;
+}
 
 /* button color */
 .ion-color-btn{
@@ -31,7 +64,7 @@
 /* highlights */
 .highlightImg {
     margin: 0px;
-    width: 100%;
+    width: 90%;
     height: 100%;
     border-radius: 50%;
     box-shadow: 3px 6px 8px -1px rgba(0,0,0,0.4);
@@ -54,6 +87,7 @@
     border-radius: 10px;
     box-shadow: 3px 6px 8px -1px rgba(0,0,0,0.2);
     overflow: hidden;
+    clear: both;
 }
 
 h4 {
@@ -68,22 +102,23 @@ h5 {
 
 .announceImg {
     margin: 5px;
-    width: 30%;
+    width: 28%;
     height: 30%;
     float: left;
     clear: none;
+    border-radius: 10px;
     
 }
 
 .announceContent {
-    margin: 2px 5px 5px 10px;
+    margin: 2px 2px 0px 5px;
     float: left;
     clear: none;
-    
+    width: 65%;
 }
 
 .btn {
     border-radius: 40%;
-    margin-top: 10px;
-    margin-left: 25px;
+    margin-top: 2px;
+    margin: auto;
 }
