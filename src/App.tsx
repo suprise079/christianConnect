@@ -2,10 +2,16 @@ import React from "react";
 import { Redirect, Route } from "react-router-dom";
 import { IonApp, IonRouterOutlet } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
-import Welcome from "./pages/Logins/Welcome/Welcome";
-import SignUp from "./pages/Logins/SignUp/SignUp";
+
+
+
+/* Importing pages */
+import Welcome from "./pages/Logins/Welcome";
+import SignUp from "./pages/Logins/SignUp";
 import SignUpU from "./pages/Logins/SignUp/SignUpU";
-import Login from "./pages/Logins/Login/Login";
+import Login from "./pages/Logins/Login";
+import UploadAnnouncement from "./pages/Profile/UploadAnnouncement";
+import PickerExample from "./pages/Profile/UploadSermons"
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -35,6 +41,9 @@ const App = () => (
         <Route exact path="/SignUp" component={SignUp} />
         <Route exact path="/SignUpU" component={SignUpU} />
         <Route exact path="/Login" component={Login} />
+        <Route exact path="/UploadAnnouncement" component={UploadAnnouncement} />
+        <Route exact path="/ok" component={PickerExample} />
+        
         <Redirect exact from="/" to="/home" />
       </IonRouterOutlet>
     </IonReactRouter>
