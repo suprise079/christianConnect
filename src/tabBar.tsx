@@ -7,6 +7,7 @@ import { albums, home, person } from 'ionicons/icons';
 import Tab2 from './pages/Tab2';
 import './pages/Tab2.css';
 import './tabBar.css';
+import SubscriptionTabs from './pages/subscription/subscription';
 
 const TabBar: React.FC = () => (
   <IonApp>
@@ -14,9 +15,9 @@ const TabBar: React.FC = () => (
       <IonTabs>
         <IonRouterOutlet>
 
-          {/* <Route exact path="/tab1">
-            <Tab1 />
-          </Route> */}
+          <Route exact path="/tab1">
+            <SubscriptionTabs />
+          </Route>
           
           <Route exact path="/tab2">
             <Tab2 />
@@ -30,7 +31,7 @@ const TabBar: React.FC = () => (
 
         <IonTabBar color='favorite' slot="bottom">
           {/* home button */}
-          <IonTabButton  >
+          <IonTabButton tab="tab1" href="/tab1" >
             <IonIcon icon={home} color='tabBtn' />
             <IonLabel>Home</IonLabel>
           </IonTabButton>
