@@ -16,7 +16,7 @@ const SubscriptionTabs: React.FC = () => {
 
   function switchTab (id:string) {
     document.getElementById(page)!.style.backgroundColor = 'transparent'
-    setpage(id)
+    setpage(id) 
     document.getElementById(id)!.style.backgroundColor = 'white'
 
   }
