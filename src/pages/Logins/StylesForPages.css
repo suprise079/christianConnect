@@ -50,3 +50,14 @@ input[type="submit"] {
 .haveAcc a {
   color: #348d60;
 }
+a.toGoogle {
+  display: "flex";
+  align-items: "center";
+  margin: "5px 35%";
+  text-decoration: "none";
+  color: "#4285F4";
+  border-radius: "10px";
+  padding: "5px 15px";
+  background: "white";
+  width: "30%";
+}

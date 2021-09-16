@@ -11,6 +11,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
+import { FcGoogle } from "react-icons/fc";
 import "../StylesForPages.css";
 
 const Body = styled(IonPage)`
@@ -27,6 +28,7 @@ const Body = styled(IonPage)`
     );
     box-sizing: border-box;
     z-index: -1;
+
   `;
 
 const SignUpU = () => {
@@ -36,7 +38,7 @@ const SignUpU = () => {
   const [showConf, setshowConf] = useState(false);
 
   return (
-    <Body style={{overflowY:"scroll"}}>
+    <Body style={{ overflowY: "scroll" }}>
       <IonHeader color="inherit" className="ion-no-border">
         <IonToolbar>
           <IonButtons slot="start">
@@ -124,6 +126,14 @@ const SignUpU = () => {
           ></IonInput>
           <input type="submit" value="Register" />
         </form>
+        <div className="haveAcc">
+          {" "}
+          Register with
+          <Link className="toGoogle" style={{}} to="/">
+            {" "}
+            <FcGoogle className="google"/> Google
+          </Link>
+        </div>
         <div className="haveAcc">
           Have an account ? <Link to="/Donate"> Donate </Link>
         </div>
