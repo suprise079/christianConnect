@@ -71,9 +71,9 @@ const UploadAnnouncement = () => {
             <input
               value={date}
               onChange={(e) => {
+                console.log(e.target.value)
                 var parts = e.target.value.split("-");
                 var mydate = new Date(parts[0], parts[1] - 1, parts[2]);
-                console.log(mydate.toDateString());
                 setdate(mydate.toDateString());
               }}
               

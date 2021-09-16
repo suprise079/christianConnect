@@ -39,7 +39,7 @@ input[type="submit"] {
   border-radius: 10px;
   color: black;
   width: 60%;
-  margin: 5% 20%;
+  margin: 5% 20% 2% 20%;
   border: 2px solid #348d60;
   background: none;
 }
