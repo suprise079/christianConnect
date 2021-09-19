@@ -145,7 +145,7 @@ const Discusions: React.FC = () => {
 
 
   return (
-    <div id='page' style={{overflowY:'scroll'}}>
+    <div id='page'>
       
       
       <div className='discussionContainer' style={{position:'relative'}}>
