@@ -11,7 +11,7 @@ const Tab2: React.FC = () => {
   var loop = [1,2,3,4,,5,6]
   return (
     <IonPage>
-      <IonContent fullscreen>
+      <div className='body' style={{overflowY:'scroll'}}>
 
         <IonHeader>
           <IonToolbar>
@@ -64,7 +64,7 @@ const Tab2: React.FC = () => {
        })
      }
 
-      </IonContent>
+      </div>
 
       
 

@@ -1,0 +1,9 @@
+.timeBtn {
+    display: flex;
+    justify-content: space-between;
+}
+
+ion-card-subtitle {
+    margin-top: 10px;
+    
+}

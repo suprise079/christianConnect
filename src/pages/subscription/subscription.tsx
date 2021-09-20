@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { arrowBackSharp } from "ionicons/icons";
 import './subscription.css'
 import { MdKeyboardArrowLeft } from 'react-icons/md'
+import Discusions from './Discussions'
 
 
 const SubscriptionTabs: React.FC = () => {
@@ -41,6 +42,7 @@ const SubscriptionTabs: React.FC = () => {
           <div className="tabInfoDiv">
             {page == '1' && <Annoce />}
             {page == '2' && <Devotions />}
+            {page == '3' && <Discusions />}
           </div>
           
         {/* </IonContent> */}

@@ -15,10 +15,10 @@ const Devotions: React.FC = () => {
                     <img src={fearless} alt="example.png" /><br />
                     
                 </div>
-                <div className='massage'>
-                    <h3 >Fearless</h3>
-                    <IonCardContent>
-                    True remedy against tormenting fear such as the psalmist describes above is faith in God. Strong faith can give you victory over fear no matter what the circumstances are. .....
+                <div className='massage p-2'>
+                    <h3 className='p-0 m-0'>Fearless</h3>
+                    <IonCardContent className='p-1'>
+                    True remedy against tormenting fear such as the psalmist describes above is faith in God. Strong faith can give you victory over fear no matter what the circumstances are...
                     </IonCardContent>
                 </div>
                 <IonButton style={{backgroundColor:'#8EB9A7'}}>Read</IonButton>
@@ -30,7 +30,7 @@ const Devotions: React.FC = () => {
                 return(
                     <IonCard key={e} className='sermon'>
                         <img src={play} alt="sermon.png" />
-                        <IonCardSubtitle>Fearless Man</IonCardSubtitle>
+                        <IonCardSubtitle ><b>Fearless Man</b></IonCardSubtitle>
                     </IonCard>
                 )
                 })}
