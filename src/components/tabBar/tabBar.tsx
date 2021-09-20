@@ -17,7 +17,7 @@ const TabBar: React.FC = () => {
       <div >
         {/* <IonIcon icon={ home } ></IonIcon> */}
         <i > <FaHome /> </i> 
-        <IonLabel > Home </IonLabel>
+        <IonLabel className="label" > Home </IonLabel>
       </div>
 
       <div >
@@ -25,14 +25,14 @@ const TabBar: React.FC = () => {
           <IonIcon icon={ mail } ></IonIcon>
         </i>
         
-        <IonLabel > Subscription </IonLabel>
+        <IonLabel className="label" > Subscription </IonLabel>
       </div>
 
       <div >
         <i >
           <IonIcon icon={ person } ></IonIcon>
         </i>
-        <IonLabel > Profile </IonLabel>
+        <IonLabel className="label" > Profile </IonLabel>
       </div>
     </div>
   );

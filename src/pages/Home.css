@@ -1,14 +1,19 @@
-* {
-    --ion-background-color: #ffffff;
-    --ion-color: black;
+
+ion-oage.userHome {
+    background-color: red;
 }
 
 ion-header {
+    /* background-color: red; */
     background-color: #348d63;
-    padding: 1em .5em .5em .5em;
-    border-radius: 0em 0em 1.5em 1.5em;
+    padding: 1em 0em .5em 0em;
+    border-radius: 0em 0em 1.3em 1.3em;
     /* box-shadow: 0 0 0 white; */
     border: 0em;
+}
+
+.container {
+    background-color: yellow;
 }
 
 .searchField {
@@ -16,9 +21,9 @@ ion-header {
     outline-width: 0em;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
+    /* justify-content: space-evenly; */
     /* background-color: yellow; */
-    padding: 1em 0em 0em 0em;
+    padding: 1em 1.3em 0em 1.3em;
     margin: 1em 0em 0em 0em;
 }
 
@@ -34,6 +39,7 @@ ion-header {
     border: 0em;
     padding: .4em 1em;
     margin: auto;
+    flex: 12;
 }
 
 input:hover,
@@ -41,18 +47,26 @@ input:focus {
     outline-width: 0em;
 }
 
+button {
+    border: 0em;
+}
+
+button:hover {
+    cursor: pointer;
+}
 
 /* main content */
 
 ion-content {
     /* --ion-background-color: red; */
-    --ion-text-color: black;
-    --ion-text-color-rgb: 255, 255, 255;
+    /* --ion-text-color: black; */
+    /* --ion-text-color-rgb: 255, 255, 255; */
     padding: 10em;
+    background-color: yellow;
 }
 
 ion-content .mapContainer {
-    /* background-color: red; */
+    background-color: white;
     display: flex;
     flex-direction: column;
     padding: 1.5em 0em;
@@ -70,8 +84,9 @@ ion-content .mapContainer .header {
 }
 
 ion-content .fellowships {
-    background-color: inherit;
+    background-color: white;
     padding: .2em .8em;
+    padding-bottom: 7em;
 }
 
 ion-tab-bar {
@@ -89,7 +104,7 @@ ion-content .moreFellowshipBtn {
     width: 70%;
     margin: auto;
     position: fixed;
-    bottom: 6em;
+    bottom: 4.8em;
     left: 3em;
     right: 4em;
     text-align: center;

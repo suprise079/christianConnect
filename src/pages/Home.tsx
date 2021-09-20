@@ -17,7 +17,7 @@ import TabBar from '../components/tabBar/tabBar';
 
 const Home: React.FC = () => {
   return (
-    <IonPage>
+    <IonPage className="userHome" >
 
       <IonHeader>
         <div className="searchField" >
@@ -26,7 +26,8 @@ const Home: React.FC = () => {
         </div>
       </IonHeader>
 
-      <IonContent fullscreen>
+      <IonContent fullscreen className="container" >
+        
         <div className="mapContainer" >
           <p className="header" >Showing Fellowship near you:</p>
           <p className="map" >Map</p>
@@ -34,7 +35,11 @@ const Home: React.FC = () => {
 
         <div className="fellowships" >
           <SearchFellowship />
-          {/* <SearchFellowship /> */}
+          <SearchFellowship />
+          <SearchFellowship />
+          <SearchFellowship />
+          <SearchFellowship />
+          <SearchFellowship />
         </div>
 
         {/* the button component tabbar for navigation */}
