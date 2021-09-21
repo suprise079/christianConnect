@@ -1,8 +1,8 @@
-import { IonContent, IonHeader, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonPage,IonList, IonTitle, IonToolbar, IonButtons, IonButton, IonIcon } from '@ionic/react';
+import { IonContent, IonHeader, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonPage,IonList, IonTitle, IonToolbar, IonButtons, IonButton, IonIcon, getPlatforms } from '@ionic/react';
 import { arrowBack } from 'ionicons/icons';
 import { useState } from 'react';
-import ExploreContainer from '../../components/ExploreContainer';
-import './annocements.css'
+import './annocements.css';
+import {Calendar} from '@ionic-native/calendar';
 
 
 const Annoce: React.FC = () => {
@@ -18,11 +18,11 @@ const Annoce: React.FC = () => {
       {title:'Worship night', content:'Rev SC & PA Mathebula invites all Men to the first Gents Night on the year under the theme, GENTS let’s talk, unpacking it all.', date:'21 May 2021 18:30', id:6}
     ]
     function readMore(event:any, cardId:string, contentId:string) {
+      setReminder()
         var card = document.getElementById(cardId)!
         var content = document.getElementById(contentId)!
         var button = event.target
-        console.log(cardId, contentId)
-        console.log('running')
+        
 
         if (button.innerHTML == 'More Info'){
           card.style.transform = 'scale(1.05)';
@@ -36,6 +36,18 @@ const Annoce: React.FC = () => {
           button.innerHTML = 'More Info';
         }
     }
+
+    console.log(Calendar.requestReadWritePermission())
+    function setReminder(){
+      Calendar.hasReadWritePermission().then((data) => {
+        console.log(data)
+      })
+      .catch((err) =>{
+        console.log(err)
+      })
+    }
+
+
 
     return (
         <>
