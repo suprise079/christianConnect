@@ -9,7 +9,7 @@ import { useState } from 'react';
 
 const Tab2: React.FC = () => {
 
-  var loop = [1,2,3,4,,5,6]
+  var loop = [1,2,3,4,,5,6,7,8]
   //use state view for now and later use subscriber list length to determine which view to use
   const [view, setView] = useState(true)
 
@@ -71,16 +71,28 @@ const Tab2: React.FC = () => {
     }
     {
       view == false && (
-        loop.map((fellowship) => {
-          return(
-            <>
-              <div className="fellowship">
-                <img src={hope} alt="fellowship profile" />
-                <h3>Mpumelelo fellowship</h3>
-              </div>
-            </>
-          )
-        })
+        <div >
+           <IonHeader>
+              <IonToolbar>
+                <IonTitle className="headerTitle" size="large">Subscriptions</IonTitle>
+              </IonToolbar>
+            </IonHeader>
+          <div className="fellowshipsContainer">
+            {
+              loop.map((fellowship) => {
+                return(
+                  <>
+                    <div className="fellowship">
+                      <img src={hope} alt="fellowship profile" />
+                      <h4>Mpumelelo fellowship</h4>
+                    </div>
+                  </>
+                )
+              })
+            }
+          </div>
+        </div>
+        
       )
     }
     </>
