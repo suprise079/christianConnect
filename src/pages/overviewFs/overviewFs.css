@@ -1,0 +1,154 @@
+ 
+ .overviewFS {
+    --ion-background-color:#348D63 ;
+ }
+  
+ .tab{
+     margin-left: 100px;
+ }
+ .tab1{
+     margin-right: 100px;
+ }
+
+.icon1{
+    color : yellow;
+    font-size: .9em;
+}
+
+.icon{
+    color :rgb(33, 65, 33);
+    margin-right: 5px;   
+}
+ 
+ 
+.pages{
+    background: #348D63;
+}
+ 
+.text{
+    margin-left: 20px;
+}
+
+
+
+
+
+
+
+/* Aapoh */
+
+
+.overviewFS div.tabbar {
+    /* background-color: #438d63; */
+    background-color: yellow;
+    display: flex;
+    justify-content: space-between;
+    padding: .5em 1em;
+    color: red;
+}
+
+/* .overviewFS .tabbar {
+    /* background-color: #348D63; */
+    /* background-color: red; */
+    /* padding: 1em; */
+    /* display: flex; */
+    /* flex-direction: row; */
+    /* justify-content: space-between; */
+    /* color: white; */
+/* }  */
+
+.overviewFS ion-tab-bar.tabbar  {
+    background-color: yellow;
+    /* color: ; */
+   
+}
+
+.overviewFS ion-tab-bar.tabbar ion-tab-button ion-icon {
+    color: black;
+    font-weight: bold;
+    /* background-color: black; */
+    padding: 0em;
+}
+
+.overviewFS ion-content .container {
+    background-color: inherit;
+    margin: 1em 0em;
+}
+
+.overviewFS ion-content .container p {
+    /* background-color: red; */
+    font-size: .8em;
+    padding: .3em 0em 0em 1.6em;
+}
+
+.overviewFS ion-content .container p i {
+    color: white;
+    font-style: normal;
+}
+
+.overviewFS ion-content .container ion-title {
+    /* background-color: red; */
+    color: white;
+    font-size: .99em;
+}
+
+
+
+.overviewFS ion-content .buttons {
+    /* background-color: red; */
+    display: flex;
+    justify-content: space-evenly;
+    /* border-bottom: .1em solid #fff; */
+    padding-bottom: 1em;
+}
+
+.overviewFS ion-content .buttons ion-button {
+    background-color: red;
+    border-radius: 50%;
+}
+
+.overviewFS ion-content .buttons ion-icon {
+    background-color: #064320;
+    border-radius: 50%;
+    padding: .5em;
+    color: white;
+    box-shadow: 0em 0em .1em white;
+}
+
+.overviewFS ion-icon:hover {
+    cursor: pointer;
+}
+
+.overviewFS ion-content .locaWebTime {
+    /* background-color: red; */
+    padding: 0em 0em 2em 0em;
+   
+}
+
+.itemBorderTop {
+    border-top: .11em solid lightgrey;
+}
+
+.overviewFS ion-content .locaWebTime .time {
+    /* background-color: yellow; */
+    display: flex;
+    justify-content: space-between;
+}
+
+.overviewFS ion-content .locaWebTime .time div {
+    position: absolute;
+    right: 1.5em;
+    display: flex;
+    vertical-align: middle;
+}
+
+.selector {
+    padding-left: 0em;
+}
+
+
+.overviewFS ion-content .locaWebTime .time div small {
+    display: flex;
+    vertical-align: middle;
+    padding: 1em 0em;
+}

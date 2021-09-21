@@ -1,0 +1,104 @@
+.tab{
+    margin-left: 100px;
+}
+.tab1{
+    margin-right: 100px;
+}
+.page {
+    --ion-background-color:#348D63;
+}
+.img1 {
+    width :50%;
+    margin-bottom: 10px;
+    margin-left: 15px;
+    border-radius:10px ;
+    margin-top: 10px;
+}
+.img2{
+    width : 35%;
+    height: 20%;
+    margin-bottom : 90px;
+    margin-left: 2px;
+    border-radius: 10px;
+}
+.img3{
+    width : 35%;
+    height: 16%;
+    margin-bottom: 10px;
+    margin-left: -124px;
+    border-radius: 10px;
+    
+}
+.img{
+    float: left;
+  width: 25%;
+  padding: 10px;
+  border-radius:10px ;
+}
+.icon1{
+    color : yellow;
+    font-size: smaller;
+}
+.btn{
+    --font-size: small;
+    --border-radius : 50px;
+    --border-color :#348D63;
+    --border-width: 2px;
+    --background :  #348D63;
+     
+}
+ 
+ 
+.btn{
+    font-size: 7px;
+    margin-top: -2px;
+    padding : 2px;
+}
+ 
+.icon2{
+    font-size: 20px;
+    margin : 5px; 
+}
+.person{
+    font-size : 30px;
+    margin-left: -2px;
+    color : black;
+    margin-bottom: 2px;
+    
+}
+ 
+.star{
+    font-size: smaller;
+}
+
+.avatar {
+    margin: 1em 0em 0em 0em; 
+    display: flex;
+    /* background-color: yellow; */
+}
+
+.avatar p {
+    margin: 0em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    font-size: small;
+    /* background-color: red; */
+}
+
+.avatar img {
+    margin-right: .5em;
+    /* vertical-align: top; */
+    width: 4em;
+    border-radius: 50%;
+}
+p{font-size: small;}
+.col{
+    background-color: #348D63; 
+}
+.text{
+    font-size: 3px;
+}
+ 
+ 
+ 

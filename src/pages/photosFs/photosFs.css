@@ -1,0 +1,34 @@
+* {
+    --ion-background-color: #348d63;
+    /* --ion-color: black; */
+}
+
+.fellowshipPhotos {
+    background-color: #438d63;
+    font-size: 1em;
+}
+
+.fellowshipPhotos .topbar {
+    background-color: #438d63;
+    display: flex;
+    justify-content: space-between;
+    padding: .5em 1em;
+}
+
+.fellowshipPhotos .images {
+    /* background-color: red; */
+    font-size: 1em;
+}
+
+.fellowshipPhotos .images div:first-child {
+    /* background-color: yellow; */
+    padding: .5em;
+}
+
+.fellowshipPhotos .images .moreImages {
+    /* background-color: blue; */
+    display: flex;
+    flex-wrap: wrap;
+    padding: .5em;
+    justify-content: space-between;
+}
