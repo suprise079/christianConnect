@@ -11,6 +11,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
+import { FcGoogle } from "react-icons/fc";
 import "../StylesForPages.css";
 import bg from "./bg.png";
 
@@ -44,10 +45,10 @@ const Body = styled(IonPage)`
   label {
     text-shadow: none;
     margin: 1.2% 5%;
-    width:70%;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
   input[type="submit"] {
     width: 30vw;
@@ -114,6 +115,15 @@ const Login = () => {
 
           <input type="submit" value="Login" />
         </form>
+      </div>
+      <div className="google-container">
+        <span className="google-login-text">Login with </span>
+        <button>
+          <span className="google-icon">
+            <FcGoogle size="20px" />
+          </span>
+          <span className="google-text">Google</span>
+        </button>
       </div>
       <div className="haveAcc">
         Don't have an account ? <Link to="/home">Register</Link>
