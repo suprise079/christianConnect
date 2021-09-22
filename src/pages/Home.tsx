@@ -36,10 +36,10 @@ const Home: React.FC = () => {
         <div className="fellowships" >
           <SearchFellowship />
           <SearchFellowship />
-          <SearchFellowship />
-          <SearchFellowship />
-          <SearchFellowship />
-          <SearchFellowship />
+          {/* <SearchFellowship /> */}
+          {/* <SearchFellowship /> */}
+          {/* <SearchFellowship /> */}
+          {/* <SearchFellowship /> */}
         </div>
 
         {/* the button component tabbar for navigation */}

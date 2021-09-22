@@ -8,6 +8,7 @@ import { FaArrowLeft, FaEllipsisH } from "react-icons/fa";
 
 // import component
 import NavigateFs from "../../components/navigateFs/nagivateFs";
+import TopImgFs from "../../components/topImagesFs/topImgFs";
 
 
 const AboutFellowship: React.FC = () => {
@@ -15,47 +16,35 @@ const AboutFellowship: React.FC = () => {
   return (
     <IonPage >
 
-      <IonContent >
-        <div className="aboutFellowship" >
+      <IonContent  className="aboutFellowship" >
 
-          <div className="topbar" >
-            {/* <IonButton > */} <FaArrowLeft /> {/* </IonButton> */}
-            {/* <IonButton > */} <FaEllipsisH /> {/* </IonButton> */}
-          </div>
+        {/* <div className="topbar" > */}
+          {/* <IonButton > <FaArrowLeft /> */}
+          {/* <IonButton > <FaEllipsisH /> */}
+        {/* </div> */}
 
 
-          <div className="photos" >
-
-            <p >
-              Images
-            </p>
-
-            <div >
-              {/* <img alt="images" /> */}
-              {/* <img alt="images" /> */}
-              <p > Images </p>
-              <p className="moreImage" > Images </p>
-            </div>
-          </div>
-
-          <NavigateFs />
-
-          <div className="view" >
-            About a fellowship
+        <div className="tabbarContainer" > 
+          <div className="tabbar" slot="fixed" >
+            <FaArrowLeft className="iconHover" />
+            <FaEllipsisH className="iconHover" />
           </div>
         </div>
+
+
+        <div className="imagesA" >
+          <TopImgFs />
+        </div>
+
+        <NavigateFs />
+
+        <div className="view" >
+          About a fellowship
+        </div>
+
       </IonContent>
     </IonPage>
     
   );
 }
 export default AboutFellowship;
-
-
-
-// <IonButtons >
-//   <IonButton > Overview </IonButton>
-//   <IonButton > Reviews </IonButton>      
-//   <IonButton > Photos </IonButton>      
-//   <IonButton > About </IonButton>         
-// </IonButtons>

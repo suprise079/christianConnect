@@ -1,15 +1,19 @@
-import { IonContent,IonIcon, IonItem,IonButton,IonSelect,IonTabButton,IonLabel,IonPage, IonTitle, IonTabBar  } from '@ionic/react';
+import { IonContent,IonIcon, IonItem,IonButton,IonSelect,IonTabButton,IonLabel,IonPage, IonTitle, IonTabBar,  } from '@ionic/react';
 import './overviewFs.css';
 import {
   shareSocialOutline, arrowBack,ellipsisHorizontalSharp,personCircleSharp,star,starHalf,returnUpForward,call,bookmarkSharp,locationSharp,timeSharp,earthSharp
 } from 'ionicons/icons'
 
-import { FaArrowLeft, FaEllipsisH } from 'react-icons/fa';
+import { FaArrowLeft, FaEllipsisH, FaStar, FaStarHalf, FaStarHalfAlt, FaRegStarHalf } from 'react-icons/fa';
 
 import img1 from './images/Church.jpeg';
 import img2 from './images/Church2.jpeg';
 import img3 from './images/prayer.jpeg';
  
+
+import { Link } from 'react-router-dom';
+
+
 
 // import component
 import NavigateFs from '../../components/navigateFs/nagivateFs';
@@ -18,32 +22,45 @@ import TopImgFs from '../../components/topImagesFs/topImgFs';
 const OverviewFs: React.FC = () => {
   return (
     <IonPage className = "overviewFS">
+
+      {/* <IonTabBar className="tabbar" >
+        <IonTabButton > 
+          <IonIcon icon={ arrowBack } />
+        </IonTabButton>
+
+        <IonTabButton > 
+          <IonIcon size="small" icon={ ellipsisHorizontalSharp } />
+        </IonTabButton>
+      </IonTabBar> */}
+        
+
  
-      <IonContent fullscreen >
+      <IonContent className="overview" fullscreen >
 
-        <div className="tabbar" >
-          {/* <button > */}
-            <FaArrowLeft />
-          {/* </button> */}
-
-          {/* <button> */}
-            <FaEllipsisH />
-          {/* </button> */}
+        <div className="tabbarContainer" > 
+          <div className="tabbar" slot="fixed" >
+            <FaArrowLeft className="iconHover" />
+            <FaEllipsisH className="iconHover" />
+          </div>
+        </div>
+        
+        
+        <div className="imagesO" > 
+          <TopImgFs img1={ img1 } img2={ img2 } img3={ img3 } />
         </div>
 
-        
-        <TopImgFs img1={ img1 } img2={ img2 } img3={ img3 } />
-
             
-        <div className = "container">
-          <IonTitle>Mpumelelo Prayer Meeting</IonTitle>
+        <div className = "nameFs">
+          <p>Mpumelelo Prayer Meeting</p>
 
           <p>
-            <i >{"4.2"}</i> <IonIcon icon={ star } className = "icon1" ></IonIcon>
-            <IonIcon icon={ star } className = "icon1" ></IonIcon>
-            <IonIcon icon={ star }className = "icon1" ></IonIcon>
-            <IonIcon icon={ star } className = "icon1"></IonIcon>
-            <IonIcon icon={ starHalf }className = "icon1" ></IonIcon> <i> ({"34" }) </i>
+            <i >{"4.2"}</i> 
+            <FaStar className = "icon1" />
+            <FaStar className = "icon1" />
+            <FaStar className = "icon1" />
+            <FaStar className = "icon1" />
+            <FaStarHalfAlt className = "icon1" /> 
+            <i> ({"34" }) </i>
           </p>
         </div>
 
@@ -54,7 +71,9 @@ const OverviewFs: React.FC = () => {
         <div className="buttons" >
           <IonIcon icon={returnUpForward}></IonIcon>
 
-          <IonIcon icon={call}></IonIcon>
+          <Link to="" href="tel:0738189349" >
+            <IonIcon icon={call}></IonIcon>
+          </Link>
 
           <IonIcon icon = {bookmarkSharp}></IonIcon>
 

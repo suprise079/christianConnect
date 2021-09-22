@@ -1,14 +1,26 @@
- 
- .overviewFS {
-    --ion-background-color:#348D63 ;
- }
-  
- .tab{
-     margin-left: 100px;
- }
- .tab1{
-     margin-right: 100px;
- }
+
+/* .overviewFS {
+--ion-background-color:#348D63 ;
+/* padding-top: 2em; */
+/* } */
+
+.overviewFS .content {
+    /* margin-top: 10em; */
+    background-color: inherit;
+}
+
+.overviewFS .content .imagesO {
+    background-color: yellow;
+    /* padding: 1em; */
+    margin-top: 4em;
+}
+
+.tab{
+    margin-left: 100px;
+}
+.tab1{
+    margin-right: 100px;
+}
 
 .icon1{
     color : yellow;
@@ -37,31 +49,42 @@
 
 /* Aapoh */
 
-
-.overviewFS div.tabbar {
-    /* background-color: #438d63; */
-    background-color: yellow;
-    display: flex;
-    justify-content: space-between;
-    padding: .5em 1em;
-    color: red;
+.overviewFS ion-content .tabbarContainer {
+    position: fixed;
+    right: 0;
+    left: 0;
+    margin-bottom: 2em;
 }
 
-/* .overviewFS .tabbar {
-    /* background-color: #348D63; */
+.overviewFS .tabbarContainer .tabbar {
+    background-color: #438d63;
     /* background-color: red; */
-    /* padding: 1em; */
-    /* display: flex; */
-    /* flex-direction: row; */
-    /* justify-content: space-between; */
-    /* color: white; */
-/* }  */
-
-.overviewFS ion-tab-bar.tabbar  {
-    background-color: yellow;
-    /* color: ; */
-   
+    display: flex;
+    z-index: 123456;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 1em 0em;
+    color: black;
+    margin-bottom: 4em;
 }
+
+.overviewFS .tabbar ion-tab-button {
+    background-color: yellow;
+    width: 2em;
+    padding: 0em;
+}
+
+.overviewFS div.tabbar .iconHover {
+    padding: 0em .5em;
+    color: black;
+}
+
+.overviewFS div.tabbar .iconHover:hover {
+    cursor: pointer;
+    color: white;
+}
+
+
 
 .overviewFS ion-tab-bar.tabbar ion-tab-button ion-icon {
     color: black;
@@ -70,23 +93,31 @@
     padding: 0em;
 }
 
-.overviewFS ion-content .container {
-    background-color: inherit;
+.overviewFS ion-content .nameFs {
+    /* background-color: #348D63; */
+    /* background-color: red; */
     margin: 1em 0em;
 }
 
-.overviewFS ion-content .container p {
+.overviewFS ion-content .nameFs p:nth-child(1) {
+    /* background-color: red; */
+    font-size: 1.09em;
+    padding: 0em 0em 0em 1.1em;
+    color: white;
+}
+
+.overviewFS ion-content .nameFs p {
     /* background-color: red; */
     font-size: .8em;
     padding: .3em 0em 0em 1.6em;
 }
 
-.overviewFS ion-content .container p i {
+.overviewFS ion-content .nameFs p i {
     color: white;
     font-style: normal;
 }
 
-.overviewFS ion-content .container ion-title {
+.overviewFS ion-content .nameFs ion-title {
     /* background-color: red; */
     color: white;
     font-size: .99em;
