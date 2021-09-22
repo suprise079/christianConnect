@@ -35,6 +35,7 @@ const OverviewFs: React.FC = () => {
 
         <TopNavBar />
         
+        {/* delete this at your own risk */}
         <div className="imagesO" ></div>
 
         <TopImgFs img1={ "" } img2={ "" } img3={ "" } />
@@ -42,16 +43,14 @@ const OverviewFs: React.FC = () => {
 
             
         <div className = "nameFs">
-          <p>Mpumelelo Prayer Meeting</p>
-
+          <p> { "Mpumelelo Prayer Meeting" } </p>
           <p>
-            <i >{"4.2"}</i> 
-            <FaStar className = "icon1" />
+            <i >{"4.2"}</i> <FaStar className = "icon1" />
             <FaStar className = "icon1" />
             <FaStar className = "icon1" />
             <FaStar className = "icon1" />
             <FaStarHalfAlt className = "icon1" /> 
-            <i> ({"34" }) </i>
+            <i> {"34" } </i>
           </p>
         </div>
 

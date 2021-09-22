@@ -3,6 +3,110 @@ ion-page.review {
     background-color: white;
 }
 
-.review .reviewContent {
+/* .review .reviewContent {
     background-color: yellow;
+} */
+
+
+
+
+.reviewContent .nameFs {
+    /* background-color: #348D63; */
+    /* background-color: red; */
+    margin: 1em 0em;
+}
+
+.reviewContent .nameFs p:nth-child(1) {
+    /* background-color: red; */
+    font-size: 1.09em;
+    padding: 0em 0em 0em 1.1em;
+    color: white;
+}
+
+.reviewContent .nameFs p {
+    /* background-color: red; */
+    font-size: .8em;
+    padding: .3em 0em 0em 1.6em;
+}
+
+.reviewContent .nameFs p i {
+    color: white;
+    font-style: normal;
+}
+
+i {
+    font-style: normal;
+}
+
+#review .reviewContent .imagesR {
+    margin-top: 3em;
+    /* padding: 5em 0em; */
+    background-color: yellow;
+}
+
+
+
+/* item */
+
+.item {
+    color: white;
+}
+
+.item .person {
+    color: #000;
+    font-size: 2em;
+}
+
+.item div {
+    display: flex;
+    /* background-color: yellow; */
+    /* padding: 1em 0em; */
+}
+
+.item div i{
+    padding: .4em;
+    font-size: 1.1em;
+}
+
+
+.small {
+    font-size: .78em;
+    /* color: red; */
+}
+
+ion-label.sortBy {
+    /* background-color: yellow; */
+    padding: .5em 0em;
+}
+
+ion-label.sortBy .btn {
+    background-color: #20704b;
+    padding: .3em .7em;
+    font-size: .9em;
+    margin: .0em .3em;
+    border-radius: .7em;
+    color: white;
+}
+
+.avatar {
+    margin: 1em 0em 0em 0em; 
+    display: flex;
+    /* background-color: yellow; */
+}
+
+.avatar p {
+    margin: 0em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    font-size: small;
+    /* background-color: red; */
+}
+
+.avatar img {
+    margin-right: .5em;
+    /* vertical-align: top; */
+    width: 4em;
+    height: 4em;
+    border-radius: 50%;
 }

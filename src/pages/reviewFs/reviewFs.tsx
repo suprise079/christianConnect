@@ -2,67 +2,77 @@ import { IonContent, IonLabel, IonPage, IonTitle, IonIcon, IonItem, IonButton } 
 import { Link } from 'react-router-dom';
 import TopImgFs from "../../components/topImagesFs/topImgFs";
 
+import { FaStar, FaStarHalfAlt } from "react-icons/fa";
+
 import { star, starHalf, personCircleSharp } from 'ionicons/icons';
 
 import img3 from './prayer.jpeg';
 
 // get css
 import './reviewFs.css';
+import NavigateFs from "../../components/navigateFs/nagivateFs";
+import TopNavBar from "../../components/topNavBar/topNavBar";
 
 const ReviewFS: React.FC = () => {
 
   return (
     <IonPage id="review" >
 
-      {/* <IonTabBar>
-        <IonTabButton >
-          <IonIcon icon={arrowBack} className=" tab1" size="small"></IonIcon>
-        </IonTabButton>
-        <IonTabButton>
-          <IonIcon icon={ellipsisHorizontalSharp} className="tab" size="small"></IonIcon>
-        </IonTabButton>
-      </IonTabBar> */}
+      <IonContent className="reviewContent" >
 
-      <IonContent>
+        <TopNavBar />
 
-        
-        {/* <img className=" img1" src={img1} />
-        <img className=" img2" src={img2} />
-        <img className=" img3" src={img3} /> */}
+        {/* delete this at your own risk..... */}
+        <div className="imagesR" >  </div>
 
         <TopImgFs />
 
+        <div className = "nameFs">
+          <p> { "Mpumelelo Prayer Meeting" } </p>
+          <p>
+            <i >{"4.2"}</i> <FaStar className = "icon1" />
+            <FaStar className = "icon1" />
+            <FaStar className = "icon1" />
+            <FaStar className = "icon1" />
+            <FaStarHalfAlt className = "icon1" /> 
+            <i> {"34" } </i>
+          </p>
+        </div>
 
-          <IonTitle>Mpumelelo Prayer Meeting</IonTitle>
-          <p>4.2<IonIcon icon={star} className="icon1" ></IonIcon>
-            <IonIcon icon={star} className="icon1" ></IonIcon>
-            <IonIcon icon={star} className="icon1" ></IonIcon>
-            <IonIcon icon={star} className="icon1"></IonIcon>
-            <IonIcon icon={starHalf} className="icon1" ></IonIcon>(34)</p>
+
+        <NavigateFs pn={"reviews"} />
         
 
 
         
         <IonItem  className = "item" color = " #348D63" lines = "full">
+          <IonLabel>
+            <IonLabel>Rate and review</IonLabel> 
+
             <IonLabel>
-               <IonLabel><small>Rate and review</small></IonLabel> 
-              <IonLabel><small>Share your experience to help others</small></IonLabel>
-            <IonIcon icon={personCircleSharp} className="person"></IonIcon> 
+              <small className="small" >Share your experience to help others</small>
+            </IonLabel>
+
+            <div > 
+            <IonIcon icon={personCircleSharp} className="person"></IonIcon>
+            <i >
             <IonIcon icon={star} className="icon2" ></IonIcon>
-            <IonIcon icon={star} className="icon2"  ></IonIcon>
+            <IonIcon icon={star} className="icon2" ></IonIcon>
             <IonIcon icon={star} className="icon2"></IonIcon>
             <IonIcon icon={star} className="icon2"></IonIcon>
-            <IonIcon icon={star} className="icon2"></IonIcon>
+            <IonIcon icon={star} className="icon2"></IonIcon>  </i> </div>
            </IonLabel>
-         </IonItem> 
+        </IonItem>
 
 
          <IonItem  color = " #348D63" lines = "full">
-          <IonLabel>
-           <IonLabel><small>Sort By</small>
-            <IonButton className=" btn " size="small">Newest</IonButton>
-          <IonButton className="btn" size="small"  >Highest</IonButton>
-          <IonButton className="btn" size="small" >Lowest</IonButton> </IonLabel>
+          <IonLabel  >
+            <IonLabel className="sortBy" >
+              <small>Sort By</small>
+              <button className="btn" >Newest</button>
+              <button className="btn" >Highest</button>
+              <button className="btn" >Lowest</button>
+            </IonLabel>
            
           <div slot=" start" className="avatar">
             <img src={img3} />
@@ -78,6 +88,7 @@ const ReviewFS: React.FC = () => {
           <IonLabel><small>I love this app, it has brought me close to God</small></IonLabel>
             </IonLabel>
         </IonItem>
+
       </IonContent>
 
 
