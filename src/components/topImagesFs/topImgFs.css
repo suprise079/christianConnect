@@ -2,6 +2,7 @@
 div.photos {
   display: flex;
   background-color: #438d63;
+  /* background-color: yellow; */
   justify-content: space-between;
   /* margin-top: 2em; */
 }

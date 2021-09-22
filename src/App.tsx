@@ -12,6 +12,7 @@ import '@ionic/react/css/core.css';
 import AboutFellowship from './pages/aboutFs/aboutFs';
 import FellowshipPhotos from './pages/photosFs/photosFs';
 import OverviewFs from './pages/overviewFs/overviewFs';
+import ReviewFS from './pages/reviewFs/reviewFs';
 
 const App: React.FC = () => (
   <IonApp>
@@ -32,6 +33,8 @@ const App: React.FC = () => (
         <Route exact path="/overviewfs" >
           <OverviewFs />
         </Route>
+
+        <Route exact path="reviewsfs" > <ReviewFS />  </Route>
 
         <Route exact path="/">
           <Redirect to="/home" />

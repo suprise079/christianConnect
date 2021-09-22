@@ -1,19 +1,13 @@
-* {
-    --ion-background-color: #348d63;
-}
+* { --ion-background-color: #348d63; }
 
-p {
-    margin: 0em;
-}
+p { margin: 0em; }
 
 a {
     text-decoration: none;
     color: white;
 }
 
-ion-page {
-    --ion-background-color: #ffffff;
-}
+ion-page { --ion-background-color: #ffffff; }
 
 .aboutFellowship {
     background-color: #438d63;
@@ -27,49 +21,13 @@ ion-page {
     padding: .5em 1em;
 }
 
-.aboutFellowship .view {
-    color: white;
-}
+.aboutFellowship .view { color: white; }
 
-
-
-
-
-/* top bar button */
-.tabbarContainer {
-    position: fixed;
-    right: 0;
-    left: 0;
-    margin-bottom: 2em;
-}
-
-.tabbarContainer .tabbar {
-    background-color: #438d63;
-    /* background-color: red; */
-    display: flex;
-    z-index: 123456;
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 1em 0em;
-    color: black;
-    margin-bottom: 4em;
-}
-
+/* 
 .tabbar ion-tab-button {
-    /* background-color: yellow; */
     width: 2em;
     padding: 0em;
-}
-
-div.tabbar .iconHover {
-    padding: 0em .5em;
-    color: black;
-}
-
-div.tabbar .iconHover:hover {
-    cursor: pointer;
-    color: white;
-}
+} */
 
 /* holds the the images of a fellowship  */
 .aboutFellowship .imagesA {

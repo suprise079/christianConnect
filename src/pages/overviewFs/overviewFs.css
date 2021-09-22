@@ -1,18 +1,12 @@
 
-/* .overviewFS {
---ion-background-color:#348D63 ;
-/* padding-top: 2em; */
-/* } */
-
-.overviewFS .content {
-    /* margin-top: 10em; */
+.overviewFS .overview {
     background-color: inherit;
 }
 
-.overviewFS .content .imagesO {
+.overviewFS .overview .imagesO {
+    margin-top: 3em;
+    /* padding: 2em 0em; */
     background-color: yellow;
-    /* padding: 1em; */
-    margin-top: 4em;
 }
 
 .tab{
@@ -49,42 +43,12 @@
 
 /* Aapoh */
 
-.overviewFS ion-content .tabbarContainer {
-    position: fixed;
-    right: 0;
-    left: 0;
-    margin-bottom: 2em;
-}
-
-.overviewFS .tabbarContainer .tabbar {
-    background-color: #438d63;
-    /* background-color: red; */
-    display: flex;
-    z-index: 123456;
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 1em 0em;
-    color: black;
-    margin-bottom: 4em;
-}
-
+/* 
 .overviewFS .tabbar ion-tab-button {
     background-color: yellow;
     width: 2em;
     padding: 0em;
-}
-
-.overviewFS div.tabbar .iconHover {
-    padding: 0em .5em;
-    color: black;
-}
-
-.overviewFS div.tabbar .iconHover:hover {
-    cursor: pointer;
-    color: white;
-}
-
-
+} */
 
 .overviewFS ion-tab-bar.tabbar ion-tab-button ion-icon {
     color: black;

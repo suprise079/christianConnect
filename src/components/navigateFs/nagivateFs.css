@@ -18,7 +18,4 @@ div.navigator a {
   /* background-color: red; */
   color: white;
 }
-
-/* div.navigator a:hover {
-  background-color: yellow;
-} */
+a:hover { cursor: pointer; }

@@ -1,12 +1,11 @@
 
 import { IonContent, IonPage } from "@ionic/react";
-import { FaEllipsisH, FaArrowLeft } from "react-icons/fa";
-import { Link } from "react-router-dom";
 
 import './photosFs.css';
 
 // import component
 import NavigateFs from "../../components/navigateFs/nagivateFs";
+import TopNavBar from "../../components/topNavBar/topNavBar";
 
 
 const FellowshipPhotos: React.FC = () => {
@@ -16,16 +15,15 @@ const FellowshipPhotos: React.FC = () => {
   return (
     <IonPage >
 
-      <IonContent >
-      <div className="fellowshipPhotos" >
-        <div className="topbar" >
-          {/* <IonButton > */} <FaArrowLeft /> {/* </IonButton> */}
-          {/* <IonButton > */} <FaEllipsisH /> {/* </IonButton> */}
-        </div>
+      <IonContent className="fellowshipPhotos" >
 
-        <NavigateFs />
+        <TopNavBar />
 
-        <div className="images" >
+        <div className="navMargin" >  </div> 
+        {/* <NavigateFs /> */}
+
+
+        <div className="imagesFS" >
           <div >
             <p style={{padding: '3em', backgroundColor:"lightgrey"}} > Main Image </p>
           </div>
@@ -41,7 +39,6 @@ const FellowshipPhotos: React.FC = () => {
             }
           </div>
         </div>
-      </div>
 
       </IonContent>
     </IonPage>

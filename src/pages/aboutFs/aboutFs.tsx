@@ -4,11 +4,11 @@ import { Link } from 'react-router-dom';
 
 
 import './aboutFs.css'; // get css
-import { FaArrowLeft, FaEllipsisH } from "react-icons/fa";
 
 // import component
 import NavigateFs from "../../components/navigateFs/nagivateFs";
 import TopImgFs from "../../components/topImagesFs/topImgFs";
+import TopNavBar from "../../components/topNavBar/topNavBar";
 
 
 const AboutFellowship: React.FC = () => {
@@ -24,17 +24,10 @@ const AboutFellowship: React.FC = () => {
         {/* </div> */}
 
 
-        <div className="tabbarContainer" > 
-          <div className="tabbar" slot="fixed" >
-            <FaArrowLeft className="iconHover" />
-            <FaEllipsisH className="iconHover" />
-          </div>
-        </div>
+        <TopNavBar />
 
 
-        <div className="imagesA" >
-          <TopImgFs />
-        </div>
+        <div className="imagesA" > <TopImgFs /> </div>
 
         <NavigateFs />
 

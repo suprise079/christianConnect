@@ -6,10 +6,6 @@ import {
 
 import { FaArrowLeft, FaEllipsisH, FaStar, FaStarHalf, FaStarHalfAlt, FaRegStarHalf } from 'react-icons/fa';
 
-import img1 from './images/Church.jpeg';
-import img2 from './images/Church2.jpeg';
-import img3 from './images/prayer.jpeg';
- 
 
 import { Link } from 'react-router-dom';
 
@@ -18,6 +14,7 @@ import { Link } from 'react-router-dom';
 // import component
 import NavigateFs from '../../components/navigateFs/nagivateFs';
 import TopImgFs from '../../components/topImagesFs/topImgFs';
+import TopNavBar from '../../components/topNavBar/topNavBar';
 
 const OverviewFs: React.FC = () => {
   return (
@@ -32,22 +29,16 @@ const OverviewFs: React.FC = () => {
           <IonIcon size="small" icon={ ellipsisHorizontalSharp } />
         </IonTabButton>
       </IonTabBar> */}
-        
 
  
       <IonContent className="overview" fullscreen >
 
-        <div className="tabbarContainer" > 
-          <div className="tabbar" slot="fixed" >
-            <FaArrowLeft className="iconHover" />
-            <FaEllipsisH className="iconHover" />
-          </div>
-        </div>
+        <TopNavBar />
         
-        
-        <div className="imagesO" > 
-          <TopImgFs img1={ img1 } img2={ img2 } img3={ img3 } />
-        </div>
+        <div className="imagesO" ></div>
+
+        <TopImgFs img1={ "" } img2={ "" } img3={ "" } />
+       
 
             
         <div className = "nameFs">

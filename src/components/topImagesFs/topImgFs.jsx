@@ -1,14 +1,9 @@
 import React from 'react';
-
-
 import img1 from './Church.jpeg';
 import img2 from './Church2.jpeg';
 import img3 from './prayer.jpeg';
 
-
 import './topImgFs.css';
-
-
 
 const TopImgFs = ( props ) => {
 
@@ -27,5 +22,4 @@ const TopImgFs = ( props ) => {
     </div>
   );
 }
-
 export default TopImgFs;
