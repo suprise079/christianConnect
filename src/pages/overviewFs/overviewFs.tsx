@@ -56,7 +56,7 @@ const OverviewFs: React.FC = () => {
         </div>
 
 
-        <NavigateFs />
+        <NavigateFs pn={"overview"} />
 
         
         <div className="buttons" >

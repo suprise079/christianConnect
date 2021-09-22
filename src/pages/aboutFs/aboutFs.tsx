@@ -29,7 +29,7 @@ const AboutFellowship: React.FC = () => {
 
         <div className="imagesA" > <TopImgFs /> </div>
 
-        <NavigateFs />
+        <NavigateFs pn={"about"} />
 
         <div className="view" >
           About a fellowship

@@ -30,15 +30,11 @@ const App: React.FC = () => (
           <FellowshipPhotos />
         </Route>
 
-        <Route exact path="/overviewfs" >
-          <OverviewFs />
-        </Route>
+        <Route exact path="/overviewfs" > <OverviewFs /> </Route>
 
-        <Route exact path="reviewsfs" > <ReviewFS />  </Route>
+        <Route exact path="/reviewsfs" > <ReviewFS /> </Route>
 
-        <Route exact path="/">
-          <Redirect to="/home" />
-        </Route>
+        <Route exact path="/"> <Redirect to="/home" /> </Route>
         
       </IonRouterOutlet>
     </IonReactRouter>

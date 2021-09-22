@@ -20,7 +20,7 @@ const FellowshipPhotos: React.FC = () => {
         <TopNavBar />
 
         <div className="navMargin" >  </div> 
-        {/* <NavigateFs /> */}
+        <NavigateFs pn={"photo"} />
 
 
         <div className="imagesFS" >
