@@ -4,10 +4,10 @@ import {
 import { IonReactRouter } from '@ionic/react-router';
 import { albums, home, person } from 'ionicons/icons';
 
-import Tab2 from './pages/Tab2';
-import './pages/Tab2.css';
+import SubscriptionHome from './pages/subscription/SubscriptionHome';
+import '../src/pages/subscription/SubscriptionHome.css';
 import './tabBar.css';
-import SubscriptionTabs from './pages/subscription/subscription';
+import SubscriptionTabs from './pages/subscription/SubscriptionTabs.jsx';
 
 const TabBar: React.FC = () => (
   <IonApp>
@@ -20,7 +20,7 @@ const TabBar: React.FC = () => (
           </Route>
           
           <Route exact path="/tab2">
-            <Tab2 />
+            <SubscriptionHome />
           </Route>
 
           {/* <Route exact path="/tab3">
@@ -36,7 +36,7 @@ const TabBar: React.FC = () => (
             <IonLabel>Home</IonLabel>
           </IonTabButton>
           {/* subscription button */}
-          <IonTabButton  tab="tab2" href="/tab2">
+          <IonTabButton  tab="subscriptionHome" href="/SubscriptionHome">
             <IonIcon icon={albums} color='tabBtn' />
             <IonLabel>Subscription</IonLabel>
           </IonTabButton>
