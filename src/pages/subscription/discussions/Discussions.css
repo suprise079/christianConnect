@@ -8,7 +8,11 @@
 
 
 
-/* main discussion container */
+/* page container */
+#page {
+    position: relative;
+}
+
 
 
 /* searchbar */
@@ -100,8 +104,7 @@
     text-shadow: 3px 6px 8px 0px rgba(0,0,0,0.2);
 }
 
-button {
-    /* margin-left: 75%; */
+/* button {
     padding: 10px;
     background-color: #348D63;
     color: #fff;
@@ -113,7 +116,7 @@ button {
 
 button:hover {
     background-color: #348d63af;
-}
+} */
 
 /* add discussion */
 .popUp {
@@ -131,16 +134,6 @@ button:hover {
 }
 
 
-#addPostBtn {
-    border: 0.5px solid rgba(0, 0, 0, 0.1);
-    box-shadow: 3px 6px 8px -1px rgba(0,0,0,0.2);
-    border-radius: 25px;
-    position: absolute;
-    right: 0;
-    top: 650px;
-    cursor: pointer;
-}
-
 #addPostBtn:hover {
     background-color: #348D63;
 
@@ -157,7 +150,7 @@ hr {
     padding-top: 5px;
     width: 100%;
 }
-.commentContent{
+/* .commentContent{
     margin: 30px 10px 10px 10px;
 }
 
@@ -198,4 +191,4 @@ hr {
     margin-left: 20px;
     padding: 8px;
     width: 80px;
-}
+} */

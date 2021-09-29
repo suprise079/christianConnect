@@ -1,23 +1,33 @@
-import {  IonPage, IonTitle, IonButton, } from '@ionic/react';
-import Annoce from './announcements/Announcements';
+import { IonContent, IonHeader, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonPage,IonList, IonTitle, IonToolbar, IonButtons, IonButton, IonIcon, IonVirtualScroll } from '@ionic/react';
+import Annoce from './announcements/Announcements'
 import Devotions from './devotions/Devotions';
 import { useState } from 'react';
 // import { IonHeader, IonToolbar, IonIcon,IonTitle } from "@ionic/react";
 import { Link } from "react-router-dom";
-import './SubscriptionTabs.css'
+import { arrowBackSharp } from "ionicons/icons";
+import './subscriptionTabs.css'
 import { MdKeyboardArrowLeft } from 'react-icons/md'
 import Discusions from './discussions/Discussions'
+import { IoAddSharp } from 'react-icons/io5';
+import Post from './discussions/post'
 
 
 const SubscriptionTabs: React.FC = () => {
 
   const loop = [1,2,3,4, 5, 6];
-  const [page, setpage] = useState('1')
+  const [page, setPage] = useState('1')
 
   function switchTab (id:string) {
-    document.getElementById(page)!.style.backgroundColor = 'transparent'
-    setpage(id) 
-    document.getElementById(id)!.style.backgroundColor = 'white'
+    try{
+      document.getElementById(page)!.style.backgroundColor = 'transparent'
+      setPage(id) 
+      document.getElementById(id)!.style.backgroundColor = 'white'
+    }
+    catch{
+      setPage(id) 
+      document.getElementById(id)!.style.backgroundColor = 'white'
+    }
+    
 
   }
 
@@ -41,7 +51,18 @@ const SubscriptionTabs: React.FC = () => {
           <div className="tabInfoDiv">
             {page == '1' && <Annoce />}
             {page == '2' && <Devotions />}
-            {page == '3' && <Discusions />}
+            {
+              page == '3' && 
+              (
+                <>
+                  <Discusions />
+                  <div >
+                    <IoAddSharp id="addPostBtn" size="30px" onClick={() => {setPage('3.1')}} />
+                  </div>
+                </>
+              )
+            }
+            { page == '3.1' && <Post />}
           </div>
           
         {/* </IonContent> */}
@@ -49,5 +70,7 @@ const SubscriptionTabs: React.FC = () => {
     </IonPage>
   );
 };
+
+// create a post page that will take the prop view and change to display discusiion
 
 export default SubscriptionTabs;

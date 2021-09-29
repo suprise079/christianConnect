@@ -147,8 +147,11 @@ const Discusions: React.FC = () => {
   return (
     <div id='page'>
       
-      
-      <div className='discussionContainer' style={{position:'relative'}}>
+      {/* add post button */}
+      <div >
+          <IoAddSharp id="addPostBtn" size="30px" onClick={(e) => { setAddDiscussion(true); console.log('I am working');  }} />
+        </div>
+      <div className='discussionContainer' >
       
         {/* search */}
 

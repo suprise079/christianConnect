@@ -20,12 +20,13 @@
 
 .tabInfoDiv {
     width: 95%;
-    min-height: 400px;
+    min-height: 420px;
     margin: auto;
     padding: 15px 10px 0px 10px;
     overflow-y: scroll;
     border-radius: 10px;
     background-color: white;
+    position: relative;
 }
 
 ::-webkit-scrollbar {
@@ -38,3 +39,12 @@
     
 }
 
+#addPostBtn {
+    border: 0.5px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 3px 6px 8px -1px rgba(0,0,0,0.2);
+    border-radius: 25px;
+    position: sticky;
+    right: 20px;
+    bottom: 10%;
+    cursor: pointer;
+}

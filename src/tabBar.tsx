@@ -7,7 +7,7 @@ import { albums, home, person } from 'ionicons/icons';
 import SubscriptionHome from './pages/subscription/SubscriptionHome';
 import '../src/pages/subscription/SubscriptionHome.css';
 import './tabBar.css';
-import SubscriptionTabs from './pages/subscription/SubscriptionTabs.jsx';
+import SubscriptionTabs from './pages/subscription/subscriptionTabs';
 
 const TabBar: React.FC = () => (
   <IonApp>
