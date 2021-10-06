@@ -8,12 +8,21 @@ import {
   IonTitle,
 } from "@ionic/react";
 import styled from "styled-components";
+
+// firebase
+import { app } from "../../../firebase/firebase";
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+
+// react
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
 import "../StylesForPages.css";
 import bg from "./bg.png";
+import { useLocation } from "react-router";
+
+const InitFirebase = app;
 
 const Body = styled(IonPage)`
   position: relative;
@@ -63,8 +72,40 @@ const handleSubmit = (e) => {
   console.log(e.target);
 };
 const Login = () => {
+  const location = useLocation();
   const [showPassword, setshowPassword] = useState(false);
   const [pswdType, setpswdType] = useState("password");
+
+  const LoginWithGoogle = () => {
+    const auth = getAuth();
+    const provider = new GoogleAuthProvider();
+
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        // The signed-in user info.
+        const user = result.user;
+        // console.log(`results : ${token},${credential},${user}`);
+        console.log(user);
+        // ...
+      })
+      .catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const email = error.email;
+        // The AuthCredential type that was used.
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        console.log(
+          `Errors : ${errorCode},${errorMessage},${email},${credential}`
+        );
+        // ...
+      });
+  };
+
   return (
     <Body>
       <IonHeader color="white" className="ion-no-border">
@@ -118,7 +159,7 @@ const Login = () => {
       </div>
       <div className="google-container">
         <span className="google-login-text">Login with </span>
-        <button>
+        <button onClick={LoginWithGoogle}>
           <span className="google-icon">
             <FcGoogle size="20px" />
           </span>
@@ -126,11 +167,14 @@ const Login = () => {
         </button>
       </div>
       <div className="haveAcc">
-        Don't have an account ? <Link to="/home">Register</Link>
+        Don't have an account ?{" "}
+        <Link to={location.state}>
+          Register
+        </Link>
       </div>
       <div className="haveAcc">
         {/* set forgot password page */}
-        <Link to="/home">Forgot password ?</Link>
+        <Link to="/Login">Forgot password ?</Link>
       </div>
     </Body>
   );

@@ -2,6 +2,8 @@ import { IonButton, IonPage } from "@ionic/react";
 import "../StylesForPages.css";
 import logo from "./Logo_transp.png";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const Body = styled(IonPage)`
   position: relative;
@@ -30,26 +32,35 @@ const Body = styled(IonPage)`
   }
 `;
 const Buttons = styled(IonButton)`
-  width: 151px;
   height: 35px;
   border-radius: 10px;
   color: #348d63;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 `;
 const Welcome = () => {
+  const [clicked, setclicked] = useState(false);
+  const [uClicked, setuClicked] = useState(false)
   return (
     <Body>
       <img src={logo} alt="Logo" />
       <div className="Buttons">
-        <Buttons
-          routerLink="/SignUp"
-          onClick={() => {
-            console.log("Hello RichMan");
-          }}
-        >
-          Leaders
+        <Buttons>
+          <Link
+            className="welcomeLink"
+            to={{ pathname: "/Login", state: "/SignUp" }}
+            onClick={()=>setclicked(false)}
+          >
+            {clicked ? "Loading..." : "I am a fellowship leader"}
+          </Link>
         </Buttons>
-        <Buttons routerLink="/SignUpU">Users</Buttons>
+        <Buttons>
+          <Link
+            className="welcomeLink"
+            to={{ pathname: "/Login", state: "/SignUpU" }}
+          >
+            {clicked ? "Loading..." : "I am just a fellowship member"}
+          </Link>
+        </Buttons>
       </div>
     </Body>
   );
