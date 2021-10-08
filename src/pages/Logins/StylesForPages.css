@@ -84,6 +84,7 @@ a.toGoogle {
   align-items: center;
   height: 100%;
   background: #4285f4;
+  border:3px solid #4285f4;
 }
 .google-container button .google-text {
   color: white;
@@ -93,7 +94,6 @@ a.toGoogle {
 button .google-icon {
   position: absolute;
   height: 100%;
-  border:3px solid #4285f4; 
   top: 0;
   left: 0;
   background-color: white;
