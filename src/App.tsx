@@ -21,6 +21,8 @@ import User from './pages/Users/User';
 import EditUser from './pages/Users/EditUser';
 import Notes from './pages/notes/Notes';
 import ViewNote from './pages/notes/ViewNote';
+import Donations from './pages/notes/Donations';
+import SignUp from './pages/Logins/SignUp';
 
 
 const App: React.FC = () => (
@@ -51,11 +53,13 @@ const App: React.FC = () => (
         <Route exact path="/notes" > <Notes /> </Route>
         {/* the page that shows the notes */}
         <Route exact path="/viewnotes" > <ViewNote /> </Route>
+        {/* get the donations */}
+        <Route exact path="/donations" > <Donations /> </Route>
+        {/* maybe leader sign up...... */}
+        <Route exact path="/SignUp" component={SignUp} />
         
 
 
-
-        {/* <Route exact path="/SignUp" component={SignUp} /> */}
         {/* <Route exact path="/UploadAnnouncement" component={UploadAnnouncement} /> */}
         {/* <Route exact path="/UploadSermon" component={UploadSermon} /> */}
         {/* <Route exact path="/UploadEvent" component={PickerExample} /> */}

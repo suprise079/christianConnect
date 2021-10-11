@@ -6,6 +6,8 @@ import {
   IonHeader,
   IonToolbar,
   IonTitle,
+  IonSelect,
+  IonSelectOption,
 } from "@ionic/react";
 import styled from "styled-components";
 
@@ -163,6 +165,29 @@ const Login = () => {
             clearInput="true"
             className="inputField"
           ></IonInput>
+
+
+          <div >
+            <select >
+              <option disabled selected >
+                Select User
+              </option>
+              <option >
+                leader
+              </option>
+
+              <option >
+                Member
+              </option>
+            </select>
+          </div> <br /><br />
+
+          <IonSelect >
+            <IonSelectOption disabled selected > Select User </IonSelectOption>
+            <IonSelectOption > Leader </IonSelectOption>
+            <IonSelectOption > Member </IonSelectOption>
+          </IonSelect>
+          
 
           <input type="submit" value="LOGIN" />
         </form>

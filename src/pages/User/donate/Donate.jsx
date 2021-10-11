@@ -11,13 +11,15 @@ import {
   IonTextarea,
 } from "@ionic/react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useState } from "react";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { FaEllipsisH } from "react-icons/fa";
 import "./Donate.css";
 import { ellipsisHorizontal } from "ionicons/icons";
 //   import bg from "./bg.png";
+
+
 
 const Body = styled(IonPage)`
   position: relative;
@@ -62,6 +64,8 @@ const Body = styled(IonPage)`
     background: transparent;
   }
 `;
+
+
 const handleSubmit = (e) => {
   e.preventDefault();
   console.log(e.target);
@@ -71,6 +75,7 @@ const Donate = () => {
   const [text, settext] = useState("");
   const [showPassword, setshowPassword] = useState(false);
   const [pswdType, setpswdType] = useState("password");
+  const history = useHistory();
 
   return (
     <Body>
@@ -128,8 +133,12 @@ const Donate = () => {
         </div>
 
         <div id="donateBtn" >
-    
-            Donate
+          <button 
+          // onClick={ e=> history.push("/donations") }
+          >
+            <Link to="/donations" > 
+            Donate </Link >
+          </button>
         </div>
 
       </div>

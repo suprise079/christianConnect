@@ -53,7 +53,7 @@ const appPages: AppPage[] = [
   },
   {
     title: "Logout",
-    url: "/Logout",
+    url: "/Login",
     iosIcon: logOutOutline,
     mdIcon: logOutSharp,
 
