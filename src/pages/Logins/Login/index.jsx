@@ -14,8 +14,9 @@ import { app } from "../../../firebase/firebase";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 
 // react
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import { Link, Redirect } from "react-router-dom";
+
+import { useState,useEffect } from "react";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
 import "../StylesForPages.css";
@@ -72,6 +73,7 @@ const handleSubmit = (e) => {
   console.log(e.target);
 };
 const Login = () => {
+  const [loggedIn, setLoggedIn] = useState(false);
   const location = useLocation();
   const [showPassword, setshowPassword] = useState(false);
   const [pswdType, setpswdType] = useState("password");
@@ -88,7 +90,11 @@ const Login = () => {
         // The signed-in user info.
         const user = result.user;
         // console.log(`results : ${token},${credential},${user}`);
+        setLoggedIn(true);
+        
+        console.log(loggedIn);
         console.log(user);
+        return <Redirect push to="/Donate" />
         // ...
       })
       .catch((error) => {
@@ -105,7 +111,9 @@ const Login = () => {
         // ...
       });
   };
-
+  useEffect(() => {
+    console.log(loggedIn)
+  }, [loggedIn])
   return (
     <Body>
       <IonHeader color="white" className="ion-no-border">
@@ -159,22 +167,21 @@ const Login = () => {
       </div>
       <div className="google-container">
         <span className="google-login-text">Login with </span>
-        <button onClick={LoginWithGoogle}>
+        <Link onClick={LoginWithGoogle} to="./signedInHome">
           <span className="google-icon">
             <FcGoogle size="20px" />
           </span>
           <span className="google-text">Google</span>
-        </button>
+        </Link>
       </div>
       <div className="haveAcc">
-        Don't have an account ?{" "}
-        <Link to={location.state}>
-          Register
-        </Link>
+        Don't have an account ? <Link to={location.state}>Register</Link>
       </div>
       <div className="haveAcc">
         {/* set forgot password page */}
         <Link to="/Login">Forgot password ?</Link>
+        
+        {loggedIn ? <Redirect push to="/" /> : ""}
       </div>
     </Body>
   );

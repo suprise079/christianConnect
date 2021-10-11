@@ -126,14 +126,14 @@ const SignUpU = () => {
           ></IonInput>
           <input type="submit" value="Register" />
         </form>
-        <div className="haveAcc">
+        {/* <div className="haveAcc">
           {" "}
           Register with
           <Link className="toGoogle" style={{}} to="/">
             {" "}
             <FcGoogle className="google"/> Google
           </Link>
-        </div>
+        </div> */}
         <div className="haveAcc">
           Have an account ? <Link to="/Donate"> Donate </Link>
         </div>
