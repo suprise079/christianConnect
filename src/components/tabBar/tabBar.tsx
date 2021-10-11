@@ -5,34 +5,37 @@ import styled from 'styled-components';
 import { FaHome } from 'react-icons/fa';
 // impor } from 'react-icons/hi';
 
+
+import { Link, useHistory } from 'react-router-dom';
 import React from 'react';
 
 import './tabBar.css'; // import css
 
 
 const TabBar: React.FC = () => {
+  const history = useHistory();
+
+
 
   return (
     <div className="tabBarContainer" >
-      <div >
-        {/* <IonIcon icon={ home } ></IonIcon> */}
-        <i > <FaHome /> </i> 
-        <IonLabel className="label" > Home </IonLabel>
+      <div onClick={ e=> history.push("/userhome") } >
+        {/* <Link to="/userhome" > */}
+          <i > <FaHome /> </i> 
+          <IonLabel className="label" > Home </IonLabel>
+        {/* </Link> */}
       </div>
 
       <div >
-        <i >
-          <IonIcon icon={ mail } ></IonIcon>
-        </i>
-        
+        <i > <IonIcon icon={ mail } ></IonIcon> </i>
         <IonLabel className="label" > Subscription </IonLabel>
       </div>
 
-      <div >
-        <i >
-          <IonIcon icon={ person } ></IonIcon>
-        </i>
-        <IonLabel className="label" > Profile </IonLabel>
+      <div onClick={ e=> history.push("/profile")} >
+        {/* <Link to="/profile" > */}
+          <i > <IonIcon icon={ person } ></IonIcon> </i>
+          <IonLabel className="label" > Profile </IonLabel>
+        {/* </Link> */}
       </div>
     </div>
   );

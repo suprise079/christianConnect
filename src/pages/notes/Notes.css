@@ -1,0 +1,43 @@
+#mainContainer{
+    background-color: #f1f1f1;
+    overflow-y: scroll;
+}
+
+#noteCards{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+#noteTitle {
+    padding-left: 10px;
+    color: #348D63;
+}
+
+#noteTitle:hover {
+    cursor: pointer;
+    color: #87e4b9;
+}
+
+#noteDate {
+    padding-top: 20px;
+}
+
+#addNote {
+    background-color: #fff;
+    right: 20px;
+    bottom: 10px;
+    width: 24px;
+    height: 24px;
+    padding: 5px;
+    margin-left: 95%;
+    border: 1px solid rgba(0, 0, 0, 0.185);
+    position: fixed;
+    margin-top: 80%;
+    border-radius: 20px;
+    color: rgba(0, 0, 0, 0.87);
+}
+
+a{
+    text-decoration: none;
+}

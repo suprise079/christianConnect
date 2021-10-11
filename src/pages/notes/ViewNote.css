@@ -1,0 +1,37 @@
+#bg{
+    background-color: #f1efef;
+}
+#backIcon{
+    color: #000;
+}
+.note {
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.11);
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    color: #000;
+    min-height: 800px;
+    margin: 10px;
+    padding: 20px;
+}
+
+.noteFooter{
+    display: flex;
+    /* border: 1px solid rgb(0, 0, 0); */
+    margin-top: 50%;
+}
+
+.deleteIcon{
+    right: 20px;
+    bottom: 10px;
+    width: 24px;
+    height: 24px;
+    padding: 5px;
+    margin-left: 95%;
+    border: 1px solid rgba(0, 0, 0, 0.185);
+    position: fixed;
+    background-color: red;
+    margin-top: 80%;
+    border-radius: 20px;
+    color: rgba(0, 0, 0, 0.87);
+}

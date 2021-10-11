@@ -3,7 +3,7 @@ import { IonButton, IonContent, IonHeader, IonIcon, IonLabel, IonPage, IonTabBar
 } from '@ionic/react';
 
 import React from 'react';
-import './Home.css';
+import './userHome.css';
 
 
 // import icons
@@ -12,10 +12,10 @@ import {
 } from 'ionicons/icons'
 
 // import component
-import SearchFellowship from '../components/searchFellowship/searchFellowship';
-import TabBar from '../components/tabBar/tabBar';
+import SearchFellowship from '../../components/searchFellowship/searchFellowship';
+import TabBar from '../../components/tabBar/tabBar';
 
-const Home: React.FC = () => {
+const UserHome: React.FC = () => {
   return (
     <IonPage className="userHome" >
 
@@ -59,4 +59,4 @@ const Home: React.FC = () => {
   );
 };
 
-export default Home;
+export default UserHome;
