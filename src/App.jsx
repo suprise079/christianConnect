@@ -23,14 +23,14 @@ import Notes from './pages/notes/Notes';
 import ViewNote from './pages/notes/ViewNote';
 
 
-const App: React.FC = () => (
+const App = () => (
   <IonApp>
     <IonReactRouter>
       <IonRouterOutlet>
 
 
         <Route exact path="/"> <Redirect to="/home" /> </Route>
-      
+
         <Route exact path="/" component={Welcome} />
         <Route exact path="/Login" component={Login} />
         <Route exact path="/SignUpU" component={SignUpU} />
@@ -51,15 +51,11 @@ const App: React.FC = () => (
         <Route exact path="/notes" > <Notes /> </Route>
         {/* the page that shows the notes */}
         <Route exact path="/viewnotes" > <ViewNote /> </Route>
-        
-
-
 
         {/* <Route exact path="/SignUp" component={SignUp} /> */}
         {/* <Route exact path="/UploadAnnouncement" component={UploadAnnouncement} /> */}
         {/* <Route exact path="/UploadSermon" component={UploadSermon} /> */}
         {/* <Route exact path="/UploadEvent" component={PickerExample} /> */}
-        
       </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>
