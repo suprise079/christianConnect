@@ -102,9 +102,10 @@
     color: #348D63;
     cursor: pointer;
     text-shadow: 3px 6px 8px 0px rgba(0,0,0,0.2);
+    height: fit-content;
 }
 
-/* button {
+#postBtns button {
     padding: 10px;
     background-color: #348D63;
     color: #fff;
@@ -114,9 +115,9 @@
     cursor: pointer;
 }
 
-button:hover {
+#postBtns button:hover {
     background-color: #348d63af;
-} */
+}
 
 /* add discussion */
 .popUp {

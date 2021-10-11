@@ -1,4 +1,8 @@
-
+Link, a {
+    text-decoration: none;
+    color: black;
+    
+}
 
 #mainHeading {
     text-align: center;
@@ -13,6 +17,7 @@
     
 }
 
+
 .tabBtn {
     font-size: x-small;
     color: black;
@@ -26,7 +31,7 @@
     overflow-y: scroll;
     border-radius: 10px;
     background-color: white;
-    position: relative;
+    
 }
 
 ::-webkit-scrollbar {
@@ -43,8 +48,10 @@
     border: 0.5px solid rgba(0, 0, 0, 0.1);
     box-shadow: 3px 6px 8px -1px rgba(0,0,0,0.2);
     border-radius: 25px;
-    position: sticky;
-    right: 20px;
-    bottom: 10%;
+    position: absolute;
+    right: 30px;
+    bottom: 5%;
     cursor: pointer;
+    background-color: rgb(25, 177, 223);
+    color: white;
 }

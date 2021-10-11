@@ -15,11 +15,11 @@ const TabBar: React.FC = () => (
       <IonTabs>
         <IonRouterOutlet>
 
-          <Route exact path="/tab1">
+          {/* <Route exact path="/tab1">
             <SubscriptionTabs />
-          </Route>
+          </Route> */}
           
-          <Route exact path="/tab2">
+          <Route exact path="/SubscriptionHome">
             <SubscriptionHome />
           </Route>
 

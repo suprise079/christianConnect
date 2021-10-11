@@ -1,13 +1,17 @@
-import { IonContent, IonGrid, IonRow, IonCol, IonHeader, IonPage, IonTitle, IonToolbar, IonButton, IonIcon } from '@ionic/react';
+import { IonContent, IonGrid, IonRouterOutlet, IonRow, IonCol, IonHeader, IonPage, IonTitle, IonToolbar, IonButton, IonIcon } from '@ionic/react';
 import { logoClosedCaptioning, play } from 'ionicons/icons';
 import church from './church.jpeg';
 import hope from './hope.jpg'
 import mpumi from './mpumi.jpg'
 import './SubscriptionHome.css';
 import { useState } from 'react';
+import { Link } from 'react-router-dom'
+import { IonReactRouter } from '@ionic/react-router';
+import { Redirect, Route } from 'react-router-dom';
+import SubscriptionTabs from './subscriptionTabs';
 
 
-const Tab2: React.FC = () => {
+const SubscriptionList = () => {
 
   var loop = [1,2,3,4,,5,6,7,8]
   //use state view for now and later use subscriber list length to determine which view to use
@@ -30,7 +34,7 @@ const Tab2: React.FC = () => {
             <div className="scrollSubscriptions">
               {/* show only ten and find the rest in view all */}
               <IonRow>
-                <IonCol id='1'><img className='highlightImg' src={hope} alt='fellow1' /><br />Hope fellowship</IonCol>
+                <IonCol id='1'><Link to="/subscriptionTabs"><img className='highlightImg' src={hope} alt='fellow1' /><br />Hope fellowship</Link></IonCol>
                 <IonCol id='2'><img className='highlightImg' src={mpumi} alt='fellow2' /><br />Mpumelelo fellowship</IonCol>
                 <IonCol id='1'><img className='highlightImg' src={hope} alt='fellow1' /><br />Hope fellowship</IonCol>
                 <IonCol id='2'><img className='highlightImg' src={mpumi} alt='fellow2' /><br />Mpumelelo fellowship</IonCol>
@@ -91,17 +95,41 @@ const Tab2: React.FC = () => {
               })
             }
           </div>
+          
         </div>
         
       )
     }
+    {console.log("sub home finished reendering")}
     </>
   );
 };
 
-export default Tab2;
+const SubscriptionHome: React.FC = () => {
+
+  return (
+    <IonReactRouter>
+        <IonRouterOutlet>
+
+          <Route exact path="/subscriptionTabs">
+            <SubscriptionTabs />
+          </Route>
+          
+          <Route exact path="/SubscriptionHome">
+            <SubscriptionList />
+          </Route>
+
+          {/* <Route exact path="/tab3">
+            <Tab3 />
+          </Route> */}
+          
+        </IonRouterOutlet>
+    </IonReactRouter>
+  )
+}
+
+export default SubscriptionHome;
 
 
 
-// make a function that add two numbers
-
+// make a function that add two num

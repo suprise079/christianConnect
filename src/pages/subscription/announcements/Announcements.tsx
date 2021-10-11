@@ -3,12 +3,15 @@ import { arrowBack } from 'ionicons/icons';
 import { useState } from 'react';
 import './Announcements.css';
 import {Calendar} from '@ionic-native/calendar';
+// firebase real time database
+import  Firebase from '../firebase.js'
+
 
 
 const Annoce: React.FC = () => {
 
-    const loop = [1,2,3,4, 5,6];
-    const [selectedId, setSelectedId] = useState(null)
+    
+    // List of annoucements
     const annocements = [
       {title:'Gents night', content:'Rev SC & PA Mathebula invites all Men to the first Gents Night on the year under the theme, GENTS let’s talk, unpacking it all.', date:'21 May 2021 18:30', id:1},
       {title:'Mens conference', content:'Rev SC & PA Mathebula invites all Men to the first Gents Night on the year under the theme, GENTS let’s talk, unpacking it all.', date:'21 May 2021 18:30', id:2},
@@ -18,7 +21,7 @@ const Annoce: React.FC = () => {
       {title:'Worship night', content:'Rev SC & PA Mathebula invites all Men to the first Gents Night on the year under the theme, GENTS let’s talk, unpacking it all.', date:'21 May 2021 18:30', id:6}
     ]
     function readMore(event:any, cardId:string, contentId:string) {
-      setReminder()
+      
         var card = document.getElementById(cardId)!
         var content = document.getElementById(contentId)!
         var button = event.target
@@ -37,15 +40,16 @@ const Annoce: React.FC = () => {
         }
     }
 
-    console.log(Calendar.requestReadWritePermission())
-    function setReminder(){
-      Calendar.hasReadWritePermission().then((data) => {
-        console.log(data)
-      })
-      .catch((err) =>{
-        console.log(err)
-      })
-    }
+    // console.log(Calendar.requestReadWritePermission())
+    // function setReminder(){
+    //   Calendar.hasReadWritePermission().then((data) => {
+    //     console.log(data)
+    //   })
+    //   .catch((err) =>{
+    //     console.log(err)
+    //   })
+    // }
+    console.log("Annoucement is rendering")
 
 
 
@@ -68,6 +72,7 @@ const Annoce: React.FC = () => {
             
             )})}
           </IonList>
+          {console.log("annouce finished reendering")}
         </>
     )
 }

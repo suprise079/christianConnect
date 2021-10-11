@@ -59,7 +59,6 @@ const Discusions: React.FC = () => {
                 {/* date */}
                 <p className='date'>{reply.date}</p>
 
-
                 <p className='commentContent'>
                   {reply.content}
                 </p>
@@ -149,8 +148,8 @@ const Discusions: React.FC = () => {
       
       {/* add post button */}
       <div >
-          <IoAddSharp id="addPostBtn" size="30px" onClick={(e) => { setAddDiscussion(true); console.log('I am working');  }} />
-        </div>
+        <IoAddSharp id="addPostBtn" size="30px" onClick={(e) => { setAddDiscussion(true); console.log('I am working');  }} />
+      </div>
       <div className='discussionContainer' >
       
         {/* search */}
@@ -208,7 +207,6 @@ const Discusions: React.FC = () => {
 
                     <div id='postBtns'>
                       <p id='1' onClick={(e) => { setReply(!reply); setAddComment(false) }}>{'number of '} replies</p>
-
                       <button onClick={(e) => { setAddComment(!addComment); setReply(false) }}>Reply</button>
                     </div>
 
@@ -239,31 +237,8 @@ const Discusions: React.FC = () => {
               )
             })
           }
-          { addDiscussion ? addDiscussionPost():""}
-        </div>
-
-        {/* add post button */}
-        <div >
-          <IoAddSharp id="addPostBtn" size="30px" onClick={(e) => { setAddDiscussion(true); console.log('I am working');  }} />
-        </div>
-         {/* pop up container */}
-
-        {
-          addDiscussion == true &&
           
-          <div className='popUp'>
-            <div className='popUpContent'>
-
-              {addDiscussionPost()}
-
-            </div>                     
-           </div>
-        }
-
-
-        
-
-
+        </div>
       </div>
 
     </div>

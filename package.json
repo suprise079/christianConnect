@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
-    "@capacitor/android": "3.2.3",
+    "@capacitor/android": "3.2.4",
     "@capacitor/app": "1.0.2",
     "@capacitor/core": "3.2.0",
     "@capacitor/haptics": "1.0.2",
@@ -25,6 +25,7 @@
     "add": "^2.0.6",
     "bootstrap": "^5.1.1",
     "cordova-plugin-calendar": "^5.1.5",
+    "firebase": "^9.1.1",
     "framer-motion": "^4.1.17",
     "i": "^0.3.6",
     "ionicons": "^5.4.0",

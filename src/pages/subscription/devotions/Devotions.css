@@ -22,6 +22,17 @@ div.devoPic {
     margin: 5px;
     float: left;
     text-align: center;
+
+}
+
+.sermon:hover {
+    background-color: lightgray;
+    color: black;
+}
+
+.sermon ion-card-subtitle:hover {
+    color: black;
+
 }
 
 .sermon video {
@@ -29,4 +40,12 @@ div.devoPic {
     border-radius: 20px;
     height: 70px;
     
+}
+
+#devotionCard {
+    width: fit-content;
+}
+
+#devotionContent {
+    padding: 1px;
 }
