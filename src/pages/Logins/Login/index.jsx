@@ -14,7 +14,13 @@ import styled from "styled-components";
 
 // firebase
 import { app } from "../../../firebase/firebase";
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import {
+  getAuth,
+  signInWithPopup,
+  GoogleAuthProvider,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword
+} from "firebase/auth";
 
 // react
 import { Link, useHistory } from "react-router-dom";
@@ -90,15 +96,20 @@ const Body = styled(IonPage)`
 
 const Login = () => {
   /* To know which type of user is logging in. (value either "/SignUp" for Leaders or ""/SignUpU"for normal users") */
+  // Trackers
   const location = useLocation();
   const history = useHistory();
+
+  // firebase/auth settings
+  const auth = getAuth();
+
+  // user details
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showPassword, setshowPassword] = useState(false);
   const [pswdType, setpswdType] = useState("password");
-
-  // user details
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
   const handleChange = (e) => {
     const val = e.target;
     if (val.type === "email") {
@@ -106,16 +117,17 @@ const Login = () => {
     } else if (val.type === "password" || val.type === "text") {
       setPassword(val.value);
     }
-    // console.log();
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(`email:${email} \npswd:${password}`);
+    signInWithEmailAndPassword(auth, email, password)
+      .then((cred) => console.log(cred))
+      .catch((err) => console.log(err));
+
   };
 
   const loginWithGoogle = () => {
-    const auth = getAuth();
     const provider = new GoogleAuthProvider();
     /*
     REGISTER NEW USERS(TO GO IN signUp AND signUpU) USING 
@@ -215,8 +227,10 @@ const Login = () => {
               type={pswdType}
               clearInput="true"
               className="inputField"
-              value = {password}
-              onIonChange = {(e)=>{handleChange(e)}}
+              value={password}
+              onIonChange={(e) => {
+                handleChange(e);
+              }}
             />
             <input type="submit" value="Login" />
           </form>
