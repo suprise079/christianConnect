@@ -9,7 +9,7 @@ import {
   import {FaUserEdit,FaCrown } from "react-icons/fa";
   
 
-  import churchImg from "../../components/Images/church.jpeg";
+  import churchImg from "../../../public/assets/icon/Church.jpeg";
 
   
   
