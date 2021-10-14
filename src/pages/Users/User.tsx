@@ -3,7 +3,7 @@ import {
     IonPage, IonCard, IonAvatar, IonCardTitle, IonCardSubtitle, IonList, IonItem, IonLabel, IonIcon,IonMenuToggle} from '@ionic/react';
   
 // import ExploreContainer from '../components/ExploreContainer';
-import './Profile.css';
+import '../Profile.css';
 import { logOutSharp, logOutOutline, bookmarkSharp, bookmarkOutline, createSharp, createOutline, walletSharp, walletOutline, } from "ionicons/icons";
 // import {
 //   useLocation,

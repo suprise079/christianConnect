@@ -6,6 +6,7 @@ import {
   IonHeader,
   IonToolbar,
   IonTitle,
+  IonContent
 } from "@ionic/react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
@@ -15,6 +16,7 @@ import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import "../StylesForPages.css";
 
 const Body = styled(IonPage)`
+  padding: 1em 0em
   position: relative;
   width: 100%;
   height: 100%;
@@ -46,100 +48,118 @@ const SignUp = () => {
         </IonToolbar>
       </IonHeader>
 
-      <div id="inputs">
-        <form action="/" method="post">
-          <label htmlFor="name">Name of fellowship</label>
-          <IonInput
-            required
-            name="name"
-            clearInput="true"
-            className="inputField"
-          ></IonInput>
 
-          <label htmlFor="First name">First name</label>
-          <IonInput
-            required
-            name="First name"
-            clearInput="true"
-            className="inputField"
-          ></IonInput>
+      <IonContent >
+      
+        <div id="inputs">
 
-          <label htmlFor="Last name">Last name</label>
-          <IonInput
-            required
-            name="Last name"
-            clearInput="true"
-            className="inputField"
-          ></IonInput>
+          {/* <form action="/" method="post"> */}
 
-          <label htmlFor="Phone number">Phone number</label>
-          {/* will use regex validation to format to NUMBERS ONLY */}
-          <IonInput
-            required
-            name="Phone number"
-            clearInput="true"
-            className="inputField"
-          ></IonInput>
+            <label htmlFor="name">Name of fellowship</label>
+            <IonInput
+              required
+              name="name"
+              clearInput="true"
+              className="inputField"
+            ></IonInput>
 
-          <label htmlFor="Email address">Email address</label>
-          <IonInput
-            required
-            type="email"
-            name="Email address"
-            clearInput="true"
-            className="inputField"
-          ></IonInput>
+            <label htmlFor="First name">First name</label>
+            <IonInput
+              required
+              name="First name"
+              clearInput="true"
+              className="inputField"
+            ></IonInput>
 
-          <label htmlFor="Password">
-            Password{" "}
-            <span
-              onClick={() => {
-                setshowPassword(showPassword ? false : true);
-                setpswdType(showPassword ? "password" : "text");
-              }}
-            >
-              {showPassword ? (
-                <AiFillEyeInvisible size="23px" />
-              ) : (
-                <AiFillEye size="23px" />
-              )}
-            </span>
-          </label>
-          <IonInput
-            required
-            type={pswdType}
-            clearInput="true"
-            className="inputField"
-          ></IonInput>
+            <label htmlFor="Last name">Last name</label>
+            <IonInput
+              required
+              name="Last name"
+              clearInput="true"
+              className="inputField"
+            ></IonInput>
 
-          <label htmlFor="Confirm password">
-            Confirm password
-            <span
-              onClick={() => {
-                setshowConf(showConf ? false : true);
-                setconfpswd(showConf ? "password" : "text");
-              }}
-            >
-              {showConf ? (
-                <AiFillEyeInvisible size="23px" />
-              ) : (
-                <AiFillEye size="23px" />
-              )}
-            </span>
-          </label>
-          <IonInput
-            required
-            type={confpswd}
-            name="Confirm password"
-            clearInput="true"
-            className="inputField"
-          ></IonInput>
-          <input type="submit" value="Create a Fellowship" />
-        </form>
-        <div className="haveAcc">
-          Have an account ? <Link to="/Login">Login</Link>
+            <label htmlFor="Phone number">Phone number</label>
+            {/* will use regex validation to format to NUMBERS ONLY */}
+            <IonInput
+              required
+              name="Phone number"
+              clearInput="true"
+              className="inputField"
+            ></IonInput>
+
+            <label htmlFor="Email address">Email address</label>
+            <IonInput
+              required
+              type="email"
+              name="Email address"
+              clearInput="true"
+              className="inputField"
+            ></IonInput>
+
+            <label htmlFor="Password">
+              Password{" "}
+              <span
+                onClick={() => {
+                  setshowPassword(showPassword ? false : true);
+                  setpswdType(showPassword ? "password" : "text");
+                }}
+              >
+                {showPassword ? (
+                  <AiFillEyeInvisible size="23px" />
+                ) : (
+                  <AiFillEye size="23px" />
+                )}
+              </span>
+            </label>
+            <IonInput
+              required
+              type={pswdType}
+              clearInput="true"
+              className="inputField"
+            ></IonInput>
+
+
+            <label htmlFor="Confirm password">
+              Confirm password
+              <span
+                onClick={() => {
+                  setshowConf(showConf ? false : true);
+                  setconfpswd(showConf ? "password" : "text");
+                }}
+              >
+                {showConf ? (
+                  <AiFillEyeInvisible size="23px" />
+                ) : (
+                  <AiFillEye size="23px" />
+                )}
+              </span>
+            </label>
+            <IonInput
+              required
+              type={confpswd}
+              name="Confirm password"
+              clearInput="true"
+              className="inputField"
+            />
+
+            <div >
+              <Link to="/leader" >
+                Create A Fellowship
+              </Link>
+            </div>
+
+          {/* </form> */}
+
+
+          <div className="haveAcc">
+            Have an account ? 
+            <Link style={{color:"#fff"}} to="/Login">Login</Link>
+          </div>
+
         </div>
-      </div>
+      </IonContent>
+      
     </Body>
   );
 };
