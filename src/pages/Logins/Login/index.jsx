@@ -55,53 +55,52 @@ const Body = styled(IonPage)`
     background: transparent;
   }
   label {
-    text-shadow: none;
+    
     margin: 1.2% 5%;
     width: 70%;
     display: flex;
     justify-content: space-between;
     align-items: center;
+
   }
   input[type="submit"] {
     width: 30vw;
+    font-size:1em;
     padding: 1% 5%;
     margin: 20px 5%;
     color: #348d63;
+    border:2px solid #348d60;
+    box-shadow:none;
     background: transparent;
+  }
+  ion-header {
+    background-color: #348d63;
+    padding: 0;
+    border-radius: 0em 0em 1.3em 1.3em;
+    box-shadow: 0 0 10px #999;
+    
+  }
+  ion-title {
+    margin:0;
+    text-align:center;
+    color:white;
+  }
+  ion-back-button{
+    color:white;
+    position:absolute;
   }
 `;
 
-
-
-
 const Login = () => {
+  /* To know which type of user is logging in. (value either "/SignUp" for Leaders or ""/SignUpU"for normal users") */
   const location = useLocation();
   const [showPassword, setshowPassword] = useState(false);
   const [pswdType, setpswdType] = useState("password");
-  const [isLeader, setIsLeader] = useState( false );
-  const [isMember, setIsMember ] = useState( false );
-
-  const history = useHistory(); // for routing
-
-
-  const onClickLogin = ( e ) => {
-
-    if( isMember ) {
-      history.push("/userhome"); // go to specified path..
-    }
-
-    else if ( isLeader ) {
-      history.push("/leader"); // go to specified path..
-    }
-  }
-
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // console.log(e.target);
-    
   };
-
 
   const LoginWithGoogle = () => {
     const auth = getAuth();
@@ -144,18 +143,12 @@ const Login = () => {
         </IonToolbar>
       </IonHeader>
 
-
-
-
-      <IonContent >
-      
-
+      <IonContent>
         <div id="logins">
           <form
             action="/"
-            /* method="post" */ onSubmit={(e) => handleSubmit( e ) }
+            /* method="post" */ onSubmit={(e) => handleSubmit(e)}
           >
-
             <label htmlFor="Email address">Email</label>
             <IonInput
               required
@@ -173,9 +166,9 @@ const Login = () => {
                 }}
               >
                 {showPassword ? (
-                <AiFillEyeInvisible size="23px" />
+                  <AiFillEyeInvisible size="23px" />
                 ) : (
-                <AiFillEye size="23px" />
+                  <AiFillEye size="23px" />
                 )}
               </span>
             </label>
@@ -185,36 +178,13 @@ const Login = () => {
               clearInput="true"
               className="inputField"
             />
-
-
-            <div >
-              <select >
-                <option disabled selected >
-                  Select User
-                </option>
-                <option
-                  onClick={ e=>{setIsLeader(true); setIsMember(false) } } >
-                  leader
-                </option>
-
-                <option onClick={ e=>{setIsMember( true ); setIsLeader(false) }} >
-                  Member
-                </option>
-              </select>
-            </div>
-
-            {/* <IonSelect >
-              <IonSelectOption disabled selected > Select User </IonSelectOption>
-              <IonSelectOption > Leader </IonSelectOption>
-              <IonSelectOption > Member </IonSelectOption>
-            </IonSelect> */}
-          
-
-            <input onClick={(e) => onClickLogin ( isLeader ) } type="submit" value="LOGIN" />
+            <input
+              // onClick={(e) => onClickLogin(isLeader)}
+              type="submit"
+              value="Login"
+            />
           </form>
         </div>
-
-
 
         <div className="google-container">
           <span className="google-login-text">Login with </span>
@@ -227,19 +197,18 @@ const Login = () => {
         </div>
 
         <div className="haveAcc">
-          Don't have an account ?{" "}
-          <Link to={"/SignUpU"}>
-            Register
-          </Link>
+          Don't have an account ? <Link to={location.state}>Register</Link>
+          {/* The line of code above uses a value from the welcome page to know what 
+          type of user wanna register and determines the exact route accordingly */}
         </div>
 
         <div className="haveAcc">
           {/* set forgot password page */}
-          <Link onClick={e=>alert("No Data")} to="/Login">Forgot password ?</Link>
-        </div> 
+          <Link onClick={(e) => alert("No Data")} to="/Login">
+            Forgot password ?
+          </Link>
+        </div>
       </IonContent>
-
-      
     </Body>
   );
 };

@@ -68,8 +68,8 @@ const App = () => (
         <Route exact path="/leader" > <Leader /> </Route>
         {/* route to page where leader can edit his details */}
         <Route exact path="/editleader" > <EditLeader /> </Route>
-        {/* route to premiun page, where user is a premiun user. */}
-        <Route exact path="/premiun" > <Premium /> </Route>
+        {/* route to premium page, where user is a premium user. */}
+        <Route exact path="/premium" > <Premium /> </Route>
         {/* sign up leader */}
         <Route exact path="/SignUp" component={SignUp} />
 

@@ -2,3 +2,6 @@
 body{
     font-family: "Poppins",sans-serif;
 }
+ion-content{
+    --background: white;
+}

@@ -13,7 +13,6 @@ import {
   IonMenuToggle,
 } from "@ionic/react";
 
-// import ExploreContainer from '../components/ExploreContainer';
 import "../Profile.css";
 import {
   logOutSharp,
@@ -29,7 +28,7 @@ import {
 import { FaUserEdit, FaCrown } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-import churchImg from "../../../public/assets/icon/Church.jpeg";
+import churchImg from "./church.jpeg";
 
 interface AppPage {
   url: string;
@@ -62,8 +61,8 @@ const appPages: AppPage[] = [
     mdIcon: "",
   },
   {
-    title: "Upgrade To Premiun",
-    url: "/premiun",
+    title: "Upgrade To Premium",
+    url: "/premium",
     iosIcon: createOutline,
     mdIcon: createSharp,
   },
@@ -94,7 +93,7 @@ const Leader: React.FC = () => {
                 />
               </Link>
 
-              <IonCardTitle>Mpumemelo Fellowship </IonCardTitle>
+              <IonCardTitle>Mpumelelo Fellowship </IonCardTitle>
               <IonCardSubtitle>mpumelelofellowship@gmail.com</IonCardSubtitle>
             </div>
           </IonCard>

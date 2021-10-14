@@ -35,13 +35,18 @@ label {
   width: 90%;
 }
 input[type="submit"] {
-  padding: 5px;
-  border-radius: 10px;
-  color: black;
-  width: 60%;
-  margin: 5% 20% 2% 20%;
-  border: 2px solid #348d60;
-  background: none;
+  padding: 10px 5px;
+  border-radius: 5px;
+  color: white;
+  width: 50%;
+  font-size: 1.2em;
+  margin: 5% 25% 2% 25%;
+  box-shadow: 0 0 5px rgba(17, 17, 17, 0.249);
+  background: #348d60;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
 }
 .haveAcc {
   text-align: center;
@@ -84,7 +89,7 @@ a.toGoogle {
   align-items: center;
   height: 100%;
   background: #4285f4;
-  border:3px solid #4285f4;
+  border: 3px solid #4285f4;
 }
 .google-container button .google-text {
   color: white;
@@ -100,11 +105,11 @@ button .google-icon {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding:0 5px;
+  padding: 0 5px;
   border-bottom-left-radius: 10px;
   border-top-left-radius: 10px;
 }
-a.welcomeLink{
+a.welcomeLink {
   text-decoration: none;
   color: inherit;
 }
