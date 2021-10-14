@@ -153,9 +153,13 @@ const SignUpU = () => {
           <input type="submit" value="Register" />
         </form>
 
-        <div style={{marginTop:"10px"}} className="google-container">
+        <div style={{ marginTop: "10px" }} className="google-container">
           <span className="google-login-text">Login with </span>
-          <button onClick={()=>{console.log("hello")}}>
+          <button
+            onClick={() => {
+              console.log("hello");
+            }}
+          >
             <span className="google-icon">
               <FcGoogle size="20px" />
             </span>
@@ -163,7 +167,17 @@ const SignUpU = () => {
           </button>
         </div>
         <div className="haveAcc">
-          Have an account ? <Link to="/Donate"> Donate </Link>
+          Have an account ?{" "}
+          <Link
+            style={{
+              color: "#348d60",
+              textDecoration: "underline",
+              margin: "10px",
+            }}
+            to="/Login"
+          >
+            Login
+          </Link>
         </div>
       </div>
     </Body>

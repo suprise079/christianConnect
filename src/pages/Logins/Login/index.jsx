@@ -19,20 +19,27 @@ import {
   signInWithPopup,
   GoogleAuthProvider,
   signInWithEmailAndPassword,
-  createUserWithEmailAndPassword
+  createUserWithEmailAndPassword,
 } from "firebase/auth";
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  collection,
+  addDoc,
+} from "firebase/firestore";
 
 // react
 import { Link, useHistory } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import Context from "../../../context/Context";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
 import "../StylesForPages.css";
 import bg from "./bg.png";
 import { useLocation } from "react-router";
 
-const InitFirebase = app;
-
+const db = getFirestore();
 const Body = styled(IonPage)`
   position: relative;
   justify-content: flex-start;
@@ -99,12 +106,19 @@ const Login = () => {
   // Trackers
   const location = useLocation();
   const history = useHistory();
+  const [loading, setLoading] = useState(false);
 
   // firebase/auth settings
   const auth = getAuth();
+  // FIRESTORE DEMO
+  // const users = doc(db,"user","0");
+  // const userSnap = getDoc(users);
+  // userSnap.then((res)=>{console.log(res.data())})
+
+  // Add a second document with a generated ID.
 
   // user details
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { isLoggedIn, setIsLoggedIn } = useContext(Context);
   const [showPassword, setshowPassword] = useState(false);
   const [pswdType, setpswdType] = useState("password");
   const [email, setEmail] = useState("");
@@ -121,10 +135,23 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setLoading(true);
     signInWithEmailAndPassword(auth, email, password)
-      .then((cred) => console.log(cred))
-      .catch((err) => console.log(err));
+      .then((result) => {
+        console.log(result.user);
+        setEmail("");
+        setPassword("");
+        setIsLoggedIn(true);
+        setLoading(false);
+      })
+      .catch((err) => {
+        // error handling
 
+        alert(err);
+        setEmail("");
+        setPassword("");
+        setLoading(false);
+      });
   };
 
   const loginWithGoogle = () => {
@@ -151,9 +178,6 @@ const Login = () => {
         setIsLoggedIn(true);
         // console.log(user);
         // ...
-      })
-      .then(() => {
-        console.log(`isLoggedIn:${isLoggedIn}`);
       })
       .catch((error) => {
         // Handle Errors here.
@@ -232,7 +256,7 @@ const Login = () => {
                 handleChange(e);
               }}
             />
-            <input type="submit" value="Login" />
+            <input type="submit" value={loading ? "..." : "Login"} />
           </form>
         </div>
 
