@@ -57,9 +57,6 @@ const Donations: React.FC = () => {
 
                     </div>
 
-                    
-
-
                   </IonCard>
 
                 </>

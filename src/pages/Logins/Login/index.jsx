@@ -6,6 +6,9 @@ import {
   IonHeader,
   IonToolbar,
   IonTitle,
+  IonSelect,
+  IonSelectOption,
+  IonContent,
 } from "@ionic/react";
 import styled from "styled-components";
 
@@ -75,16 +78,30 @@ const Login = () => {
   const location = useLocation();
   const [showPassword, setshowPassword] = useState(false);
   const [pswdType, setpswdType] = useState("password");
-  const history = useHistory();
+  const [isLeader, setIsLeader] = useState( false );
+  const [isMember, setIsMember ] = useState( false );
 
+  const history = useHistory(); // for routing
+
+
+  const onClickLogin = ( e ) => {
+
+    if( isMember ) {
+      history.push("/userhome"); // go to specified path..
+    }
+
+    else if ( isLeader ) {
+      history.push("/leader"); // go to specified path..
+    }
+  }
 
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(e.target);
+    // console.log(e.target);
     
-    history.push("/userhome"); // go to specified path..
-  };  
+  };
+
 
   const LoginWithGoogle = () => {
     const auth = getAuth();
@@ -127,69 +144,102 @@ const Login = () => {
         </IonToolbar>
       </IonHeader>
 
-      <div id="logins">
-        <form
-          action="/"
-          /* method="post" */ onSubmit={(e) => {
-            handleSubmit(e);
-          }}
-        >
-          <label htmlFor="Email address">Email</label>
-          <IonInput
-            required
-            type="email"
-            name="Email address"
-            clearInput="true"
-            className="inputField"
-          ></IonInput>
-          <label htmlFor="Password">
-            Password
-            <span
-              onClick={() => {
-                setshowPassword(showPassword ? false : true);
-                setpswdType(showPassword ? "password" : "text");
-              }}
-            >
-              {showPassword ? (
+
+
+
+      <IonContent >
+      
+
+        <div id="logins">
+          <form
+            action="/"
+            /* method="post" */ onSubmit={(e) => handleSubmit( e ) }
+          >
+
+            <label htmlFor="Email address">Email</label>
+            <IonInput
+              required
+              type="email"
+              name="Email address"
+              clearInput="true"
+              className="inputField"
+            />
+            <label htmlFor="Password">
+              Password
+              <span
+                onClick={() => {
+                  setshowPassword(showPassword ? false : true);
+                  setpswdType(showPassword ? "password" : "text");
+                }}
+              >
+                {showPassword ? (
                 <AiFillEyeInvisible size="23px" />
-              ) : (
+                ) : (
                 <AiFillEye size="23px" />
-              )}
+                )}
+              </span>
+            </label>
+            <IonInput
+              required
+              type={pswdType}
+              clearInput="true"
+              className="inputField"
+            />
+
+
+            <div >
+              <select >
+                <option disabled selected >
+                  Select User
+                </option>
+                <option
+                  onClick={ e=>{setIsLeader(true); setIsMember(false) } } >
+                  leader
+                </option>
+
+                <option onClick={ e=>{setIsMember( true ); setIsLeader(false) }} >
+                  Member
+                </option>
+              </select>
+            </div>
+
+            {/* <IonSelect >
+              <IonSelectOption disabled selected > Select User </IonSelectOption>
+              <IonSelectOption > Leader </IonSelectOption>
+              <IonSelectOption > Member </IonSelectOption>
+            </IonSelect> */}
+          
+
+            <input onClick={(e) => onClickLogin ( isLeader ) } type="submit" value="LOGIN" />
+          </form>
+        </div>
+
+
+
+        <div className="google-container">
+          <span className="google-login-text">Login with </span>
+          <button onClick={LoginWithGoogle}>
+            <span className="google-icon">
+              <FcGoogle size="20px" />
             </span>
-          </label>
-          <IonInput
-            required
-            type={pswdType}
-            clearInput="true"
-            className="inputField"
-          ></IonInput>
+            <span className="google-text">Google</span>
+          </button>
+        </div>
 
-          <input type="submit" value="LOGIN" />
-        </form>
-      </div>
+        <div className="haveAcc">
+          Don't have an account ?{" "}
+          <Link to={"/SignUpU"}>
+            Register
+          </Link>
+        </div>
 
+        <div className="haveAcc">
+          {/* set forgot password page */}
+          <Link onClick={e=>alert("No Data")} to="/Login">Forgot password ?</Link>
+        </div> 
+      </IonContent>
 
-
-
-      <div className="google-container">
-        <span className="google-login-text">Login with </span>
-        <button onClick={LoginWithGoogle}>
-          <span className="google-icon">
-            <FcGoogle size="20px" />
-          </span>
-          <span className="google-text">Google</span>
-        </button>
-      </div>
-      <div className="haveAcc">
-        Don't have an account ?{" "}
-        <Link to={"/SignUpU"}>
-          Register
-        </Link>
-      </div>
-      <div className="haveAcc">
-        {/* set forgot password page */}
-        <Link onClick={e=>alert("No Data")} to="/Login">Forgot password ?</Link>
-      </div>
+      
     </Body>
   );
 };

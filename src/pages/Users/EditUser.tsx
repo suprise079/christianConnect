@@ -1,5 +1,5 @@
 import { IonPage, IonItem, IonTitle, IonButton, IonInput, IonDatetime } from '@ionic/react';
-import './Profile.css';
+import '../Profile.css';
 import React, { useState } from 'react';
 
 import profileImg from "./profile.jpeg";

@@ -21,6 +21,14 @@ import User from './pages/Users/User';
 import EditUser from './pages/Users/EditUser';
 import Notes from './pages/notes/Notes';
 import ViewNote from './pages/notes/ViewNote';
+import Donations from './pages/notes/Donations';
+import SignUp from './pages/Logins/SignUp';
+import Leader from './pages/Leader/Leader';
+import EditLeader from './pages/Leader/EditLeader';
+import Premium from './pages/Leader/Premium';
+import UploadAnnouncement from './pages/Profile/UploadAnnouncement';
+import UploadSermon from './pages/Profile/UploadSermons';
+import PickerExample from './pages/Profile/UploadEvents';
 
 
 const App = () => (
@@ -51,11 +59,23 @@ const App = () => (
         <Route exact path="/notes" > <Notes /> </Route>
         {/* the page that shows the notes */}
         <Route exact path="/viewnotes" > <ViewNote /> </Route>
+{/* <<<<<<< HEAD:src/App.tsx */}
+        {/* get the donations */}
+        <Route exact path="/donations" > <Donations /> </Route>
+        {/* maybe leader sign up...... */}
+        <Route exact path="/SignUp" component={SignUp} />
+        {/* leader home page */}
+        <Route exact path="/leader" > <Leader /> </Route>
+        {/* route to page where leader can edit his details */}
+        <Route exact path="/editleader" > <EditLeader /> </Route>
+        {/* route to premiun page, where user is a premiun user. */}
+        <Route exact path="/premiun" > <Premium /> </Route>
+        {/* sign up leader */}
+        <Route exact path="/SignUp" component={SignUp} />
 
-        {/* <Route exact path="/SignUp" component={SignUp} /> */}
-        {/* <Route exact path="/UploadAnnouncement" component={UploadAnnouncement} /> */}
-        {/* <Route exact path="/UploadSermon" component={UploadSermon} /> */}
-        {/* <Route exact path="/UploadEvent" component={PickerExample} /> */}
+        <Route exact path="/uploadAnnouncement" component={UploadAnnouncement} />
+        <Route exact path="/uploadSermon" component={UploadSermon} />
+        <Route exact path="/uploadEvent" component={PickerExample} />
       </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>
