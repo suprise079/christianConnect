@@ -38,9 +38,8 @@ input[type="submit"] {
   padding: 10px 5px;
   border-radius: 5px;
   color: white;
-  width: 50%;
+  margin: 5% 0;
   font-size: 1.2em;
-  margin: 5% 25% 2% 25%;
   box-shadow: 0 0 5px rgba(17, 17, 17, 0.249);
   background: #348d60;
   -webkit-border-radius: 5px;
@@ -51,9 +50,36 @@ input[type="submit"] {
 .haveAcc {
   text-align: center;
   width: 100%;
+  padding-bottom: 20px;
+  position: relative;
 }
 .haveAcc a {
+  position: inherit;
   color: #348d60;
+  
+}
+.haveAcc a:not(.fromWelcome){
+  transition: 0.2s;
+  animation: pump linear infinite 10s;
+  -webkit-animation: pump linear infinite 5s;
+  -webkit-transition: 0.2s;
+  -moz-transition: 0.2s;
+  -ms-transition: 0.2s;
+  -o-transition: 0.2s;
+}
+@keyframes pump {
+  0% {
+    top: 0;
+  }
+  2% {
+    top: -500px;
+  }
+  4% {
+    top: 20px;
+  }
+  5% {
+    top: 0;
+  }
 }
 a.toGoogle {
   display: "flex";

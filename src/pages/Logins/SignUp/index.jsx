@@ -6,13 +6,13 @@ import {
   IonHeader,
   IonToolbar,
   IonTitle,
-  IonContent,
 } from "@ionic/react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 import { useState } from "react";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
+import { FcGoogle } from "react-icons/fc";
 import "../StylesForPages.css";
 
 const Body = styled(IonPage)`
@@ -54,7 +54,11 @@ const Content = styled.div`
     rgba(52, 141, 99, 1) 60%,
     rgba(52, 141, 99, 1) 100%
   );
-  overflowy: scroll;
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 const SignUp = () => {
@@ -76,104 +80,119 @@ const SignUp = () => {
 
       <Content style={{ overflowY: "scroll" }}>
         <div id="inputs">
-          {/* <form action="/" method="post"> */}
+          <form action="/" method="post">
+            <label htmlFor="name">Name of fellowship</label>
+            <IonInput
+              required
+              name="name"
+              clearInput="true"
+              className="inputField"
+            ></IonInput>
 
-          <label htmlFor="name">Name of fellowship</label>
-          <IonInput
-            required
-            name="name"
-            clearInput="true"
-            className="inputField"
-          ></IonInput>
+            <label htmlFor="First name">First name</label>
+            <IonInput
+              required
+              name="First name"
+              clearInput="true"
+              className="inputField"
+            ></IonInput>
 
-          <label htmlFor="First name">First name</label>
-          <IonInput
-            required
-            name="First name"
-            clearInput="true"
-            className="inputField"
-          ></IonInput>
+            <label htmlFor="Last name">Last name</label>
+            <IonInput
+              required
+              name="Last name"
+              clearInput="true"
+              className="inputField"
+            ></IonInput>
 
-          <label htmlFor="Last name">Last name</label>
-          <IonInput
-            required
-            name="Last name"
-            clearInput="true"
-            className="inputField"
-          ></IonInput>
+            <label htmlFor="Phone number">Phone number</label>
+            {/* will use regex validation to format to NUMBERS ONLY */}
+            <IonInput
+              required
+              name="Phone number"
+              clearInput="true"
+              className="inputField"
+            ></IonInput>
 
-          <label htmlFor="Phone number">Phone number</label>
-          {/* will use regex validation to format to NUMBERS ONLY */}
-          <IonInput
-            required
-            name="Phone number"
-            clearInput="true"
-            className="inputField"
-          ></IonInput>
+            <label htmlFor="Email address">Email address</label>
+            <IonInput
+              required
+              type="email"
+              name="Email address"
+              clearInput="true"
+              className="inputField"
+            ></IonInput>
 
-          <label htmlFor="Email address">Email address</label>
-          <IonInput
-            required
-            type="email"
-            name="Email address"
-            clearInput="true"
-            className="inputField"
-          ></IonInput>
+            <label htmlFor="Password">
+              Password{" "}
+              <span
+                onClick={() => {
+                  setshowPassword(showPassword ? false : true);
+                  setpswdType(showPassword ? "password" : "text");
+                }}
+              >
+                {showPassword ? (
+                  <AiFillEyeInvisible size="23px" />
+                ) : (
+                  <AiFillEye size="23px" />
+                )}
+              </span>
+            </label>
+            <IonInput
+              required
+              type={pswdType}
+              clearInput="true"
+              className="inputField"
+            ></IonInput>
 
-          <label htmlFor="Password">
-            Password{" "}
-            <span
+            <label htmlFor="Confirm password">
+              Confirm password
+              <span
+                onClick={() => {
+                  setshowConf(showConf ? false : true);
+                  setconfpswd(showConf ? "password" : "text");
+                }}
+              >
+                {showConf ? (
+                  <AiFillEyeInvisible size="23px" />
+                ) : (
+                  <AiFillEye size="23px" />
+                )}
+              </span>
+            </label>
+            <IonInput
+              required
+              type={confpswd}
+              name="Confirm password"
+              clearInput="true"
+              className="inputField"
+            />
+
+            <input type="submit" value="Create a fellowship" />
+          </form>
+          <div style={{ marginTop: "10px" }} className="google-container">
+            <span className="google-login-text">Login with </span>
+            <button
               onClick={() => {
-                setshowPassword(showPassword ? false : true);
-                setpswdType(showPassword ? "password" : "text");
+                console.log("hello");
               }}
             >
-              {showPassword ? (
-                <AiFillEyeInvisible size="23px" />
-              ) : (
-                <AiFillEye size="23px" />
-              )}
-            </span>
-          </label>
-          <IonInput
-            required
-            type={pswdType}
-            clearInput="true"
-            className="inputField"
-          ></IonInput>
-
-          <label htmlFor="Confirm password">
-            Confirm password
-            <span
-              onClick={() => {
-                setshowConf(showConf ? false : true);
-                setconfpswd(showConf ? "password" : "text");
-              }}
-            >
-              {showConf ? (
-                <AiFillEyeInvisible size="23px" />
-              ) : (
-                <AiFillEye size="23px" />
-              )}
-            </span>
-          </label>
-          <IonInput
-            required
-            type={confpswd}
-            name="Confirm password"
-            clearInput="true"
-            className="inputField"
-          />
-
-          <div>
-            <Link to="/leader">Create A Fellowship</Link>
+              <span className="google-icon">
+                <FcGoogle size="20px" />
+              </span>
+              <span className="google-text">Google</span>
+            </button>
           </div>
-
-          {/* </form> */}
-
           <div className="haveAcc">
             Have an account ?
-            <Link style={{ color: "#fff" }} to="/Login">
+            <Link
+              style={{
+                color: "#348d60",
+                textDecoration: "underline",
+                margin: "10px",
+              }}
+              to="/Login"
+            >
               Login
             </Link>
           </div>

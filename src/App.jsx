@@ -35,8 +35,6 @@ const App = () => (
   <IonApp>
     <IonReactRouter>
       <IonRouterOutlet>
-
-
         <Route exact path="/"> <Redirect to="/home" /> </Route>
 
         <Route exact path="/" component={Welcome} />
@@ -59,7 +57,7 @@ const App = () => (
         <Route exact path="/notes" > <Notes /> </Route>
         {/* the page that shows the notes */}
         <Route exact path="/viewnotes" > <ViewNote /> </Route>
-{/* <<<<<<< HEAD:src/App.tsx */}
+
         {/* get the donations */}
         <Route exact path="/donations" > <Donations /> </Route>
         {/* maybe leader sign up...... */}
