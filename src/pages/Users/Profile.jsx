@@ -140,6 +140,23 @@ const Body = styled(IonPage)`
   div.content {
     height: 500px;
   }
+  div.menu {
+    margin-top: 40px;
+    overflow-y: scroll;
+  }
+  div.item {
+    box-shadow: 0px 1px 0px 1px rgb(0 0 0 / 10%);
+    display: flex;
+    align-items: center;
+    background: white;
+    padding: 15px 10px;
+    margin: 5px 5px;
+    border-radius: 5px;
+  }
+  .icon {
+    font-size: 1.5em;
+    padding: 0 10px;
+  }
 `;
 const Profile = () => {
   const history = useHistory(); // use this for routing in js codes.
@@ -176,30 +193,25 @@ const Profile = () => {
           </div>
         </div>
         <div className="content">
-          <IonList className="menu">
+          <div className="menu">
             {appPages.map((appPage, index) => {
               return (
-                <IonMenuToggle key={index} autoHide={false}>
-                  <IonItem
-                    id={appPage.url}
-                    routerDirection="forward"
-                    lines="full"
-                    detail={false}
-                    onClick={(e) => goToItem(e)}
-                  >
-                    {/* <Link to={appPage.url}> */}
-                    <IonIcon
-                      slot="start"
-                      ios={appPage.iosIcon}
-                      md={appPage.mdIcon}
-                    />
-                    <IonLabel>{appPage.title}</IonLabel>
-                    {/* </Link> */}
-                  </IonItem>
-                </IonMenuToggle>
+                <div
+                  id={appPage.url}
+                  onClick={(e) => goToItem(e)}
+                  className="item"
+                >
+                  <IonIcon
+                    className="icon"
+                    slot="start"
+                    ios={appPage.iosIcon}
+                    md={appPage.mdIcon}
+                  />
+                  <IonLabel>{appPage.title}</IonLabel>
+                </div>
               );
             })}
-          </IonList>
+          </div>
         </div>
       </div>
       <TabBar />
