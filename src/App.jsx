@@ -34,6 +34,7 @@ import Premium from "./pages/Leader/Premium";
 import UploadAnnouncement from "./pages/Profile/UploadAnnouncement";
 import UploadSermon from "./pages/Profile/UploadSermons";
 import PickerExample from "./pages/Profile/UploadEvents";
+import SubscriptionHome from "./pages/subscription/SubscriptionHome"
 
 
 
@@ -130,6 +131,12 @@ const App = () => {
             />
             <Route exact path="/uploadSermon" component={UploadSermon} />
             <Route exact path="/uploadEvent" component={PickerExample} />
+
+
+            {/* Subscription Home page */}
+            <Route exact path="/SubscriptionHome">
+              <SubscriptionHome />
+            </Route>
           </IonRouterOutlet>
         </IonReactRouter>
       </IonApp>

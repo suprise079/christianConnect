@@ -26,7 +26,7 @@ const TabBar: React.FC = () => {
         {/* </Link> */}
       </div>
 
-      <div >
+      <div onClick={ e=> history.push("/SubscriptionHome") }>
         <i > <IonIcon icon={ mail } ></IonIcon> </i>
         <IonLabel className="label" > Subscription </IonLabel>
       </div>
