@@ -1,13 +1,12 @@
 import { Redirect, Route } from "react-router-dom";
 import { IonApp, IonRouterOutlet } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
-import UserHome from "./pages/userHome/userHome";
 import { useState } from "react";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
 
-
+import UserHome from "./pages/userHome/userHome";
 // firebase
 import { app } from "./firebase/firebase";
 
@@ -22,7 +21,7 @@ import Welcome from "./pages/Logins/Welcome/index";
 import Login from "./pages/Logins/Login";
 import SignUpU from "./pages/Logins/SignUp/SignUpU";
 import Donate from "./pages/User/donate/Donate";
-import User from "./pages/Users/User";
+import Profile from "./pages/Users/Profile";
 import EditUser from "./pages/Users/EditUser";
 import Notes from "./pages/notes/Notes";
 import ViewNote from "./pages/notes/ViewNote";
@@ -34,15 +33,13 @@ import Premium from "./pages/Leader/Premium";
 import UploadAnnouncement from "./pages/Profile/UploadAnnouncement";
 import UploadSermon from "./pages/Profile/UploadSermons";
 import PickerExample from "./pages/Profile/UploadEvents";
-
-
-
+import SavedVideos from "./pages/User/savedVideos/savedVideos";
 
 const App = () => {
   // check if the user is logged in
   var [isLoggedIn, setIsLoggedIn] = useState(false);
   return (
-    <Context.Provider value={{ isLoggedIn,setIsLoggedIn }}>
+    <Context.Provider value={{ isLoggedIn, setIsLoggedIn }}>
       <IonApp>
         <IonReactRouter>
           <IonRouterOutlet>
@@ -55,12 +52,10 @@ const App = () => {
             <Route exact path="/Login" component={Login} />
             <Route exact path="/SignUpU" component={SignUpU} />
             <Route exact path="/Donate" component={Donate} />
+            <Route exact path="/savedVideos" component={SavedVideos} />
 
             {/* user home tab pages */}
-            <Route exact path="/userhome">
-              {" "}
-              <UserHome />{" "}
-            </Route>
+            <Route exact path="/userhome" component={UserHome} />
             <Route exact path="/aboutFellowship">
               <AboutFellowship />{" "}
             </Route>
@@ -80,7 +75,7 @@ const App = () => {
             {/* sanah's pages for the user.... */}
             <Route exact path="/profile">
               {" "}
-              <User />{" "}
+              <Profile />{" "}
             </Route>
             {/* edit user page. */}
             <Route exact path="/editprofile">
