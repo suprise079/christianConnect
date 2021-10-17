@@ -28,7 +28,26 @@ const Body = styled(IonPage)`
     );
     box-sizing: border-box;
     z-index: -1;
-
+    ion-header {
+      background-color: #fff;
+      padding: 0;
+      border-radius: 0;
+      box-shadow: 0 0 10px #000;
+    }
+    ion-title {
+      margin:0;
+      text-align:center;
+      color:rgba(52, 141, 99, 1);
+    }
+    ion-back-button{
+      color:rgba(52, 141, 99, 1);
+      position:absolute;
+    }
+    form{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+    }
   `;
 
 const SignUpU = () => {
@@ -38,15 +57,11 @@ const SignUpU = () => {
   const [showConf, setshowConf] = useState(false);
   const history = useHistory(); // use for routing to other pages in code.
 
-
-
-
   const RegisterClick = () => {
-
     alert("ACTIONS FOR REGISTERING USER COMING SOON....");
 
     history.push("/Login");
-  }
+  };
 
   return (
     <Body style={{ overflowY: "scroll" }}>
@@ -60,11 +75,7 @@ const SignUpU = () => {
       </IonHeader>
 
       <div id="inputs">
-        <form
-        onClick={ e=> RegisterClick( e ) }
-          action="/"
-          method="post">
-
+        <form onClick={(e) => RegisterClick(e)} action="/" method="post">
           <label htmlFor="First name">First name</label>
           <IonInput
             name="First name"
@@ -142,18 +153,31 @@ const SignUpU = () => {
           <input type="submit" value="Register" />
         </form>
 
-
-
-        <div className="haveAcc">
-          {" "}
-          Register with
-          <Link className="toGoogle" style={{}} to="/">
-            {" "}
-            <FcGoogle className="google"/> Google
-          </Link>
+        <div style={{ marginTop: "10px" }} className="google-container">
+          <span className="google-login-text">Login with </span>
+          <button
+            onClick={() => {
+              console.log("hello");
+            }}
+          >
+            <span className="google-icon">
+              <FcGoogle size="20px" />
+            </span>
+            <span className="google-text">Google</span>
+          </button>
         </div>
         <div className="haveAcc">
-          Have an account ? <Link to="/Donate"> Donate </Link>
+          Have an account ?{" "}
+          <Link
+            style={{
+              color: "#348d60",
+              textDecoration: "underline",
+              margin: "10px",
+            }}
+            to="/Login"
+          >
+            Login
+          </Link>
         </div>
       </div>
     </Body>

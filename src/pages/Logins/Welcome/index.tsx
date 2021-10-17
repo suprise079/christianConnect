@@ -30,6 +30,11 @@ const Body = styled(IonPage)`
     align-items: center;
     width: 100%;
   }
+  a{
+    height:100%;
+    display:flex;
+    align-items:center;
+  }
 `;
 const Buttons = styled(IonButton)`
   height: 35px;
@@ -48,7 +53,7 @@ const Welcome = () => {
         <Buttons>
           <Link
             className="welcomeLink"
-            to={{ pathname: "/SignUp", state: "/SignUp" }}
+            to={{ pathname: "/Login", state: "/SignUp" }}
             onClick={()=>setclicked(false)}
           >
             {clicked ? "Loading..." : "I am a fellowship leader"}
@@ -58,7 +63,7 @@ const Welcome = () => {
         <Buttons>
           <Link
             className="welcomeLink"
-            to={{ pathname: "/SignUpU", state: "/SignUpU" }}
+            to={{ pathname: "/Login", state: "/SignUpU" }}
           >
             {clicked ? "Loading..." : "I am just a fellowship member"}
           </Link>

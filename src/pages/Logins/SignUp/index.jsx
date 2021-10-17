@@ -6,13 +6,13 @@ import {
   IonHeader,
   IonToolbar,
   IonTitle,
-  IonContent
 } from "@ionic/react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 import { useState } from "react";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
+import { FcGoogle } from "react-icons/fc";
 import "../StylesForPages.css";
 
 const Body = styled(IonPage)`
@@ -29,6 +29,36 @@ const Body = styled(IonPage)`
   );
   box-sizing: border-box;
   z-index: -1;
+  ion-header {
+    background-color: #fff;
+    padding: 0;
+    border-radius: 0;
+    box-shadow: 0 0 10px #000;
+    
+  }
+  ion-title {
+    margin:0;
+    text-align:center;
+    color:rgba(52, 141, 99, 1);
+  }
+  ion-back-button{
+    color:rgba(52, 141, 99, 1);
+    position:absolute;
+  }
+`;
+const Content = styled.div`
+  background: rgb(164, 204, 185);
+  background: linear-gradient(
+    0deg,
+    rgba(164, 204, 185, 1) 26%,
+    rgba(52, 141, 99, 1) 60%,
+    rgba(52, 141, 99, 1) 100%
+  );
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 const SignUp = () => {
@@ -48,13 +78,9 @@ const SignUp = () => {
         </IonToolbar>
       </IonHeader>
 
-
-      <IonContent >
-      
+      <Content style={{ overflowY: "scroll" }}>
         <div id="inputs">
-
-          {/* <form action="/" method="post"> */}
-
+          <form action="/" method="post">
             <label htmlFor="name">Name of fellowship</label>
             <IonInput
               required
@@ -119,7 +145,6 @@ const SignUp = () => {
               className="inputField"
             ></IonInput>
 
-
             <label htmlFor="Confirm password">
               Confirm password
               <span
@@ -143,23 +168,36 @@ const SignUp = () => {
               className="inputField"
             />
 
-            <div >
-              <Link to="/leader" >
-                Create A Fellowship
-              </Link>
-            </div>
-
-          {/* </form> */}
-
-
-          <div className="haveAcc">
-            Have an account ? 
-            <Link style={{color:"#fff"}} to="/Login">Login</Link>
+            <input type="submit" value="Create a fellowship" />
+          </form>
+          <div style={{ marginTop: "10px" }} className="google-container">
+            <span className="google-login-text">Login with </span>
+            <button
+              onClick={() => {
+                console.log("hello");
+              }}
+            >
+              <span className="google-icon">
+                <FcGoogle size="20px" />
+              </span>
+              <span className="google-text">Google</span>
+            </button>
           </div>
-
+          <div className="haveAcc">
+            Have an account ?
+            <Link
+              style={{
+                color: "#348d60",
+                textDecoration: "underline",
+                margin: "10px",
+              }}
+              to="/Login"
+            >
+              Login
+            </Link>
+          </div>
         </div>
-      </IonContent>
-      
+      </Content>
     </Body>
   );
 };

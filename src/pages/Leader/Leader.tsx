@@ -1,19 +1,35 @@
-import { 
-    IonContent,
-    // IonHeader, IonTitle, IonToolbar,IonMenu,
-    IonPage, IonCard, IonAvatar, IonCardTitle, IonCardSubtitle, IonList, IonItem, IonLabel, IonIcon,IonMenuToggle} from '@ionic/react';
-  
-// import ExploreContainer from '../components/ExploreContainer';
-import '../Profile.css';
-import { logOutSharp, logOutOutline, bookmarkSharp, bookmarkOutline, createSharp, createOutline, walletSharp, walletOutline, } from "ionicons/icons";
+import {
+  IonContent,
+  // IonHeader, IonTitle, IonToolbar,IonMenu,
+  IonPage,
+  IonCard,
+  IonAvatar,
+  IonCardTitle,
+  IonCardSubtitle,
+  IonList,
+  IonItem,
+  IonLabel,
+  IonIcon,
+  IonMenuToggle,
+} from "@ionic/react";
 
-import {FaUserEdit,FaCrown } from "react-icons/fa";
-import { Link } from 'react-router-dom';
+import "../Profile.css";
+import {
+  logOutSharp,
+  logOutOutline,
+  bookmarkSharp,
+  bookmarkOutline,
+  createSharp,
+  createOutline,
+  walletSharp,
+  walletOutline,
+} from "ionicons/icons";
+
+import { FaUserEdit, FaCrown } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 import churchImg from "./church.jpeg";
 
-
-  
 interface AppPage {
   url: string;
   iosIcon: string;
@@ -21,7 +37,7 @@ interface AppPage {
   title: string;
 }
 
-var i = <FaCrown />
+var i = <FaCrown />;
 
 const appPages: AppPage[] = [
   {
@@ -29,14 +45,12 @@ const appPages: AppPage[] = [
     url: "/SavedVideos",
     iosIcon: bookmarkOutline,
     mdIcon: bookmarkSharp,
-
   },
   {
     title: "Donate",
     url: "/Donate",
     iosIcon: walletOutline,
     mdIcon: walletSharp,
-
   },
   {
     title: "Notes",
@@ -44,11 +58,11 @@ const appPages: AppPage[] = [
     // iosIcon: createOutline,
     // mdIcon: createSharp,
     iosIcon: i.toString(),
-    mdIcon: ""
+    mdIcon: "",
   },
   {
-    title: "Upgrade To Premiun",
-    url: "/premiun",
+    title: "Upgrade To Premium",
+    url: "/premium",
     iosIcon: createOutline,
     mdIcon: createSharp,
   },
@@ -57,15 +71,13 @@ const appPages: AppPage[] = [
     url: "/Login",
     iosIcon: logOutOutline,
     mdIcon: logOutSharp,
-
   },
 ];
 
 const Leader: React.FC = () => {
   return (
     <IonPage>
-      
-      <IonContent >
+      <IonContent>
         <div className="bgColor">
           <IonCard className="nameCard">
             <IonAvatar className="avatar">
@@ -73,41 +85,35 @@ const Leader: React.FC = () => {
             </IonAvatar>
 
             <div className="details">
-
-              <Link to="/editleader" >
+              <Link to="/editleader">
                 <FaUserEdit
                   // onClick={e=> }
-                  color="#000" size="20px"/>
-
+                  color="#000"
+                  size="20px"
+                />
               </Link>
-              
-              <IonCardTitle>Mpumemelo Fellowship </IonCardTitle>
+
+              <IonCardTitle>Mpumelelo Fellowship </IonCardTitle>
               <IonCardSubtitle>mpumelelofellowship@gmail.com</IonCardSubtitle>
             </div>
-
           </IonCard>
         </div>
 
-
-
         <IonList className="menu">
           {appPages.map((appPage, index) => {
-
             return (
               <IonMenuToggle key={index} autoHide={false}>
-
                 <IonItem
                   // className={
                   //   location.pathname === appPage.url ? "selected" : ""
                   // }
-                  button onClick={() => { }}
-
+                  button
+                  onClick={() => {}}
                   routerLink={appPage.url}
                   routerDirection="forward"
                   lines="full"
                   detail={false}
                 >
-
                   <IonIcon
                     slot="start"
                     ios={appPage.iosIcon}
@@ -115,15 +121,12 @@ const Leader: React.FC = () => {
                     color="#000"
                   />
                   <IonLabel>{appPage.title}</IonLabel>
-
                 </IonItem>
               </IonMenuToggle>
-
-            )
+            );
           })}
         </IonList>
       </IonContent>
-
     </IonPage>
   );
 };

@@ -1,30 +1,19 @@
-
-ion-oage.userHome {
-    background-color: red;
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+body{
+    font-family: "Poppins",sans-serif;
 }
-
 ion-header {
-    /* background-color: red; */
     background-color: #348d63;
     padding: 1em 0em .5em 0em;
     border-radius: 0em 0em 1.3em 1.3em;
-    /* box-shadow: 0 0 0 white; */
     border: 0em;
+    box-shadow: 0 0 10px #999;
 }
-
-.container {
-    background-color: yellow;
-}
-
 .searchField {
     text-align: center;
     outline-width: 0em;
     display: flex;
     flex-direction: column;
-    /* justify-content: space-evenly; */
-    /* background-color: yellow; */
-    padding: 1em 1.3em 0em 1.3em;
-    margin: 1em 0em 0em 0em;
 }
 
 .searchField p {
@@ -33,18 +22,20 @@ ion-header {
     font-size: .9em;
 }
 
-.searchField input {
-    width: 90%;
-    border-radius: 1em;
-    border: 0em;
-    padding: .4em 1em;
-    margin: auto;
-    flex: 12;
-}
 
-input:hover,
-input:focus {
-    outline-width: 0em;
+.searchField div#search{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.searchField div input{
+    padding: 0;
+}
+.searchField div input::placeholder{
+    color: white;
+}
+.searchField div input:focus {
+    border-bottom: 2px solid black;
 }
 
 button {

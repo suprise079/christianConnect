@@ -14,19 +14,32 @@ import styled from "styled-components";
 
 // firebase
 import { app } from "../../../firebase/firebase";
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import {
+  getAuth,
+  signInWithPopup,
+  GoogleAuthProvider,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+} from "firebase/auth";
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  collection,
+  addDoc,
+} from "firebase/firestore";
 
 // react
 import { Link, useHistory } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
+import Context from "../../../context/Context";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
 import "../StylesForPages.css";
 import bg from "./bg.png";
 import { useLocation } from "react-router";
 
-const InitFirebase = app;
-
+const db = getFirestore();
 const Body = styled(IonPage)`
   position: relative;
   justify-content: flex-start;
@@ -55,7 +68,6 @@ const Body = styled(IonPage)`
     background: transparent;
   }
   label {
-    text-shadow: none;
     margin: 1.2% 5%;
     width: 70%;
     display: flex;
@@ -64,48 +76,96 @@ const Body = styled(IonPage)`
   }
   input[type="submit"] {
     width: 30vw;
+    font-size: 1em;
     padding: 1% 5%;
     margin: 20px 5%;
     color: #348d63;
+    border: 2px solid #348d60;
+    box-shadow: none;
     background: transparent;
+  }
+  ion-header {
+    background-color: #348d63;
+    padding: 0;
+    border-radius: 0em 0em 1.3em 1.3em;
+    box-shadow: 0 0 10px #999;
+  }
+  ion-title {
+    margin: 0;
+    text-align: center;
+    color: white;
+  }
+  ion-back-button {
+    color: white;
+    position: absolute;
   }
 `;
 
-
-
-
 const Login = () => {
+  /* To know which type of user is logging in. (value either "/SignUp" for Leaders or ""/SignUpU"for normal users") */
+  // Trackers
   const location = useLocation();
+  const history = useHistory();
+  const [loading, setLoading] = useState(false);
+
+  // firebase/auth settings
+  const auth = getAuth();
+  // FIRESTORE DEMO
+  // const users = doc(db,"user","0");
+  // const userSnap = getDoc(users);
+  // userSnap.then((res)=>{console.log(res.data())})
+
+  // Add a second document with a generated ID.
+
+  // user details
+  const { isLoggedIn, setIsLoggedIn } = useContext(Context);
   const [showPassword, setshowPassword] = useState(false);
   const [pswdType, setpswdType] = useState("password");
-  const [isLeader, setIsLeader] = useState( false );
-  const [isMember, setIsMember ] = useState( false );
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  const history = useHistory(); // for routing
-
-
-  const onClickLogin = ( e ) => {
-
-    if( isMember ) {
-      history.push("/userhome"); // go to specified path..
+  const handleChange = (e) => {
+    const val = e.target;
+    if (val.type === "email") {
+      setEmail(val.value);
+    } else if (val.type === "password" || val.type === "text") {
+      setPassword(val.value);
     }
-
-    else if ( isLeader ) {
-      history.push("/leader"); // go to specified path..
-    }
-  }
-
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log(e.target);
-    
+    setLoading(true);
+    signInWithEmailAndPassword(auth, email, password)
+      .then((result) => {
+        console.log(result.user);
+        setEmail("");
+        setPassword("");
+        setIsLoggedIn(true);
+        setLoading(false);
+      })
+      .catch((err) => {
+        // error handling
+
+        alert(err);
+        setEmail("");
+        setPassword("");
+        setLoading(false);
+      });
   };
 
-
-  const LoginWithGoogle = () => {
-    const auth = getAuth();
+  const loginWithGoogle = () => {
     const provider = new GoogleAuthProvider();
+    /*
+    REGISTER NEW USERS(TO GO IN signUp AND signUpU) USING 
+    this f(x) needs to be imported first
+    createUserWithEmailAndPassword(email,password)
+      .then(cred => {userCred = cred.user})
+
+    LOGOUT => import signOut from firebase/auth
+    const handleSignOut = signOut().then(()=>{console.log("Logged Out !")})
+
+    */
 
     signInWithPopup(auth, provider)
       .then((result) => {
@@ -114,8 +174,9 @@ const Login = () => {
         const token = credential.accessToken;
         // The signed-in user info.
         const user = result.user;
-        // console.log(`results : ${token},${credential},${user}`);
-        console.log(user);
+        console.log(`results : ${token},${credential},${user}`);
+        setIsLoggedIn(true);
+        // console.log(user);
         // ...
       })
       .catch((error) => {
@@ -133,6 +194,13 @@ const Login = () => {
       });
   };
 
+  useEffect(() => {
+    console.log(`isLoggedIn from use effect:${isLoggedIn}`);
+    if (isLoggedIn) {
+      history.push("/userhome");
+    }
+  }, [isLoggedIn, history]);
+
   return (
     <Body>
       <IonHeader color="white" className="ion-no-border">
@@ -144,25 +212,24 @@ const Login = () => {
         </IonToolbar>
       </IonHeader>
 
-
-
-
-      <IonContent >
-      
-
+      <IonContent>
         <div id="logins">
           <form
             action="/"
-            /* method="post" */ onSubmit={(e) => handleSubmit( e ) }
+            /* method="post" */ onSubmit={(e) => handleSubmit(e)}
           >
-
             <label htmlFor="Email address">Email</label>
             <IonInput
+              id="email"
               required
               type="email"
               name="Email address"
               clearInput="true"
               className="inputField"
+              value={email}
+              onIonChange={(e) => {
+                handleChange(e);
+              }}
             />
             <label htmlFor="Password">
               Password
@@ -173,9 +240,9 @@ const Login = () => {
                 }}
               >
                 {showPassword ? (
-                <AiFillEyeInvisible size="23px" />
+                  <AiFillEyeInvisible size="23px" />
                 ) : (
-                <AiFillEye size="23px" />
+                  <AiFillEye size="23px" />
                 )}
               </span>
             </label>
@@ -184,41 +251,22 @@ const Login = () => {
               type={pswdType}
               clearInput="true"
               className="inputField"
+              value={password}
+              onIonChange={(e) => {
+                handleChange(e);
+              }}
             />
-
-
-            <div >
-              <select >
-                <option disabled selected >
-                  Select User
-                </option>
-                <option
-                  onClick={ e=>{setIsLeader(true); setIsMember(false) } } >
-                  leader
-                </option>
-
-                <option onClick={ e=>{setIsMember( true ); setIsLeader(false) }} >
-                  Member
-                </option>
-              </select>
-            </div>
-
-            {/* <IonSelect >
-              <IonSelectOption disabled selected > Select User </IonSelectOption>
-              <IonSelectOption > Leader </IonSelectOption>
-              <IonSelectOption > Member </IonSelectOption>
-            </IonSelect> */}
-          
-
-            <input onClick={(e) => onClickLogin ( isLeader ) } type="submit" value="LOGIN" />
+            <input type="submit" value={loading ? "..." : "Login"} />
           </form>
         </div>
 
-
-
         <div className="google-container">
           <span className="google-login-text">Login with </span>
-          <button onClick={LoginWithGoogle}>
+          <button
+            onClick={() => {
+              loginWithGoogle();
+            }}
+          >
             <span className="google-icon">
               <FcGoogle size="20px" />
             </span>
@@ -228,18 +276,24 @@ const Login = () => {
 
         <div className="haveAcc">
           Don't have an account ?{" "}
-          <Link to={"/SignUpU"}>
+          <Link className="fromWelcome" to={location.state}>
             Register
           </Link>
+          {/* The line of code above uses a value from the welcome page to know what 
+          type of user wanna register and determines the exact route accordingly */}
         </div>
 
         <div className="haveAcc">
           {/* set forgot password page */}
-          <Link onClick={e=>alert("No Data")} to="/Login">Forgot password ?</Link>
-        </div> 
+          <Link
+            className="fromWelcome"
+            onClick={(e) => alert("No Data")}
+            to="/Login"
+          >
+            Forgot password ?
+          </Link>
+        </div>
       </IonContent>
-
-      
     </Body>
   );
 };
