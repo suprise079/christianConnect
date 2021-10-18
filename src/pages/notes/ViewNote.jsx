@@ -7,34 +7,43 @@ import { IoMdArrowBack } from 'react-icons/io';
 import './ViewNote.css';
 import NotesInfo from './notes.json';
 
-interface notedt  {
-    "title": string,
-    "date": string,
-    "content": string,
-    "id": number
-}
+
+// GET FIREBASE HELPING FUNCTIONS
+// import { getOneNote } from '../../firebase/firebase';
+import { getAllNotes } from '../../firebase/firebase';
+
+
+
+
+// interface notedt  {
+//     "title": string,
+//     "date": string,
+//     "content": string,
+//     "id": number
+// }
 
 function ViewNote() {
-
- 
     // const [idn, setId] = useState<any>();
     // const id: any = 
     // ? parseInt(param.get("id"),10): null;
 
     // Show Notes
-    const [note, setNote] = useState< notedt [] >();
+    const [note, setNote] = useState();
     
     useEffect(() => {
         // alert( "sljdfskljdfkg")
         const qs = window.location.search;
         const param =  new URLSearchParams( qs );
-        let idnn : any = param.get("id")
+        let idnn = param.get("id");
+        // console.log( idnn );
 
-        let Not: notedt [] = NotesInfo.filter( (n, i ) => n.id.toString() === idnn.toString() );
+        // get all the notes and return em
+        getAllNotes().then( data => {
+            // if note is the one passed in the link.
+            setNote( data.filter( n => n.id === idnn ) )
+        })
 
-        setNote( Not );
-
-        console.log( "second", note )
+        // getOneNote();
     }, [])
     
 
@@ -59,14 +68,10 @@ function ViewNote() {
                     { note ? note[0].title : '' }
                 </h3>
                 <span id='noteText'>{ note ? note[0].content : '' }</span>
-                
-                    
-                <AiFillDelete className='deleteIcon'/>
-                
+                {/* COMMENT OUT LATER....... */}
+                {/* <AiFillDelete className='deleteIcon'/> */}
             </div>
         </IonContent>
-
-        
         </IonApp>
     )
 }

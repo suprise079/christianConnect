@@ -5,3 +5,8 @@ body{
 ion-content{
     --background: white;
 }
+
+/* make input of type submit to have a pointer for hover. */
+input[type="submit"]:hover, button:hover {
+    cursor: pointer;
+}

@@ -7,13 +7,16 @@ import churchImg from "./church.jpeg";
 
 
 
+
+
+
+
+
 const EditLeader = () => {
   const [text, setText] = useState();
   const [buttonHover,setButtonHover] = useState("#348D63");
 
 
-
-  
 
   return (
     <IonPage>
