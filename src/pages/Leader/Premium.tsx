@@ -66,7 +66,7 @@ const appPages: AppPage[] = [
 const Premium: React.FC = () => {
   return (
     <IonPage>
-      
+
       <IonContent >
         <div className="bgColor">
           <IonCard className="nameCard">
@@ -78,14 +78,14 @@ const Premium: React.FC = () => {
               <Link to="/editleader" >
                 <FaUserEdit color="#000" size="20px"/>
               </Link>
-              
+
               <IonCardTitle><FaCrown color="#FFD700" />Mpumemelo Fellowship</IonCardTitle>
               <IonCardSubtitle>mpumelelofellowship@gmail.com</IonCardSubtitle>
             </div>
 
           </IonCard>
         </div>
-  
+
 
   
       <IonList className="menu">
@@ -120,7 +120,7 @@ const Premium: React.FC = () => {
             )
           })}
         </IonList>
-      
+
       </IonContent>
       
 

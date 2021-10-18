@@ -14,6 +14,7 @@ import {
 } from "@ionic/react";
 
 import "../Profile.css";
+
 import {
   logOutSharp,
   logOutOutline,

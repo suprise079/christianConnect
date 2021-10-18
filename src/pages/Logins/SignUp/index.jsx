@@ -67,6 +67,8 @@ const SignUp = () => {
   const [confpswd, setconfpswd] = useState("password");
   const [showConf, setshowConf] = useState(false);
 
+
+
   return (
     <Body>
       <IonHeader color="inherit" className="ion-no-border">
@@ -80,7 +82,8 @@ const SignUp = () => {
 
       <Content style={{ overflowY: "scroll" }}>
         <div id="inputs">
-          <form action="/" method="post">
+          <form action="/" method="post" >
+
             <label htmlFor="name">Name of fellowship</label>
             <IonInput
               required
@@ -168,8 +171,12 @@ const SignUp = () => {
               className="inputField"
             />
 
-            <input type="submit" value="Create a fellowship" />
+            <input onClick={ e=> alert("HI") } type="submit" value="Create a fellowship" />
+
           </form>
+
+
+
           <div style={{ marginTop: "10px" }} className="google-container">
             <span className="google-login-text">Login with </span>
             <button

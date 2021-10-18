@@ -151,6 +151,7 @@ const Login = () => {
         setEmail("");
         setPassword("");
         setLoading(false);
+        setIsLoggedIn(false);
       });
   };
 

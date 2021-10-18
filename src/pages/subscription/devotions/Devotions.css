@@ -1,0 +1,51 @@
+
+div.devoPic {
+    width: 100%;
+   
+}
+
+.devoPic img {
+    width: 100%;
+    height: 150px;
+    border-radius: 20px;
+}
+
+.massage {
+    width: 100%;
+    height:11em;
+    overflow: hidden;
+}
+
+.sermon {
+    width: 30%;
+    padding: 5px;
+    margin: 5px;
+    float: left;
+    text-align: center;
+
+}
+
+.sermon:hover {
+    background-color: lightgray;
+    color: black;
+}
+
+.sermon ion-card-subtitle:hover {
+    color: black;
+
+}
+
+.sermon video {
+    width: 100%;
+    border-radius: 20px;
+    height: 70px;
+    
+}
+
+#devotionCard {
+    width: fit-content;
+}
+
+#devotionContent {
+    padding: 1px;
+}
