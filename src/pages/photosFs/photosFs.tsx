@@ -1,10 +1,10 @@
 
 import { IonContent, IonPage } from "@ionic/react";
-
+import { Link } from 'react-router-dom'
 import './photosFs.css';
 
 // import component
-import NavigateFs from "../../components/navigateFs/nagivateFs";
+import NavigateFs from "../../components/navigateFs/navigateFs";
 import TopNavBar from "../../components/topNavBar/topNavBar";
 
 
@@ -19,9 +19,10 @@ const FellowshipPhotos: React.FC = () => {
 
         <TopNavBar />
 
-        <div className="navMargin" >  </div> 
-        <NavigateFs pn={"photo"} />
+        {/* <div className="navMargin" > </div> */}
+        <br /><br /><br />
 
+        <NavigateFs pn={"photo"} />
 
         <div className="imagesFS" >
           <div >
@@ -31,7 +32,7 @@ const FellowshipPhotos: React.FC = () => {
           <div className="moreImages" >
             {
               [1, 2, 3, 4, 5, 6, 7, 8, 9].map((imgs, i ) => (
-                <p key={i} 
+                <p key={i}
                 style={{ width:"32%", textAlign: "center", padding: '2em',
                 backgroundColor:"lightgrey", margin: ".1em" 
               }} > { imgs } </p>

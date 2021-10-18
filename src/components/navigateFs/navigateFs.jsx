@@ -1,6 +1,6 @@
 
 import { Link } from 'react-router-dom';
-import './nagivateFs.css';
+import './navigateFs.css';
 
 
 const NavigateFs = ( props ) => {

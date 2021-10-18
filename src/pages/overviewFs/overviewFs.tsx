@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom';
 
 
 // import component
-import NavigateFs from '../../components/navigateFs/nagivateFs';
+import NavigateFs from '../../components/navigateFs/navigateFs';
 import TopImgFs from '../../components/topImagesFs/topImgFs';
 import TopNavBar from '../../components/topNavBar/topNavBar';
 

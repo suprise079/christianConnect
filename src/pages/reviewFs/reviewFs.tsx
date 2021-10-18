@@ -10,7 +10,7 @@ import img3 from './prayer.jpeg';
 
 // get css
 import './reviewFs.css';
-import NavigateFs from "../../components/navigateFs/nagivateFs";
+import NavigateFs from "../../components/navigateFs/navigateFs";
 import TopNavBar from "../../components/topNavBar/topNavBar";
 
 const ReviewFS: React.FC = () => {
