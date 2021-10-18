@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { IonHeader, IonTitle, IonToolbar, IonApp, IonContent } from '@ionic/react';
 import { GiSaveArrow } from 'react-icons/gi'
 import { IoMdArrowBack } from 'react-icons/io'
@@ -17,6 +17,7 @@ function NoteContent() {
 	const [noteTile, setnoteTile] = useState();
 	const [noteContent, setnoteContent] = useState();
 	const dateObj = new Date();
+	const history = useHistory(); // used to route dynamically.
 	
 	
 	// this returns the time, in the format
@@ -57,6 +58,7 @@ function NoteContent() {
 					alert("NOTES SAVE");
 					setnoteContent("")
 					setnoteTile("");
+					history.push("/notes");
 				}
 				// when something was wrong.. there was an error.
 				else { alert("ERROR:PROBLEM"); console.log( feedback ) }
@@ -85,6 +87,7 @@ function NoteContent() {
 					<div id="notTitle" >
 						<label >Type title here</label>
 						<input
+							autoFocus
 							value={ noteTile }
 							placeholder="note title"
 							onChange={ e=> setnoteTile( e.target.value ) }
@@ -105,6 +108,7 @@ function NoteContent() {
 					<GiSaveArrow
 						onClick={ e => addUserNote()  }
 						className='deleteIcon'/>
+						
 				</div>
 			</IonContent>
 			

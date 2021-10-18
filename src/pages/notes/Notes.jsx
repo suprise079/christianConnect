@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { IonHeader, IonTitle, IonToolbar, IonCard, IonSearchbar, IonApp } from '@ionic/react';
 import { IoMdArrowBack } from 'react-icons/io'
 import { GrAdd } from 'react-icons/gr'
@@ -8,7 +8,6 @@ import NotesInfo from './notes.json'
 // import NoteContent from "./NoteContent";
 
 // import firebase functions and classes
-import { collection } from 'firebase/firestore';
 import { getAllNotes } from "../../firebase/firebase";
 
 
@@ -19,24 +18,25 @@ function Notes() {
   // search notes
   const [searchNote, setSearchNote] = useState('');
   // Show Notes
-  const [notes, setNotes] = useState([]);
+  const [notes, setNotes] = useState();
+  const history = useHistory(); // use to route dynamically
 
-  // // Display Notes
-  // function Notes(){
 
   useEffect(() => {
     // the function that get all the notes
     getAllNotes().then( setNotes );
     // console.log( notes );
   }, [] )
-    
+  
+
   return (
     <IonApp id='mainContainer'>
       
       {/* header */}
       <IonHeader id='header'>
         {/* back arrow */}
-        <IoMdArrowBack id='backIcon' />
+        <Link to='/profile'><IoMdArrowBack id='backIcon' /></Link>
+
         {/* title */}
         <IonToolbar>  
           <IonTitle id='title'>Notes</IonTitle>
@@ -62,7 +62,9 @@ function Notes() {
               </IonCard>
             </>
             )
-          ) : "loading"
+          ) : (
+            <h2>loading </h2>
+          )
         }
 
         {/* add note button */}

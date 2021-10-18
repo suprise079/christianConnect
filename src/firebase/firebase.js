@@ -1,11 +1,14 @@
-import { async } from "@firebase/util";
 import { initializeApp } from "firebase/app";
+
 import { getFirestore,
   getDocs,
   collection,
   getDoc, 
   doc
 } from "firebase/firestore";
+
+
+
 
 const firebaseConfig = {
   // TEST PROJECT
@@ -67,6 +70,12 @@ export const getAllNotes = async () => {
 }
 
 
+
+
+
+
+
+
 // THIS FUNCTION GETS A SINGLE NOTE DOC FROM FIREBASE.
 // IT'S RECEIVE THE ID OR THE NODE.
 // export const getOneNote = async ( id ) => {
@@ -79,4 +88,4 @@ export const getAllNotes = async () => {
 
 
 
-export { app };
+export default app ;
