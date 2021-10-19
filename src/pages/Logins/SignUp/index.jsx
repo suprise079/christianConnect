@@ -12,12 +12,12 @@ import { Link, useHistory } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
-import {FiLoader} from "react-icons/fi"
+import { FiLoader } from "react-icons/fi";
 import "../StylesForPages.css";
 
 import Context from "../../../context/Context";
-import { app } from "../../../firebase/firebase";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { app, auth } from "../../../firebase/firebase";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
 const Body = styled(IonPage)`
   padding: 1em 0em
@@ -91,7 +91,6 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [pswd, setPswd] = useState("");
   const [confirmPswd, setConfirmPswd] = useState("");
-  const { isLoggedIn, setIsLoggedIn } = useContext(Context);
 
   const handleChange = (e) => {
     const val = e.target;
@@ -114,12 +113,18 @@ const SignUp = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
-    createUserWithEmailAndPassword(getAuth(), email, pswd)
+    createUserWithEmailAndPassword(auth, email, pswd)
       .then((result) => {
-        console.log(result.user);
+        auth.onAuthStateChanged((user) => {
+          console.log("USER IS :", user ? user.email : user);
+          if (user) {
+            history.push("/userhome");
+          } else {
+            history.push("/");
+          }
+        });
         setEmail("");
         setPswd("");
-        setIsLoggedIn(true);
         setLoading(false);
         // add to firestore all other user details
       })
@@ -128,16 +133,9 @@ const SignUp = () => {
         alert(err);
         setEmail("");
         setPswd("");
-        setIsLoggedIn(false);
         setLoading(false);
       });
   };
-  useEffect(() => {
-    console.log(`isLoggedIn from use effect:${isLoggedIn}`);
-    if (isLoggedIn) {
-      history.push("/userhome");
-    }
-  }, [isLoggedIn, history]);
 
   return (
     <Body>

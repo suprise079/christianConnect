@@ -15,7 +15,7 @@ import { FcGoogle } from "react-icons/fc";
 import "../StylesForPages.css";
 
 import Context from "../../../context/Context";
-import { app } from "../../../firebase/firebase";
+import { app, auth } from "../../../firebase/firebase";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 const Body = styled(IonPage)`
   overflowY:scroll
@@ -78,8 +78,7 @@ const SignUpU = () => {
   const [email, setEmail] = useState("");
   const [pswd, setPswd] = useState("");
   const [confirmPswd, setConfirmPswd] = useState("");
-  const { isLoggedIn, setIsLoggedIn } = useContext(Context);
-
+  
   const handleChange = (e) => {
     const val = e.target;
     if (val.type === "email") {
@@ -100,12 +99,18 @@ const SignUpU = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
-    createUserWithEmailAndPassword(getAuth(), email, pswd)
+    createUserWithEmailAndPassword(auth, email, pswd)
       .then((result) => {
-        console.log(result.user);
+        auth.onAuthStateChanged((user) => {
+          console.log("USER IS :", user ? user.email : user);
+          if (user) {
+            history.push("/userhome");
+          } else {
+            history.push("/");
+          }
+        });
         setEmail("");
         setPswd("");
-        setIsLoggedIn(true);
         setLoading(false);
         // add to firestore all other user details
       })
@@ -114,16 +119,9 @@ const SignUpU = () => {
         alert(err);
         setEmail("");
         setPswd("");
-        setIsLoggedIn(false);
         setLoading(false);
       });
   };
-  useEffect(() => {
-    console.log(`isLoggedIn from use effect:${isLoggedIn}`);
-    if (isLoggedIn) {
-      history.push("/userhome");
-    }
-  }, [isLoggedIn, history]);
 
   return (
     <Body>

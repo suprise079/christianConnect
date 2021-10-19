@@ -13,21 +13,14 @@ import {
 import styled from "styled-components";
 
 // firebase
-import { app } from "../../../firebase/firebase";
+import { app, auth } from "../../../firebase/firebase";
+
 import {
-  getAuth,
+  signOut,
   signInWithPopup,
   GoogleAuthProvider,
   signInWithEmailAndPassword,
-  createUserWithEmailAndPassword,
 } from "firebase/auth";
-import {
-  getFirestore,
-  doc,
-  getDoc,
-  collection,
-  addDoc,
-} from "firebase/firestore";
 
 // react
 import { Link, useHistory } from "react-router-dom";
@@ -39,7 +32,6 @@ import "../StylesForPages.css";
 import bg from "./bg.png";
 import { useLocation } from "react-router";
 
-const db = getFirestore();
 const Body = styled(IonPage)`
   position: relative;
   justify-content: flex-start;
@@ -76,7 +68,7 @@ const Body = styled(IonPage)`
   }
   button[type="submit"] {
     border: 2px solid #348d60 !important;
-    border-radius:5px;
+    border-radius: 5px;
     width: 30vw;
     font-size: 1em;
     padding: 1% 5%;
@@ -110,21 +102,14 @@ const Login = () => {
   const history = useHistory();
   const [loading, setLoading] = useState(false);
 
-  // firebase/auth settings
-  const auth = getAuth();
-  // FIRESTORE DEMO
-  // const users = doc(db,"user","0");
-  // const userSnap = getDoc(users);
-  // userSnap.then((res)=>{console.log(res.data())})
-
-  // Add a second document with a generated ID.
-
   // user details
   const { isLoggedIn, setIsLoggedIn } = useContext(Context);
   const [showPassword, setshowPassword] = useState(false);
   const [pswdType, setpswdType] = useState("password");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  // check if the user is logged in
 
   const handleChange = (e) => {
     const val = e.target;
@@ -140,10 +125,17 @@ const Login = () => {
     setLoading(true);
     signInWithEmailAndPassword(auth, email, password)
       .then((result) => {
-        console.log(result.user);
+        auth.onAuthStateChanged((user) => {
+          console.log("USER IS :", user ? user.email : user);
+          if (user) {
+            history.push("/userhome");
+          }else{
+            history.push("/");
+          }
+        });
+        // console.log(result.user);
         setEmail("");
         setPassword("");
-        setIsLoggedIn(true);
         setLoading(false);
       })
       .catch((err) => {
@@ -152,22 +144,11 @@ const Login = () => {
         setEmail("");
         setPassword("");
         setLoading(false);
-        setIsLoggedIn(false);
       });
   };
 
   const loginWithGoogle = () => {
     const provider = new GoogleAuthProvider();
-    /*
-    REGISTER NEW USERS(TO GO IN signUp AND signUpU) USING 
-    this f(x) needs to be imported first
-    createUserWithEmailAndPassword(email,password)
-      .then(cred => {userCred = cred.user})
-
-    LOGOUT => import signOut from firebase/auth
-    const handleSignOut = signOut().then(()=>{console.log("Logged Out !")})
-
-    */
 
     signInWithPopup(auth, provider)
       .then((result) => {
@@ -195,13 +176,6 @@ const Login = () => {
         // ...
       });
   };
-
-  useEffect(() => {
-    console.log(`isLoggedIn from use effect:${isLoggedIn}`);
-    if (isLoggedIn) {
-      history.push("/userhome");
-    }
-  }, [isLoggedIn, history]);
 
   return (
     <Body>
@@ -260,7 +234,14 @@ const Login = () => {
             />
             {/* <input type="submit" value={loading ? <span className="loader"></span> : "Login"} /> */}
             <button type="submit">
-              {loading ? <span style={{borderColor:"#348d60"}} className="loader"></span> : "Register"}
+              {loading ? (
+                <span
+                  style={{ borderColor: "#348d60" }}
+                  className="loader"
+                ></span>
+              ) : (
+                "Register"
+              )}
             </button>
           </form>
         </div>

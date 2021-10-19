@@ -52,6 +52,14 @@ const Welcome = () => {
         <Buttons>
           <Link
             className="welcomeLink"
+            to={{ pathname: "/Login", state: "/SignUpU" }}
+          >
+            {clicked ? "Loading..." : "I am just a fellowship member"}
+          </Link>
+        </Buttons>
+        <Buttons>
+          <Link
+            className="welcomeLink"
             to={{ pathname: "/Login", state: "/SignUp" }}
             onClick={()=>setclicked(false)}
           >
@@ -59,14 +67,6 @@ const Welcome = () => {
           </Link>
         </Buttons>
         
-        <Buttons>
-          <Link
-            className="welcomeLink"
-            to={{ pathname: "/Login", state: "/SignUpU" }}
-          >
-            {clicked ? "Loading..." : "I am just a fellowship member"}
-          </Link>
-        </Buttons>
       </div>
     </Body>
   );
