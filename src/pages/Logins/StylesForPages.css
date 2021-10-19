@@ -34,19 +34,7 @@ label {
   align-items: center;
   width: 90%;
 }
-input[type="submit"] {
-  padding: 10px 5px;
-  border-radius: 5px;
-  color: white;
-  margin: 5% 0;
-  font-size: 1.2em;
-  box-shadow: 0 0 5px rgba(17, 17, 17, 0.249);
-  background: #348d60;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  -ms-border-radius: 5px;
-  -o-border-radius: 5px;
-}
+
 .haveAcc {
   text-align: center;
   width: 100%;
@@ -56,9 +44,8 @@ input[type="submit"] {
 .haveAcc a {
   position: inherit;
   color: #348d60;
-  
 }
-.haveAcc a:not(.fromWelcome){
+.haveAcc a:not(.fromWelcome) {
   transition: 0.2s;
   animation: pump linear infinite 10s;
   -webkit-animation: pump linear infinite 5s;
@@ -138,4 +125,41 @@ button .google-icon {
 a.welcomeLink {
   text-decoration: none;
   color: inherit;
+}
+span.loader {
+  animation: spin 2s linear infinite;
+  border: 6px dotted white;
+  border-top: none;
+  width: 10px;
+  height: 0px;
+  -webkit-animation: spin 1s linear infinite alternate;
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+    transform-origin: center;
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    width: 5px;
+  }
+  50% {
+    transform: rotate(180deg);
+    transform-origin: center;
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    height: 10px;
+  }
+  100% {
+    width: 5px;
+    transform: rotate(360deg);
+    transform-origin: center;
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+  }
 }

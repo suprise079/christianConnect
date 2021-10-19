@@ -74,7 +74,9 @@ const Body = styled(IonPage)`
     justify-content: space-between;
     align-items: center;
   }
-  input[type="submit"] {
+  button[type="submit"] {
+    border: 2px solid #348d60 !important;
+    border-radius:5px;
     width: 30vw;
     font-size: 1em;
     padding: 1% 5%;
@@ -146,7 +148,6 @@ const Login = () => {
       })
       .catch((err) => {
         // error handling
-
         alert(err);
         setEmail("");
         setPassword("");
@@ -257,7 +258,10 @@ const Login = () => {
                 handleChange(e);
               }}
             />
-            <input type="submit" value={loading ? "..." : "Login"} />
+            {/* <input type="submit" value={loading ? <span className="loader"></span> : "Login"} /> */}
+            <button type="submit">
+              {loading ? <span style={{borderColor:"#348d60"}} className="loader"></span> : "Register"}
+            </button>
           </form>
         </div>
 
@@ -277,7 +281,10 @@ const Login = () => {
 
         <div className="haveAcc">
           Don't have an account ?{" "}
-          <Link className="fromWelcome" to={location.state}>
+          <Link
+            className="fromWelcome"
+            to={{ pathname: location.state, state: location.state }}
+          >
             Register
           </Link>
           {/* The line of code above uses a value from the welcome page to know what 

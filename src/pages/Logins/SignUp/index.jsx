@@ -8,12 +8,16 @@ import {
   IonTitle,
 } from "@ionic/react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
-
-import { useState } from "react";
+import { Link, useHistory } from "react-router-dom";
+import { useState, useEffect, useContext } from "react";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
+import {FiLoader} from "react-icons/fi"
 import "../StylesForPages.css";
+
+import Context from "../../../context/Context";
+import { app } from "../../../firebase/firebase";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 const Body = styled(IonPage)`
   padding: 1em 0em
@@ -45,6 +49,16 @@ const Body = styled(IonPage)`
     color:rgba(52, 141, 99, 1);
     position:absolute;
   }
+  button[type="submit"]{
+    width:100px;
+    padding: 10px 5px;
+    border-radius: 5px;
+    color: white;
+    margin: 5% 0;
+    font-size: 1.2em;
+    box-shadow: 0 0 5px rgba(17, 17, 17, 0.249);
+    background: #348d60;
+  }
 `;
 const Content = styled.div`
   background: rgb(164, 204, 185);
@@ -66,8 +80,64 @@ const SignUp = () => {
   const [pswdType, setpswdType] = useState("password");
   const [confpswd, setconfpswd] = useState("password");
   const [showConf, setshowConf] = useState(false);
+  const history = useHistory(); // use for routing to other pages in code.
+  const [loading, setLoading] = useState(false);
 
+  // form details variables
+  const [fsName, setFsName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [email, setEmail] = useState("");
+  const [pswd, setPswd] = useState("");
+  const [confirmPswd, setConfirmPswd] = useState("");
+  const { isLoggedIn, setIsLoggedIn } = useContext(Context);
 
+  const handleChange = (e) => {
+    const val = e.target;
+    if (val.type === "email") {
+      setEmail(val.value);
+    } else if (val.name === "password") {
+      setPswd(val.value);
+    } else if (val.name === "First name") {
+      setFirstName(val.value);
+    } else if (val.name === "Last name") {
+      setLastName(val.value);
+    } else if (val.name === "Phone number") {
+      setPhoneNumber(val.value);
+    } else if (val.name === "Confirm Password") {
+      setConfirmPswd(val.value);
+    } else if (val.name === "fsName") {
+      setFsName(val.value);
+    }
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setLoading(true);
+    createUserWithEmailAndPassword(getAuth(), email, pswd)
+      .then((result) => {
+        console.log(result.user);
+        setEmail("");
+        setPswd("");
+        setIsLoggedIn(true);
+        setLoading(false);
+        // add to firestore all other user details
+      })
+      .catch((err) => {
+        // error handling
+        alert(err);
+        setEmail("");
+        setPswd("");
+        setIsLoggedIn(false);
+        setLoading(false);
+      });
+  };
+  useEffect(() => {
+    console.log(`isLoggedIn from use effect:${isLoggedIn}`);
+    if (isLoggedIn) {
+      history.push("/userhome");
+    }
+  }, [isLoggedIn, history]);
 
   return (
     <Body>
@@ -82,12 +152,13 @@ const SignUp = () => {
 
       <Content style={{ overflowY: "scroll" }}>
         <div id="inputs">
-          <form action="/" method="post" >
-
+          <form onSubmit={(e) => handleSubmit(e)}>
             <label htmlFor="name">Name of fellowship</label>
             <IonInput
+              value={fsName}
+              onIonChange={(e) => handleChange(e)}
               required
-              name="name"
+              name="fsName"
               clearInput="true"
               className="inputField"
             ></IonInput>
@@ -98,6 +169,8 @@ const SignUp = () => {
               name="First name"
               clearInput="true"
               className="inputField"
+              onIonChange={(e) => handleChange(e)}
+              value={firstName}
             ></IonInput>
 
             <label htmlFor="Last name">Last name</label>
@@ -106,6 +179,8 @@ const SignUp = () => {
               name="Last name"
               clearInput="true"
               className="inputField"
+              onIonChange={(e) => handleChange(e)}
+              value={lastName}
             ></IonInput>
 
             <label htmlFor="Phone number">Phone number</label>
@@ -115,6 +190,8 @@ const SignUp = () => {
               name="Phone number"
               clearInput="true"
               className="inputField"
+              onIonChange={(e) => handleChange(e)}
+              value={phoneNumber}
             ></IonInput>
 
             <label htmlFor="Email address">Email address</label>
@@ -124,6 +201,8 @@ const SignUp = () => {
               name="Email address"
               clearInput="true"
               className="inputField"
+              onIonChange={(e) => handleChange(e)}
+              value={email}
             ></IonInput>
 
             <label htmlFor="Password">
@@ -143,9 +222,12 @@ const SignUp = () => {
             </label>
             <IonInput
               required
+              name="password"
               type={pswdType}
               clearInput="true"
               className="inputField"
+              onIonChange={(e) => handleChange(e)}
+              value={pswd}
             ></IonInput>
 
             <label htmlFor="Confirm password">
@@ -166,19 +248,20 @@ const SignUp = () => {
             <IonInput
               required
               type={confpswd}
-              name="Confirm password"
+              name="Confirm Password"
               clearInput="true"
               className="inputField"
+              onIonChange={(e) => handleChange(e)}
+              value={confirmPswd}
             />
 
-            <input onClick={ e=> alert("HI") } type="submit" value="Create a fellowship" />
-
+            <button type="submit">
+              {loading ? <span className="loader"></span> : "Register"}
+            </button>
           </form>
 
-
-
           <div style={{ marginTop: "10px" }} className="google-container">
-            <span className="google-login-text">Login with </span>
+            <span className="google-login-text">Register with </span>
             <button
               onClick={() => {
                 console.log("hello");
@@ -198,7 +281,7 @@ const SignUp = () => {
                 textDecoration: "underline",
                 margin: "10px",
               }}
-              to="/Login"
+              to={{ pathname: "/Login", state: "/SignUp" }}
             >
               Login
             </Link>

@@ -44,7 +44,6 @@ const Buttons = styled(IonButton)`
 `;
 const Welcome = () => {
   const [clicked, setclicked] = useState(false);
-  const [uClicked, setuClicked] = useState(false);
   
   return (
     <Body>
