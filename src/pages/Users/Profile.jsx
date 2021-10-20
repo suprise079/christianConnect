@@ -163,7 +163,7 @@ const Profile = () => {
 
   const goToItem = (e) => {
     console.log(e.target.id);
-    history.push(e.target.id);
+    history.push( `${e.target.id}` );
   };
   return (
     <Body>
@@ -192,10 +192,10 @@ const Profile = () => {
             </div>
           </div>
         </div>
+        
         <div className="content">
           <div className="menu">
-            {appPages.map((appPage, index) => {
-              return (
+            {appPages.map((appPage, index) => (
                 <div
                   id={appPage.url}
                   onClick={(e) => goToItem(e)}
@@ -209,8 +209,8 @@ const Profile = () => {
                   />
                   <IonLabel>{appPage.title}</IonLabel>
                 </div>
-              );
-            })}
+              )
+            )}
           </div>
         </div>
       </div>

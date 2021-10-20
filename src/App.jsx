@@ -51,6 +51,7 @@ const App = () => {
       <IonApp>
         <IonReactRouter>
           <IonRouterOutlet>
+            
             <Route exact path="/">
               {" "}
               <Redirect to="/home" />{" "}
@@ -62,10 +63,13 @@ const App = () => {
             <Route exact path="/Donate" component={Donate} />
             <Route exact path="/savedVideos" component={SavedVideos} />
             <Route exact path="/addnote" component={ NoteContent } />
-
-
+            {/* get the notes route */}
+            <Route exact path="/notes" component={Notes} />
             {/* user home tab pages */}
             <Route exact path="/userhome" component={UserHome} />
+
+
+
             <Route exact path="/aboutFellowship">
               <AboutFellowship />{" "}
             </Route>
@@ -89,14 +93,9 @@ const App = () => {
             </Route>
             {/* edit user page. */}
             <Route exact path="/editprofile">
-              {" "}
               <EditUser />{" "}
             </Route>
-            {/* get the notes route */}
-            <Route exact path="/notes">
-              {" "}
-              <Notes />{" "}
-            </Route>
+
             {/* the page that shows the notes */}
             <Route exact path="/viewnotes">
               {" "}
