@@ -44,12 +44,19 @@ const Buttons = styled(IonButton)`
 `;
 const Welcome = () => {
   const [clicked, setclicked] = useState(false);
-  const [uClicked, setuClicked] = useState(false);
   
   return (
     <Body>
       <img src={logo} alt="Logo" />
       <div className="Buttons">
+        <Buttons>
+          <Link
+            className="welcomeLink"
+            to={{ pathname: "/Login", state: "/SignUpU" }}
+          >
+            {clicked ? "Loading..." : "I am just a fellowship member"}
+          </Link>
+        </Buttons>
         <Buttons>
           <Link
             className="welcomeLink"
@@ -60,14 +67,6 @@ const Welcome = () => {
           </Link>
         </Buttons>
         
-        <Buttons>
-          <Link
-            className="welcomeLink"
-            to={{ pathname: "/Login", state: "/SignUpU" }}
-          >
-            {clicked ? "Loading..." : "I am just a fellowship member"}
-          </Link>
-        </Buttons>
       </div>
     </Body>
   );

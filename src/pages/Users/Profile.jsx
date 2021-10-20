@@ -1,22 +1,15 @@
 import {
   IonToolbar,
   IonPage,
-  IonCard,
-  IonAvatar,
   IonCardTitle,
   IonCardSubtitle,
-  IonList,
-  IonItem,
   IonLabel,
   IonIcon,
-  IonMenuToggle,
   IonHeader,
   IonButtons,
   IonBackButton,
   IonTitle,
 } from "@ionic/react";
-
-// import ExploreContainer from '../components/ExploreContainer';
 import "../Profile.css";
 import {
   logOutSharp,
@@ -28,21 +21,17 @@ import {
   walletSharp,
   walletOutline,
 } from "ionicons/icons";
-// import {
-//   useLocation,
-//    Link
-// } from "react-router-dom";
+
 import { FaUserEdit } from "react-icons/fa";
 
 import TabBar from "../../components/tabBar/tabBar";
 
-import { useHistory, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
-// import images
-import profileImg from "./profile.jpeg";
-// import Sermons from "../pages/extends/Sermons";
-// import Donate from "../pages/extends/Donate";
-// import Notes from "../pages/extends/Notes";
+
+// firebase for signOut
+import { auth } from "../../firebase/firebase";
+import { signOut } from "@firebase/auth";
 
 const appPages = [
   {
@@ -65,7 +54,7 @@ const appPages = [
   },
   {
     title: "Logout",
-    url: "/Login",
+    url: "/",
     iosIcon: logOutOutline,
     mdIcon: logOutSharp,
   },
@@ -163,7 +152,25 @@ const Profile = () => {
 
   const goToItem = (e) => {
     console.log(e.target.id);
+<<<<<<< HEAD
     history.push( `${e.target.id}` );
+=======
+    if (e.target.id === "/") {
+      auth
+        .signOut()
+        .then((res) => {
+          // Display a modal saying "User successfully signed out"
+          /* setTimeout(() => {
+              history.push(e.target.id);
+            }, 3000); */
+          alert("Successfully signed Out ! ");
+          history.push(e.target.id);
+        })
+        .catch((err) => alert(err));
+    } else {
+      history.push(e.target.id);
+    }
+>>>>>>> cdae72b11be1aba5a843114e4fa12d459450894e
   };
   return (
     <Body>
@@ -197,6 +204,7 @@ const Profile = () => {
           <div className="menu">
             {appPages.map((appPage, index) => (
                 <div
+                  key={index}
                   id={appPage.url}
                   onClick={(e) => goToItem(e)}
                   className="item"

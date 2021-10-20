@@ -9,11 +9,14 @@ import {
 } from "@ionic/react";
 import styled from "styled-components";
 import { Link, useHistory } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
 import "../StylesForPages.css";
 
+import Context from "../../../context/Context";
+import { app, auth } from "../../../firebase/firebase";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 const Body = styled(IonPage)`
   overflowY:scroll
     position: relative;
@@ -48,6 +51,16 @@ const Body = styled(IonPage)`
       flex-direction:column;
       align-items:center;
     }
+    button[type="submit"]{
+      width:100px;
+      padding: 10px 5px;
+      border-radius: 5px;
+      color: white;
+      margin: 5% 0;
+      font-size: 1.2em;
+      box-shadow: 0 0 5px rgba(17, 17, 17, 0.249);
+      background: #348d60;
+    }
   `;
 
 const SignUpU = () => {
@@ -56,15 +69,62 @@ const SignUpU = () => {
   const [confpswd, setconfpswd] = useState("password");
   const [showConf, setshowConf] = useState(false);
   const history = useHistory(); // use for routing to other pages in code.
+  const [loading, setLoading] = useState(false);
 
-  const RegisterClick = () => {
-    alert("ACTIONS FOR REGISTERING USER COMING SOON....");
+  // form details variables
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [email, setEmail] = useState("");
+  const [pswd, setPswd] = useState("");
+  const [confirmPswd, setConfirmPswd] = useState("");
+  
+  const handleChange = (e) => {
+    const val = e.target;
+    if (val.type === "email") {
+      setEmail(val.value);
+    } else if (val.name === "password") {
+      setPswd(val.value);
+    } else if (val.name === "First name") {
+      setFirstName(val.value);
+    } else if (val.name === "Last name") {
+      setLastName(val.value);
+    } else if (val.name === "Phone number") {
+      setPhoneNumber(val.value);
+    } else if (val.name === "Confirm Password") {
+      setConfirmPswd(val.value);
+    }
+  };
 
-    history.push("/Login");
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setLoading(true);
+    createUserWithEmailAndPassword(auth, email, pswd)
+      .then((result) => {
+        auth.onAuthStateChanged((user) => {
+          console.log("USER IS :", user ? user.email : user);
+          if (user) {
+            history.push("/userhome");
+          } else {
+            history.push("/");
+          }
+        });
+        setEmail("");
+        setPswd("");
+        setLoading(false);
+        // add to firestore all other user details
+      })
+      .catch((err) => {
+        // error handling
+        alert(err);
+        setEmail("");
+        setPswd("");
+        setLoading(false);
+      });
   };
 
   return (
-    <Body style={{ overflowY: "scroll" }}>
+    <Body>
       <IonHeader color="inherit" className="ion-no-border">
         <IonToolbar>
           <IonButtons slot="start">
@@ -74,36 +134,48 @@ const SignUpU = () => {
         </IonToolbar>
       </IonHeader>
 
-      <div id="inputs">
-        <form onClick={(e) => RegisterClick(e)} action="/" method="post">
+      <div style={{ overflowY: "scroll" }} id="inputs">
+        <form onSubmit={(e) => handleSubmit(e)}>
           <label htmlFor="First name">First name</label>
           <IonInput
             name="First name"
             clearInput="true"
             className="inputField"
+            onIonChange={(e) => handleChange(e)}
+            value={firstName}
+            required
           ></IonInput>
 
           <label htmlFor="Last name">Last name</label>
           <IonInput
+            required
             name="Last name"
             clearInput="true"
             className="inputField"
+            onIonChange={(e) => handleChange(e)}
+            value={lastName}
           ></IonInput>
 
           <label htmlFor="Phone number">Phone number</label>
           {/* will use regex validation to format to NUMBERS ONLY */}
           <IonInput
+            required
             name="Phone number"
             clearInput="true"
             className="inputField"
+            onIonChange={(e) => handleChange(e)}
+            value={phoneNumber}
           ></IonInput>
 
           <label htmlFor="Email address">Email address</label>
           <IonInput
+            required
             type="email"
             name="Email address"
             clearInput="true"
             className="inputField"
+            onIonChange={(e) => handleChange(e)}
+            value={email}
           ></IonInput>
 
           <label htmlFor="Password">
@@ -123,9 +195,12 @@ const SignUpU = () => {
           </label>
           <IonInput
             required
+            name="password"
             type={pswdType}
             clearInput="true"
             className="inputField"
+            onIonChange={(e) => handleChange(e)}
+            value={pswd}
           ></IonInput>
 
           <label htmlFor="Confirm password">
@@ -146,15 +221,19 @@ const SignUpU = () => {
           <IonInput
             required
             type={confpswd}
-            name="Confirm password"
+            name="Confirm Password"
             clearInput="true"
             className="inputField"
+            onIonChange={(e) => handleChange(e)}
+            value={confirmPswd}
           ></IonInput>
-          <input type="submit" value="Register" />
+          <button type="submit">
+            {loading ? <span className="loader"></span> : "Register"}
+          </button>
         </form>
 
         <div style={{ marginTop: "10px" }} className="google-container">
-          <span className="google-login-text">Login with </span>
+          <span className="google-login-text">Register with </span>
           <button
             onClick={() => {
               console.log("hello");
@@ -174,7 +253,7 @@ const SignUpU = () => {
               textDecoration: "underline",
               margin: "10px",
             }}
-            to="/Login"
+            to={{ pathname: "/Login", state: "/SignUpU" }}
           >
             Login
           </Link>
