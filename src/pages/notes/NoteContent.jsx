@@ -7,7 +7,7 @@ import './NoteContent.css'
 
 // import firebase tool
 import { collection, addDoc } from 'firebase/firestore';
-import { firestoreObj } from '../../firebase/firebase';
+import { db } from '../../firebase/firebase';
 
 
 
@@ -35,7 +35,7 @@ function NoteContent() {
 	async function add() {
 
 		try {
-			const ref = await addDoc( collection(firestoreObj, "notes"), {
+			const ref = await addDoc( collection(db, "notes"), {
 				content: noteContent,
 				time: getTime(),
 				title: noteTile,
