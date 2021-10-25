@@ -4,7 +4,7 @@ import { IonHeader, IonTitle, IonToolbar, IonCard, IonSearchbar, IonApp } from '
 import { IoMdArrowBack } from 'react-icons/io'
 import { GrAdd } from 'react-icons/gr'
 import "./Notes.css";
-import NotesInfo from './notes.json'
+// import NotesInfo from './notes.json'
 // import NoteContent from "./NoteContent";
 
 // import firebase functions and classes

@@ -240,7 +240,7 @@ const Login = () => {
                   className="loader"
                 ></span>
               ) : (
-                "Register"
+                "Login"
               )}
             </button>
           </form>

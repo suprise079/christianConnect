@@ -26,9 +26,8 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-
 // export firestore object
-export const firestoreObj = getFirestore();
+export const db = getFirestore( app );
 // export firebase/auth object
 export const auth = getAuth();
 
@@ -41,7 +40,7 @@ export const getAllNotes = async () => {
   var data = [];
 
   try { // get a reference to firebase doc
-    const ref = await getDocs( collection(firestoreObj, "notes"));
+    const ref = await getDocs( collection( db , "notes"));
     ref.forEach( doc => {
       // console.log( doc.id + " => ", doc.data() )
       // push data into the an array to return.
@@ -53,7 +52,6 @@ export const getAllNotes = async () => {
         title: doc.data().title, // title of the notes
       })
     })
-
     // console.log( "GET ALL NOTES FUNC: ", data ); // seeing purpose.
     // a filter will be applied once log in is settle.
     return data; // return notes to users.

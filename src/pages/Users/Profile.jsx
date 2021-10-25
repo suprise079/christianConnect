@@ -33,6 +33,8 @@ import styled from "styled-components";
 import { auth } from "../../firebase/firebase";
 import { signOut } from "@firebase/auth";
 
+
+
 const appPages = [
   {
     title: "Saved videos",
@@ -147,11 +149,16 @@ const Body = styled(IonPage)`
     padding: 0 10px;
   }
 `;
+
+
 const Profile = () => {
   const history = useHistory(); // use this for routing in js codes.
 
   const goToItem = (e) => {
     console.log(e.target.id);
+// <<<<<<< HEAD
+    history.push( `${e.target.id}` );
+// =======
     if (e.target.id === "/") {
       auth
         .signOut()
@@ -167,6 +174,7 @@ const Profile = () => {
     } else {
       history.push(e.target.id);
     }
+// >>>>>>> cdae72b11be1aba5a843114e4fa12d459450894e
   };
   return (
     <Body>
@@ -195,10 +203,10 @@ const Profile = () => {
             </div>
           </div>
         </div>
+        
         <div className="content">
           <div className="menu">
-            {appPages.map((appPage, index) => {
-              return (
+            {appPages.map((appPage, index) => (
                 <div
                   key={index}
                   id={appPage.url}
@@ -213,12 +221,15 @@ const Profile = () => {
                   />
                   <IonLabel>{appPage.title}</IonLabel>
                 </div>
-              );
-            })}
+              )
+            )}
           </div>
         </div>
       </div>
+
+      {/* tabbar for navigating user pages */}
       <TabBar />
+
     </Body>
   );
 };

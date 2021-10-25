@@ -110,21 +110,27 @@ const SignUp = () => {
       setFsName(val.value);
     }
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
     createUserWithEmailAndPassword(auth, email, pswd)
       .then((result) => {
-        auth.onAuthStateChanged((user) => {
-          console.log("USER IS :", user ? user.email : user);
-          if (user) {
-            history.push("/userhome");
-          } else {
-            history.push("/");
-          }
-        });
-        setEmail("");
-        setPswd("");
+
+        console.log( result );
+
+
+
+        // auth.onAuthStateChanged((user) => {
+        //   console.log("USER IS :", user ? user.email : user);
+        //   if (user) {
+        //     history.push("/userhome");
+        //   } else {
+        //     history.push("/");
+        //   }
+        // });
+        setEmail(""); setFsName(""); setLastName(""); setPhoneNumber("");
+        setPswd(""); setConfirmPswd(""); setFirstName("");
         setLoading(false);
         // add to firestore all other user details
       })
@@ -258,6 +264,9 @@ const SignUp = () => {
             </button>
           </form>
 
+
+
+
           <div style={{ marginTop: "10px" }} className="google-container">
             <span className="google-login-text">Register with </span>
             <button
@@ -271,6 +280,7 @@ const SignUp = () => {
               <span className="google-text">Google</span>
             </button>
           </div>
+
           <div className="haveAcc">
             Have an account ?
             <Link
@@ -284,6 +294,7 @@ const SignUp = () => {
               Login
             </Link>
           </div>
+
         </div>
       </Content>
     </Body>

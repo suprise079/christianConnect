@@ -17,6 +17,17 @@ import "../StylesForPages.css";
 import Context from "../../../context/Context";
 import { app, auth } from "../../../firebase/firebase";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { DBWrapper } from "workbox-core/_private";
+
+
+// custom functions from firebase
+import { registerUser } from "../../../firebase/firebase-help";
+
+// custom functions
+import getCurTimeDate from "../../../components/helpFunc";
+
+
+
 const Body = styled(IonPage)`
   overflowY:scroll
     position: relative;
@@ -101,17 +112,45 @@ const SignUpU = () => {
     setLoading(true);
     createUserWithEmailAndPassword(auth, email, pswd)
       .then((result) => {
-        auth.onAuthStateChanged((user) => {
-          console.log("USER IS :", user ? user.email : user);
-          if (user) {
-            history.push("/userhome");
-          } else {
-            history.push("/");
-          }
-        });
-        setEmail("");
-        setPswd("");
-        setLoading(false);
+        var uid = result.user.uid; // user id to map with user data in firestore
+
+        if( uid ) {
+          // console.log( result.user.uid )
+          // registerUser func to add user data, after createauth works
+          // ( email, fname, lname, pwd, phone, regDate, uid )
+          registerUser(email, firstName, lastName, pswd, phoneNumber, getCurTimeDate(), uid ).then( res => {
+            if( res ){
+              alert("User Successfully registered...");
+
+              // reset input fields.
+              setFirstName(""); setLastName(""); setPhoneNumber(""); setEmail("");
+              setPswd(""); setConfirmPswd("");
+              
+              // route to login page
+              history.push("/Login");
+            }
+            else { console.log("Error registering use data"); }
+          })
+        }
+        
+
+
+        // db.collection("Users").addDoc({formStuff}).then((res)=>{
+
+          // auth.onAuthStateChanged((user) => {
+          //   console.log("USER IS :", user ? user.email : user);
+          //   if (user) {
+          //     //
+          //     history.push("/userhome");
+          //   } else {
+          //     history.push("/");
+          //   }
+          // });
+          // setEmail("");
+          // setPswd("");
+          setLoading(false);
+
+        // })
         // add to firestore all other user details
       })
       .catch((err) => {
@@ -232,6 +271,8 @@ const SignUpU = () => {
           </button>
         </form>
 
+
+
         <div style={{ marginTop: "10px" }} className="google-container">
           <span className="google-login-text">Register with </span>
           <button
@@ -245,6 +286,7 @@ const SignUpU = () => {
             <span className="google-text">Google</span>
           </button>
         </div>
+
         <div className="haveAcc">
           Have an account ?{" "}
           <Link
@@ -258,6 +300,7 @@ const SignUpU = () => {
             Login
           </Link>
         </div>
+
       </div>
     </Body>
   );
