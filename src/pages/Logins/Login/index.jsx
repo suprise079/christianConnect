@@ -126,7 +126,7 @@ const Login = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((result) => {
         auth.onAuthStateChanged((user) => {
-          console.log("USER IS :", user ? user.email : user);
+          console.log("USER IS :", user ? user : user);
           if (user) {
             history.push("/userhome");
           }else{
