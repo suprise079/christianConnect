@@ -137,6 +137,7 @@ const Login = () => {
     await signInWithEmailAndPassword(auth, email, password)
       .then((result) => {
         auth.onAuthStateChanged((user) => {
+<<<<<<< HEAD
           if (user.email && user.uid ) {
             // pass user id from auth .. get user data from firestore ..
             LoginUser( user.uid ).then( data => {
@@ -158,6 +159,11 @@ const Login = () => {
               }
               
             })
+=======
+          console.log("USER IS :", user ? user : user);
+          if (user) {
+            history.push("/userhome");
+>>>>>>> 515681922535cd8b35b143549337711118a8ed1b
           }else{
             history.push("/Login");
           }
