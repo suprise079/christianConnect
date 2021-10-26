@@ -22,6 +22,10 @@ import {
   walletOutline,
 } from "ionicons/icons";
 
+
+// import from react modules
+import { useEffect, useState } from "react";
+
 import { FaUserEdit } from "react-icons/fa";
 
 import TabBar from "../../components/tabBar/tabBar";
@@ -153,12 +157,24 @@ const Body = styled(IonPage)`
 
 const Profile = () => {
   const history = useHistory(); // use this for routing in js codes.
+  const [ user, setUser ] = useState();
+
+
+
+  useEffect(() => {
+    // get the value of auth.current user that keeps user's data.
+    var d = auth.currentUser?.providerData[0].displayName;
+    console.log( d ); // for debuggin purposes
+    setUser( JSON.parse( d ) ) // set user for this page
+  },[])
+
+
 
   const goToItem = (e) => {
     console.log(e.target.id);
-// <<<<<<< HEAD
+
     history.push( `${e.target.id}` );
-// =======
+
     if (e.target.id === "/") {
       auth
         .signOut()
@@ -174,8 +190,8 @@ const Profile = () => {
     } else {
       history.push(e.target.id);
     }
-// >>>>>>> cdae72b11be1aba5a843114e4fa12d459450894e
   };
+
   return (
     <Body>
       <IonHeader color="white" className="ion-no-border">
@@ -183,7 +199,7 @@ const Profile = () => {
           <IonButtons slot="start">
             <IonBackButton defaultHref="/" />
           </IonButtons>
-          <IonTitle>Profile</IonTitle>
+          <IonTitle>Profile User</IonTitle>
         </IonToolbar>
       </IonHeader>
       <div className="body">
@@ -198,8 +214,10 @@ const Profile = () => {
                 size="20px"
               />
 
-              <IonCardTitle>Jane Doe</IonCardTitle>
-              <IonCardSubtitle>janedoe@gmail.com</IonCardSubtitle>
+              <IonCardTitle>{ user.firstname } {" "} {user.lastname } </IonCardTitle>
+              <IonCardSubtitle>
+                { user.email }
+              </IonCardSubtitle>
             </div>
           </div>
         </div>

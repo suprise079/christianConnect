@@ -1,15 +1,8 @@
 import {
-  IonButton,
   IonContent,
   IonHeader,
   IonIcon,
-  IonLabel,
   IonPage,
-  IonTabBar,
-  IonTabButton,
-  IonTabs,
-  IonTitle,
-  IonToolbar,
 } from "@ionic/react";
 
 import React from "react";
@@ -23,11 +16,26 @@ import {
   search,
 } from "ionicons/icons";
 
+import { useEffect } from "react";
+
+// from firebase
+import { auth } from "../../firebase/firebase";
+
+
 // import component
 import SearchFellowship from "../../components/searchFellowship/searchFellowship";
 import TabBar from "../../components/tabBar/tabBar";
 
 const UserHome: React.FC = () => {
+
+
+
+  useEffect(() => {
+    // knflskdnf
+    // console.log( auth.currentUser?.providerData[0].displayName );
+  }, [])
+
+
   return (
     <IonPage className="userHome">
       <IonHeader class="ion-no-border">
@@ -61,6 +69,7 @@ const UserHome: React.FC = () => {
           More Fellowships <IonIcon icon={arrowForward}> </IonIcon>
         </button>
         {/* </div> */}
+        
       </IonContent>
     </IonPage>
   );

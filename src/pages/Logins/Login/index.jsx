@@ -10,12 +10,14 @@ import {
   IonSelectOption,
   IonContent,
 } from "@ionic/react";
+
 import styled from "styled-components";
 
 // firebase
 import { app, auth } from "../../../firebase/firebase";
 
 import {
+  updateProfile,
   signOut,
   signInWithPopup,
   GoogleAuthProvider,
@@ -31,6 +33,8 @@ import { FcGoogle } from "react-icons/fc";
 import "../StylesForPages.css";
 import bg from "./bg.png";
 import { useLocation } from "react-router";
+import { async } from "@firebase/util";
+import { LoginUser } from "../../../firebase/firebase-help";
 
 const Body = styled(IonPage)`
   position: relative;
@@ -103,14 +107,19 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
 
   // user details
-  const { isLoggedIn, setIsLoggedIn } = useContext(Context);
+  const { curUser, setCurUser, isLoggedIn, setIsLoggedIn } = useContext(Context);
   const [showPassword, setshowPassword] = useState(false);
   const [pswdType, setpswdType] = useState("password");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  // check if the user is logged in
 
+  // use effect, run when pages loads
+  useEffect(() => {
+    // alert("login", location.state );
+  }, [])
+
+  // check if the user is logged in
   const handleChange = (e) => {
     const val = e.target;
     if (val.type === "email") {
@@ -120,20 +129,40 @@ const Login = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+
     setLoading(true);
-    signInWithEmailAndPassword(auth, email, password)
+    await signInWithEmailAndPassword(auth, email, password)
       .then((result) => {
         auth.onAuthStateChanged((user) => {
-          console.log("USER IS :", user ? user.email : user);
-          if (user) {
-            history.push("/userhome");
+          if (user.email && user.uid ) {
+            // pass user id from auth .. get user data from firestore ..
+            LoginUser( user.uid ).then( data => {
+              // console.log( data );
+              // if data is true
+              if( data ) {
+                // updating user's data.. i couldnt find a place to store this, 
+                // displayName, receives a string, i stringify users data from firebase
+                // and update user profile with stringify that, needs JSON.parse
+                // to get the user data.
+                updateProfile( auth.currentUser, {
+                  displayName: JSON.stringify(data)
+                }).then( () => {
+                  // profile updated and user data is added to firebase auth.
+                  history.push("/userhome?user=" + data.id ); // route to user page
+                }).catch( error => {
+                  // an error occured....
+                })
+              }
+              
+            })
           }else{
-            history.push("/");
+            history.push("/Login");
           }
         });
-        // console.log(result.user);
+
         setEmail("");
         setPassword("");
         setLoading(false);
@@ -145,6 +174,8 @@ const Login = () => {
         setPassword("");
         setLoading(false);
       });
+
+    // setLoading( false );
   };
 
   const loginWithGoogle = () => {
@@ -192,7 +223,7 @@ const Login = () => {
         <div id="logins">
           <form
             action="/"
-            /* method="post" */ onSubmit={(e) => handleSubmit(e)}
+            // /* method="post" */ onSubmit={(e) => handleSubmit(e)}
           >
             <label htmlFor="Email address">Email</label>
             <IonInput
@@ -233,7 +264,9 @@ const Login = () => {
               }}
             />
             {/* <input type="submit" value={loading ? <span className="loader"></span> : "Login"} /> */}
-            <button type="submit">
+            <button
+              onClick={ e => handleSubmit(e) }
+              type="submit">
               {loading ? (
                 <span
                   style={{ borderColor: "#348d60" }}

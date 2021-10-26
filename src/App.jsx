@@ -40,14 +40,18 @@ import NoteContent from "./pages/notes/NoteContent";
 
 
 
-
 const App = () => {
   // check if the user is logged in
   var [isLoggedIn, setIsLoggedIn] = useState(false);
+  var [ curUser, setCurUser ] = useState();
 
 
   return (
-    <Context.Provider value={{ isLoggedIn, setIsLoggedIn }}>
+    <Context.Provider value={{
+      curUser, setCurUser,
+      isLoggedIn, setIsLoggedIn
+      }}>
+      
       <IonApp>
         <IonReactRouter>
           <IonRouterOutlet>

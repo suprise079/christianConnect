@@ -20,6 +20,7 @@ import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { DBWrapper } from "workbox-core/_private";
 
 
+
 // custom functions from firebase
 import { registerUser } from "../../../firebase/firebase-help";
 
@@ -89,7 +90,7 @@ const SignUpU = () => {
   const [email, setEmail] = useState("");
   const [pswd, setPswd] = useState("");
   const [confirmPswd, setConfirmPswd] = useState("");
-  
+
   const handleChange = (e) => {
     const val = e.target;
     if (val.type === "email") {
@@ -115,17 +116,16 @@ const SignUpU = () => {
         var uid = result.user.uid; // user id to map with user data in firestore
 
         if( uid ) {
+          alert("adding user");
           // console.log( result.user.uid )
           // registerUser func to add user data, after createauth works
           // ( email, fname, lname, pwd, phone, regDate, uid )
           registerUser(email, firstName, lastName, pswd, phoneNumber, getCurTimeDate(), uid ).then( res => {
             if( res ){
               alert("User Successfully registered...");
-
               // reset input fields.
               setFirstName(""); setLastName(""); setPhoneNumber(""); setEmail("");
               setPswd(""); setConfirmPswd("");
-              
               // route to login page
               history.push("/Login");
             }
@@ -155,7 +155,9 @@ const SignUpU = () => {
       })
       .catch((err) => {
         // error handling
-        alert(err);
+        // email-already-in-use
+        // console.log( err.code )
+        if( err.code.includes("email-already-in-use") ) { alert("Email Is Already In Use") }
         setEmail("");
         setPswd("");
         setLoading(false);
