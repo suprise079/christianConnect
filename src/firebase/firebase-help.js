@@ -103,3 +103,9 @@ export const registerLeader = async ( email, fname, lname, pwd, phone, regDate, 
   return isReg;
 }
 
+
+
+
+
+
+export default firebase;

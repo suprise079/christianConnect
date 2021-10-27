@@ -35,7 +35,7 @@ import styled from "styled-components";
 
 // firebase for signOut
 import { auth } from "../../firebase/firebase";
-import { signOut } from "@firebase/auth";
+import { signOut } from "firebase/auth";
 
 
 
@@ -214,9 +214,9 @@ const Profile = () => {
                 size="20px"
               />
 
-              <IonCardTitle>{ user.firstname } {" "} {user.lastname } </IonCardTitle>
+              <IonCardTitle>{ user?.firstname } {" "} {user?.lastname } </IonCardTitle>
               <IonCardSubtitle>
-                { user.email }
+                { user?.email }
               </IonCardSubtitle>
             </div>
           </div>
