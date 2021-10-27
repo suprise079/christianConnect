@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useHistory } from 'react-router-dom'
-import { IonHeader, IonTitle, IonToolbar, IonApp, IonContent } from '@ionic/react';
+import { IonHeader, IonTitle, IonToolbar, IonPage, IonContent } from '@ionic/react';
 import { GiSaveArrow } from 'react-icons/gi'
 import { IoMdArrowBack } from 'react-icons/io'
 import './NoteContent.css'
@@ -61,7 +61,7 @@ function NoteContent() {
 
 
 	return (
-		<IonApp id='bg'>
+		<IonPage id='bg'>
 			{/* header */}
 			<IonHeader id='header'>
 
@@ -74,7 +74,7 @@ function NoteContent() {
 			<IonContent >
 				<div className='note'>
 
-					{ noteTile } | { noteContent }
+					{/* { noteTile } | { noteContent } */}
 
 					<div id="notTitle" >
 						<label >Type title here</label>
@@ -104,7 +104,7 @@ function NoteContent() {
 				</div>
 			</IonContent>
 			
-		</IonApp>
+		</IonPage>
 	)
 }
 
