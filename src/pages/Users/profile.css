@@ -27,3 +27,23 @@ a.item {
   font-size: 1.5em;
   padding: 0 10px;
 }
+
+
+
+#userProfile #details {
+  text-align: center;
+  /* background-color: yellow; */
+  padding: 0em 0em .5em 0em;
+}
+
+#userProfile #details #editButton {
+}
+
+#userProfile #details #editButton:hover {
+  /* font-size: 2em; */
+}
+
+
+#userProfile #infos {
+  background-color: red;
+}

@@ -116,17 +116,19 @@ const Body = styled(IonPage)`
     top: 15%;
     left: 5%;
     width: 90%;
-    background: white;
-    height: 30vh;
+    background-color: white;
+    height: 11em;
+    padding: 0em 0em .5em 0em;
     box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.05);
     border-radius: 10px;
   }
   div.profile {
     position: relative;
     top: -10%;
-    left: 35%;
-    width: 30%;
-    height: 50%;
+    // left: 35%;
+    margin: auto;
+    width: 6.5em;
+    height: 6em;
     background-image: url(${"/assets/icon/prayer.jpeg"});
     background-size: cover;
     // border: 2px solid;
@@ -181,7 +183,7 @@ const Profile = () => {
 
 
   return (
-    <IonPage >
+    <IonPage id="userProfile" >
 
       <Body>
         <IonHeader color="white" className="ion-no-border">
@@ -192,25 +194,30 @@ const Profile = () => {
             <IonTitle>Profile User</IonTitle>
           </IonToolbar>
         </IonHeader>
+
         <div className="body">
+
           <div className="container">
             <div className="headerTrail"></div>
+
             <div className="infos">
               <div className="profile"></div>
 
-              <div className="details">
-                <FaUserEdit
-                  onClick={(e) => history.push("/editprofile")}
-                  color="#000"
-                  size="25px"/>
-
+              <div id="details">
+                <Link to="/editprofile" >
+                  <FaUserEdit
+                    id="editButton"
+                    // onClick={(e) => history.push("/editprofile")}
+                    color="#000"
+                    size="25px"/>
+                </Link>
+               
+                  {/*  */}
                 <IonCardTitle>{ user?.firstname } {" "} {user?.lastname } </IonCardTitle>
-                <IonCardSubtitle>
-                  { user?.email }
-                </IonCardSubtitle>
+                <IonCardSubtitle> { user?.email } </IonCardSubtitle>
               </div>
-
             </div>
+
           </div>
           
           <div className="content">
