@@ -2,6 +2,8 @@ import { IonButton, IonPage } from "@ionic/react";
 import "../StylesForPages.css";
 import logo from "./Logo_transp.png";
 import styled from "styled-components";
+import {BiLoaderAlt} from "react-icons/bi";
+import {FaWalking,FaChurch} from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
@@ -30,10 +32,10 @@ const Body = styled(IonPage)`
     align-items: center;
     width: 100%;
   }
-  a{
-    height:100%;
-    display:flex;
-    align-items:center;
+  a {
+    height: 100%;
+    display: flex;
+    align-items: center;
   }
 `;
 const Buttons = styled(IonButton)`
@@ -44,12 +46,12 @@ const Buttons = styled(IonButton)`
 `;
 const Welcome = () => {
   const [clicked, setclicked] = useState(false);
-  
+
   return (
     <Body>
       <img src={logo} alt="Logo" />
       <div className="Buttons">
-        <Buttons>
+        {/* <Buttons>
           <Link
             className="welcomeLink"
             to={{ pathname: "/Login", state: "/SignUpU" }}
@@ -69,7 +71,9 @@ const Welcome = () => {
             {clicked ? "Loading..." : "I am a fellowship leader"}
           </Link>
         </Buttons>
-        
+         */}
+        {/* <span className="main-loader"><BiLoaderAlt size="4em"/></span> */}
+        <div className="walking-loader"><span><FaWalking size="2em"/></span><span><FaChurch size="2em"/></span></div>
       </div>
     </Body>
   );

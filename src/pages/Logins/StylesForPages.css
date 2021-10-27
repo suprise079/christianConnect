@@ -34,7 +34,9 @@ label {
   align-items: center;
   width: 90%;
 }
-
+img{
+  margin-top: 80px;
+}
 .haveAcc {
   text-align: center;
   width: 100%;
@@ -133,6 +135,53 @@ span.loader {
   width: 10px;
   height: 0px;
   -webkit-animation: spin 1s linear infinite alternate;
+}
+span.main-loader {
+  animation: mainSpin 2s linear infinite;
+  -webkit-animation: mainSpin 2s linear infinite;
+  color: #fff;
+  size: 2em;
+  display: grid;
+  place-items: centre;
+}
+@keyframes mainSpin {
+  to {
+    transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+  }
+}
+
+div.walking-loader {
+  position: relative;
+  color: white;
+  display: flex;
+  align-items: flex-end;
+}
+div.walking-loader span:first-of-type {
+  position: relative;
+  animation: walk infinite linear 5s;
+  -webkit-animation: walk infinite linear 5s;
+  bottom: 0;
+}
+div.walking-loader span:last-of-type {
+  position: relative;
+  bottom: -5px;
+  right: -65px;
+}
+span:last-of-type svg{
+  height: 4em;
+  width: 4em;
+}
+@keyframes walk {
+  from {
+    right: 50px;
+  }
+  to {
+    right: -70px;
+  }
 }
 @keyframes spin {
   0% {
