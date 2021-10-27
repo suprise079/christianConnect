@@ -1,17 +1,16 @@
 import React from 'react';
 import { useState, useEffect } from "react";
 import { Link, useHistory } from 'react-router-dom'
-import { IonHeader, IonTitle, IonToolbar, IonApp, IonContent } from '@ionic/react';
+import { IonHeader, IonTitle, IonToolbar, IonPage, IonContent } from '@ionic/react';
 import { AiFillDelete } from 'react-icons/ai';
 import { IoMdArrowBack } from 'react-icons/io';
 import './ViewNote.css';
-import NotesInfo from './notes.json';
+
 
 
 // GET FIREBASE HELPING FUNCTIONS
 // import { getOneNote } from '../../firebase/firebase';
-import { getAllNotes } from '../../firebase/firebase';
-import { deleteDocument } from '../../firebase/firebase-help';
+import { deleteDocument, getAllNotes } from '../../firebase/firebase-help';
 
 
 function ViewNote() {
@@ -46,6 +45,8 @@ function ViewNote() {
     
 
     return (
+			<IonPage >
+
 			<div id='bg'>
 				{/* header */}
 				<IonHeader id='header'>
@@ -80,6 +81,9 @@ function ViewNote() {
 					
 				</>
 			</div>
+
+			</IonPage>
+
     )
 }
 

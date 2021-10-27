@@ -6,7 +6,6 @@ import { useState } from "react";
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
 
-import UserHome from "./pages/userHome/userHome";
 // firebase
 import { app } from "./firebase/firebase";
 
@@ -37,6 +36,8 @@ import PickerExample from "./pages/Profile/UploadEvents";
 import SavedVideos from "./pages/User/savedVideos/savedVideos";
 import SubscriptionHome from "./pages/subscription/SubscriptionHome"
 import NoteContent from "./pages/notes/NoteContent";
+import UserHome from "./pages/userHome/userHome";
+
 
 
 
@@ -67,8 +68,18 @@ const App = () => {
             <Route exact path="/Donate" component={Donate} />
             <Route exact path="/savedVideos" component={SavedVideos} />
             <Route exact path="/addnote" component={ NoteContent } />
+
+
+
             {/* get the notes route */}
-            <Route exact path="/notes" component={Notes} />
+            <Route exact path="/notes"
+              // component={Notes}
+            >
+              <Notes />
+            </Route>
+
+
+            
             {/* user home tab pages */}
             <Route exact path="/userhome" component={UserHome} />
 

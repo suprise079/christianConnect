@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { IonHeader, IonTitle, IonToolbar, IonApp, IonContent } from '@ionic/react';
 import { GiSaveArrow } from 'react-icons/gi'
@@ -7,52 +7,42 @@ import './NoteContent.css'
 
 // import firebase tool
 import { collection, addDoc } from 'firebase/firestore';
-import { db } from '../../firebase/firebase';
+import { db, auth } from '../../firebase/firebase';
+import { addNotes } from '../../firebase/firebase-help';
 
 
+// get helping functions
+import getCurTimeDate from '../../components/helpFunc';
 
 
 
 function NoteContent() {
+
 	const [noteTile, setnoteTile] = useState();
 	const [noteContent, setnoteContent] = useState();
 	const dateObj = new Date();
 	const history = useHistory(); // used to route dynamically.
+  const [ user, setUser ] = useState(); // hold current user information
+
 	
-	
-	// this returns the time, in the format
-	// date, month, year, hours:minutes 
-	function getTime() {
-		return dateObj.getDate() +" "+ 
-		dateObj.getMonth() +" "+ 
-		dateObj.getFullYear() +" "+
-		dateObj.getHours() + ":" +
-		dateObj.getMinutes()
-	}
+
+
+	useEffect(() => {
+
+
+		// get the value of auth.current user that keeps user's data.
+    var d = auth.currentUser?.providerData[0].displayName;
+    // console.log( JSON.parse( d ) ); // for debuggin purposes
+    setUser( JSON.parse( d ) ) // set user for this page
+	}, [])
 
 
 
-	async function add() {
-
-		try {
-			const ref = await addDoc( collection(db, "notes"), {
-				content: noteContent,
-				time: getTime(),
-				title: noteTile,
-				userId: ""
-			})
-			return ref;	
-		}
-		catch( e ) { // if there is an error
-			console.log( e );
-			return null; // return null
-		}	
-	} 
 
 	const addUserNote = () => {
 		if( noteContent && noteTile ) {
 			// call sync func and add data to firebase
-			add().then( feedback => { // when adding is done running, do this.
+			addNotes( noteContent, noteTile, user.userId ).then( feedback => { // when adding is done running, do this.
 				// if no error
 				if( feedback.id ) {
 					alert("NOTES SAVE");
@@ -67,6 +57,8 @@ function NoteContent() {
 		// when some fields are empty
 		else { alert("Some Fields Are Empty"); }
 	}
+
+
 
 	return (
 		<IonApp id='bg'>

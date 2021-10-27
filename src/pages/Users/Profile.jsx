@@ -11,6 +11,7 @@ import {
   IonTitle,
 } from "@ionic/react";
 import "../Profile.css";
+import "./profile.css";
 import {
   logOutSharp,
   logOutOutline,
@@ -30,7 +31,7 @@ import { FaUserEdit } from "react-icons/fa";
 
 import TabBar from "../../components/tabBar/tabBar";
 
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import styled from "styled-components";
 
 // firebase for signOut
@@ -139,19 +140,6 @@ const Body = styled(IonPage)`
     margin-top: 40px;
     overflow-y: scroll;
   }
-  div.item {
-    box-shadow: 0px 1px 0px 1px rgb(0 0 0 / 10%);
-    display: flex;
-    align-items: center;
-    background: white;
-    padding: 15px 10px;
-    margin: 5px 5px;
-    border-radius: 5px;
-  }
-  .icon {
-    font-size: 1.5em;
-    padding: 0 10px;
-  }
 `;
 
 
@@ -163,17 +151,16 @@ const Profile = () => {
 
   useEffect(() => {
     // get the value of auth.current user that keeps user's data.
-    var d = auth.currentUser?.providerData[0].displayName;
-    console.log( d ); // for debuggin purposes
-    setUser( JSON.parse( d ) ) // set user for this page
+    var d = JSON.parse( auth.currentUser?.providerData[0].displayName );
+    // console.log( d ); // for debuggin purposes
+    setUser( d ) // set user for this page
   },[])
 
 
 
   const goToItem = (e) => {
     console.log(e.target.id);
-
-    history.push( `${e.target.id}` );
+    // history.push( `${e.target.id}` );
 
     if (e.target.id === "/") {
       auth
@@ -192,44 +179,49 @@ const Profile = () => {
     }
   };
 
-  return (
-    <Body>
-      <IonHeader color="white" className="ion-no-border">
-        <IonToolbar color="white">
-          <IonButtons slot="start">
-            <IonBackButton defaultHref="/" />
-          </IonButtons>
-          <IonTitle>Profile User</IonTitle>
-        </IonToolbar>
-      </IonHeader>
-      <div className="body">
-        <div className="container">
-          <div className="headerTrail"></div>
-          <div className="infos">
-            <div className="profile"></div>
-            <div className="details">
-              <FaUserEdit
-                onClick={(e) => history.push("/editprofile")}
-                color="#000"
-                size="20px"
-              />
 
-              <IonCardTitle>{ user?.firstname } {" "} {user?.lastname } </IonCardTitle>
-              <IonCardSubtitle>
-                { user?.email }
-              </IonCardSubtitle>
+  return (
+    <IonPage >
+
+      <Body>
+        <IonHeader color="white" className="ion-no-border">
+          <IonToolbar color="white">
+            <IonButtons slot="start">
+              <IonBackButton defaultHref="/" />
+            </IonButtons>
+            <IonTitle>Profile User</IonTitle>
+          </IonToolbar>
+        </IonHeader>
+        <div className="body">
+          <div className="container">
+            <div className="headerTrail"></div>
+            <div className="infos">
+              <div className="profile"></div>
+
+              <div className="details">
+                <FaUserEdit
+                  onClick={(e) => history.push("/editprofile")}
+                  color="#000"
+                  size="25px"/>
+
+                <IonCardTitle>{ user?.firstname } {" "} {user?.lastname } </IonCardTitle>
+                <IonCardSubtitle>
+                  { user?.email }
+                </IonCardSubtitle>
+              </div>
+
             </div>
           </div>
-        </div>
-        
-        <div className="content">
-          <div className="menu">
-            {appPages.map((appPage, index) => (
-                <div
+          
+          <div className="content">
+            <div id="profile_items" className="menu">
+              {appPages.map((appPage, index) => (
+                <Link
                   key={index}
                   id={appPage.url}
                   onClick={(e) => goToItem(e)}
                   className="item"
+                  to={ appPage?.url }
                 >
                   <IonIcon
                     className="icon"
@@ -238,17 +230,21 @@ const Profile = () => {
                     md={appPage.mdIcon}
                   />
                   <IonLabel>{appPage.title}</IonLabel>
-                </div>
-              )
-            )}
+                </Link>
+                )
+              )}
+            </div>
           </div>
+
         </div>
-      </div>
 
-      {/* tabbar for navigating user pages */}
-      <TabBar />
+        {/* tabbar for navigating user pages */}
+        <TabBar />
 
-    </Body>
+      </Body>
+
+    </IonPage>
+
   );
 };
 

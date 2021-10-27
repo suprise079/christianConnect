@@ -6,6 +6,11 @@ import {
 } from 'firebase/firestore';
 
 
+// get helping functions
+import getCurTimeDate from '../components/helpFunc';
+
+
+
 
 // THIS FUNCTION DELETES A NOTE DOCUMENT FROM FIREBASE.
 // IT'S RECEIVE A COLLECTION NAME AND DOCUMENT ID
@@ -20,8 +25,6 @@ export const deleteDocument = async ( collec, id ) => {
     alert("Deleting Error");
   }
 }
-
-
 
 
 // func to upload users data to firestore
@@ -73,7 +76,6 @@ export const LoginUser = async ( uid ) => {
 }
 
 
-
 // func to upload leaders data to firestore
 // receives email, firstname(fname), lastname, password, phone numbe
 // profile photo, registration date and user id from authentication to ref
@@ -101,6 +103,79 @@ export const registerLeader = async ( email, fname, lname, pwd, phone, regDate, 
   }
 
   return isReg;
+}
+
+
+// ADDS A NOTE TO NOTES TABLE, RECEIVES, NOTECONTENT
+// note title and auth user id, it calls func that
+// return time and date
+export const addNotes = async ( nc, nt, uid ) => {
+
+  try {
+    const ref = await addDoc( collection(db, "notes"), {
+      content: nc,
+      time: getCurTimeDate(),
+      title: nt,
+      userId: uid,
+    })
+    return ref;	
+  }
+  catch( e ) { // if there is an error
+    console.log( e );
+    return null; // return null
+  }	
+} 
+
+//
+// USED TO GET NOTES THAT BELONGS TO A SINGLE USER
+export const getUserNotes = async ( uid ) => {
+  var data = [];
+
+  try { // get all notes, where user id, == receives user id
+    const q = query( collection( db, "notes"), where("userId", "==", uid));
+    const ref = await getDocs( q ); // get the notes documents
+
+    ref.docs.map( doc => { // map to go over all of em
+      // console.log( doc.data() );
+      // push data into the an array to return.
+      data.push({
+        id: doc.id, // id of the doc online
+        userId: doc.data().userId, // user who made this notes
+        content: doc.data().content, // content of the notes
+        time: doc.data().time, // time user made the notes
+        title: doc.data().title, // title of the notes
+      })
+    })
+    // console.log( "GET ALL NOTES FUNC: ", data ); // seeing purpose.
+    // a filter will be applied once log in is settle.
+    return data; // return notes to users.
+  }
+  catch(e) { console.error("Error Getting Notes:", e ); return null; }
+}
+
+
+// THIS FUNCTION GET ALL THE DATA IN notes COLLECTION
+export const getAllNotes = async () => {
+  var data = [];
+
+  try { // get a reference to firebase doc
+    const ref = await getDocs( collection( db , "notes"));
+    ref.forEach( doc => {
+      // console.log( doc.id + " => ", doc.data() )
+      // push data into the an array to return.
+      data.push({
+        id: doc.id, // id of the doc online
+        userId: doc.data().userId, // user who made this notes
+        content: doc.data().content, // content of the notes
+        time: doc.data().time, // time user made the notes
+        title: doc.data().title, // title of the notes
+      })
+    })
+    // console.log( "GET ALL NOTES FUNC: ", data ); // seeing purpose.
+    // a filter will be applied once log in is settle.
+    return data; // return notes to users.
+  }
+  catch( e ) { console.error("GETTING NOTES ERROR: ", e ); return ; }
 }
 
 

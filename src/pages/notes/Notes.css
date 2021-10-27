@@ -1,26 +1,27 @@
 #mainContainer{
     background-color: #f1f1f1;
     overflow-y: scroll;
+    /* background-color: yellow; */
 }
 
-#noteCards{
+#notesContainer .noteCards{
     display: flex;
     justify-content: space-between;
     padding: 10px;
     background-color: rgb(250, 250, 250);
 }
 
-#noteTitle {
+#notesContainer .noteTitle {
     padding-left: 10px;
     color: #348D63;
 }
 
-#noteTitle:hover {
+#notesContainer .noteTitle:hover {
     cursor: pointer;
     color: #87e4b9;
 }
 
-#noteDate {
+#notesContainer .noteDate {
     padding-top: 20px;
 }
 
@@ -41,4 +42,9 @@
 
 a{
     text-decoration: none;
+}
+
+#notesContainer #searchNotes {
+    /* background-color: red; */
+    color: white;
 }
