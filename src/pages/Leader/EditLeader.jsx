@@ -28,7 +28,7 @@ const EditLeader = () => {
           <img className="editProfile"
             width="200" height="200" src={churchImg} alt="" />
 
-          <IonTitle>Mpumelelo Fellowship</IonTitle>
+          <IonTitle> { fellowship.name } </IonTitle>
 
           <IonItem lines="full">
             <div style={{ display: "flex", justifyContent: "space-between", width: "100%" }}>
