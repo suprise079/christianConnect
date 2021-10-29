@@ -199,12 +199,14 @@ const Login = () => {
           })
         }else{ history.push("/Login"); }
       });
-
      
     })
     .catch((err) => {
+      setLoading(false);
       // error handling
-      if( err.code.includes("invalid-email") ) { alert( "Invalid User Email" ) }
+      if( err.code.includes("invalid-email") ) {
+        alert( "Invalid User Email" ); setEmail(""); setPassword("");
+      }
         
       else if ( err.code.includes("auth/user-not-found") ) {
         alert("User Not Found."); setEmail(""); setPassword("");
@@ -212,11 +214,14 @@ const Login = () => {
       else if ( err.code.includes("auth/wrong-password") ) {
         alert("Wrong Password"); setPassword("");
       }
+      else if ( err.code.includes("auth/network-request-failed") ) {
+        alert("Network Error, Please Check Your Network Connection");
+        setPassword("");
+      }
       else {
         alert( err )
         setEmail(""); setPassword("");
       }
-      setLoading(false);
     });
 
     // setLoading( false );

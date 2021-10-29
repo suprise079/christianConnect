@@ -2,7 +2,7 @@ import app, { db } from './firebase';
 import firebase from "firebase/compat/app";
 
 import {
-  deleteDoc, doc, addDoc, collection, where, query, getDocs, limit, docs
+  deleteDoc, doc, addDoc, collection, where, query, getDocs, limit, updateDoc
 } from 'firebase/firestore';
 
 
@@ -43,7 +43,6 @@ export const LoginUser = async ( uid ) => {
       data.push( d );
       // console.log( data );
     })
-
     // console.log( data )
     return data[0]
   }
@@ -52,6 +51,21 @@ export const LoginUser = async ( uid ) => {
     return null;
   }
   
+}
+
+
+
+
+// edit user account, currently can only edit firstname, lastname and phone number
+export const editUser = async (fn, ln, phone, id ) => {
+  const usrref = doc( db, "Users", id );
+
+  const r = await updateDoc( usrref, {
+    firstname: fn,
+    lastname: ln,
+    phoneNumber: phone
+  });
+  // console.log( r )
 }
 
 
@@ -127,21 +141,6 @@ export const getLeaderFs = async( uid ) => {
     return null;
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 // ADDS A NOTE TO NOTES TABLE, RECEIVES, NOTECONTENT

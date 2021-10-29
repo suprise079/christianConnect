@@ -5,10 +5,11 @@ import styled from "styled-components";
 import {BiLoaderAlt} from "react-icons/bi";
 import {FaWalking,FaChurch} from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 
 // import firebase functions and modules here
 import { auth } from "../../../firebase/firebase";
+import Context from "../../../context/Context";
 
 const Body = styled(IonPage)`
   position: relative;
@@ -48,15 +49,20 @@ const Buttons = styled(IonButton)`
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 `;
 const Welcome = () => {
+  const { curUser, setCurUser } = useContext( Context );
   const [clicked, setclicked] = useState(false);
 
 
   useEffect(() => {
-
+    // console.log( curUser );
     // reset user's data in auth state....
-    auth.signOut().then((res) => { console.log( res ) })
+    auth.signOut().then((res) => {
+      console.log( res )
+      setCurUser(); 
+    })
     .catch((err) => alert(err));
 
+    // console.log( curUser );
   }, [])
 
   return (
