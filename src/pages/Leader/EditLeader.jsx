@@ -1,12 +1,13 @@
 import { IonPage, IonItem, IonTitle, IonInput, IonContent
 } from "@ionic/react";
 import "../Profile.css";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 
 import churchImg from "./church.jpeg";
 
 
-
+// import db context
+import Context from "../../context/Context";
 
 
 
@@ -15,6 +16,7 @@ import churchImg from "./church.jpeg";
 const EditLeader = () => {
   const [text, setText] = useState();
   const [buttonHover,setButtonHover] = useState("#348D63");
+  const { fellowship } = useContext( Context );
 
 
 

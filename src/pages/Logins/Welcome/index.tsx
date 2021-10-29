@@ -65,17 +65,23 @@ const Welcome = () => {
         <Buttons>
           <Link
             className="welcomeLink"
-            to={{ pathname: "/Login",
-            // state: "/SignUp"
-            }}
+            to={ "/Login" }
             onClick={()=>setclicked(false)}
           >
             {clicked ? "Loading..." : "I am An App User"}
           </Link>
         </Buttons>
-         */}
+
+
+        {/* THE NEW WALKING LOGO THINGY */}
         {/* <span className="main-loader"><BiLoaderAlt size="4em"/></span> */}
-        <div className="walking-loader"><span><FaWalking size="2em"/></span><span><FaChurch size="2em"/></span></div>
+        {/* <div className="walking-loader"> */}
+          {/* <span><FaWalking size="2em"/></span><span><FaChurch size="2em"/></span> */}
+        {/* </div> */}
+
+
+
+
       </div>
     </Body>
   );

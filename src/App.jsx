@@ -45,12 +45,14 @@ const App = () => {
   // check if the user is logged in
   var [isLoggedIn, setIsLoggedIn] = useState(false);
   var [ curUser, setCurUser ] = useState();
+  var [ fellowship, setFellowship ] = useState();
 
 
   return (
     <Context.Provider value={{
       curUser, setCurUser,
-      isLoggedIn, setIsLoggedIn
+      isLoggedIn, setIsLoggedIn,
+      fellowship, setFellowship
       }}>
       
       <IonApp>

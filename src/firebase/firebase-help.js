@@ -8,6 +8,7 @@ import {
 
 // get helping functions
 import getCurTimeDate from '../components/helpFunc';
+import { async } from '@firebase/util';
 
 
 
@@ -52,40 +53,6 @@ export const LoginUser = async ( uid ) => {
   }
   
 }
-
-
-// // func to upload leaders data to firestore
-// // receives email, firstname(fname), lastname, password, phone numbe
-// // profile photo, registration date and user id from authentication to ref
-// // usser data in firestore
-// export const registerLeader=async(email,fname,lname,pwd,phone,uid) =>{
-
-//   var isReg = false;
-
-//   try {
-//     const ref = await addDoc( collection( db, "Users" ), {
-//       email: email,
-//       firstname: fname,
-//       lastname: lname,
-//       password: pwd,
-//       phoneNumber: phone,
-//       profilePic: "",
-//       regDate: getCurTimeDate(),
-//       userId: uid
-//     });
-//     if( ref.id ) isReg = true;
-//   }
-//   catch( error ) {
-//     console.log("ERROR: ", error );
-//     isReg = false
-//   }
-
-//   return isReg;
-// }
-
-
-
-
 
 
 
@@ -135,6 +102,41 @@ export const registerUser = async (
   }
   return isReg;
 };
+
+
+
+// get leaders fellowship details from firestore.
+// receives a leaders user id from firebase auth
+export const getLeaderFs = async( uid ) => {
+
+  var data = [];
+
+  try {
+    const q = query( collection(db, "Fellowships"), where("leaderId", "==", uid ) );
+    const ref = await getDocs( q );
+
+    ref.docs.map( doc => {
+      var d = doc.data();
+      d["id"] = doc.id;
+      data.push( d )
+    })
+    return data[0];
+  }
+  catch( error ) {
+    console.error("ERROR:", error );
+    return null;
+  }
+}
+
+
+
+
+
+
+
+
+
+
 
 
 

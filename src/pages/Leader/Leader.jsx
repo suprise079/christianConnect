@@ -13,7 +13,9 @@ import {
   IonMenuToggle,
 } from "@ionic/react";
 
+// get css
 import "../Profile.css";
+import "./Leader.css"
 
 import {
   logOutSharp,
@@ -27,20 +29,22 @@ import {
 } from "ionicons/icons";
 
 import { FaUserEdit, FaCrown } from "react-icons/fa";
-import { Link } from "react-router-dom";
-
+import { Link, useHistory } from "react-router-dom";
 import churchImg from "./church.jpeg";
 
-interface AppPage {
-  url: string;
-  iosIcon: string;
-  mdIcon: string;
-  title: string;
-}
+
+// get context db
+import Context from "../../context/Context";
+
+// firebase imports
+import { auth } from "../../firebase/firebase";
+import { useContext, useEffect } from "react";
+
+
 
 var i = <FaCrown />;
 
-const appPages: AppPage[] = [
+const appPages = [
   {
     title: "Saved videos",
     url: "/SavedVideos",
@@ -69,17 +73,49 @@ const appPages: AppPage[] = [
   },
   {
     title: "Logout",
-    url: "/Login",
+    url: "/",
     iosIcon: logOutOutline,
     mdIcon: logOutSharp,
   },
 ];
 
-const Leader: React.FC = () => {
+const Leader = () => {
+  const { curUser, setCurUser, fellowship } = useContext( Context );
+  const history = useHistory();
+
+
+  // useEffect(() => {
+    
+  // }, [])
+
+
+  const goToItem = (e) => {
+    // console.log(e.target.id);
+    // history.push( `${e.target.id}` );
+
+    if (e.target.id === "/") {
+      auth
+        .signOut()
+        .then((res) => {
+          // Display a modal saying "User successfully signed out"
+          /* setTimeout(() => {
+              history.push(e.target.id);
+            }, 3000); */
+          // alert("Successfully signed Out ! ");
+          history.push(e.target.id);
+        })
+        .catch((err) => alert(err));
+    } else {
+      history.push(e.target.id);
+    }
+  };
+
+
+
   return (
     <IonPage>
-      <IonContent>
-        <div className="bgColor">
+      <IonContent >
+        <div id="leaderProfile" className="bgColor">
           <IonCard className="nameCard">
             <IonAvatar className="avatar">
               <img src={churchImg} alt="" />
@@ -88,15 +124,16 @@ const Leader: React.FC = () => {
             <div className="details">
               <Link to="/editleader">
                 <FaUserEdit
-                  // onClick={e=> }
                   color="#000"
                   size="20px"
                 />
               </Link>
 
-              <IonCardTitle>Mpumelelo Fellowship </IonCardTitle>
-              <IonCardSubtitle>mpumelelofellowship@gmail.com</IonCardSubtitle>
+              {/* Fellowship Name */}
+              <IonCardTitle> { fellowship?.name } </IonCardTitle>
+              <IonCardSubtitle> { curUser?.email } </IonCardSubtitle>
             </div>
+
           </IonCard>
         </div>
 
@@ -108,8 +145,9 @@ const Leader: React.FC = () => {
                   // className={
                   //   location.pathname === appPage.url ? "selected" : ""
                   // }
+                  id={ appPage.url }
                   button
-                  onClick={() => {}}
+                  onClick={(e) => goToItem( e )}
                   routerLink={appPage.url}
                   routerDirection="forward"
                   lines="full"

@@ -34,7 +34,7 @@ import "../StylesForPages.css";
 import bg from "./bg.png";
 import { useLocation } from "react-router";
 import { async } from "@firebase/util";
-import { LoginUser } from "../../../firebase/firebase-help";
+import { getLeaderFs, LoginUser } from "../../../firebase/firebase-help";
 
 const Body = styled(IonPage)`
   position: relative;
@@ -107,7 +107,7 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
 
   // user details
-  const { curUser, setCurUser, isLoggedIn, setIsLoggedIn } = useContext(Context);
+  const { curUser, setCurUser, isLoggedIn, setIsLoggedIn, setFellowship } = useContext(Context);
   const [showPassword, setshowPassword] = useState(false);
   const [pswdType, setpswdType] = useState("password");
   const [email, setEmail] = useState("");
@@ -142,6 +142,7 @@ const Login = () => {
             // console.log( data );
             // if data is true
             if( data ) {
+
               // updating user's data.. i couldnt find a place to store this, 
               // displayName, receives a string, i stringify users data from firebase
               // and update user profile with stringify that, needs JSON.parse
@@ -153,12 +154,47 @@ const Login = () => {
                 setPassword("");
                 setLoading(false);
                 // profile updated and user data is added to firebase auth.
-                history.push("/userhome?user=" + data.id ); // route to user page
+                history.push("/userhome?user=" + data.userId ); // route to user page
 
               }).catch( error => {
                 // an error occured....
                 console.error("Error:", error.code ) 
               })
+
+              
+              // get leader's fellowship data... run only user is leader 
+              if( data.isLeader ) {
+                // get user fellowship data. pass user auth id
+                getLeaderFs( data.userId ).then( refDoc => {
+                  var fs = refDoc;
+
+                  // set data in global context
+                  setFellowship( fs );
+
+                  if( fs ) { // if user data is valid and available
+                    // console.log( fellowship ) // seeing.
+                    // add user data to auth currentUser, we will add this to
+                    // phone number. 1st stringify with json string, because phoneNumber
+                    // receives only a string and our data is object,
+                    // this will help me, get data in any file i wants to use them.
+                    updateProfile( auth.currentUser, {
+                      phoneNumber : JSON.stringify( fs )
+                    }).then( () => {
+                      setEmail("");
+                      setPassword("");
+                      setLoading(false);
+                      // profile updated and user data is added to firebase auth.
+                      history.push("/userhome?user=" + data.userId ); // route to user page
+      
+                    }).catch( error => {
+                      // an error occured....
+                      console.error("Error:", error.code ) 
+                    })
+                  }
+
+                })
+              }
+              
             }
           })
         }else{ history.push("/Login"); }
@@ -256,9 +292,9 @@ const Login = () => {
                 }}
               >
                 {showPassword ? (
-                  <AiFillEyeInvisible size="23px" />
+                  <AiFillEyeInvisible size="2px" />
                 ) : (
-                  <AiFillEye size="23px" />
+                  <AiFillEye size="20px" />
                 )}
               </span>
             </label>
