@@ -1,0 +1,19 @@
+
+
+
+
+#editUser_editButtons {
+  /* background-color: red; */
+  display: flex;
+  padding: .5em 0em;
+  justify-content: space-evenly;
+}
+
+#editUser_editButtons .editbutton {
+  background-color: green;
+}
+
+#editUserAccount #nameTitle {
+  background-color: red;
+  text-transform: capitalize;
+}

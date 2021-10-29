@@ -56,7 +56,7 @@ const Notes = () => {
         {/* search */}
         <IonSearchbar id='searchNotes' value={searchNote} onIonChange={e => setSearchNote(e.detail.value)}></IonSearchbar>
 
-        {/*  foreach loop */}
+        {/* map all users notes */}
         {
           notes ? notes.map((note,i) => (
             <>
@@ -70,9 +70,7 @@ const Notes = () => {
               </IonCard>
             </>
             )
-          ) : (
-            <h2>loading...</h2>
-          )
+          ) : ( <h2>loading...</h2> )
         }
 
         {/* add note button */}

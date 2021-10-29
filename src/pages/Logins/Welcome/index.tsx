@@ -5,7 +5,10 @@ import styled from "styled-components";
 import {BiLoaderAlt} from "react-icons/bi";
 import {FaWalking,FaChurch} from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
+// import firebase functions and modules here
+import { auth } from "../../../firebase/firebase";
 
 const Body = styled(IonPage)`
   position: relative;
@@ -47,7 +50,19 @@ const Buttons = styled(IonButton)`
 const Welcome = () => {
   const [clicked, setclicked] = useState(false);
 
+
+  useEffect(() => {
+
+    // reset user's data in auth state....
+    auth.signOut().then((res) => { console.log( res ) })
+    .catch((err) => alert(err));
+
+  }, [])
+
   return (
+    <IonPage >
+
+
     <Body>
       <img src={logo} alt="Logo" />
       <div className="Buttons">
@@ -79,11 +94,10 @@ const Welcome = () => {
           {/* <span><FaWalking size="2em"/></span><span><FaChurch size="2em"/></span> */}
         {/* </div> */}
 
-
-
-
       </div>
     </Body>
+    </IonPage>
+
   );
 };
 

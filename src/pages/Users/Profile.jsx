@@ -161,7 +161,7 @@ const Profile = () => {
 
 
   const goToItem = (e) => {
-    console.log(e.target.id);
+    // console.log(e.target.id);
     // history.push( `${e.target.id}` );
 
     if (e.target.id === "/") {
