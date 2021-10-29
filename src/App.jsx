@@ -125,10 +125,7 @@ const App = () => {
             {/* maybe leader sign up...... */}
             <Route exact path="/SignUp" component={SignUp} />
             {/* leader home page */}
-            <Route exact path="/leader">
-              {" "}
-              <Leader />{" "}
-            </Route>
+            <Route exact path="/leader" component={Leader} />
             {/* route to page where leader can edit his details */}
             <Route exact path="/editleader">
               {" "}
@@ -136,17 +133,12 @@ const App = () => {
             </Route>
             {/* route to premium page, where user is a premium user. */}
             <Route exact path="/premium">
-              {" "}
-              <Premium />{" "}
+              <Premium />
             </Route>
             {/* sign up leader */}
             <Route exact path="/SignUp" component={SignUp} />
 
-            <Route
-              exact
-              path="/uploadAnnouncement"
-              component={UploadAnnouncement}
-            />
+            <Route exact path="/uploadAnnouncement" component={UploadAnnouncement} />
             <Route exact path="/uploadSermon" component={UploadSermon} />
             <Route exact path="/uploadEvent" component={PickerExample} />
 

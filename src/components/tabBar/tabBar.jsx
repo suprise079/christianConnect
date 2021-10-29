@@ -5,12 +5,14 @@ import { FaHome } from "react-icons/fa";
 // impor } from 'react-icons/hi';
 
 import { Link, useHistory } from "react-router-dom";
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
 
 import "./tabBar.css"; // import css
+import Context from "../../context/Context";
 
-const TabBar: React.FC = () => {
+const TabBar = () => {
   const history = useHistory();
+  const { curUser } = useContext( Context );
 
   return (
     <div className="tabBarContainer">
@@ -29,10 +31,9 @@ const TabBar: React.FC = () => {
         <IonLabel className="label" > Subscription </IonLabel>
       </div>
 
-      <div onClick={(e) => history.push("/profile")}>
+      <div onClick={(e) => history.push( curUser?.isLeader ? "/leader":"/profile" )}>
         {/* <Link to="/profile" > */}
         <i>
-          {" "}
           <IonIcon icon={person}></IonIcon>{" "}
         </i>
         <IonLabel className="label"> Profile </IonLabel>
@@ -43,40 +44,3 @@ const TabBar: React.FC = () => {
 };
 
 export default TabBar;
-
-{
-  /* <IonTabBar > */
-}
-{
-  /* href="/home" */
-}
-// <IonTabButton >
-{
-  /* <button > */
-}
-// <IonIcon icon={
-//  home} ></IonIcon>
-// <IonLabel >Home</IonLabel>
-{
-  /* </button> */
-}
-// </IonTabButton>
-
-{
-  /* href="/subscription" */
-}
-// <IonTabButton >
-// <IonIcon icon={
-// mail } ></IonIcon>
-// <IonLabel >Subscription</IonLabel>
-// </IonTabButton>
-
-{
-  /* href="/" */
-}
-// <IonTabButton >
-// <IonIcon icon={
-// person } ></IonIcon>
-// <IonLabel >Profile</IonLabel>
-// </IonTabButton>
-// </IonTabBar>

@@ -49,24 +49,26 @@ const Welcome = () => {
     <Body>
       <img src={logo} alt="Logo" />
       <div className="Buttons">
-        <Buttons>
+        {/* <Buttons>
           <Link
             className="welcomeLink"
             to={{ pathname: "/Login", state: "/SignUpU" }}
           >
             {clicked ? "Loading..." : "I am just a fellowship member"}
           </Link>
-        </Buttons>
+        </Buttons> */}
 
 
         
         <Buttons>
           <Link
             className="welcomeLink"
-            to={{ pathname: "/Login", state: "/SignUp" }}
+            to={{ pathname: "/Login",
+            // state: "/SignUp"
+            }}
             onClick={()=>setclicked(false)}
           >
-            {clicked ? "Loading..." : "I am a fellowship leader"}
+            {clicked ? "Loading..." : "I am An App User"}
           </Link>
         </Buttons>
         

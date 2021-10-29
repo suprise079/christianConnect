@@ -12,6 +12,8 @@ import getCurTimeDate from '../components/helpFunc';
 
 
 
+
+
 // THIS FUNCTION DELETES A NOTE DOCUMENT FROM FIREBASE.
 // IT'S RECEIVE A COLLECTION NAME AND DOCUMENT ID
 export const deleteDocument = async ( collec, id ) => {
@@ -24,32 +26,6 @@ export const deleteDocument = async ( collec, id ) => {
     console.log("DELETING ERROR: ", e );
     alert("Deleting Error");
   }
-}
-
-
-// func to upload users data to firestore
-// receives email, firstname(fname), lastname, password, phone numbe
-// profile photo, registration date and user id from authentication to ref
-// usser data in firestore
-export const registerUser = async ( email, fname, lname, pwd, phone, regDate, uid ) => {
-  var isReg = false;
-  try {
-    const ref = await addDoc( collection( db, "Users" ), {
-      email: email,
-      firstname: fname,
-      lastname: lname,
-      password: pwd,
-      phoneNumber: phone,
-      profilePic: "",
-      regDate: regDate,
-      userId: uid
-    });
-    if( ref.id ) isReg = true;
-  }
-  catch( error ) {
-    console.log("ERROR: ", error ); isReg = false
-  }
-  return isReg;
 }
 
 
@@ -66,44 +42,104 @@ export const LoginUser = async ( uid ) => {
       data.push( d );
       // console.log( data );
     })
+
+    // console.log( data )
+    return data[0]
   }
   catch( error ) {
     console.log("ERROR:", error )
     return null;
   }
-  // console.log( data )
-  return data[0]
+  
 }
 
 
-// func to upload leaders data to firestore
+// // func to upload leaders data to firestore
+// // receives email, firstname(fname), lastname, password, phone numbe
+// // profile photo, registration date and user id from authentication to ref
+// // usser data in firestore
+// export const registerLeader=async(email,fname,lname,pwd,phone,uid) =>{
+
+//   var isReg = false;
+
+//   try {
+//     const ref = await addDoc( collection( db, "Users" ), {
+//       email: email,
+//       firstname: fname,
+//       lastname: lname,
+//       password: pwd,
+//       phoneNumber: phone,
+//       profilePic: "",
+//       regDate: getCurTimeDate(),
+//       userId: uid
+//     });
+//     if( ref.id ) isReg = true;
+//   }
+//   catch( error ) {
+//     console.log("ERROR: ", error );
+//     isReg = false
+//   }
+
+//   return isReg;
+// }
+
+
+
+
+
+
+
+// func to upload users data to firestore
 // receives email, firstname(fname), lastname, password, phone numbe
 // profile photo, registration date and user id from authentication to ref
 // usser data in firestore
-export const registerLeader = async ( email, fname, lname, pwd, phone, regDate, uid ) => {
-
+export const registerUser = async (
+  email,
+  fname,
+  lname,
+  pwd,
+  phone,
+  uid,
+  fsName,
+  wannaBeLeader
+) => {
   var isReg = false;
-
   try {
-    const ref = await addDoc( collection( db, "Users" ), {
+    const ref = await addDoc(collection(db, "Users"), {
       email: email,
       firstname: fname,
       lastname: lname,
       password: pwd,
       phoneNumber: phone,
       profilePic: "",
-      regDate: regDate,
-      userId: uid
+      regDate: getCurTimeDate(),
+      userId: uid,
+      isLeader: wannaBeLeader,
     });
-    if( ref.id ) isReg = true;
+    console.log(ref);
+    isReg = ref.id ?? true;
+    if (ref.id && wannaBeLeader) {
+      const fSRef = await addDoc(collection(db, "Fellowships"), {
+        name: fsName,
+        leaderId: uid,
+        about: "",
+        registrationDate: getCurTimeDate(),
+        time: "",
+        location: "",
+        photo: "",
+      });
+    }
+  } catch (error) {
+    console.log("ERROR: ", error);
+    isReg = false;
   }
-  catch( error ) {
-    console.log("ERROR: ", error );
-    isReg = false
-  }
-
   return isReg;
-}
+};
+
+
+
+
+
 
 
 // ADDS A NOTE TO NOTES TABLE, RECEIVES, NOTECONTENT
@@ -177,10 +213,6 @@ export const getAllNotes = async () => {
   }
   catch( e ) { console.error("GETTING NOTES ERROR: ", e ); return ; }
 }
-
-
-
-
 
 
 export default firebase;

@@ -6,6 +6,8 @@ import {
   IonHeader,
   IonToolbar,
   IonTitle,
+  IonCheckbox,
+  IonLabel,
 } from "@ionic/react";
 import styled from "styled-components";
 import { Link, useHistory } from "react-router-dom";
@@ -18,6 +20,7 @@ import "../StylesForPages.css";
 import Context from "../../../context/Context";
 import { app, auth } from "../../../firebase/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import { registerUser } from "../../../firebase/firebase-help";
 
 const Body = styled(IonPage)`
   padding: 1em 0em
@@ -91,6 +94,7 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [pswd, setPswd] = useState("");
   const [confirmPswd, setConfirmPswd] = useState("");
+  const [wannaBeLeader, setWannaBeLeader] = useState(false);
 
   const handleChange = (e) => {
     const val = e.target;
@@ -116,23 +120,52 @@ const SignUp = () => {
     setLoading(true);
     createUserWithEmailAndPassword(auth, email, pswd)
       .then((result) => {
-
-        console.log( result );
-
-
-
-        // auth.onAuthStateChanged((user) => {
-        //   console.log("USER IS :", user ? user.email : user);
-        //   if (user) {
-        //     history.push("/userhome");
-        //   } else {
-        //     history.push("/");
-        //   }
-        // });
-        setEmail(""); setFsName(""); setLastName(""); setPhoneNumber("");
-        setPswd(""); setConfirmPswd(""); setFirstName("");
-        setLoading(false);
+        console.log(result);
+        const uid = result.user.uid;
+        
         // add to firestore all other user details
+        registerUser(
+          email,
+          firstName,
+          lastName,
+          pswd,
+          phoneNumber,
+          uid,
+          fsName,
+          wannaBeLeader
+        ).then((ref) => {
+          console.log(ref);
+          if( ref ) {
+            alert("User Successfully registered..");
+
+            // auth.onAuthStateChanged((user) => {
+            //   console.log("USER IS :", user ? user.email : user);
+            //   if (user) {
+            //     history.push("/userhome");
+            //   } else {
+            //     history.push("/");
+            //   }
+            // });
+            
+            setEmail("");
+            setFsName("");
+            setLastName("");
+            setPhoneNumber("");
+            setPswd("");
+            setConfirmPswd("");
+            setFirstName("");
+
+            setLoading(false);
+            history.push("/Login");
+          }
+          else {
+            alert("Error adding user data to firebase...")
+            console.log("Error adding user data to firebase...")
+          }
+        });
+
+
+        
       })
       .catch((err) => {
         // error handling
@@ -157,15 +190,41 @@ const SignUp = () => {
       <Content style={{ overflowY: "scroll" }}>
         <div id="inputs">
           <form onSubmit={(e) => handleSubmit(e)}>
-            <label htmlFor="name">Name of fellowship</label>
-            <IonInput
-              value={fsName}
-              onIonChange={(e) => handleChange(e)}
-              required
-              name="fsName"
-              clearInput="true"
-              className="inputField"
-            ></IonInput>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "flex-start",
+                width: "80%",
+                padding: "0",
+              }}
+              onClick={() => {
+                setWannaBeLeader(!wannaBeLeader);
+                setFsName("");
+              }}
+            >
+              <IonCheckbox checked={wannaBeLeader} name="checkbox" />
+              <IonLabel style={{ marginLeft: "20px" }} htmlFor="checkbox">
+                Register as a leader
+              </IonLabel>
+            </div>
+            {wannaBeLeader ? (
+              <>
+                <label htmlFor="name">Name of fellowship</label>
+                <IonInput
+                  autofocus
+                  required
+                  value={fsName}
+                  onIonChange={(e) => handleChange(e)}
+                  name="fsName"
+                  clearInput="true"
+                  className="inputField"
+                ></IonInput>
+              </>
+            ) : (
+              ""
+            )}
 
             <label htmlFor="First name">First name</label>
             <IonInput
@@ -264,9 +323,6 @@ const SignUp = () => {
             </button>
           </form>
 
-
-
-
           <div style={{ marginTop: "10px" }} className="google-container">
             <span className="google-login-text">Register with </span>
             <button
@@ -294,7 +350,6 @@ const SignUp = () => {
               Login
             </Link>
           </div>
-
         </div>
       </Content>
     </Body>

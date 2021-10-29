@@ -113,11 +113,10 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-
   // use effect, run when pages loads
-  useEffect(() => {
+  // useEffect(() => {
     // alert("login", location.state );
-  }, [])
+  // }, [])
 
   // check if the user is logged in
   const handleChange = (e) => {
@@ -135,43 +134,54 @@ const Login = () => {
 
     setLoading(true);
     await signInWithEmailAndPassword(auth, email, password)
-      .then((result) => {
-        auth.onAuthStateChanged((user) => {
-          if (user.email && user.uid ) {
-            // pass user id from auth .. get user data from firestore ..
-            LoginUser( user.uid ).then( data => {
-              // console.log( data );
-              // if data is true
-              if( data ) {
-                // updating user's data.. i couldnt find a place to store this, 
-                // displayName, receives a string, i stringify users data from firebase
-                // and update user profile with stringify that, needs JSON.parse
-                // to get the user data.
-                updateProfile( auth.currentUser, {
-                  displayName: JSON.stringify(data)
-                }).then( () => {
-                  // profile updated and user data is added to firebase auth.
-                  history.push("/userhome?user=" + data.id ); // route to user page
-                }).catch( error => {
-                  // an error occured....
-                })
-              }
-              
-            })
-          }else{ history.push("/Login"); }
-        });
+    .then((result) => {
+      auth.onAuthStateChanged((user) => {
+        if (user.email && user.uid ) {
+          // pass user id from auth .. get user data from firestore ..
+          LoginUser( user.uid ).then( data => {
+            // console.log( data );
+            // if data is true
+            if( data ) {
+              // updating user's data.. i couldnt find a place to store this, 
+              // displayName, receives a string, i stringify users data from firebase
+              // and update user profile with stringify that, needs JSON.parse
+              // to get the user data.
+              updateProfile( auth.currentUser, {
+                displayName: JSON.stringify(data)
+              }).then( () => {
+                setEmail("");
+                setPassword("");
+                setLoading(false);
+                // profile updated and user data is added to firebase auth.
+                history.push("/userhome?user=" + data.id ); // route to user page
 
-        setEmail("");
-        setPassword("");
-        setLoading(false);
-      })
-      .catch((err) => {
-        // error handling
-        alert(err);
-        setEmail("");
-        setPassword("");
-        setLoading(false);
+              }).catch( error => {
+                // an error occured....
+                console.error("Error:", error.code ) 
+              })
+            }
+          })
+        }else{ history.push("/Login"); }
       });
+
+     
+    })
+    .catch((err) => {
+      // error handling
+      if( err.code.includes("invalid-email") ) { alert( "Invalid User Email" ) }
+        
+      else if ( err.code.includes("auth/user-not-found") ) {
+        alert("User Not Found."); setEmail(""); setPassword("");
+      }
+      else if ( err.code.includes("auth/wrong-password") ) {
+        alert("Wrong Password"); setPassword("");
+      }
+      else {
+        alert( err )
+        setEmail(""); setPassword("");
+      }
+      setLoading(false);
+    });
 
     // setLoading( false );
   };
@@ -227,6 +237,7 @@ const Login = () => {
             <IonInput
               id="email"
               required
+              autofocus
               type="email"
               name="Email address"
               clearInput="true"
@@ -295,7 +306,8 @@ const Login = () => {
           Don't have an account ?{" "}
           <Link
             className="fromWelcome"
-            to={{ pathname: location.state, state: location.state }}
+            // to={{ pathname: location.state, state: location.state }}
+            to={ "/SignUp" }
           >
             Register
           </Link>

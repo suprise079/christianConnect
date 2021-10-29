@@ -5,7 +5,7 @@ import {
   IonPage,
 } from "@ionic/react";
 
-import React from "react";
+import React, { useState } from "react";
 import "./userHome.css";
 
 // import icons
@@ -16,7 +16,8 @@ import {
   search,
 } from "ionicons/icons";
 
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
+import Context from "../../context/Context";
 
 // from firebase
 import { auth } from "../../firebase/firebase";
@@ -26,13 +27,18 @@ import { auth } from "../../firebase/firebase";
 import SearchFellowship from "../../components/searchFellowship/searchFellowship";
 import TabBar from "../../components/tabBar/tabBar";
 
-const UserHome: React.FC = () => {
-
-
+const UserHome = () => {
+  const { curUser, setCurUser } = useContext( Context );
+  const [ profileRouter, setRoute ] = useState("");
 
   useEffect(() => {
     // knflskdnf
-    // console.log( auth.currentUser?.providerData[0].displayName );
+    var userData = JSON.parse( auth.currentUser?.providerData[0].displayName  )
+    // console.log( "User Data", userData );
+    setCurUser( userData );
+    // 
+    // 
+    setRoute( userData.isLeader ? "/leader" : "/profile" )
   }, [])
 
 
