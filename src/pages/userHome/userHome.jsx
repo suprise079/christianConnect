@@ -10,9 +10,7 @@ import "./userHome.css";
 
 // import icons
 import {
-  home,
   arrowForward,
-  arrowForwardOutline,
   search,
 } from "ionicons/icons";
 
@@ -21,24 +19,35 @@ import Context from "../../context/Context";
 
 // from firebase
 import { auth } from "../../firebase/firebase";
+import Cookies from 'js-cookie';
 
 
 // import component
 import SearchFellowship from "../../components/searchFellowship/searchFellowship";
 import TabBar from "../../components/tabBar/tabBar";
+import { getAllFellowships } from "../../firebase/firebase-help";
+
+
+
 
 const UserHome = () => {
   const { curUser, setCurUser } = useContext( Context );
-  const [ profileRouter, setRoute ] = useState("");
+  const [ fellowships, setFellowships ] = useState();
 
   useEffect(() => {
     // knflskdnf
-    var userData = JSON.parse( auth.currentUser?.providerData[0].displayName  )
+    // console.log("FROM JS-COOKIE", Cookies.get("userData") )
+    setCurUser( JSON.parse( Cookies.get("userData") ));
+
+    // console.log( "FROM FB AUTH", auth.currentUser?.providerData[0].displayName )
+    // var userData = JSON.parse( auth.currentUser?.providerData[0].displayName  )
     // console.log( "User Data", userData );
-    setCurUser( userData );
+    // setCurUser( userData );
     // 
     // 
-    setRoute( userData.isLeader ? "/leader" : "/profile" )
+    getAllFellowships().then( data =>  { // console.log( data );
+      setFellowships( data )
+    }); // console.log( fellowships )
   }, [])
 
 
@@ -62,9 +71,22 @@ const UserHome = () => {
           <p className="map">Map</p>
         </div>
 
+
+
+        {/* display all fellowships available */}
         <div className="fellowships">
-          <SearchFellowship />
-          <SearchFellowship />
+          {
+            fellowships && fellowships.length > 0 ? (
+
+              fellowships.map( (fs, ind) => (
+                <SearchFellowship key={ ind }
+                  name={fs.name} about={fs.about}
+                  location={ fs.location } time={ fs.time } fsid={ fs.id } />
+              ))
+            ) : (
+              <h2>no fs</h2>
+            )
+          }
         </div>
 
         {/* the button component tab bar for navigation */}

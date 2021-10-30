@@ -5,6 +5,7 @@ import {FiMoreVertical} from 'react-icons/fi'
 import './viewVideo.css'
 import vid from '../dummy.mp4'
 
+import React from 'react'
 
 const ViewVideo = () => {
 

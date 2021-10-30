@@ -11,7 +11,7 @@ import {
 } from "@ionic/react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import React, { useState } from "react";
 import { FaCalendarAlt } from "react-icons/fa";
 import { IoMdCloudUpload } from "react-icons/io";
 import "../styles.css";

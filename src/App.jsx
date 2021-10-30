@@ -1,7 +1,7 @@
 import { Redirect, Route } from "react-router-dom";
 import { IonApp, IonRouterOutlet } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
-import { useState } from "react";
+import React, { useState } from "react";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -19,7 +19,6 @@ import OverviewFs from "./pages/overviewFs/overviewFs";
 import ReviewFS from "./pages/reviewFs/reviewFs";
 import Welcome from "./pages/Logins/Welcome/index";
 import Login from "./pages/Logins/Login";
-import SignUpU from "./pages/Logins/SignUp/SignUpU";
 import Donate from "./pages/User/donate/Donate";
 import Profile from "./pages/Users/Profile";
 import EditUser from "./pages/Users/EditUser";
@@ -43,16 +42,18 @@ import UserHome from "./pages/userHome/userHome";
 
 const App = () => {
   // check if the user is logged in
-  var [isLoggedIn, setIsLoggedIn] = useState(false);
+  var [ isLoggedIn, setIsLoggedIn ] = useState(false);
   var [ curUser, setCurUser ] = useState();
   var [ fellowship, setFellowship ] = useState();
+  const [ allFellowships, setAllFellowships ] = useState();
 
 
   return (
     <Context.Provider value={{
       curUser, setCurUser,
       isLoggedIn, setIsLoggedIn,
-      fellowship, setFellowship
+      fellowship, setFellowship,
+      allFellowships, setAllFellowships
       }}>
       
       <IonApp>
@@ -66,7 +67,6 @@ const App = () => {
 
             <Route exact path="/" component={Welcome} />
             <Route exact path="/Login" component={Login} />
-            <Route exact path="/SignUpU" component={SignUpU} />
             <Route exact path="/Donate" component={Donate} />
             <Route exact path="/savedVideos" component={SavedVideos} />
             <Route exact path="/addnote" component={ NoteContent } />

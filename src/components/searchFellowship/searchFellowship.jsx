@@ -10,22 +10,24 @@ import React from 'react'
 import './searchFellowship.css';
 
 
-const SearchFellowship: React.FC = () => {
+const SearchFellowship = ( props ) => {
 
 
   return (
     <div className="searchFellowship" >
       <div >
-        <p className="fellowshipName" > { "Mpumelelo prayer meetings" } </p>
-        <p className="subInfo" > { "2" + "km " } away </p>
-        <p className="subInfo" > {"student prayer meeting"} </p>
-        <p className="subInfo" > {"8pm weekdays"} </p>
+        <p className="fellowshipName" > { props.name } </p>
+        <p className="subInfo" >
+          {/* { "2" + "km " } away */}
+          { props.location }
+        </p>
+        <p className="subInfo" > { props.about } </p>
+        <p className="subInfo" > { props.time } </p>
       </div>
 
       <div className="viewInfo" >
-        <IonTabButton href="/overviewfs" >
-
-          <IonIcon icon={ downloadSharp } ></IonIcon> <br />
+        <IonTabButton href={"/overviewfs?fsid=" + props.fsid } >
+          {/* <IonIcon icon={ downloadSharp } ></IonIcon> <br /> */}
           <IonLabel >View</IonLabel>
         </IonTabButton>
       </div>

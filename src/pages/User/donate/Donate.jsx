@@ -12,7 +12,7 @@ import {
 } from "@ionic/react";
 import styled from "styled-components";
 import { Link, useHistory } from "react-router-dom";
-import { useState } from "react";
+import React, { useState } from "react";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { FaEllipsisH } from "react-icons/fa";
 import "./Donate.css";

@@ -5,7 +5,7 @@ import '../Profile.css';
 import "./EditUser.css";
 
 
-import React, { useContext, useState } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import { useHistory } from 'react-router';
 
 import profileImg from "./profile.jpeg";
@@ -13,7 +13,8 @@ import profileImg from "./profile.jpeg";
 
 // get db context
 import Context from '../../context/Context';
-import { editUser, LoginUser } from '../../firebase/firebase-help';
+import { deleteDocument, editUser, LoginUser } from '../../firebase/firebase-help';
+import Cookies from 'js-cookie';
 
 
 // import firebase and its modules
@@ -26,25 +27,36 @@ import {
 
 
 const EditUser = () => {
+  // for editing purposes
+  const [ user, setUser ] = useState( JSON.parse(Cookies.get("userData")) )
   const { curUser, setCurUser } = useContext( Context )
   const history = useHistory();
-  const [fname, setFname] = useState( curUser.firstname );
-  const [lname, setLname] = useState( curUser.lastname );
-  const [phone, setPhone] = useState( curUser.phoneNumber );
+  const [fname, setFname] = useState( user?.firstname );
+  const [lname, setLname] = useState( user?.lastname );
+  const [phone, setPhone] = useState( user?.phoneNumber );
+
+  useEffect(() => {
+    // console.log( JSON.parse( Cookies.get("userData")) )
+    setCurUser( JSON.parse( Cookies.get("userData")) )
+  }, [])
 
 
   const delUser = () => {
     var isTrue = window.confirm("Continue To Delete Account..?");
 
     if( isTrue ) {
-      alert("Will Delete Soon")
+      deleteDocument("Users", curUser.id ).then(() => {
+        alert("User Account Deleted");
+        Cookies.remove("userData"); // delete user data from session cookie
+        history.push("/");
+      })
     }
   }
 
   const EditUser = () => {
 
     if( fname && lname && phone ) {
-      var res = window.confirm("Continue, You'll Be Logged Out?");
+      var res = window.confirm("Continue..?");
 
       if( res ) { 
         editUser( fname, lname, phone, curUser.id ).then(() => {
@@ -53,28 +65,10 @@ const EditUser = () => {
           .then(( data ) => {
   
             if( data ) {
-              // BEST OPTION IS TO LOG OUT THE USER
-              history.push( "/" )
-  
-              // console.log("IN THE AUTH FUNC")
-              // updating user's data.. i couldnt find a place to store this, 
-              // displayName, receives a string, i stringify users data from firebase
-              // and update user profile with stringify that, needs JSON.parse
-              // to get the user data.
-              // console.log( auth.currentUser.providerData[0])
-              // updateProfile( auth.currentUser, {
-              //   displayName: JSON.stringify(data)
-              // }).then( () => {
-              //   console.log("WHEN AUTH IS DONE")
-              //   // profile updated and user data is added to firebase auth.
-              //   console.log("ROUTING TO:", data.isLeader)
-              //   history.push( data.isLeader ? "/leader" : "/profile" ); // route to user page
-  
-              // }).catch( error => {
-              //   // an error occured....
-              //   console.error("Error:", error.code ) 
-              // })
-  
+              Cookies.remove("userData"); // remove current user data
+              Cookies.set("userData", JSON.stringify( data ) ); // set new user data from fb 
+              setCurUser( JSON.parse( Cookies.get("userData")) ); // set user in Context
+              history.push( data?.isLeader ? "/leader" : "/profile" ) // redirect user to homepage
             }
   
           })
@@ -85,9 +79,7 @@ const EditUser = () => {
       }
      
     }
-    else {
-      alert("Please Fill All fields....")
-    }
+    else { alert("Please Fill All fields....") }
   }
 
 
@@ -103,7 +95,7 @@ const EditUser = () => {
         <div className="editProfileImg" >
           <img
             src={ profileImg }
-            alt={ "photo of " + curUser.firstname + " " + curUser.lastname } />
+            alt={ "photo of " + curUser?.firstname + " " + curUser?.lastname } />
         </div>
 
         <IonTitle id="nameTitle" > { curUser?.firstname } { curUser?.lastname } </IonTitle>

@@ -3,6 +3,7 @@ import {CgCloseR} from 'react-icons/cg'
 import {IoCamera, IoVideocam, IoImage, IoDocument, IoArrowBack} from 'react-icons/io5'
 import './post.css'
 import fearless from '../fearless.jpg';
+import React, { useState } from 'react';
 
 
 const Post = () => {

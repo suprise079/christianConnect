@@ -4,7 +4,7 @@ import church from './church.jpeg';
 import hope from './hope.jpg'
 import mpumi from './mpumi.jpg'
 import './SubscriptionHome.css';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom'
 import { IonReactRouter } from '@ionic/react-router';
 import { Redirect, Route } from 'react-router-dom';

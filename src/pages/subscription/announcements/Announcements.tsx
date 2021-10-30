@@ -5,7 +5,7 @@ import './Announcements.css';
 // import {Calendar} from '@ionic-native/calendar';
 // firebase real time database
 import  Firebase from '../firebase.js'
-
+import React from 'react';
 
 
 const Annoce: React.FC = () => {

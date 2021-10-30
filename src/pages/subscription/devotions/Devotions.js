@@ -1,6 +1,7 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import ViewVideos from './viewVideos.js'
 import DevotionsHome from './DevotionsHome'
+
 
 
 const Devotions = () => {

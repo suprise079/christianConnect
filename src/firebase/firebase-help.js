@@ -20,7 +20,7 @@ import { async } from '@firebase/util';
 export const deleteDocument = async ( collec, id ) => {
   try {
     const ref = await deleteDoc( doc( db, collec, id )).then((r)=> {
-      console.log( "REF AFTER DEL NOTE: ",  r );
+      // console.log( "REF AFTER DEL NOTE: ",  r );
     });
   }
   catch( e ) {
@@ -215,5 +215,21 @@ export const getAllNotes = async () => {
   catch( e ) { console.error("GETTING NOTES ERROR: ", e ); return ; }
 }
 
+
+
+
+// GETS ALL THE FELLOWSHIPS FROM FIREBASE
+export const getAllFellowships = async() => {
+  const fsRef = await getDocs( collection( db, "Fellowships" ) )
+
+  var data = [];
+  fsRef.docs.map( doc => {
+    var d = doc.data();
+    d["id"] = doc.id;
+    data.push( d )
+  })
+  if( data.length > 0 ) return data; // return all the fellowships.
+  else { return null } // return null 
+}
 
 export default firebase;

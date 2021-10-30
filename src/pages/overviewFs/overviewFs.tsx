@@ -9,7 +9,7 @@ import { FaArrowLeft, FaEllipsisH, FaStar, FaStarHalf, FaStarHalfAlt, FaRegStarH
 
 import { Link } from 'react-router-dom';
 
-
+import React from 'react'
 
 // import component
 import NavigateFs from '../../components/navigateFs/navigateFs';

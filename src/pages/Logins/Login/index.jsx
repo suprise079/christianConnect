@@ -13,27 +13,28 @@ import {
 
 import styled from "styled-components";
 
-// firebase
+// firebase and db func
 import { app, auth } from "../../../firebase/firebase";
 
 import {
   updateProfile,
-  signOut,
   signInWithPopup,
   GoogleAuthProvider,
   signInWithEmailAndPassword,
 } from "firebase/auth";
 
+// import js cookie for holding user data
+import Cookies from 'js-cookie';
+
 // react
 import { Link, useHistory } from "react-router-dom";
-import { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Context from "../../../context/Context";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
 import "../StylesForPages.css";
 import bg from "./bg.png";
 import { useLocation } from "react-router";
-import { async } from "@firebase/util";
 import { getLeaderFs, LoginUser } from "../../../firebase/firebase-help";
 
 const Body = styled(IonPage)`
@@ -142,6 +143,8 @@ const Login = () => {
             // console.log( data );
             // if data is true
             if( data ) {
+              // use cookies js to set user's dats
+              Cookies.set("userData", JSON.stringify(data) );
 
               // updating user's data.. i couldnt find a place to store this, 
               // displayName, receives a string, i stringify users data from firebase

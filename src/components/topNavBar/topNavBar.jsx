@@ -1,6 +1,7 @@
 
 import { FaArrowLeft, FaEllipsisH } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import React from 'react';
 
 import './topNavBar.css';
 

@@ -7,6 +7,8 @@ import { IonReactRouter } from '@ionic/react-router';
 import { Redirect, Route } from 'react-router-dom';
 import vid from '../dummy.mp4'
 
+import React from "react";
+
 const DevotionsHome = ({setPages}) => {
 
     // dummy list to display 6 dummy videos

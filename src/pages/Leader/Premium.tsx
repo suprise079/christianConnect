@@ -16,6 +16,7 @@ import {FaUserEdit} from "react-icons/fa";
 // import profileImg from "../components/Images/profile.jpeg";
 import churchImg from "./church.jpeg";
  
+import React from 'react'
 
   
 interface AppPage {

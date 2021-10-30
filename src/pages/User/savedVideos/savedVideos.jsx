@@ -8,7 +8,7 @@ import {
 } from "@ionic/react";
 import TabBar from "../../../components/tabBar/tabBar";
 import { logOutSharp } from "ionicons/icons";
-
+import React from 'react';
 import { FaUserEdit } from "react-icons/fa";
 import { useHistory, Link } from "react-router-dom";
 import styled from "styled-components";

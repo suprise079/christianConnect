@@ -8,6 +8,8 @@ import { star, starHalf, personCircleSharp } from 'ionicons/icons';
 
 import img3 from './prayer.jpeg';
 
+import React from "react";
+
 // get css
 import './reviewFs.css';
 import NavigateFs from "../../components/navigateFs/navigateFs";

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useHistory } from 'react-router-dom'
 import { IonHeader, IonTitle, IonToolbar, IonCard, IonSearchbar, IonApp, IonPage } from '@ionic/react';
 import { IoMdArrowBack } from 'react-icons/io'

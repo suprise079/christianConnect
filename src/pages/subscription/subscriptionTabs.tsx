@@ -1,7 +1,7 @@
 import { IonContent, IonHeader, IonCard,IonRouterOutlet, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonPage,IonList, IonTitle, IonToolbar, IonButtons, IonButton, IonIcon, IonVirtualScroll } from '@ionic/react';
 import Annoce from './announcements/Announcements'
 import Devotions from './devotions/Devotions.js';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 // import { IonHeader, IonToolbar, IonIcon,IonTitle } from "@ionic/react";
 import { arrowBackSharp } from "ionicons/icons";
 import './subscriptionTabs.css'

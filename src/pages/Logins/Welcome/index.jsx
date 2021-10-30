@@ -5,10 +5,11 @@ import styled from "styled-components";
 import {BiLoaderAlt} from "react-icons/bi";
 import {FaWalking,FaChurch} from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 
 // import firebase functions and modules here
 import { auth } from "../../../firebase/firebase";
+import Cookies from 'js-cookie';
 import Context from "../../../context/Context";
 
 const Body = styled(IonPage)`
@@ -58,6 +59,7 @@ const Welcome = () => {
     // reset user's data in auth state....
     auth.signOut().then((res) => {
       console.log( res )
+      Cookies.remove("userData");
       setCurUser(); 
     })
     .catch((err) => alert(err));

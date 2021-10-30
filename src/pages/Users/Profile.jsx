@@ -25,7 +25,7 @@ import {
 
 
 // import from react modules
-import { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import { FaUserEdit } from "react-icons/fa";
 
@@ -36,7 +36,9 @@ import styled from "styled-components";
 
 // firebase for signOut
 import { auth } from "../../firebase/firebase";
+import Cookies from 'js-cookie';
 import { signOut } from "firebase/auth";
+import Context from "../../context/Context";
 
 
 
@@ -147,15 +149,13 @@ const Body = styled(IonPage)`
 
 const Profile = () => {
   const history = useHistory(); // use this for routing in js codes.
-  const [ user, setUser ] = useState();
+  const { curUser, setCurUser } = useContext( Context );
 
 
 
   useEffect(() => {
-    // get the value of auth.current user that keeps user's data.
-    var d = JSON.parse( auth.currentUser?.providerData[0].displayName );
-    // console.log( d ); // for debuggin purposes
-    setUser( d ) // set user for this page
+    // console.log( JSON.parse( Cookies.get("userData") ) );
+    setCurUser( JSON.parse( Cookies.get("userData") ) );
   },[])
 
 
@@ -165,8 +165,7 @@ const Profile = () => {
     // history.push( `${e.target.id}` );
 
     if (e.target.id === "/") {
-      auth
-        .signOut()
+      auth.signOut()
         .then((res) => {
           // Display a modal saying "User successfully signed out"
           /* setTimeout(() => {
@@ -212,9 +211,8 @@ const Profile = () => {
                     size="25px"/>
                 </Link>
                
-                  {/*  */}
-                <IonCardTitle>{ user?.firstname } {" "} {user?.lastname } </IonCardTitle>
-                <IonCardSubtitle> { user?.email } </IonCardSubtitle>
+                <IonCardTitle>{ curUser?.firstname } { curUser?.lastname } </IonCardTitle>
+                <IonCardSubtitle> { curUser?.email } </IonCardSubtitle>
               </div>
             </div>
 
