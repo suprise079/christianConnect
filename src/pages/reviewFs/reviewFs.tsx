@@ -12,7 +12,6 @@ import React from "react";
 
 // get css
 import './reviewFs.css';
-import NavigateFs from "../../components/navigateFs/navigateFs";
 import TopNavBar from "../../components/topNavBar/topNavBar";
 
 const ReviewFS: React.FC = () => {
@@ -42,11 +41,6 @@ const ReviewFS: React.FC = () => {
         </div>
 
 
-        <NavigateFs pn={"reviews"} />
-        
-
-
-        
         <IonItem  className = "item" color = " #348D63" lines = "full">
           <IonLabel>
             <IonLabel>Rate and review</IonLabel> 

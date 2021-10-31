@@ -65,8 +65,6 @@ const UserHome = () => {
           <p className="map">Map</p>
         </div>
 
-
-
         {/* display all fellowships available */}
         <div className="fellowships">
           {

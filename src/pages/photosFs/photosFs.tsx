@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 import './photosFs.css';
 import React from 'react';
 // import component
-import NavigateFs from "../../components/navigateFs/navigateFs";
 import TopNavBar from "../../components/topNavBar/topNavBar";
 
 
@@ -21,8 +20,6 @@ const FellowshipPhotos: React.FC = () => {
 
         {/* <div className="navMargin" > </div> */}
         <br /><br /><br />
-
-        <NavigateFs pn={"photo"} />
 
         <div className="imagesFS" >
           <div >

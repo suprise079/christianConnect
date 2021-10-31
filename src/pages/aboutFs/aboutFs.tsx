@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom';
 import './aboutFs.css'; // get css
 
 // import component
-import NavigateFs from "../../components/navigateFs/navigateFs";
 import TopImgFs from "../../components/topImagesFs/topImgFs";
 import TopNavBar from "../../components/topNavBar/topNavBar";
 
@@ -22,7 +21,7 @@ const AboutFellowship: React.FC = () => {
 
         <div className="imagesA" > <TopImgFs /> </div>
 
-        <NavigateFs pn={"about"} />
+        {/* <NavigateFs pn={"about"} /> */}
 
         <div className="view" >
           About a fellowship

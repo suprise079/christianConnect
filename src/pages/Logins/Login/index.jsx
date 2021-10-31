@@ -122,6 +122,9 @@ const Login = () => {
 
     // reset data in the cookie
     Cookies.remove("userData");
+    Cookies.remove("allFellowships");
+    Cookies.remove("dummy");
+
   }, [])
 
   // check if the user is logged in
@@ -156,30 +159,38 @@ const Login = () => {
               // then get all fellowships from firebase and set them to
               // session cookie
               getAllFellowships().then( fellows => {
-                var fs = fellows;
-                console.log( fs )
+                // console.log( Object.assign({}, fellows ) )
+                var afs = JSON.stringify( fellows );
+                // var afs = JSON.stringify(  Object.assign({}, fellows ) );
+                // console.log( afs )
                 // set to cookies js session var
-                Cookies.set("AllFellowships", JSON.stringify( fs ))
-                console.log( Cookies.get("AllFellowships") )
+                Cookies.set("allFellowships", afs )
+                // console.log( Cookies.get("AllFellowships") )
+
+
+                // get leader's fellowship data... run only user is leader 
+                if( data.isLeader ) {
+                  // get user fellowship data. pass user auth id
+                  getLeaderFs( data.userId ).then( refDoc => {
+                    var fs = refDoc;
+                    // set data in global context
+                    setFellowship( fs );
+                    if( fs ) { // if user data is valid and available
+                      // set current leader fs in session cookie
+                      Cookies.set("curLeaderFs", JSON.stringify( fs ) )
+
+                    }
+                    history.push("/userhome?user=" + data.userId ); // route to user page
+                  })
+
+                }
+
+                // console.log( data )
+                setEmail(""); setPassword(""); setLoading(false);
+                history.push("/userhome?user=" + data.userId ); // route to user page
+
               })
               
-              // get leader's fellowship data... run only user is leader 
-              if( data.isLeader ) {
-                // get user fellowship data. pass user auth id
-                getLeaderFs( data.userId ).then( refDoc => {
-                  var fs = refDoc;
-                  // set data in global context
-                  setFellowship( fs );
-                  if( fs ) { // if user data is valid and available
-                    // set current leader fs in session cookie
-                    Cookies.set("curLeaderFs", JSON.stringify( fs ) )
-                  }
-                })
-              }
-
-              // console.log( data )
-              setEmail(""); setPassword(""); setLoading(false);
-              history.push("/userhome?user=" + data.userId ); // route to user page
             }
           })
         }else{ history.push("/Login"); }

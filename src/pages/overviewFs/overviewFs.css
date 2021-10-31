@@ -1,9 +1,9 @@
 
-.overviewFS .overview {
+#overviewFS .overview {
     background-color: inherit;
 }
 
-.overviewFS .overview .imagesO {
+#overviewFS .overview .imagesO {
     margin-top: 3em;
     /* padding: 2em 0em; */
     background-color: yellow;
@@ -43,45 +43,40 @@
 
 /* Aapoh */
 
-/* 
-.overviewFS .tabbar ion-tab-button {
-    background-color: yellow;
-    width: 2em;
-    padding: 0em;
-} */
-
-.overviewFS ion-tab-bar.tabbar ion-tab-button ion-icon {
+#overviewFS ion-tab-bar.tabbar ion-tab-button ion-icon {
     color: black;
     font-weight: bold;
     /* background-color: black; */
     padding: 0em;
 }
 
-.overviewFS ion-content .nameFs {
+#overviewFS .nameFs {
     /* background-color: #348D63; */
     /* background-color: red; */
-    margin: 1em 0em;
+    margin: 1em 0em 1em 0em;
+		padding: 1em 0em 0em 0em;
 }
 
-.overviewFS ion-content .nameFs p:nth-child(1) {
-    /* background-color: red; */
-    font-size: 1.09em;
-    padding: 0em 0em 0em 1.1em;
-    color: white;
+#overviewFS div.nameFs #fsName {
+	/* background-color: red; */
+	font-size: 1.09em;
+	padding: 0em 0em 0em 1.1em;
+	color: #127647;
+	text-transform: capitalize;
 }
 
-.overviewFS ion-content .nameFs p {
+#overviewFS ion-content .nameFs p {
     /* background-color: red; */
     font-size: .8em;
     padding: .3em 0em 0em 1.6em;
 }
 
-.overviewFS ion-content .nameFs p i {
+#overviewFS ion-content .nameFs p i {
     color: white;
     font-style: normal;
 }
 
-.overviewFS ion-content .nameFs ion-title {
+#overviewFS ion-content .nameFs ion-title {
     /* background-color: red; */
     color: white;
     font-size: .99em;
@@ -89,7 +84,7 @@
 
 
 
-.overviewFS ion-content .buttons {
+#overviewFS ion-content .FsButtons {
     /* background-color: red; */
     display: flex;
     justify-content: space-evenly;
@@ -97,12 +92,12 @@
     padding-bottom: 1em;
 }
 
-.overviewFS ion-content .buttons ion-button {
+#overviewFS ion-content .FsButtons ion-button {
     background-color: red;
     border-radius: 50%;
 }
 
-.overviewFS ion-content .buttons ion-icon {
+#overviewFS ion-content .FsButtons ion-icon {
     background-color: #064320;
     border-radius: 50%;
     padding: .5em;
@@ -110,11 +105,11 @@
     box-shadow: 0em 0em .1em white;
 }
 
-.overviewFS ion-icon:hover {
+#overviewFS ion-icon:hover {
     cursor: pointer;
 }
 
-.overviewFS ion-content .locaWebTime {
+#overviewFS ion-content .locaWebTime {
     /* background-color: red; */
     padding: 0em 0em 2em 0em;
    
@@ -124,13 +119,13 @@
     border-top: .11em solid lightgrey;
 }
 
-.overviewFS ion-content .locaWebTime .time {
+#overviewFS ion-content .locaWebTime .time {
     /* background-color: yellow; */
     display: flex;
     justify-content: space-between;
 }
 
-.overviewFS ion-content .locaWebTime .time div {
+#overviewFS ion-content .locaWebTime .time div {
     position: absolute;
     right: 1.5em;
     display: flex;
@@ -142,8 +137,49 @@
 }
 
 
-.overviewFS ion-content .locaWebTime .time div small {
+#overviewFS ion-content .locaWebTime .time div small {
     display: flex;
     vertical-align: middle;
     padding: 1em 0em;
 }
+
+
+
+
+
+
+/* THE NAVIGATION PART TO MOVE ABOUT AND SEE DETAILS OF A FELLOWSHIP */
+#overviewFS #navigatorFs {
+    display: flex;
+    justify-content: space-evenly;
+    background-color: #127647;
+    /* background-color: inherit; */
+    /* box-shadow: 0em 0em .1em white; */
+    margin: 1em 0em;
+    color: white;
+    /* padding: 0em 1em; */
+  }
+  
+#overviewFS #navigatorFs a {
+border: 0em;
+font-size: .9em;
+padding: .8em .1em;
+/* background-color: #348d63; */
+background-color: #127647;
+/* background-color: red; */
+color: white;
+}
+#overviewFS #navigatorFs a:hover { cursor: pointer; }
+
+#overviewFS #navigatorFs .navFsBtn {
+	display: flex;
+	flex-direction: column;
+	padding: .6em 0em;
+}   
+
+#overviewFS #navigatorFs span.navFsBtn:hover,
+#overviewFS #navigatorFs span.navFsBtn:focus {
+	background-color: white;
+	color: #127647;
+	cursor: pointer;
+}   
