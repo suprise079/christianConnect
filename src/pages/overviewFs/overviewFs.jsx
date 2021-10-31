@@ -69,11 +69,58 @@ const ContactLocAddr = () => {
 
 
 // contains the reviews of a fellowship
-const ReviewsFs = () => {
+const ReviewsFs = ( props ) => {
   return (
     <>
-      <h3 > REviews Of A Fellowship </h3>
-      Reviews Component
+      <h3 > Review { props.name } fellowship </h3>
+      
+      <div id="reviewsFs" >
+        <div  className="item" >
+          <small>Rate and review</small> 
+
+          <small className="small" >Share your experience to help others</small>
+
+          <div > 
+            <IonIcon icon={personCircleSharp} className="person"></IonIcon>
+            <i >
+            <IonIcon icon={star} className="icon2" ></IonIcon>
+            <IonIcon icon={star} className="icon2" ></IonIcon>
+            <IonIcon icon={star} className="icon2"></IonIcon>
+            <IonIcon icon={star} className="icon2"></IonIcon>
+            <IonIcon icon={star} className="icon2"></IonIcon>
+            </i> 
+          </div>
+        </div>
+
+
+        <div id="reviews"  color = " #348D63" lines = "full">
+          <div className="sortBy" >
+            <small>Sort By</small>
+            <button className="btn" >Newest</button>
+            <button className="btn" >Highest</button>
+            <button className="btn" >Lowest</button>
+          </div>
+           
+          <div className="review" >
+            <div className="userPicName">
+              <img src={""} alt="IMG" />
+              <i > {"Marie Hope"} </i>  <i> {"2"} reviews </i>
+            </div>
+            <div className="reviewed" >
+              <IonIcon icon={star} className="icon1" ></IonIcon>
+              <IonIcon icon={star} className="icon1" ></IonIcon>
+              <IonIcon icon={star} className="icon1" ></IonIcon>
+              <IonIcon icon={star} className="icon1"></IonIcon>
+              <IonIcon icon={star} className="star"></IonIcon><br />
+              <small>2 months ago</small> <br />
+              <small>I love this app, it has brought me close to God</small>
+            </div>
+          </div>
+
+
+        </div>
+
+      </div>
     </>
   )
 }
@@ -82,7 +129,7 @@ const ReviewsFs = () => {
 const PhotosFs = ( props ) => {
   return (
     <>
-      <h3 > Photos Of A Fellowship </h3>
+      <h3 > Photos of { props.name } fellowship </h3>
       Photos Component
     </>
   )
@@ -93,7 +140,7 @@ const PhotosFs = ( props ) => {
 const AboutFs = ( props ) => {
   return (
     <>
-      <h3 > About A Fellowship </h3>
+      <h3 > About { props.name } fellowship </h3>
       <div >
         { props.aboutFs }
       </div>
@@ -113,7 +160,7 @@ const OverviewFs = () => {
     const url = window.location.search; // get the search part of the local url..
     const usp = new URLSearchParams( url ); // make obj used to search params in url
     const fellowshipId = usp.get("fsid"); // get param with the passed name
-    console.log( 'URL IS:', fellowshipId ); ///
+    // console.log( 'URL IS:', fellowshipId ); ///
 
     // read all fellowships from firebase... get the 1 that matches the in from url
     // it will return an array of one element... get the 1st element of the array
@@ -181,13 +228,13 @@ const OverviewFs = () => {
             show === 0 ? (
               <ContactLocAddr />
             ) : show === 1 ? (
-              <ReviewsFs />
+              <ReviewsFs name={ curFs?.name }  />
             ) : show === 2 ? (
 
-              <PhotosFs />
+              <PhotosFs name={ curFs?.name } />
             ) : (
               // pass about a fellow details to this components
-              <AboutFs aboutFs = { curFs?.about } />
+              <AboutFs aboutFs = { curFs?.about } name={ curFs?.name }  />
             )
           }
         </div >

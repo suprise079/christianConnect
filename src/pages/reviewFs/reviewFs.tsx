@@ -41,7 +41,7 @@ const ReviewFS: React.FC = () => {
         </div>
 
 
-        <IonItem  className = "item" color = " #348D63" lines = "full">
+        <IonItem  className="item" color = "#348D63" lines = "full">
           <IonLabel>
             <IonLabel>Rate and review</IonLabel> 
 
