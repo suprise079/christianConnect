@@ -13,14 +13,15 @@ import profileImg from "./profile.jpeg";
 
 // get db context
 import Context from '../../context/Context';
-import { deleteDocument, editUser, LoginUser } from '../../firebase/firebase-help';
+import { deleteDocument, editUser, LoginUser
+} from '../../firebase/firebase-help';
 import Cookies from 'js-cookie';
 
 
 // import firebase and its modules
 import { auth } from '../../firebase/firebase';
 import {
-  updateProfile,
+  updateProfile, deleteUser
 } from "firebase/auth";
 
 
@@ -28,7 +29,8 @@ import {
 
 const EditUser = () => {
   // for editing purposes
-  const [ user, setUser ] = useState( JSON.parse(Cookies.get("userData")) )
+  const [ user, setUser ] = useState(
+    JSON.parse(Cookies.get("userData")) ? JSON.parse(Cookies.get("userData")) : "" )
   const { curUser, setCurUser } = useContext( Context )
   const history = useHistory();
   const [fname, setFname] = useState( user?.firstname );
@@ -46,9 +48,16 @@ const EditUser = () => {
 
     if( isTrue ) {
       deleteDocument("Users", curUser.id ).then(() => {
-        alert("User Account Deleted");
-        Cookies.remove("userData"); // delete user data from session cookie
-        history.push("/");
+        const user = auth.currentUser; // get the current user
+        // delete user from auth
+        deleteUser( user ).then(() => {
+          // Cookies.remove("userData"); // delete user data from session cookie
+          alert("User Account Deleted");
+          history.push("/");
+        }).catch( error => {
+          console.error( error.code );
+          alert( error.code );
+        })
       })
     }
   }

@@ -97,7 +97,7 @@ export const registerUser = async (
       userId: uid,
       isLeader: wannaBeLeader,
     });
-    console.log(ref);
+    // console.log(ref);
     isReg = ref.id ?? true;
     if (ref.id && wannaBeLeader) {
       const fSRef = await addDoc(collection(db, "Fellowships"), {

@@ -35,15 +35,9 @@ const UserHome = () => {
   const [ fellowships, setFellowships ] = useState();
 
   useEffect(() => {
-    // knflskdnf
     // console.log("FROM JS-COOKIE", Cookies.get("userData") )
     setCurUser( JSON.parse( Cookies.get("userData") ));
 
-    // console.log( "FROM FB AUTH", auth.currentUser?.providerData[0].displayName )
-    // var userData = JSON.parse( auth.currentUser?.providerData[0].displayName  )
-    // console.log( "User Data", userData );
-    // setCurUser( userData );
-    // 
     // 
     getAllFellowships().then( data =>  { // console.log( data );
       setFellowships( data )
@@ -84,7 +78,7 @@ const UserHome = () => {
                   location={ fs.location } time={ fs.time } fsid={ fs.id } />
               ))
             ) : (
-              <h2>no fs</h2>
+              <h2> Loading..... </h2>
             )
           }
         </div>

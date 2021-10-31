@@ -120,7 +120,7 @@ const SignUp = () => {
     setLoading(true);
     createUserWithEmailAndPassword(auth, email, pswd)
       .then((result) => {
-        console.log(result);
+        // console.log(result);
         const uid = result.user.uid;
         
         // add to firestore all other user details
@@ -134,7 +134,7 @@ const SignUp = () => {
           fsName,
           wannaBeLeader
         ).then((ref) => {
-          console.log(ref);
+          // console.log(ref);
           if( ref ) {
             alert("User Successfully registered..");
 

@@ -5,13 +5,17 @@ import {
   home, codeDownload, downloadSharp, download
 } from 'ionicons/icons';
 
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
+
+// for data management and firebase
+import Cookies from 'js-cookie';
+import Context from '../../context/Context';
 
 import './searchFellowship.css';
 
 
 const SearchFellowship = ( props ) => {
-
+  const { allFellowships } = useContext( Context );
 
   return (
     <div className="searchFellowship" >
@@ -26,7 +30,10 @@ const SearchFellowship = ( props ) => {
       </div>
 
       <div className="viewInfo" >
-        <IonTabButton href={"/overviewfs?fsid=" + props.fsid } >
+
+        <IonTabButton
+          // onClick={ e => fs() }
+          href={"/overviewfs?fsid=" + props.fsid } >
           {/* <IonIcon icon={ downloadSharp } ></IonIcon> <br /> */}
           <IonLabel >View</IonLabel>
         </IonTabButton>

@@ -35,7 +35,8 @@ import { FcGoogle } from "react-icons/fc";
 import "../StylesForPages.css";
 import bg from "./bg.png";
 import { useLocation } from "react-router";
-import { getLeaderFs, LoginUser } from "../../../firebase/firebase-help";
+import { getAllFellowships, getLeaderFs, LoginUser
+} from "../../../firebase/firebase-help";
 
 const Body = styled(IonPage)`
   position: relative;
@@ -115,9 +116,13 @@ const Login = () => {
   const [password, setPassword] = useState("");
 
   // use effect, run when pages loads
-  // useEffect(() => {
+  useEffect(() => {
     // alert("login", location.state );
-  // }, [])
+
+
+    // reset data in the cookie
+    Cookies.remove("userData");
+  }, [])
 
   // check if the user is logged in
   const handleChange = (e) => {
@@ -132,8 +137,8 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-
     setLoading(true);
+
     await signInWithEmailAndPassword(auth, email, password)
     .then((result) => {
       auth.onAuthStateChanged((user) => {
@@ -144,65 +149,41 @@ const Login = () => {
             // if data is true
             if( data ) {
               // use cookies js to set user's dats
+              // console.log( data )
+              // set user data to session cookies...
               Cookies.set("userData", JSON.stringify(data) );
 
-              // updating user's data.. i couldnt find a place to store this, 
-              // displayName, receives a string, i stringify users data from firebase
-              // and update user profile with stringify that, needs JSON.parse
-              // to get the user data.
-              updateProfile( auth.currentUser, {
-                displayName: JSON.stringify(data)
-              }).then( () => {
-                setEmail("");
-                setPassword("");
-                setLoading(false);
-                // profile updated and user data is added to firebase auth.
-                history.push("/userhome?user=" + data.userId ); // route to user page
-
-              }).catch( error => {
-                // an error occured....
-                console.error("Error:", error.code ) 
+              // then get all fellowships from firebase and set them to
+              // session cookie
+              getAllFellowships().then( fellows => {
+                var fs = fellows;
+                console.log( fs )
+                // set to cookies js session var
+                Cookies.set("AllFellowships", JSON.stringify( fs ))
+                console.log( Cookies.get("AllFellowships") )
               })
-
               
               // get leader's fellowship data... run only user is leader 
               if( data.isLeader ) {
                 // get user fellowship data. pass user auth id
                 getLeaderFs( data.userId ).then( refDoc => {
                   var fs = refDoc;
-
                   // set data in global context
                   setFellowship( fs );
-
                   if( fs ) { // if user data is valid and available
-                    // console.log( fellowship ) // seeing.
-                    // add user data to auth currentUser, we will add this to
-                    // phone number. 1st stringify with json string, because phoneNumber
-                    // receives only a string and our data is object,
-                    // this will help me, get data in any file i wants to use them.
-                    updateProfile( auth.currentUser, {
-                      phoneNumber : JSON.stringify( fs )
-                    }).then( () => {
-                      setEmail("");
-                      setPassword("");
-                      setLoading(false);
-                      // profile updated and user data is added to firebase auth.
-                      history.push("/userhome?user=" + data.userId ); // route to user page
-      
-                    }).catch( error => {
-                      // an error occured....
-                      console.error("Error:", error.code ) 
-                    })
+                    // set current leader fs in session cookie
+                    Cookies.set("curLeaderFs", JSON.stringify( fs ) )
                   }
-
                 })
               }
-              
+
+              // console.log( data )
+              setEmail(""); setPassword(""); setLoading(false);
+              history.push("/userhome?user=" + data.userId ); // route to user page
             }
           })
         }else{ history.push("/Login"); }
       });
-     
     })
     .catch((err) => {
       setLoading(false);
@@ -210,7 +191,6 @@ const Login = () => {
       if( err.code.includes("invalid-email") ) {
         alert( "Invalid User Email" ); setEmail(""); setPassword("");
       }
-        
       else if ( err.code.includes("auth/user-not-found") ) {
         alert("User Not Found."); setEmail(""); setPassword("");
       }
@@ -221,14 +201,13 @@ const Login = () => {
         alert("Network Error, Please Check Your Network Connection");
         setPassword("");
       }
-      else {
-        alert( err )
+      else { alert( err ); console.error( err )
         setEmail(""); setPassword("");
       }
     });
-
-    // setLoading( false );
+    setLoading( false );
   };
+
 
   const loginWithGoogle = () => {
     const provider = new GoogleAuthProvider();
