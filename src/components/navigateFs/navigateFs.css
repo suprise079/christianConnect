@@ -1,0 +1,21 @@
+div.navigator {
+  display: flex;
+  justify-content: space-evenly;
+  background-color: #127647;
+  /* background-color: inherit; */
+  /* box-shadow: 0em 0em .1em white; */
+  margin: 1em 0em;
+  color: white;
+  /* padding: 0em 1em; */
+}
+
+div.navigator a {
+  border: 0em;
+  font-size: .9em;
+  padding: .8em .1em;
+  /* background-color: #348d63; */
+  background-color: #127647;
+  /* background-color: red; */
+  color: white;
+}
+a:hover { cursor: pointer; }
