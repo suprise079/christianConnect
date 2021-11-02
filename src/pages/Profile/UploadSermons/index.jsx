@@ -59,7 +59,7 @@ const UploadSermon = () => {
               required
               type="text"
               name="Title"
-              clearInput="true"
+              clearinput
               className="inputField"
             ></IonInput>
           </div>
@@ -104,7 +104,7 @@ const UploadSermon = () => {
                 required
                 type="text"
                 name="Title"
-                clearInput="true"
+                clearinput
                 placeholder="https://www.youtube.com/sermon123"
                 className="inputField ytLink"
               ></IonInput>

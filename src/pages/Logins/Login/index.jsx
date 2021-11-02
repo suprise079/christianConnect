@@ -173,13 +173,14 @@ const Login = () => {
                   // get user fellowship data. pass user auth id
                   getLeaderFs( data.userId ).then( refDoc => {
                     var fs = refDoc;
-                    // set data in global context
-                    setFellowship( fs );
                     if( fs ) { // if user data is valid and available
+                      // set data in global context
+                      setFellowship( fs );
+                      // console.log( fs );
                       // set current leader fs in session cookie
                       Cookies.set("curLeaderFs", JSON.stringify( fs ) )
-
                     }
+                    console.log("here")
                     history.push("/userhome?user=" + data.userId ); // route to user page
                   })
 
@@ -216,6 +217,7 @@ const Login = () => {
         setEmail(""); setPassword("");
       }
     });
+    console.log("HERE AND HERE")
     setLoading( false );
   };
 

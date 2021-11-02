@@ -36,11 +36,17 @@ import styled from "styled-components";
 
 // firebase for signOut
 import { auth } from "../../firebase/firebase";
-import Cookies from 'js-cookie';
 import { signOut } from "firebase/auth";
 import Context from "../../context/Context";
+// get firebase functions
+import {
+  getUserImg
+} from "../../firebase/firebase-help";
+import Cookies from 'js-cookie';
 
 
+
+var profileImg = "/assets/icon/prayer.jpeg";
 
 const appPages = [
   {
@@ -124,19 +130,6 @@ const Body = styled(IonPage)`
     box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.05);
     border-radius: 10px;
   }
-  div.profile {
-    position: relative;
-    top: -10%;
-    // left: 35%;
-    margin: auto;
-    width: 6.5em;
-    height: 6em;
-    background-image: url(${"/assets/icon/prayer.jpeg"});
-    background-size: cover;
-    // border: 2px solid;
-    border-radius: 100%;
-    box-shadow: 0px 2px 7px 2px rgb(0 0 0 / 14%);
-  }
   div.content {
     height: 500px;
   }
@@ -150,12 +143,22 @@ const Body = styled(IonPage)`
 const Profile = () => {
   const history = useHistory(); // use this for routing in js codes.
   const { curUser, setCurUser } = useContext( Context );
+  const [ userPhoto, setUserPhoto ] = useState();
+  const [ user, setUser ] = useState(
+    JSON.parse(Cookies.get("userData")) ? JSON.parse(Cookies.get("userData")) : "" )
+
 
 
 
   useEffect(() => {
     // console.log( JSON.parse( Cookies.get("userData") ) );
     setCurUser( JSON.parse( Cookies.get("userData") ) );
+
+    // console.log( user )
+    getUserImg( user?.userId ).then( res => {
+      if( res ) { setUserPhoto( res ); }
+      else { setUserPhoto( false ) }
+    })
   },[])
 
 
@@ -200,7 +203,13 @@ const Profile = () => {
             <div className="headerTrail"></div>
 
             <div className="infos">
-              <div className="profile"></div>
+              <div className="profile" >
+                <img
+                  src={ userPhoto ? userPhoto?.photo : "" }
+                  alt={"photo of " + curUser?.firstname } />
+              </div>
+              
+            
 
               <div id="details">
                 <Link to="/editprofile" >

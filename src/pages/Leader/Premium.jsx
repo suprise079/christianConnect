@@ -15,18 +15,17 @@ import {FaUserEdit} from "react-icons/fa";
 // import images 
 // import profileImg from "../components/Images/profile.jpeg";
 import churchImg from "./church.jpeg";
- 
-import React from 'react'
+
+
+// import session managements and firebase functions
+import Cookies from 'js-cookie'
+import Context from '../../context/Context';
+
+import React, { useEffect, useContext } from 'react'
+
 
   
-interface AppPage {
-  url: string;
-  iosIcon: string;
-  mdIcon: string;
-  title: string;
-}
-  
-const appPages: AppPage[] = [
+const appPages = [
   {
     title: "Upload Sermons",
     url: "/uploadSermon",
@@ -64,32 +63,41 @@ const appPages: AppPage[] = [
 
 
 
-const Premium: React.FC = () => {
+const Premium = () => {
+  const { curUser, setCurUser, fellowship, setFellowship } = useContext( Context );
+  
+
+  useEffect(() => {
+    setFellowship( JSON.parse(Cookies.get("curLeaderFs")) );
+    setCurUser( JSON.parse( Cookies.get("userData") ) );
+  },[])
+
+
+
   return (
     <IonPage>
 
       <IonContent >
-        <div className="bgColor">
+        <div style={{textAlign:"center"}} className="bgColor">
           <IonCard className="nameCard">
             <IonAvatar className="avatar">
               <img src={churchImg} alt="" />
             </IonAvatar>
 
             <div className="details">
-              <Link to="/editleader" >
+              <Link to="/editprofile" >
                 <FaUserEdit color="#000" size="20px"/>
               </Link>
 
-              <IonCardTitle><FaCrown color="#FFD700" />Mpumemelo Fellowship</IonCardTitle>
-              <IonCardSubtitle>mpumelelofellowship@gmail.com</IonCardSubtitle>
+              <IonCardTitle><FaCrown color="#FFD700" /> { fellowship?.name } </IonCardTitle>
+              <IonCardSubtitle> { curUser?.email } </IonCardSubtitle>
             </div>
-
           </IonCard>
         </div>
 
 
   
-      <IonList className="menu">
+        <IonList className="menu">
           {appPages.map((appPage, index) => {
 
             return (
@@ -117,13 +125,11 @@ const Premium: React.FC = () => {
 
               </IonItem>
               </IonMenuToggle>
-
             )
           })}
         </IonList>
 
       </IonContent>
-      
 
     </IonPage>
   );

@@ -59,16 +59,14 @@ const Notes = () => {
         {/* map all users notes */}
         {
           notes ? notes.map((note,i) => (
-            <>
-              <IonCard key={i} className='noteCards' >
+            <IonCard key={i} className='noteCards' >
 
-                {/* note title */}
-                <h3  onClick={(e) =>{ }} ><Link className='noteTitle' to={'/viewnotes?id=' + note.id }>{note.title}</Link></h3>
+              {/* note title */}
+              <h3  onClick={(e) =>{ }} ><Link className='noteTitle' to={'/viewnotes?id=' + note.id }>{note.title}</Link></h3>
 
-                {/* date created */}
-                <small className='noteDate'>{note.time}</small>
-              </IonCard>
-            </>
+              {/* date created */}
+              <small className='noteDate'>{note.time}</small>
+            </IonCard>
             )
           ) : ( <h2>loading...</h2> )
         }

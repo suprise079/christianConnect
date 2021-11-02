@@ -49,6 +49,7 @@ const Buttons = styled(IonButton)`
   color: #348d63;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 `;
+
 const Welcome = () => {
   const { curUser, setCurUser } = useContext( Context );
   const [clicked, setclicked] = useState(false);
@@ -91,7 +92,7 @@ const Welcome = () => {
             to={ "/Login" }
             onClick={()=>setclicked(false)}
           >
-            {clicked ? "Loading..." : "I am An App User"}
+            {clicked ? "Loading..." : "Get Started"}
           </Link>
         </Buttons>
 

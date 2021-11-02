@@ -54,8 +54,6 @@ export const LoginUser = async ( uid ) => {
 }
 
 
-
-
 // edit user account, currently can only edit firstname, lastname and phone number
 export const editUser = async (fn, ln, phone, id ) => {
   const usrref = doc( db, "Users", id );
@@ -67,7 +65,6 @@ export const editUser = async (fn, ln, phone, id ) => {
   });
   // console.log( r )
 }
-
 
 
 // func to upload users data to firestore
@@ -116,7 +113,6 @@ export const registerUser = async (
   }
   return isReg;
 };
-
 
 
 // get leaders fellowship details from firestore.
@@ -216,8 +212,6 @@ export const getAllNotes = async () => {
 }
 
 
-
-
 // GETS ALL THE FELLOWSHIPS FROM FIREBASE
 export const getAllFellowships = async() => {
   const fsRef = await getDocs( collection( db, "Fellowships" ) )
@@ -231,5 +225,79 @@ export const getAllFellowships = async() => {
   if( data.length > 0 ) return data; // return all the fellowships.
   else { return null } // return null 
 }
+
+
+// ADD OR UPDATE USERS PROFILE PIC
+// receives user id from auth and a photo string
+export const addProfileImg = async ( uid, photo ) => {
+  try {
+    const ref = await addDoc( collection(db, "userProfilePic"), {
+      userId: uid,
+      photo: photo
+    })
+
+    if( ref.id ) return true
+  }
+  catch( err ) {
+    console.error("Adding Pic", err );
+    return false;
+  }
+} 
+
+
+// edit user account, currently can only edit firstname, lastname and phone number
+export const updateProfileImg = async ( uid, photo ) => {
+  try {
+    const q = query( collection(db, "userProfilePic"),
+    where("userId", "==", uid), limit(1));
+  
+    const ref = await getDocs( q );
+
+    var id;
+    ref.docs.map( doc => id = doc.id )
+    if( id ) {
+      const usrref = doc( db, "userProfilePic", id );
+        await updateDoc( usrref, {
+        photo: photo
+      });
+    } else{ console.error("NO IMAGE ID") }
+  }
+  catch( err ) {
+    console.error( err )
+  }
+  
+  
+  // console.log( r )
+}
+
+
+// get user profile image from firebase
+// receives the user id from auth
+export const getUserImg = async( uid ) => {
+  // console.log( "HERE", uid )
+  // make a query to get user image from user profile pic, where user id
+  // = to params user id and the limit is one
+  try {
+    const q = query( collection(db, "userProfilePic" ),
+    where("userId", "==", uid ) )
+  
+    const res = await getDocs( q );
+
+    var data = [];
+    res.docs.map( doc => {
+      var d = doc.data();
+      d["id"] = doc.id;
+      data.push( d )
+    })
+    // console.log( data[0] )
+    return data[0]
+  }
+  catch( err ) {
+    console.error("getting user profile::", err )
+    return false;
+  }
+  
+}
+
 
 export default firebase;

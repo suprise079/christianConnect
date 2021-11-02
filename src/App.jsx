@@ -7,7 +7,6 @@ import React, { useState } from "react";
 import "@ionic/react/css/core.css";
 
 // firebase
-import { app } from "./firebase/firebase";
 
 // context for state handling
 import Context from "./context/Context";

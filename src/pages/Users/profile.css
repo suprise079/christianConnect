@@ -47,3 +47,29 @@ a.item {
 #userProfile #infos {
   background-color: red;
 }
+
+
+#userProfile div.profile {
+  position: relative;
+  top: -10%;
+  /* left: 35%; */
+  text-align: center;
+  margin: auto;
+  width: 6.5em;
+  height: 6em;
+  background-size: cover;
+  /* border: 2px solid; */
+  border-radius: 100%;
+  box-shadow: 0px 2px 7px 2px rgb(0 0 0 / 14%);
+}
+
+#userProfile div.profile img {
+  position: relative;
+  text-align: center;
+  margin: auto;
+  width: 6.5em;
+  height: 6em;
+  background-size: cover;
+  border-radius: 100%;
+  box-shadow: 0px 2px 7px 2px rgb(0 0 0 / 14%);
+}

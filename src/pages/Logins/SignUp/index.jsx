@@ -20,7 +20,7 @@ import "../StylesForPages.css";
 import Context from "../../../context/Context";
 import { app, auth } from "../../../firebase/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { registerUser } from "../../../firebase/firebase-help";
+import { addProfileImg, registerUser } from "../../../firebase/firebase-help";
 
 const Body = styled(IonPage)`
   padding: 1em 0em
@@ -137,6 +137,10 @@ const SignUp = () => {
           // console.log(ref);
           if( ref ) {
             alert("User Successfully registered..");
+
+            addProfileImg( uid, "" ).then( res => {
+              if( !res ) console.error("Error making user profile image");
+            })
 
             // auth.onAuthStateChanged((user) => {
             //   console.log("USER IS :", user ? user.email : user);

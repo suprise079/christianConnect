@@ -1,15 +1,18 @@
 {
   "name": "christianConnect",
+  "homepage": ".",
   "version": "0.0.1",
   "private": true,
   "dependencies": {
     "@capacitor/android": "3.2.5",
     "@capacitor/app": "1.0.2",
+    "@capacitor/camera": "^1.1.2",
     "@capacitor/core": "3.2.0",
     "@capacitor/haptics": "1.0.2",
     "@capacitor/keyboard": "1.0.2",
     "@capacitor/status-bar": "1.0.2",
     "@ionic-native/calendar": "^5.36.0",
+    "@ionic/pwa-elements": "^3.0.2",
     "@ionic/react": "^5.5.0",
     "@ionic/react-router": "^5.5.0",
     "@testing-library/jest-dom": "^5.11.9",
@@ -75,5 +78,5 @@
     "@capacitor/cli": "3.2.0",
     "react-scripts": "^3.4.4"
   },
-  "description": "An Ionic project"
+  "description": "Christian Connect"
 }

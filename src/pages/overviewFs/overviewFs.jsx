@@ -117,7 +117,6 @@ const ReviewsFs = ( props ) => {
             </div>
           </div>
 
-
         </div>
 
       </div>

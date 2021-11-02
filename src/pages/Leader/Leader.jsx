@@ -38,6 +38,9 @@ import Context from "../../context/Context";
 
 // firebase imports
 import { auth } from "../../firebase/firebase";
+import Cookies from 'js-cookie';
+
+
 import React, { useContext, useEffect } from "react";
 
 
@@ -80,13 +83,14 @@ const appPages = [
 ];
 
 const Leader = () => {
-  const { curUser, setCurUser, fellowship } = useContext( Context );
+  const { curUser, setCurUser, fellowship, setFellowship } = useContext( Context );
   const history = useHistory();
 
 
-  // useEffect(() => {
-    
-  // }, [])
+  useEffect(() => {
+    setFellowship( JSON.parse(Cookies.get("curLeaderFs")) );
+    setCurUser( JSON.parse( Cookies.get("userData") ) );
+  },[])
 
 
   const goToItem = (e) => {
@@ -122,7 +126,7 @@ const Leader = () => {
             </IonAvatar>
 
             <div className="details">
-              <Link to="/editleader">
+              <Link to="/editprofile">
                 <FaUserEdit
                   color="#000"
                   size="20px"

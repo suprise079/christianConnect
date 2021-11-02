@@ -16,13 +16,17 @@ import { FaCalendarAlt } from "react-icons/fa";
 import { IoMdCloudUpload } from "react-icons/io";
 import "../styles.css";
 
-const handleSubmit = (e) => {
-  e.preventDefault();
-  console.log(e.target);
-};
+
 const UploadAnnouncement = () => {
   const [date, setdate] = useState("Date");
   const [text, setText] = useState("");
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(e.target);
+  };
+
   return (
     <IonPage
       style={{
@@ -59,7 +63,7 @@ const UploadAnnouncement = () => {
               required
               type="text"
               name="Title"
-              clearInput="true"
+              clearinput
               className="inputField"
             ></IonInput>
           </div>
@@ -78,7 +82,7 @@ const UploadAnnouncement = () => {
               }}
               
               type="date"
-              clearInput="true"
+              clearinput
               className="inputField"
               placeholder=" "
             ></input>
