@@ -5,6 +5,7 @@ import {
   IonCardSubtitle,
   IonLabel,
   IonIcon,
+  IonImg,
   IonHeader,
   IonButtons,
   IonBackButton,
@@ -197,7 +198,7 @@ const Profile = () => {
           </IonToolbar>
         </IonHeader>
 
-        <div className="body">
+        <div id="profileContent" className="body">
 
           <div className="container">
             <div className="headerTrail"></div>
@@ -214,13 +215,13 @@ const Profile = () => {
               <div id="details">
                 <Link to="/editprofile" >
                   <FaUserEdit
-                    id="editButton"
+                    className="editButton"
                     // onClick={(e) => history.push("/editprofile")}
-                    color="#000"
                     size="25px"/>
                 </Link>
                
-                <IonCardTitle>{ curUser?.firstname } { curUser?.lastname } </IonCardTitle>
+                <IonCardTitle style={{textTransform:"capitalize"}} >
+                  { curUser?.firstname } { curUser?.lastname } </IonCardTitle>
                 <IonCardSubtitle> { curUser?.email } </IonCardSubtitle>
               </div>
             </div>

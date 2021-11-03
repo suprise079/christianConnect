@@ -164,26 +164,29 @@ export const addNotes = async ( nc, nt, uid ) => {
 export const getUserNotes = async ( uid ) => {
   var data = [];
 
-  try { // get all notes, where user id, == receives user id
-    const q = query( collection( db, "notes"), where("userId", "==", uid));
-    const ref = await getDocs( q ); // get the notes documents
-
-    ref.docs.map( doc => { // map to go over all of em
-      // console.log( doc.data() );
-      // push data into the an array to return.
-      data.push({
-        id: doc.id, // id of the doc online
-        userId: doc.data().userId, // user who made this notes
-        content: doc.data().content, // content of the notes
-        time: doc.data().time, // time user made the notes
-        title: doc.data().title, // title of the notes
+  if( uid ) {
+    try { // get all notes, where user id, == receives user id
+      const q = query( collection( db, "notes"), where("userId", "==", uid));
+      const ref = await getDocs( q ); // get the notes documents
+  
+      ref.docs.map( doc => { // map to go over all of em
+        // console.log( doc.data() );
+        // push data into the an array to return.
+        data.push({
+          id: doc.id, // id of the doc online
+          userId: doc.data().userId, // user who made this notes
+          content: doc.data().content, // content of the notes
+          time: doc.data().time, // time user made the notes
+          title: doc.data().title, // title of the notes
+        })
       })
-    })
-    // console.log( "GET ALL NOTES FUNC: ", data ); // seeing purpose.
-    // a filter will be applied once log in is settle.
-    return data; // return notes to users.
+      // console.log( "GET ALL NOTES FUNC: ", data ); // seeing purpose.
+      // a filter will be applied once log in is settle.
+      return data; // return notes to users.
+    }
+    catch(e) { console.error("Error Getting User Notes:", e ); return null; }
   }
-  catch(e) { console.error("Error Getting Notes:", e ); return null; }
+  
 }
 
 
