@@ -26,12 +26,18 @@
 #editUser_editButtons {
   /* background-color: red; */
   display: flex;
+  font-weight: bold;
   padding: .5em 0em;
   justify-content: space-evenly;
 }
 
 #editUser_editButtons .editbutton {
-  background-color: green;
+  background-color: #348D63;
+}
+
+#editUser_editButtons .editbutton:hover,
+#editUser_editButtons .editbutton:focus {
+  background-color: #1d4f37;
 }
 
 #editUserAccount #nameTitle {
@@ -65,4 +71,30 @@
 #editUserAccount #inputFields .edituserBtn .editbutton {
   background-color: green;
   text-align: center;
+}
+
+
+
+
+#editUserAccount #editPhotoBtn {
+  /* background-color: white; */
+  /* background-color: yellow; */
+  margin: auto;
+  text-decoration: underline;
+  padding: 0em 0em .9em 0em;
+  text-align: center;
+  color: black;
+  cursor: pointer;
+}
+
+
+#editUserAccount #editPhotoBtn:focus,
+#editUserAccount #editPhotoBtn:hover {
+  /* background-color: white; */
+  /* background-color: yellow; */
+  margin: auto;
+  padding: 0em 0em .9em 0em;
+  text-align: center;
+  color: black;
+  cursor: pointer;
 }

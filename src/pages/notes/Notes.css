@@ -1,7 +1,16 @@
-#mainContainer{
+#notesMainContainer{
     background-color: #f1f1f1;
     overflow-y: scroll;
     /* background-color: yellow; */
+}
+
+#notesMainContainer #header {
+    /* background-color: red; */
+}
+
+#notesMainContainer #notesContainer {
+    /* background-color: yellow; */
+    font-size: 1em;
 }
 
 #notesContainer .noteCards{

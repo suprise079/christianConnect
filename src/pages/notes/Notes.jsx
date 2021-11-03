@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link, useHistory } from 'react-router-dom'
-import { IonHeader, IonTitle, IonToolbar, IonCard, IonSearchbar, IonApp, IonPage } from '@ionic/react';
+import { IonHeader, IonTitle, IonToolbar, IonCard,
+  IonSearchbar, IonPage, IonContent
+} from '@ionic/react';
 import { IoMdArrowBack } from 'react-icons/io'
 import { GrAdd } from 'react-icons/gr'
 import "./Notes.css";
@@ -9,36 +11,33 @@ import "./Notes.css";
 // import firebase functions and classes
 import { auth } from "../../firebase/firebase";
 import { getUserNotes } from "../../firebase/firebase-help";
-
+import Context from "../../context/Context";
+import Cookies from "js-cookie";
 
 
 
 
 const Notes = () => {
+  const { curUser, setCurUser } = useContext( Context );
   // search notes
   const [searchNote, setSearchNote] = useState('');
   // Show Notes
   const [notes, setNotes] = useState();
   const history = useHistory(); // use to route dynamically
-  const [ user, setUser ] = useState();
 
 
 
   useEffect(() => {
-    // console.log( auth.currentUser?.providerData[0].displayName )
-    // get the value of auth.current user that keeps user's data.
-    var d = JSON.parse( auth.currentUser?.providerData[0].displayName );
-    // console.log( d ); // for debuggin purposes
-    setUser( d ) // set user for this page
-    // get current user notes.. after the promise is returned
-    // set current user notes to local state var.
-    getUserNotes( d.userId ).then( setNotes )
+    // get user's data from session........
+    setCurUser( JSON.parse( Cookies.get("userData") ) );
+    // get user's notes from firebase.......
+    getUserNotes( curUser?.userId ).then( setNotes )
   }, [] )
   
 
 
   return (
-    <IonPage id='mainContainer'>
+    <IonPage id='notesMainContainer'>
       
       {/* header */}
       <IonHeader id='header'>
@@ -51,31 +50,38 @@ const Notes = () => {
         </IonToolbar>
       </IonHeader>
 
-      <div id='notesContainer'>
+      <IonContent >
+        <div id='notesContainer'>
 
         {/* search */}
         <IonSearchbar id='searchNotes' value={searchNote} onIonChange={e => setSearchNote(e.detail.value)}></IonSearchbar>
 
         {/* map all users notes */}
         {
-          notes ? notes.map((note,i) => (
+          notes && notes.length > 0 ? notes.map((note,i) => (
             <IonCard key={i} className='noteCards' >
 
               {/* note title */}
-              <h3  onClick={(e) =>{ }} ><Link className='noteTitle' to={'/viewnotes?id=' + note.id }>{note.title}</Link></h3>
+              <h3  onClick={(e) =>{ }} >
+                <Link className='noteTitle' to={'/viewnotes?id=' + note.id }>
+                  {note.title}</Link></h3>
 
               {/* date created */}
               <small className='noteDate'>{note.time}</small>
             </IonCard>
             )
-          ) : ( <h2>loading...</h2> )
+          ) : ( <h2 style={{textAlign:"center"}} >
+            No Notes For <span style={{textTransform:"capitalize"}} >
+              { curUser?.firstname } </span></h2> )
         }
 
         {/* add note button */}
         <Link to='./addnote'> <GrAdd id='addNote' /> </Link>
 
-      </div>
-
+        </div>
+      
+      </IonContent>
+      
     </IonPage>
   );
 }

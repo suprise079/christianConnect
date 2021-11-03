@@ -1,5 +1,6 @@
-import { IonPage, IonItem, IonTitle, IonLabel, IonCheckbox, IonButton, IonInput,
-  IonDatetime, IonContent 
+import {
+  IonPage, IonItem, IonTitle, IonLabel, IonCheckbox, IonButton, IonInput,
+  IonDatetime, IonContent
 } from '@ionic/react';
 
 import { Camera, CameraResultType } from '@capacitor/camera';
@@ -18,7 +19,8 @@ import profileImg from "./profile.jpeg";
 
 // get db context
 import Context from '../../context/Context';
-import { deleteDocument, editUser, getUserImg, LoginUser, updateProfileImg
+import {
+  deleteDocument, editUser, getUserImg, LoginUser, updateProfileImg
 } from '../../firebase/firebase-help';
 import Cookies from 'js-cookie';
 
@@ -35,46 +37,63 @@ import { takePicture } from '../../components/helpFunc';
 
 const EditUser = () => {
   // for editing purposes
-  const [ user, setUser ] = useState(
-    JSON.parse(Cookies.get("userData")) ? JSON.parse(Cookies.get("userData")) : "" )
-  const { curUser, setCurUser, fellowship, setFellowship } = useContext( Context );
-  const [ userPhoto, setUserPhoto ] = useState();
+  const [user, setUser] = useState(
+    JSON.parse(Cookies.get("userData")) ? JSON.parse(Cookies.get("userData")) : "")
+  const { curUser, setCurUser, fellowship, setFellowship } = useContext(Context);
+  const [userPhoto, setUserPhoto] = useState();
   const history = useHistory();
-  const [fname, setFname] = useState( user?.firstname );
-  const [lname, setLname] = useState( user?.lastname );
-  const [phone, setPhone] = useState( user?.phoneNumber );
-  const [image, setImage] = useState( user?.profilePic );
+  const [fname, setFname] = useState(user?.firstname);
+  const [lname, setLname] = useState(user?.lastname);
+  const [phone, setPhone] = useState(user?.phoneNumber);
+  const [image, setImage] = useState(user?.profilePic);
   // new leader and setting fellowship name
   // const [fsName, setFsName] = useState("");
   // const [wannaBeLeader, setWannaBeLeader] = useState(false); 
-  
-  
+
+
   useEffect(() => {
-    setFellowship( JSON.parse(Cookies.get("curLeaderFs")) );
-    setCurUser( JSON.parse( Cookies.get("userData") ) );
+
+    if( curUser?.isLeader ) { // get fellowship data only if user is leader
+      setFellowship( JSON.parse( Cookies.get("curLeaderFs")) );
+    }
+
+    setCurUser(JSON.parse(Cookies.get("userData")));
 
     // console.log( user )
-    getUserImg( user?.userId ).then( res => {
-      if( res ) { setUserPhoto( res ) }
-      else { setUserPhoto( false ) }
+    getUserImg(user?.userId).then(res => {
+      if (res) { setUserPhoto(res) }
+      else { setUserPhoto(false) }
     })
-  },[])
+  }, [])
 
 
   const delUser = () => {
     var isTrue = window.confirm("Continue To Delete Account..?");
 
-    if( isTrue ) {
-      deleteDocument("Users", curUser.id ).then(() => {
+    if (isTrue) {
+      var userId = curUser?.userId;
+
+      deleteDocument("Users", curUser.id).then(() => {
         const user = auth.currentUser; // get the current user
         // delete user from auth
-        deleteUser( user ).then(() => {
+        deleteUser(user).then(() => {
+
+          // delete user profile pic
+          if( phone && phone?.id ) {
+            deleteDocument("userProfilePic", phone?.id )
+          }
+
+          // delete user delete user fellowship if user is leader
+          if( fellowship && fellowship?.id ) {
+            deleteDocument("Fellowships", fellowship?.id )
+          }
+
           // Cookies.remove("userData"); // delete user data from session cookie
           alert("User Account Deleted");
           history.push("/");
-        }).catch( error => {
-          console.error( error.code );
-          alert( error.code );
+        }).catch(error => {
+          console.error(error.code);
+          alert(error.code);
         })
       })
     }
@@ -82,40 +101,39 @@ const EditUser = () => {
 
   const EditUser = () => {
 
-    if( fname && lname && phone ) {
-      
-      if( image && image != null && image != undefined ) {
-        // console.log( image );
-        updateProfileImg( curUser?.userId, image );
+    if (fname && lname && phone) {
+
+      if (image && image != null && image != undefined) {
+        updateProfileImg(curUser?.userId, image);
       }
 
       var res = window.confirm("Continue..?");
 
-      if( res ) { 
-        editUser( fname, lname, phone, curUser.id ).then(() => {
-        
-          LoginUser( curUser.userId )
-          .then(( data ) => {
-  
-            if( data ) {
-              Cookies.remove("userData"); // remove current user data
-              Cookies.set("userData",JSON.stringify(data));// set new user data from fb 
-              setCurUser( JSON.parse( Cookies.get("userData")) ); // set user in Context
-              history.push( data?.isLeader ? "/leader" : "/profile" ) // redirect user to homepage
-            }
-          })
-          .catch( err => {
-            console.error( err.code );
-          })
+      if (res) {
+        editUser(fname, lname, phone, curUser.id).then(() => {
+
+          LoginUser(curUser.userId)
+            .then((data) => {
+
+              if (data) {
+                Cookies.remove("userData"); // remove current user data
+                Cookies.set("userData", JSON.stringify(data));// set new user data from fb 
+                setCurUser(JSON.parse(Cookies.get("userData"))); // set user in Context
+                history.push(data?.isLeader ? "/leader" : "/profile") // redirect user to homepage
+              }
+            })
+            .catch(err => {
+              console.error(err.code);
+            })
         })
       }
-     
+
     }
     else { alert("Please Fill All fields....") }
   }
 
-  const EditPhoto = ( fileinput ) => {
-    if( fileinput && fileinput != null  ) {
+  const EditPhoto = (fileinput) => {
+    if (fileinput && fileinput != null) {
       // console.log(fileinput)
 
       var data = new FileReader()
@@ -124,11 +142,11 @@ const EditUser = () => {
       //   console.log( "HERE", e.target.result);
       // };
 
-      data.addEventListener("load", function(d){ 
+      data.addEventListener("load", function (d) {
         // console.log("FILE READER", d.target.result)
         setImage(d.target.result)
       })
-     data.readAsDataURL(fileinput);
+      data.readAsDataURL(fileinput);
     }
     else { console.error("READ IMG ERROR") }
 
@@ -142,51 +160,54 @@ const EditUser = () => {
     <IonPage>
 
       <IonContent >
-      
-      <div id="editUserAccount" >
 
-        <div className="bgColor"></div>
+        <div id="editUserAccount" >
 
-        <div className="editProfileImg" >
-          <img
-            // onClick={ e=> EditPhoto() }
-            src={ userPhoto ? userPhoto.photo : "" }
-            alt={ "photo of " + curUser?.firstname + " " + curUser?.lastname } />
-          <br />
-          <input
-            onChange = { e => EditPhoto( e.target.files[0] ) }
-            placeholder="Select Image"
-            type={{backgroundColoe:"red"}}  type="file" />
-        </div>
+          <div className="bgColor"></div>
 
-        <div >
-          { // display the session name, if user is a leader
-            curUser?.isLeader ? (
-              <IonTitle id="nameTitle" >
-                { fellowship?.name } </IonTitle>
-            ) : ("")
-          }
-        <IonTitle id="nameTitle" > { curUser?.firstname } { curUser?.lastname } </IonTitle>
-        </div>
+          <div className="editProfileImg" >
+            <img
+              // onClick={ e=> EditPhoto() }
+              src={userPhoto ? userPhoto.photo : ""}
+              alt={"photo of " + curUser?.firstname + " " + curUser?.lastname} />
+            <br />
+            <label id="editPhotoBtn" htmlFor="selectImage">Select Image</label>
+            <input
+              style={{ display: "none" }}
+              id="selectImage"
+              onChange={e => EditPhoto(e.target.files[0])}
+              placeholder="Select Image"
+              type={{ backgroundColoe: "red" }} type="file" />
+          </div>
 
-        <div id="editUser_editButtons" lines="full" >
-          <IonButton
-            className="editbutton"
-            onClick={ e => delUser() }
-            size="small"
-            color="#348D63">Delete Account</IonButton>
+          <div >
+            { // display the session name, if user is a leader
+              curUser?.isLeader ? (
+                <IonTitle id="nameTitle" >
+                  {fellowship?.name} </IonTitle>
+              ) : ("")
+            }
+            <IonTitle id="nameTitle" > {curUser?.firstname} {curUser?.lastname} </IonTitle>
+          </div>
 
-          <IonButton
-            className="editbutton"
-            onClick={ e => EditUser() }
-            size="small"
-            color="#348D63">Edit Profile</IonButton>
-        </div>
+          <div id="editUser_editButtons" lines="full" >
+            <IonButton
+              className="editbutton"
+              onClick={e => delUser()}
+              size="small"
+              color="#348D63">Delete Account</IonButton>
+
+            <IonButton
+              className="editbutton"
+              onClick={e => EditUser()}
+              size="small"
+              color="#348D63">Edit Profile</IonButton>
+          </div>
 
 
-        <div id="inputFields" >
+          <div id="inputFields" >
 
-          {/* <div
+            {/* <div
             style={{
               display: "flex",
               flexDirection: "row",
@@ -225,37 +246,37 @@ const EditUser = () => {
             )}
           </div> */}
 
-          <div className="edituserField" lines="full">
-            <IonInput
-              value={ fname }
-              placeholder="user firstname"
-              className="field"
-              placeholder="Firstname"
-              onIonChange={e => setFname(e.detail.value)}
-              clearInput />
-          </div>
+            <div className="edituserField" lines="full">
+              <IonInput
+                value={fname}
+                placeholder="user firstname"
+                className="field"
+                placeholder="Firstname"
+                onIonChange={e => setFname(e.detail.value)}
+                clearInput />
+            </div>
 
-          <div className="edituserField" lines="full">
-            <IonInput
-              value={ lname }
-              className="field"
-              placeholder="user lastname"
-              placeholder="Lastname"
-              onIonChange={e => setLname(e.detail.value)}
-              clearInput />
-          </div>
+            <div className="edituserField" lines="full">
+              <IonInput
+                value={lname}
+                className="field"
+                placeholder="user lastname"
+                placeholder="Lastname"
+                onIonChange={e => setLname(e.detail.value)}
+                clearInput />
+            </div>
 
-          <div className="edituserField" lines="full">
-            <IonInput
-              value={ phone }
-              className="field"
-              placeholder="user phone number"
-              placeholder="Phone number"
-              onIonChange={e => setPhone(e.detail.value)}
-              clearInput />
-          </div>
+            <div className="edituserField" lines="full">
+              <IonInput
+                value={phone}
+                className="field"
+                placeholder="user phone number"
+                placeholder="Phone number"
+                onIonChange={e => setPhone(e.detail.value)}
+                clearInput />
+            </div>
 
-          {/* <div className="edituserField" lines="full">
+            {/* <div className="edituserField" lines="full">
             <IonInput
               className="field"
               placeholder="E-mail"
@@ -263,21 +284,21 @@ const EditUser = () => {
               clearInput />
           </div> */}
 
-          {/* <div className="edituserBtn" lines="full">
+            {/* <div className="edituserBtn" lines="full">
             <IonButton
               className="editbutton"
               onClick={ e => EditUser() }
               size="small"
               color="#348D63">Edit Profile</IonButton>
           </div> */}
+          </div>
+
+          {/* <IonDatetime value="2019-10-01T15:43:40.394Z" display-timezone="utc"> */}
+          {/* </IonDatetime> */}
+          {/* <IonItem className="about" lines="full"> */}
+          {/* </IonItem> */}
         </div>
 
-        {/* <IonDatetime value="2019-10-01T15:43:40.394Z" display-timezone="utc"> */}
-        {/* </IonDatetime> */}
-        {/* <IonItem className="about" lines="full"> */}
-        {/* </IonItem> */}
-      </div>
-      
 
 
       </IonContent>
