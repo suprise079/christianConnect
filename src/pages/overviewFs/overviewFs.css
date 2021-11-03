@@ -185,6 +185,200 @@ color: white;
 }
 
 
+/* Malebo review css */
+
+
+.reviewContent .nameFs {
+    /* background-color: #348D63; */
+    /* background-color: red; */
+    margin: 1em 0em;
+}
+
+.reviewContent .nameFs p:nth-child(1) {
+    /* background-color: red; */
+    font-size: 1.09em;
+    padding: 0em 0em 0em 1.1em;
+    color: white;
+}
+
+.reviewContent .nameFs p {
+    /* background-color: red; */
+    font-size: .8em;
+    padding: .3em 0em 0em 1.6em;
+}
+
+.reviewContent .nameFs p i {
+    color: white;
+    font-style: normal;
+}
+
+i {
+    font-style: normal;
+}
+
+#review .reviewContent .imagesR {
+    margin-top: 3em;
+    /* padding: 5em 0em; */
+    /* background-color: yellow; */
+    border: 1px solid black;
+}
+
+
+/* item */
+.item {
+    color: white;
+    /* border: 1px solid orangered; */
+    margin: 20px 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    /* border-bottom: 1px solid white; */
+    /* background-color: red; */
+}
+
+
+.person{
+    /* background-color: red; */
+    /* border: 1px solid black; */
+    max-width: 60px;
+    max-height: 60px;
+    width: 100%;
+    height: 100%;
+}
+
+.item div {
+    display: flex;
+    /* background-color: yellow; */
+    max-width: 300px;
+    /* padding: 1em 0em; */
+}
+
+.item div i{
+    padding: .4em;
+    font-size: 1.1em;
+}
+
+
+.small {
+    font-size: 1px;
+    color: rgb(253, 253, 253);
+}
+
+ion-label.sortBy {
+    /* background-color: yellow; */
+    padding: .5em 0em;
+}
+
+ion-label.sortBy .btn {
+    background-color: #20704b;
+    padding: .3em .7em;
+    font-size: .9em;
+    margin: .0em .3em;
+    border-radius: .7em;
+    color: white;
+}
+
+.avatar1 {
+    margin: 1px; 
+    display: flex;
+    /* border: 1px solid red; */
+    /* background-color: yellow; */
+}
+
+.avatar1 p {
+    margin: 0em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    font-size: small;
+    /* background-color: red; */
+}
+
+.avatar1 img {
+    margin-right: .5em;
+    /* vertical-align: top; */
+    width: 4em;
+    height: 4em;
+    border-radius: 50%;
+}
+
+.reviewTextArea{
+    background-color: white;
+    color: #000000;
+    border: none;
+}
+
+.reviewBtn{
+    background-color: #20704b;
+    padding: 5px 10px;
+    border-radius: 10px;
+    margin-bottom: 5px;
+}
+
+.star-rating{
+    margin-top: 25px;
+    margin-left: 15px;
+}
+
+.reviewTextArea{
+    background-color: white;
+    margin: 15px 0px;
+    max-width: 350px;
+    max-height: 100px;
+    width: 100%;
+    height: 100%;
+    border: 1px solid rgb(211, 211, 211);
+}
+
+.sortBy{
+    /* background-color: #20704b; */
+    border: 1px solid #20704b ;
+    margin: 10px 0px;
+    max-width: 410px;
+    width: 100%;
+    padding: 10px;
+    /* box-shadow: inset 1px 1px 3px #000000; */
+}
+
+.sort-btn:hover{
+    background-color: #71cca2;
+}
+
+.sort-btn{
+    margin-left: 20px;
+    margin-right: 20px;
+    background-color: #20704b;
+    border-radius: 5px;
+    padding: 2px 10px;
+}
+
+.reviewCont{
+    /* border: 1px solid black; */
+    padding: 10px 10px;
+    margin-bottom: 20px;
+}
+
+.add-review{
+    /* border: 1px solid orange; */
+    margin-top: 10px;
+    padding-left: -10px;
+    max-width: 350px;
+    width: 100%;
+}
+
+.item.sc-ion-label-md-h, .item .sc-ion-label-md-h {
+    display: block;
+    color: black;
+    font-size: inherit;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    background-color: white;
+    padding: 10px;
+    margin: 0px;
+    border-radius: 6px;
+}
 
 
 
@@ -206,28 +400,28 @@ color: white;
 /* REVIEWS SECTION'S CSS */
 
 /* item */
-#reviewsFs {
+/* #reviewsFs { */
 	/* background-color: red; */
-}
+/* } */
 
-#reviewsFs .item {
+/* #reviewsFs .item {
 	color: white;
 	background-color: #127647;
-	/* background-color: blue; */
+	background-color: blue;
 	display: flex;
 	flex-direction: column;
 	padding: .5em 0em 0em .5em;
-}
+} */
 
-#reviewsFs .item .person {
+/* #reviewsFs .item .person {
 	color: #000;
 	font-size: 2em;
-}
+} */
 
-#reviewsFs .item div {
+/* #reviewsFs .item div {
 	display: flex;
-	/* background-color: yellow; */
-	/* padding: 1em 0em; */
+	background-color: yellow;
+	padding: 1em 0em;
 }
 
 #reviewsFs .item div i{
@@ -236,10 +430,10 @@ color: white;
 }
 
 #reviewsFs #reviews {
-	/* background-color: red; */
-}
+	background-color: red;
+} */
 
-#reviewsFs #reviews .review {
+/* #reviewsFs #reviews .review {
 	background-color: #127647;
 	display: flex;
 	flex-direction: column;
@@ -248,12 +442,12 @@ color: white;
 }
 
 #reviewsFs #reviews .review .userPicName  {
-	/* background-color: yellow; */
-	/* padding: .3em 0em .3em .3em; */
-}
+	background-color: yellow;
+	padding: .3em 0em .3em .3em;
+} */
 
 
-#reviewsFs #reviews .review .userPicName img {
+/* #reviewsFs #reviews .review .userPicName img {
 	width: 1em;
 	height: 6em;
 	border-radius: 50%;
@@ -263,15 +457,15 @@ color: white;
 #reviewsFs #reviews .review .reviewed .icon1,
 #reviewsFs #reviews .review .reviewed .star {
 	font-size: .9em;
-}
+} */
 
-#reviewsFs .small {
+/* #reviewsFs .small {
 	font-size: .78em;
-	/* color: red; */
+	color: red;
 }
 
 #reviewsFs .sortBy {
-	/* background-color: yellow; */
+	background-color: yellow;
 	padding: .5em 0em;
 }
 
@@ -290,5 +484,5 @@ color: white;
 	flex-direction: column;
 	justify-content: space-evenly;
 	font-size: small;
-	/* background-color: red; */
-}
+	background-color: red;
+} */

@@ -1,11 +1,11 @@
-import { IonContent,IonIcon, IonItem,IonButton,IonSelect,IonTabButton,IonLabel,IonPage, IonTitle, IonTabBar,  } from '@ionic/react';
+import { IonContent, IonIcon, IonItem, IonSelect, IonLabel, IonPage, IonTitle, IonTabBar,  } from '@ionic/react';
 import './overviewFs.css';
-import {
-  shareSocialOutline, arrowBack,ellipsisHorizontalSharp,personCircleSharp,star,starHalf,returnUpForward,call,bookmarkSharp,locationSharp,timeSharp,earthSharp
-} from 'ionicons/icons'
+import Stars from '../../components/starRating/starRating';
 
+//import icons
+import { shareSocialOutline, returnUpForward, call, bookmarkSharp,locationSharp, timeSharp, earthSharp, star } from 'ionicons/icons'
+import { GrAdd } from 'react-icons/gr';
 import { FaArrowLeft, FaEllipsisH, FaStar, FaStarHalf, FaStarHalfAlt, FaRegStarHalf } from 'react-icons/fa';
-
 
 // session management and firebase db
 import Cookies from 'js-cookie';
@@ -17,10 +17,9 @@ import { Link } from 'react-router-dom';
 import React, { useContext, useEffect, useState } from 'react'
 
 // import component
-import TopImgFs from '../../components/topImagesFs/topImgFs';
+// import NavigateFs from '../../components/navigateFs/navigateFs';
+// import TopImgFs from '../../components/topImagesFs/topImgFs';
 import TopNavBar from '../../components/topNavBar/topNavBar';
-
-
 
 
 
@@ -70,53 +69,85 @@ const ContactLocAddr = () => {
 
 // contains the reviews of a fellowship
 const ReviewsFs = ( props ) => {
+
+  const [rateTxt, setRateTxt] = useState ();
+  const [ stars, setStars ] = useState(0);
+  
+
+  function addRev(){
+    // addReview()
+  }
+
   return (
     <>
       <h3 > Review { props.name } fellowship </h3>
       
       <div id="reviewsFs" >
-        <div  className="item" >
-          <small>Rate and review</small> 
+        <div  className = "item">
+          
+          <IonLabel>
+            {/* add review container */}
+              
+              <h2>Rate and review</h2> 
 
-          <small className="small" >Share your experience to help others</small>
+              <div className='add-review'>                 
+                {/* star rating stars={ stars } setStars={ setStars } */}
+                <Stars hoverValue={ stars } setHoverValue={ setStars } />                            
+              </div>
 
-          <div > 
-            <IonIcon icon={personCircleSharp} className="person"></IonIcon>
-            <i >
-            <IonIcon icon={star} className="icon2" ></IonIcon>
-            <IonIcon icon={star} className="icon2" ></IonIcon>
-            <IonIcon icon={star} className="icon2"></IonIcon>
-            <IonIcon icon={star} className="icon2"></IonIcon>
-            <IonIcon icon={star} className="icon2"></IonIcon>
-            </i> 
-          </div>
+              {/* reviews text area */}
+              <textarea className='reviewTextArea' value={rateTxt}  placeholder="How was your experience?"  onChange={(e)=> setRateTxt(e.target.value)}/>
+
+              <br />
+              
+              {/* add review button */}
+              <button className='reviewBtn'>Add review</button>
+            
+           </IonLabel>
+
         </div>
 
+        
+        <div className="sortBy" >
 
-        <div id="reviews"  color = " #348D63" lines = "full">
-          <div className="sortBy" >
-            <small>Sort By</small>
-            <button className="btn" >Newest</button>
-            <button className="btn" >Highest</button>
-            <button className="btn" >Lowest</button>
-          </div>
-           
-          <div className="review" >
-            <div className="userPicName">
-              <img src={""} alt="IMG" />
-              <i > {"Marie Hope"} </i>  <i> {"2"} reviews </i>
-            </div>
-            <div className="reviewed" >
-              <IonIcon icon={star} className="icon1" ></IonIcon>
-              <IonIcon icon={star} className="icon1" ></IonIcon>
-              <IonIcon icon={star} className="icon1" ></IonIcon>
-              <IonIcon icon={star} className="icon1"></IonIcon>
-              <IonIcon icon={star} className="star"></IonIcon><br />
-              <small>2 months ago</small> <br />
-              <small>I love this app, it has brought me close to God</small>
-            </div>
-          </div>
+          {/* sort buttons */}
+          {/* create functions for them to work */}
+              <small>Sort By</small>
+              <button className="sort-btn" >Newest</button>
+              <button className="sort-btn" >Highest</button>
+              <button className="sort-btn" >Lowest</button>
+        </div>
 
+         <div>
+            {/* display reviews from datatbase */}
+
+          <div className='reviewCont'>
+
+            <div slot=" start" className="avatar1">
+
+              {/* display profile picture */}
+              {/* <img src={img3} /> */}
+
+              {/* name of user */}
+              <p><i> {"Marie Hope"} </i></p>
+            </div>
+
+            {/* display stars */}
+            
+            {/* <IonIcon icon={star} className="icon1" ></IonIcon>
+            <IonIcon icon={star} className="icon1" ></IonIcon>
+            <IonIcon icon={star} className="icon1" ></IonIcon>
+            <IonIcon icon={star} className="icon1"></IonIcon>
+            <IonIcon icon={star} className="star"></IonIcon> */}
+
+            {/* date review created */}
+            <p>{'date'}</p>
+            
+            {/* review content */}
+            <p>I love this app, it has brought me close to God</p>
+
+
+          </div>
         </div>
 
       </div>
@@ -244,6 +275,83 @@ const OverviewFs = () => {
 
       </IonContent>
     </IonPage>
+
+    // malebo's overview code
+
+    // <IonPage className = "overviewFS">
+ 
+    //   <IonContent className="overview" fullscreen >
+
+    //     <TopNavBar />
+        
+    //     {/* delete this at your own risk */}
+    //     <div className="imagesO" ></div>
+
+    //     <TopImgFs img1={ "" } img2={ "" } img3={ "" } />
+       
+
+            
+    //     <div className = "nameFs">
+    //       <p> { "Mpumelelo Prayer Meeting" } </p>
+    //       <p>
+    //         <i >{"4.2"}</i> <FaStar className = "icon1" />
+    //         <FaStar className = "icon1" />
+    //         <FaStar className = "icon1" />
+    //         <FaStar className = "icon1" />
+    //         <FaStarHalfAlt className = "icon1" /> 
+    //         <i> {"34" } </i>
+    //       </p>
+    //     </div>
+
+
+    //     <NavigateFs pn={"overview"} />
+
+        
+    //     <div className="buttons" >
+    //       <IonIcon icon={returnUpForward}></IonIcon>
+
+    //       <Link to="" href="tel:0738189349" >
+    //         <IonIcon icon={call}></IonIcon>
+    //       </Link>
+
+    //       <GrAdd id='add-btn'/>
+
+    //       <IonIcon icon = {shareSocialOutline}></IonIcon>
+    //     </div>
+        
+      
+
+    //     <div className="locaWebTime"  >
+    //       <IonItem  color = " #348D63" lines="none" className="itemBorderTop" >
+            
+    //         <IonIcon icon ={locationSharp} className = "icon"></IonIcon>
+    //         <p>{"Landau, Terrace rd"} </p>
+            
+    //       </IonItem>
+              
+    //       <IonItem  color = " #348D63" lines="none" className="itemBorderTop time" >
+
+    //         <IonIcon icon ={timeSharp} className = "icon"></IonIcon>
+    //         <p> Open between {"12:00 - 22:00"} </p>
+
+    //       </IonItem>
+            
+            
+    //       <IonItem  color = " #348D63" lines="none" className="itemBorderTop" >
+
+    //         <IonIcon icon= {earthSharp} className = "icon"></IonIcon>
+    //         <p> {"www.cnxjnsdn.co.za"} </p>
+            
+    //       </IonItem>
+    //     </div>
+          
+
+    //   </IonContent>
+    // </IonPage>
+
+
+
+
   );
 };
 
