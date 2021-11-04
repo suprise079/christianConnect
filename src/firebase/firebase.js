@@ -7,6 +7,7 @@ import { getFirestore,
   doc
 } from "firebase/firestore";
 import { async } from "@firebase/util";
+import { getStorage, ref } from "firebase/storage";
 
 
 
@@ -31,6 +32,8 @@ const app = initializeApp(firebaseConfig);
 export const db = getFirestore( app );
 // export firebase/auth object
 export const auth = getAuth();
+// export firebase storage 
+export const storage = getStorage();
 
 
 

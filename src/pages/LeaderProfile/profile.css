@@ -1,5 +1,7 @@
 
 
+/* This file contains all the css for userProfile and all subfolders */
+
 #profile_items {
   /* background-color: red; */
   font-size: 1em;
@@ -87,3 +89,39 @@ a.item {
   /* background-color: yellow; */
   font-size: 1em;
 }
+
+
+
+.nameCard {
+  background-color: white;
+  overflow: visible;
+  position: relative;
+  padding: 10px;
+ }
+ ion-card-subtitle{
+   text-transform: lowercase;
+ }
+ ::-webkit-scrollbar{
+   width: 0px;
+   background: transparent;
+ }
+ 
+ .avatar {
+   text-align: center;
+   width: 120px;
+   margin: auto;
+   position: relative;
+   bottom: 40px;
+   height: 120px;
+   box-shadow: 1px 0px 3px;
+ }
+ 
+ .avatar img {
+   width: 100%;
+ }
+ 
+ 
+ ion-title{
+   width:100%;
+   text-align: center;
+ }

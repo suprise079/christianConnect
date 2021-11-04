@@ -11,7 +11,7 @@ import {
   IonBackButton,
   IonTitle,
 } from "@ionic/react";
-import "../Profile.css";
+// import "../Profile.css";
 import "./profile.css";
 import {
   logOutSharp,

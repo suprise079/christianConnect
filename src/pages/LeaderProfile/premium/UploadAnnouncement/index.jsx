@@ -14,17 +14,59 @@ import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import { FaCalendarAlt } from "react-icons/fa";
 import { IoMdCloudUpload } from "react-icons/io";
-import "../styles.css";
+import "../../LeaderProfile.css";
+import { doc, setDoc } from "@firebase/firestore";
+import {db} from '../../../../firebase/firebase'
+import { useHistory } from "react-router";
 
 
 const UploadAnnouncement = () => {
   const [date, setdate] = useState("Date");
   const [text, setText] = useState("");
+  const fellowshipId = ''
+  const [formData, setFormData] = useState({
+    fellowshipId:fellowshipId, 
+    picture:'',
+    time: new Date(),
+    text:'No details provided',
+    title:"No title provided"
+  })
+  const history = useHistory()
 
+  
+  function handleChange(e){
+     // temporal data variable
+     var carryData = formData
+     carryData[e.target.name] = e.target.value
+     setFormData(carryData)
+     console.log('form data: ',formData)
+  }
 
-  const handleSubmit = (e) => {
+  function makeid(length) {
+    var result           = '';
+    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for ( var i = 0; i < length; i++ ) {
+      result += characters.charAt(Math.floor(Math.random() * 
+      charactersLength));
+      }
+      return result;
+    }
+
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    console.log(e.target);
+
+    var id = makeid(20)
+
+    const postData = await setDoc(doc(db, "announcements", id), formData)
+    .then((response) => {
+        alert("Post successfull")
+        history.push("/premium")
+    })
+    .catch((err) => {
+        console.log("Err escaped")
+        alert("err occured:", err)
+    })
   };
 
   return (
@@ -62,9 +104,10 @@ const UploadAnnouncement = () => {
             <IonInput
               required
               type="text"
-              name="Title"
+              name="title"
               clearinput
               className="inputField"
+              onInput = {(e) => handleChange(e)}
             ></IonInput>
           </div>
           <div className="datePicker">
@@ -79,8 +122,10 @@ const UploadAnnouncement = () => {
                 var parts = e.target.value.split("-");
                 var mydate = new Date(parts[0], parts[1] - 1, parts[2]);
                 setdate(mydate.toDateString());
+                handleChange(e)
               }}
-              
+              required
+              name='time'
               type="date"
               clearinput
               className="inputField"
@@ -88,11 +133,14 @@ const UploadAnnouncement = () => {
             ></input>
           </div>
           <IonTextarea
+            required
+            minlength='50'
             rows="7"
             placeholder="Description..."
             className="textArea"
             value={text}
-            onIonChange={(e) => setText(e.target.value)}
+            name='text'
+            onIonChange={(e) =>  handleChange(e)}
           ></IonTextarea>
 
           <button type="submit"><span>Post</span> <IoMdCloudUpload size="20px"/></button>

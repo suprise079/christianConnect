@@ -1,6 +1,6 @@
 import { IonPage, IonItem, IonTitle, IonInput, IonContent
 } from "@ionic/react";
-import "../Profile.css";
+import "./LeaderProfile.css";
 import React, { useContext, useState } from "react";
 
 import churchImg from "./church.jpeg";
