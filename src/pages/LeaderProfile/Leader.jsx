@@ -24,13 +24,21 @@ import {
   walletOutline,
   
 } from "ionicons/icons";
+<<<<<<< HEAD
+import {GiUpgrade} from "react-icons/gi"
+=======
 import {GiUpgrade } from "react-icons/gi"
+>>>>>>> e7d057a9cffdf0efdb7e62ae36936ddace6f16ad
 
 
 // import from react modules
 import React, { useContext, useEffect, useState } from "react";
 
+<<<<<<< HEAD
+import { FaUserEdit } from "react-icons/fa";
+=======
 import { FaUserEdit, FaEdit } from "react-icons/fa";
+>>>>>>> e7d057a9cffdf0efdb7e62ae36936ddace6f16ad
 
 import TabBar from "../../components/tabBar/tabBar";
 
@@ -40,6 +48,10 @@ import styled from "styled-components";
 // firebase for signOut
 import { auth } from "../../firebase/firebase";
 import { signOut } from "firebase/auth";
+<<<<<<< HEAD
+import Context from "../../context/Context";
+=======
+>>>>>>> e7d057a9cffdf0efdb7e62ae36936ddace6f16ad
 // get firebase functions
 import {
   getUserImg
@@ -49,8 +61,12 @@ import Cookies from 'js-cookie';
 import dummyPicture from './dummy_profile.jpg'
 import Premium from "./premium/Premium";
 
+<<<<<<< HEAD
+
+=======
 // import ... db content
 import Context from "../../context/Context";
+>>>>>>> e7d057a9cffdf0efdb7e62ae36936ddace6f16ad
 
 var profileImg = "/assets/icon/prayer.jpeg";
 
@@ -122,13 +138,59 @@ const Body = styled(IonPage)`
 
 
 const Leader = () => {
+<<<<<<< HEAD
+  const history = useHistory(); // use this for routing in js codes.
+  const { curUser, setCurUser } = useContext( Context );
+=======
   // context and global variables....
   const { curUser, setCurUser, fellowship, setFellowship } = useContext( Context );
   const history = useHistory(); // use this for routing in js codes.
+>>>>>>> e7d057a9cffdf0efdb7e62ae36936ddace6f16ad
   const [ userPhoto, setUserPhoto ] = useState();
   // state to switch between premium features and leader account
   const [page, setPage] = useState(true)
   const [ user, setUser ] = useState(
+<<<<<<< HEAD
+    JSON.parse(Cookies.get("userData")) ? JSON.parse(Cookies.get("userData")) : "" )
+
+  console.log("current user details:",user)
+// pages
+const appPages = [
+  {
+    title: "Saved videos",
+    url: "/savedVideos",
+    iosIcon: bookmarkOutline,
+    mdIcon: bookmarkSharp,
+  },
+  {
+    title: "Donate",
+    url: "/Donate",
+    iosIcon: walletOutline,
+    mdIcon: walletSharp,
+  },
+  {
+    title: "Notes",
+    url: "/notes",
+    iosIcon: createOutline,
+    mdIcon: createSharp,
+  },
+  !user.isPremium ? {
+    title: "Upgrade To Premium",
+    url: "/premium",
+    iosIcon: createOutline,
+    mdIcon: createSharp,
+  }:false,
+  {
+    title: "Logout",
+    url: "/",
+    iosIcon: logOutOutline,
+    mdIcon: logOutSharp,
+  },
+];
+
+  useEffect(() => {
+    // console.log( JSON.parse( Cookies.get("userData") ) );
+=======
     JSON.parse(Cookies.get("userData") ? Cookies.get("userData") : "") );
 
   // console.log("current user details:",user)
@@ -176,6 +238,7 @@ const Leader = () => {
   useEffect(() => {
     // console.log( JSON.parse( Cookies.get("userData") ) );
     setFellowship( JSON.parse(Cookies.get("curLeaderFs")) );
+>>>>>>> e7d057a9cffdf0efdb7e62ae36936ddace6f16ad
     setCurUser( JSON.parse( Cookies.get("userData") ) );
     
 
@@ -200,7 +263,11 @@ const Leader = () => {
           /* setTimeout(() => {
               history.push(e.target.id);
             }, 3000); */
+<<<<<<< HEAD
+          alert("Successfully signed Out ! ");
+=======
           // alert("Successfully signed Out ! ");
+>>>>>>> e7d057a9cffdf0efdb7e62ae36936ddace6f16ad
           history.push(e.target.id);
         })
         .catch((err) => alert(err));
@@ -277,9 +344,13 @@ const Leader = () => {
                     ios={appPage.iosIcon}
                     md={appPage.mdIcon}
                   />
+<<<<<<< HEAD
+                  <IonLabel>{appPage.title}</IonLabel>
+=======
                   <IonLabel>{appPage.title} {" "}
                     { appPage.title === "Edit" ? fellowship?.name : "" }
                   </IonLabel>
+>>>>>>> e7d057a9cffdf0efdb7e62ae36936ddace6f16ad
                 </Link>
                 )
               ))}

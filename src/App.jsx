@@ -6,6 +6,7 @@ import React, { useState } from "react";
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
 // import bootstrap css
+import 'bootstrap/dist/css/bootstrap.min.css';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
 // firebase

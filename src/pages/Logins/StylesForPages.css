@@ -1,7 +1,8 @@
-ion-toolbar {
+/* Please use an ID its ruining other files */
+/* ion-toolbar {
   --background: #348d60;
   color: white;
-}
+} */
 ion-button {
   --background: white;
   text-transform: unset;
@@ -34,6 +35,8 @@ label {
   align-items: center;
   width: 90%;
 }
+
+
 img{
   margin-top: 80px;
 }

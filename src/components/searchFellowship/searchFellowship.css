@@ -1,11 +1,14 @@
 .searchFellowship {
     background-color: inherit;
-    padding: .8em 0em;
-    /* padding: .2em .8em; */
+    border: 1px solid rgb(236, 236, 236);
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 12.8px 8px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    border-bottom: .1em solid rgb(92, 92, 92);
+    /* border-bottom: .1em solid rgb(92, 92, 92); */
+    /* box-shadow:  3px 5px 4px -5px rgba(94, 94, 94, 0.63); */
 }
 
 .searchFellowship .info {
@@ -51,4 +54,13 @@
 
 .searchFellowship .viewInfo ion-tab-button ion-label {
     font-size: 1.1em;
+}
+
+.view-btn{
+    border: 1px solid #348d63;
+    background-color: #348d63;
+    color: white;
+    margin-top: 35px;
+    padding: 5px 15px;
+    border-radius: 8px;
 }

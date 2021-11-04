@@ -1,20 +1,11 @@
-import {
-  IonContent,
-  IonHeader,
-  IonIcon,
-  IonPage,
-} from "@ionic/react";
-
-import React, { useState } from "react";
+import { IonContent, IonIcon, IonPage, } from "@ionic/react";
+import { BsSearch } from 'react-icons/bs';
+import React from "react";
 import "./userHome.css";
 
 // import icons
-import {
-  arrowForward,
-  search,
-} from "ionicons/icons";
-
-import { useEffect, useContext } from "react";
+import { home, arrowForward, arrowForwardOutline, search, } from "ionicons/icons";
+import { useEffect, useContext, useState } from "react";
 import Context from "../../context/Context";
 
 // from firebase
@@ -23,11 +14,10 @@ import Cookies from 'js-cookie';
 
 
 // import component
+import { getAllFellowships } from "../../firebase/firebase-help";
 import SearchFellowship from "../../components/searchFellowship/searchFellowship";
 import TabBar from "../../components/tabBar/tabBar";
-import { getAllFellowships } from "../../firebase/firebase-help";
-
-
+import Map from '../../components/Map'
 
 
 const UserHome = () => {
@@ -47,38 +37,52 @@ const UserHome = () => {
 
   return (
     <IonPage className="userHome">
-      <IonHeader class="ion-no-border">
-        <div className="searchField">
-          <p>Search Fellowship</p>
-          <div id="search">
-            <input type="text" placeholder="Search..." />
-            <span id="searchIcon">
-              <IonIcon icon={search}> </IonIcon>
-            </span>{" "}
+
+      <IonContent  fullscreen className="container">
+
+         {/* header */}
+          <div className="home-header">
+            {/* search container*/}
+            <div className="searchField">
+              {/* search field */}
+              <div id="search">
+
+                <BsSearch className='searchIcon'/>
+                <input id='search-inpt' type="text" placeholder="Search..." />
+               
+              </div>
+
+            </div>
           </div>
-        </div>
-      </IonHeader>
 
-      <IonContent fullscreen className="container">
+        {/* map-container */}
         <div className="mapContainer">
-          <p className="header">Showing Fellowship near you:</p>
-          <p className="map">Map</p>
+          <p className="header">Fellowships near you</p>
+
+            <div className="map">
+              <Map/>
+              
+            </div>
         </div>
 
-        {/* display all fellowships available */}
         <div className="fellowships">
-          {
-            fellowships && fellowships.length > 0 ? (
+          {/* <SearchFellowship />
+          <SearchFellowship /> */}
 
-              fellowships.map( (fs, ind) => (
-                <SearchFellowship key={ ind }
-                  name={fs.name} about={fs.about}
-                  location={ fs.location } time={ fs.time } fsid={ fs.id } />
-              ))
-            ) : (
-              <h2> Loading..... </h2>
-            )
-          }
+            {/* display all fellowships available*/}
+            {
+              fellowships && fellowships.length > 0 ? (
+
+                fellowships.map( (fs, ind) => (
+                  <SearchFellowship key={ ind }
+                    name={fs.name} about={fs.about}
+                    location={ fs.location } time={ fs.time } fsid={ fs.id } />
+                ))
+              ) : (
+                <h2> Loading..... </h2>
+              )
+            }
+          
         </div>
 
         {/* the button component tab bar for navigation */}
@@ -86,7 +90,8 @@ const UserHome = () => {
 
         {/* <div className="moreFellowshipBtn" > */}
         <button className="moreFellowshipBtn">
-          More Fellowships <IonIcon icon={arrowForward}> </IonIcon>
+          More Fellowships 
+          {/* <IonIcon icon={arrowForward}> </IonIcon> */}
         </button>
         {/* </div> */}
         
