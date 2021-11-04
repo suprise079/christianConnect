@@ -7,7 +7,7 @@ import { Camera, CameraResultType } from '@capacitor/camera';
 
 
 // geta css files
-import '../Profile.css';
+import './profile.css';
 import "./EditUser.css";
 
 

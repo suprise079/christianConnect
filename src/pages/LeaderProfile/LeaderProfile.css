@@ -1,3 +1,8 @@
+
+
+/* This file contains all the css for the leader profile folder and subfolders */
+
+
 ion-toolbar {
   color: black;
   --background: transparent;
@@ -14,7 +19,7 @@ ion-toolbar {
 div.title {
   /* border: 1px solid red; */
   position: relative;
-  height: 40px;
+  height: 90px;
   margin: 20px 0;
 }
 div.title .inputField {
@@ -101,11 +106,37 @@ button[type="submit"] {
 }
 .addYt span.add{
   cursor: pointer;
-
+  width: 60px;
+  position: relative;
 }
+
+.addYt span.add input{
+  position: absolute;
+  top: 15px;
+  left: -5px;
+  height: 20px;
+  opacity: 0%;
+}
+
 .ytLink {
   width: 80%;
   height: 40px;
   margin: 0 10%;
   transition: 1s;
+}
+
+.pageSwitch {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.pageSwitch button {
+  width: 100%;
+  padding: 5px;
+  
+}
+
+.pageSwitch button:first-child {
+  border-right: 1px solid grey;
 }

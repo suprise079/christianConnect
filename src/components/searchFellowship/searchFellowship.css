@@ -11,6 +11,13 @@
     /* box-shadow:  3px 5px 4px -5px rgba(94, 94, 94, 0.63); */
 }
 
+.searchFellowship .info {
+    /* background-color: red; */
+    display: flex;
+    flex-direction: column;
+    padding: .1em 0em;
+}
+
 .searchFellowship p {
     margin: 0em;
 }
@@ -21,6 +28,7 @@
 }
 
 .searchFellowship .subInfo {
+    text-transform: capitalize;
     /* background-color: red; */
     margin: 0em;
     font-size: .75em;

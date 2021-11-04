@@ -11,7 +11,7 @@ import {
   IonBackButton,
   IonTitle,
 } from "@ionic/react";
-import "../Profile.css";
+// import "../Profile.css";
 import "./profile.css";
 import {
   logOutSharp,
@@ -22,13 +22,15 @@ import {
   createOutline,
   walletSharp,
   walletOutline,
+  
 } from "ionicons/icons";
+import {GiUpgrade } from "react-icons/gi"
 
 
 // import from react modules
 import React, { useContext, useEffect, useState } from "react";
 
-import { FaUserEdit } from "react-icons/fa";
+import { FaUserEdit, FaEdit } from "react-icons/fa";
 
 import TabBar from "../../components/tabBar/tabBar";
 
@@ -38,43 +40,21 @@ import styled from "styled-components";
 // firebase for signOut
 import { auth } from "../../firebase/firebase";
 import { signOut } from "firebase/auth";
-import Context from "../../context/Context";
 // get firebase functions
 import {
   getUserImg
 } from "../../firebase/firebase-help";
 import Cookies from 'js-cookie';
+// default profile image
+import dummyPicture from './dummy_profile.jpg'
+import Premium from "./premium/Premium";
 
-
+// import ... db content
+import Context from "../../context/Context";
 
 var profileImg = "/assets/icon/prayer.jpeg";
 
-const appPages = [
-  {
-    title: "Saved videos",
-    url: "/savedVideos",
-    iosIcon: bookmarkOutline,
-    mdIcon: bookmarkSharp,
-  },
-  {
-    title: "Donate",
-    url: "/Donate",
-    iosIcon: walletOutline,
-    mdIcon: walletSharp,
-  },
-  {
-    title: "Notes",
-    url: "/notes",
-    iosIcon: createOutline,
-    mdIcon: createSharp,
-  },
-  {
-    title: "Logout",
-    url: "/",
-    iosIcon: logOutOutline,
-    mdIcon: logOutSharp,
-  },
-];
+
 const Body = styled(IonPage)`
   position: relative;
   justify-content: flex-start;
@@ -141,22 +121,67 @@ const Body = styled(IonPage)`
 `;
 
 
-const Profile = () => {
+const Leader = () => {
+  // context and global variables....
+  const { curUser, setCurUser, fellowship, setFellowship } = useContext( Context );
   const history = useHistory(); // use this for routing in js codes.
-  const { curUser, setCurUser } = useContext( Context );
   const [ userPhoto, setUserPhoto ] = useState();
+  // state to switch between premium features and leader account
+  const [page, setPage] = useState(true)
   const [ user, setUser ] = useState(
-    JSON.parse(Cookies.get("userData")) ? JSON.parse(Cookies.get("userData")) : "" )
+    JSON.parse(Cookies.get("userData") ? Cookies.get("userData") : "") );
 
-
-
+  // console.log("current user details:",user)
+  // pages
+  const appPages = [
+    {
+      title: "Saved videos",
+      url: "/savedVideos",
+      iosIcon: bookmarkOutline,
+      mdIcon: bookmarkSharp,
+    },
+    {
+      title: "Donate",
+      url: "/Donate",
+      iosIcon: walletOutline,
+      mdIcon: walletSharp,
+    },
+    {
+      title: "Notes",
+      url: "/notes",
+      iosIcon: createOutline,
+      mdIcon: createSharp,
+    },
+    {
+      title: "Edit",
+      url: "/editfs",
+      // iosIcon: createOutline,
+      mdIcon: createSharp,
+      // iosIcon: i.toString(),
+    },
+    !user.isPremium ? {
+      title: "Upgrade To Premium",
+      url: "/premium",
+      iosIcon: createOutline,
+      mdIcon: createSharp,
+    }:false,
+    {
+      title: "Logout",
+      url: "/",
+      iosIcon: logOutOutline,
+      mdIcon: logOutSharp,
+    },
+  ];
 
   useEffect(() => {
     // console.log( JSON.parse( Cookies.get("userData") ) );
+    setFellowship( JSON.parse(Cookies.get("curLeaderFs")) );
     setCurUser( JSON.parse( Cookies.get("userData") ) );
+    
 
     // console.log( user )
     getUserImg( user?.userId ).then( res => {
+      // added this empty to make the dummy picture show because i dont understand the code
       if( res ) { setUserPhoto( res ); }
       else { setUserPhoto( false ) }
     })
@@ -175,7 +200,7 @@ const Profile = () => {
           /* setTimeout(() => {
               history.push(e.target.id);
             }, 3000); */
-          alert("Successfully signed Out ! ");
+          // alert("Successfully signed Out ! ");
           history.push(e.target.id);
         })
         .catch((err) => alert(err));
@@ -194,7 +219,7 @@ const Profile = () => {
             <IonButtons slot="start">
               <IonBackButton defaultHref="/" />
             </IonButtons>
-            <IonTitle>Profile User</IonTitle>
+            <IonTitle>Leader pofile</IonTitle>
           </IonToolbar>
         </IonHeader>
 
@@ -206,7 +231,7 @@ const Profile = () => {
             <div className="infos">
               <div className="profile" >
                 <img
-                  src={ userPhoto ? userPhoto?.photo : "" }
+                  src={ userPhoto ? userPhoto?.photo : dummyPicture }
                   alt={"photo of " + curUser?.firstname } />
               </div>
               
@@ -227,16 +252,24 @@ const Profile = () => {
             </div>
 
           </div>
-          
+          {
+            user.isPremium && (
+              <div className="pageSwitch">
+                <button onClick={() => setPage(true)}>Manage profile</button>
+                <button onClick={() => setPage(false)}>premium features</button>
+              </div>
+            )
+          }
           <div className="content">
             <div id="profile_items" className="menu">
-              {appPages.map((appPage, index) => (
+              { page && (appPages.map((appPage, index) => (
                 <Link
                   key={index}
                   id={appPage.url}
                   onClick={(e) => goToItem(e)}
                   className="item"
                   to={ appPage?.url }
+                  style={{display: !appPage ? 'none':""}}
                 >
                   <IonIcon
                     className="icon"
@@ -244,10 +277,13 @@ const Profile = () => {
                     ios={appPage.iosIcon}
                     md={appPage.mdIcon}
                   />
-                  <IonLabel>{appPage.title}</IonLabel>
+                  <IonLabel>{appPage.title} {" "}
+                    { appPage.title === "Edit" ? fellowship?.name : "" }
+                  </IonLabel>
                 </Link>
                 )
-              )}
+              ))}
+              {!page && <Premium />}
             </div>
           </div>
 
@@ -263,4 +299,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default Leader;

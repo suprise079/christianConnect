@@ -71,7 +71,7 @@ const handleSubmit = (e) => {
   console.log(e.target);
 };
 
-const Donate = () => {
+const Payment = () => {
   const [text, settext] = useState("");
   const [showPassword, setshowPassword] = useState(false);
   const [pswdType, setpswdType] = useState("password");
@@ -146,51 +146,4 @@ const Donate = () => {
   );
 };
 
-export default Donate;
-
-// <div id="logins">
-//         <form
-//         action="/"
-//         onSubmit={(e) => {
-//             handleSubmit(e);
-//         }}
-//         >
-//         <label htmlFor="Email address">Email</label>
-//         <IonInput
-//             required
-//             type="email"
-//             name="Email address"
-//             clearInput="true"
-//             className="inputField"
-//         ></IonInput>
-//         <label htmlFor="Password">
-//             Password
-//             <span
-//             onClick={() => {
-//                 setshowPassword(showPassword ? false : true);
-//                 setpswdType(showPassword ? "password" : "text");
-//             }}
-//             >
-//             {showPassword ? (
-//                 <AiFillEyeInvisible size="23px" />
-//             ) : (
-//                 <AiFillEye size="23px" />
-//             )}
-//             </span>
-//         </label>
-//         <IonInput
-//             required
-//             type={pswdType}
-//             clearInput="true"
-//             className="inputField"
-//         ></IonInput>
-
-//         <input type="submit" value="Login" />
-//         </form>
-//     </div>
-//     <div className="haveAcc">
-//         Don't have an account ? <Link to="/home">Register</Link>
-//     </div>
-//     <div className="haveAcc">
-//         <Link to="/home">Forgot password ?</Link>
-//     </div>
+export default Payment;

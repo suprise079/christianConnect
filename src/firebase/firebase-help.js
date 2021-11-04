@@ -260,7 +260,7 @@ export const updateProfileImg = async ( uid, photo ) => {
     ref.docs.map( doc => id = doc.id )
     if( id ) {
       const usrref = doc( db, "userProfilePic", id );
-        await updateDoc( usrref, {
+      await updateDoc( usrref, {
         photo: photo
       });
     } else{ console.error("NO IMAGE ID") }
@@ -268,8 +268,6 @@ export const updateProfileImg = async ( uid, photo ) => {
   catch( err ) {
     console.error( err )
   }
-  
-  
   // console.log( r )
 }
 
@@ -300,6 +298,21 @@ export const getUserImg = async( uid ) => {
     return false;
   }
   
+}
+
+
+// update a fellowship details
+export const editFS = async ( id, name, about, loc, time ) => {
+  try{
+    // console.log("sjdfsjd");
+    await updateDoc( doc(db, "Fellowships", id), {
+      name: name,
+      about: about,
+      location: loc,
+      time: time
+    })
+  }
+  catch( err ) { console.error( "updating fellowship", err ) }
 }
 
 

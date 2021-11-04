@@ -5,6 +5,8 @@ import React, { useState } from "react";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
+// import bootstrap css
+// import 'bootstrap/dist/css/bootstrap.min.css';
 
 // firebase
 
@@ -18,23 +20,25 @@ import OverviewFs from "./pages/overviewFs/overviewFs";
 import ReviewFS from "./pages/reviewFs/reviewFs";
 import Welcome from "./pages/Logins/Welcome/index";
 import Login from "./pages/Logins/Login";
-import Donate from "./pages/User/donate/Donate";
-import Profile from "./pages/Users/Profile";
-import EditUser from "./pages/Users/EditUser";
+import Donate from "./pages/UserProfile/donate/Donate";
+import Profile from "./pages/UserProfile/Profile";
+import EditUser from "./pages/UserProfile/EditUser";
 import Notes from "./pages/notes/Notes";
 import ViewNote from "./pages/notes/ViewNote";
 import Donations from "./pages/notes/Donations";
 import SignUp from "./pages/Logins/SignUp";
-import Leader from "./pages/Leader/Leader";
-import EditLeader from "./pages/Leader/EditLeader";
-import Premium from "./pages/Leader/Premium";
-import UploadAnnouncement from "./pages/Profile/UploadAnnouncement";
-import UploadSermon from "./pages/Profile/UploadSermons";
-import PickerExample from "./pages/Profile/UploadEvents";
-import SavedVideos from "./pages/User/savedVideos/savedVideos";
+import Leader from "./pages/LeaderProfile/Leader";
+import EditLeader from "./pages/LeaderProfile/EditLeader";
+import Premium from "./pages/LeaderProfile/premium/Premium";
+import UploadAnnouncement from "./pages/LeaderProfile/premium/UploadAnnouncement";
+import UploadSermon from "./pages/LeaderProfile/premium/UploadSermons";
+import uploadDevotion from "./pages/LeaderProfile/premium/UploadDevotion";
+import SavedVideos from "./pages/UserProfile/savedVideos/savedVideos";
 import SubscriptionHome from "./pages/subscription/SubscriptionHome"
 import NoteContent from "./pages/notes/NoteContent";
 import UserHome from "./pages/userHome/userHome";
+import EditFs from "./pages/LeaderProfile/editFs";
+import Payment from "./pages/LeaderProfile/premium/Upgrading/payment";
 
 
 
@@ -72,6 +76,8 @@ const App = () => {
             <Route exact path="/Donate" component={Donate} />
             <Route exact path="/savedVideos" component={SavedVideos} />
             <Route exact path="/addnote" component={ NoteContent } />
+
+            <Route exact path="/editfs" component={ EditFs } />
 
 
 
@@ -137,14 +143,14 @@ const App = () => {
             </Route>
             {/* route to premium page, where user is a premium user. */}
             <Route exact path="/premium">
-              <Premium />
+              <Payment />
             </Route>
             {/* sign up leader */}
             <Route exact path="/SignUp" component={SignUp} />
 
             <Route exact path="/uploadAnnouncement" component={UploadAnnouncement} />
             <Route exact path="/uploadSermon" component={UploadSermon} />
-            <Route exact path="/uploadEvent" component={PickerExample} />
+            <Route exact path="/uploadDevotions" component={uploadDevotion} />
 
 
             {/* Subscription Home page */}
