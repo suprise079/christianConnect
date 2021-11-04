@@ -88,12 +88,12 @@ const UserHome = () => {
         {/* the button component tab bar for navigation */}
         <TabBar />
 
-        {/* <div className="moreFellowshipBtn" > */}
-        <button className="moreFellowshipBtn">
-          More Fellowships 
-          {/* <IonIcon icon={arrowForward}> </IonIcon> */}
-        </button>
-        {/* </div> */}
+        {/* <div className="moreFellowshipBtn" >
+          <button className="moreFellowshipBtn">
+            More Fellowships 
+            <IonIcon icon={arrowForward}> </IonIcon>
+          </button>
+        </div> */}
         
       </IonContent>
     </IonPage>
