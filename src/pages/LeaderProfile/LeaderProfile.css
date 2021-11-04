@@ -1,0 +1,142 @@
+
+
+/* This file contains all the css for the leader profile folder and subfolders */
+
+
+ion-toolbar {
+  color: black;
+  --background: transparent;
+}
+#UploadAnnouncements {
+  margin: 60px 0;
+}
+#UploadAnnouncements form {
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+  width: 100%;
+}
+div.title {
+  /* border: 1px solid red; */
+  position: relative;
+  height: 90px;
+  margin: 20px 0;
+}
+div.title .inputField {
+  position: absolute;
+  width: 80%;
+  height: 40px;
+  margin: 0;
+  left: 10%;
+  padding: 20px 15px !important;
+  border: 1px solid black;
+  border-radius: 30px;
+  background: transparent;
+}
+div.title label {
+  position: absolute;
+  height: 16px;
+  width: auto;
+  padding: 5px;
+  left: 20%;
+  top: -8px;
+  background: #f9fcfb;
+  color: rgb(73, 73, 73);
+  text-shadow: none;
+  text-align: center;
+  transition: 1s;
+  z-index: 1000;
+}
+div.datePicker {
+  display: flex;
+  align-items: center;
+  position: relative;
+  height: 25px;
+  width: 80%;
+  margin: 0 10%;
+}
+div.datePicker span.icon {
+  position: absolute;
+  right: 0;
+  cursor: pointer;
+}
+input[type="date"] {
+  position: absolute;
+  right: 0;
+  border-color: transparent;
+  background: transparent;
+  outline: none;
+  width: 25px;
+  height: 25px;
+  margin: 0;
+  cursor: pointer;
+}
+.textArea {
+  border: 2px solid black;
+  margin: 7.5%;
+  width: 85%;
+  height: 160px;
+  background: white;
+  border-radius: 15px;
+  padding: 0 10px 0 5px;
+}
+
+button[type="submit"] {
+  width: 30%;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  padding: 0 5%;
+  margin: 10% 35%;
+  justify-content: space-around;
+  background: #7beec5;
+  border: none !important;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+}
+.addYt {
+  margin: 10px 10%;
+  padding: 0 15px;
+  width: 80%;
+  height: 34px;
+  background: #88c3a7;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.addYt span.add{
+  cursor: pointer;
+  width: 60px;
+  position: relative;
+}
+
+.addYt span.add input{
+  position: absolute;
+  top: 15px;
+  left: -5px;
+  height: 20px;
+  opacity: 0%;
+}
+
+.ytLink {
+  width: 80%;
+  height: 40px;
+  margin: 0 10%;
+  transition: 1s;
+}
+
+.pageSwitch {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.pageSwitch button {
+  width: 100%;
+  padding: 5px;
+  
+}
+
+.pageSwitch button:first-child {
+  border-right: 1px solid grey;
+}

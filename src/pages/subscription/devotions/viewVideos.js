@@ -1,57 +1,142 @@
-import {IonButton, IonLabel, IonItem, IonInput} from '@ionic/react'
-import { RiCloseLine } from 'react-icons/ri'
-import {IoChevronBack} from 'react-icons/io5'
-import {FiMoreVertical} from 'react-icons/fi'
-import './viewVideo.css'
-import vid from '../dummy.mp4'
+import { IonButton, IonLabel, IonItem, IonInput } from "@ionic/react";
+import { RiCloseLine } from "react-icons/ri";
+import { IoChevronBack } from "react-icons/io5";
+import { FiMoreVertical } from "react-icons/fi";
+import "./viewVideo.css";
+import vid from "../dummy.mp4";
+import { useState, useContext,useEffect } from "react";
+import { VideoContext } from "./VideoContext";
+import React from "react";
 
-import React from 'react'
+// User notes interface
+const Notes = () => {
+  const note = { title: "Mans thing", content: "this is amaing" };
+
+  const handleChange = (event) => {
+    var name = event.target.name;
+    note[name] = event.target.value;
+    console.log(note);
+  };
+
+  return (
+    <>
+      <div className="notes">
+        <input
+          type="text"
+          id="noteTitle"
+          placeholder="Notes title..."
+          name="title"
+          onChange={(e) => handleChange(e)}
+        ></input>
+
+        <textarea
+          name=""
+          id=""
+          name="content"
+          onChange={(e) => handleChange(e)}
+          placeholder="Write notes here..."
+        ></textarea>
+        <IonButton>Save</IonButton>
+      </div>
+    </>
+  );
+};
+
+// playlist interface
+const Playlist = () => {
+  const { videos, playingVideo, setPages, setPlayingVideo } =
+    useContext(VideoContext);
+
+  return (
+    <>
+      {videos.map((video) => {
+        return (
+          <>
+            <div className="trackAlign" onClick={() => setPlayingVideo(video)}>
+              <div className="videoUrl" onClick={() => setPlayingVideo(video)}>
+                <video src={video.url} controls={false}></video>
+              </div>
+              <div className="videoInfo" onClick={() => setPlayingVideo(video)}>
+                <b>{video.title}</b>
+                <p className="p-0 m-0">{video.author}</p>
+              </div>
+            </div>
+          </>
+        );
+      })}
+    </>
+  );
+};
 
 const ViewVideo = () => {
+  const [page, setPage] = useState("Notes");
+  const { videos, playingVideo, setPlayingVideo, setPages,pages } =
+    useContext(VideoContext);
 
-    const note= {title:'Mans thing', content:'this is amaing'}
-    
-    
+  function closeHover() {
+    document.getElementById("btn").style.display = "none";
+    console.log("me here");
+  }
 
-    function closeHover(){
-        document.getElementById('btn').style.display = 'none';
-        console.log('me here')
+  function switchTab(id) {
+    try {
+      // remove background of previously selected menu
+      document.getElementById(page).style.backgroundColor = "transparent";
+      setPage(id);
+      document.getElementById(id).style.backgroundColor = "white";
+    } catch {
+      setPage(id);
+      document.getElementById(id).style.backgroundColor = "white";
     }
-
-    const handleChange = (event) => {
-        var name = event.target.name;
-        note[name] = event.target.value
-        console.log(note)
-    }
-
-    return (
+  }
+  useEffect(() => {
+      console.log(pages)
+  }, [pages])
+  return (
+    <div>
+      <div className="close mb-2">
+        <button
+          onClick={() => {
+            setPages("1");
+            console.log("some");
+            console.log(pages)
+          }}
+          id="btn"
+        >
+          <IoChevronBack size="20" />
+          Back
+        </button>
+        <span>Video player</span>
+        <button>
+          <FiMoreVertical size="20" />
+        </button>
+      </div>
+      <div className="video">
+        <video
+          controls={true}
+          onClick={() => closeHover()}
+          src={playingVideo.url}
+        >
+          {" "}
+          video cant play
+        </video>
         <div>
-            <div className="close">
-                <button id='btn'><IoChevronBack size='20' /></button>
-                <span>Video player</span>
-                <button><FiMoreVertical size='20' /></button>
-            </div>
-            <div className="video" >
-                <video  controls={true} onClick={() => closeHover()} src={vid}> video cant play</video>
-
-            </div>
-            <h3 className="selectedTitle">Notes</h3>
-            <div className="playNote">
-                <button>Notes</button>
-                <button>Playlist</button>
-            </div>
-            <div className="notes">
-                <IonItem>
-                    <IonLabel>Title</IonLabel>
-                    <IonInput type="text" placeholder='Notes title' name='title' onChange={(e) => handleChange(e)} />
-                </IonItem>
-                
-                <textarea name="" id="" onChange={(e) => handleChange(e)} placeholder='Write notes here...'></textarea>
-                <IonButton>Save</IonButton>
-            </div>
+          {playingVideo.author} - {playingVideo.title}
         </div>
-    )
-}
-
+      </div>
+      <h3 className="selectedTitle">{page}</h3>
+      <div className="playNote">
+        <button id="Notes" onClick={() => switchTab("Notes")}>
+          Notes
+        </button>
+        <button id="Playlist" onClick={() => switchTab("Playlist")}>
+          Playlist
+        </button>
+      </div>
+      {page == "Notes" && <Notes />}
+      {page == "Playlist" && <Playlist />}
+    </div>
+  );
+};
 
 export default ViewVideo;
