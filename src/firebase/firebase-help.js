@@ -240,13 +240,10 @@ export const addProfileImg = async ( uid, photo ) => {
       userId: uid,
       photo: photo
     })
-
     if( ref.id ) return true
   }
   catch( err ) {
-    console.error("Adding Pic", err );
-    return false;
-  }
+    console.error("Adding Pic", err ); return false; }
 } 
 
 
@@ -317,6 +314,66 @@ export const editFS = async ( id, name, about, loc, time ) => {
   }
   catch( err ) { console.error( "updating fellowship", err ) }
 }
+
+
+// add a review about a fellowship to review collection
+export const AddReview = async( uid, fsid, stars, text ) => {
+  try {
+    const refDoc = await addDoc( collection(db, "Reviews"), {
+      text: text,
+      userId: uid,
+      fsId: fsid,
+      stars: stars,
+      date: getCurTimeDate(),
+    })
+    if( refDoc.id ) return true;
+    else { return false }
+  }
+  catch( err ) {
+    console.log("adding review ERROR")
+    return false;
+  }
+}
+
+
+// get all reviews from reviews table.
+export const getReviews = async() => {
+  try {
+    const ref = await getDocs( collection(db, "Reviews") );
+    var data = [];
+    ref.docs.map( doc => {
+      var d = doc.data();
+      d["id"] = doc.id;
+      data.push( d );
+    })
+    // console.log( data )
+    if( data.length >= 0 ) return data;
+    else { return false }
+  }
+  catch( err ) { console.error("get reviews error"); return false }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 export default firebase;

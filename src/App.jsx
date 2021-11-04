@@ -35,7 +35,7 @@ import UploadAnnouncement from "./pages/LeaderProfile/premium/UploadAnnouncement
 import UploadSermon from "./pages/LeaderProfile/premium/UploadSermons";
 import uploadDevotion from "./pages/LeaderProfile/premium/UploadDevotion";
 import SavedVideos from "./pages/UserProfile/savedVideos/savedVideos";
-import SubscriptionHome from "./pages/subscription/SubscriptionHome"
+// import SubscriptionHome from "./pages/subscription/SubscriptionHome"
 import NoteContent from "./pages/notes/NoteContent";
 import UserHome from "./pages/userHome/userHome";
 import EditFs from "./pages/LeaderProfile/editFs";
@@ -152,9 +152,7 @@ const App = () => {
 
 
             {/* Subscription Home page */}
-            <Route exact path="/SubscriptionHome">
-              <SubscriptionHome />
-            </Route>
+            {/* <Route exact path="/SubscriptionHome" component={ SubscriptionHome } /> */}
           </IonRouterOutlet>
         </IonReactRouter>
       </IonApp>
