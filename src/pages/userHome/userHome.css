@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+body{
+    font-family: "Poppins",sans-serif;
+}
+ion-header {
+    background-color: #348d63;
+    padding: 1em 0em .5em 0em;
+    border-radius: 0em 0em 1.3em 1.3em;
+    border: 0em;
+    box-shadow: 0 0 10px #999;
+}
+.searchField {
+    text-align: center;
+    outline-width: 0em;
+    display: flex;
+    flex-direction: column;
+}
+
+.searchField p {
+    /* background-color: red; */
+    margin: 0em;
+    font-size: .9em;
+}
+
+
+.searchField div#search{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.searchField div input{
+    padding: 0;
+}
+.searchField div input::placeholder{
+    color: white;
+}
+.searchField div input:focus {
+    border-bottom: 2px solid black;
+}
+
+button {
+    border: 0em;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+/* main content */
+
+ion-content {
+    /* --ion-background-color: red; */
+    /* --ion-text-color: black; */
+    /* --ion-text-color-rgb: 255, 255, 255; */
+    padding: 10em;
+    background-color: yellow;
+}
+
+ion-content .mapContainer {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 1.5em 0em;
+}
+
+ion-content .mapContainer .map {
+    background-color: aquamarine;
+    margin: 0em;
+}
+
+ion-content .mapContainer .header {
+    /* background-color: aquamarine; */
+    font-weight: bold;
+    margin: 0em;
+}
+
+ion-content .fellowships {
+    background-color: white;
+    padding: .2em .8em;
+    padding-bottom:12em;
+}
+
+ion-tab-bar {
+    color: white;
+}
+
+input:hover,
+input:focus {
+    outline-width: 0em;
+    border: 0em;
+}
+
+ion-content .moreFellowshipBtn {
+    background-color: #16e9e6;
+    width: 70%;
+    margin: auto;
+    position: fixed;
+    bottom: 4.8em;
+    left: 3em;
+    right: 4em;
+    text-align: center;
+    padding: .7em;
+    border-radius: 5em;
+    display: flex;
+    justify-content: center;
+    box-shadow: 0em 0em .3em rgb(162, 162, 162);
+}

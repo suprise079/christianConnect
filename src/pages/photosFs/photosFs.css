@@ -1,0 +1,27 @@
+
+.fellowshipPhotos .navMargin {
+    margin: 3.5em 0em 0em 0em;
+}
+
+.fellowshipPhotos {
+    background-color: #438d63;
+    font-size: 1em;
+}
+
+.fellowshipPhotos .imagesFS {
+    /* background-color: red; */
+    font-size: 1em;
+}
+
+.fellowshipPhotos .imagesFS div:first-child {
+    /* background-color: yellow; */
+    padding: .5em;
+}
+
+.fellowshipPhotos .imagesFS .moreImages {
+    /* background-color: blue; */
+    display: flex;
+    flex-wrap: wrap;
+    padding: .5em;
+    justify-content: space-between;
+}

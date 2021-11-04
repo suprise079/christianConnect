@@ -1,0 +1,57 @@
+Link, a {
+    text-decoration: none;
+    color: black;
+    
+}
+
+#mainHeading {
+    text-align: center;
+    font-weight: bold;
+}
+
+#tabs {
+    text-align: center;
+    margin-bottom: -10px;
+    font-size: 1em;
+    padding: -2px;
+    
+}
+
+
+.tabBtn {
+    font-size: x-small;
+    color: black;
+}
+
+.tabInfoDiv {
+    width: 95%;
+    min-height: 420px;
+    margin: auto;
+    padding: 15px 10px 0px 10px;
+    overflow-y: scroll;
+    border-radius: 10px;
+    background-color: white;
+    
+}
+
+::-webkit-scrollbar {
+    width: 0;  /* Remove scrollbar space */
+    background: transparent;  /* Optional: just make scrollbar invisible */
+}
+
+#subscribePage {
+    background: linear-gradient(180deg, #A3D7BF 0%, #348D63 100%);
+    
+}
+
+#addPostBtn {
+    border: 0.5px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 3px 6px 8px -1px rgba(0,0,0,0.2);
+    border-radius: 25px;
+    position: absolute;
+    right: 30px;
+    bottom: 5%;
+    cursor: pointer;
+    background-color: rgb(25, 177, 223);
+    color: white;
+}

@@ -1,0 +1,7 @@
+{
+  "name": "christianConnect",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}

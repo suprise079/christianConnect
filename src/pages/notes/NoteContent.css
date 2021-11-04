@@ -1,0 +1,67 @@
+#bg{
+    background-color: #f1efef;
+}
+#backIcon{
+    color: #000;
+}
+.note {
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.11);
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    color: #000;
+    min-height: 800px;
+    margin: 10px;
+    padding: 20px;
+}
+
+.noteFooter{
+    display: flex;
+    /* border: 1px solid rgb(0, 0, 0); */
+    margin-top: 50%;
+}
+
+.deleteIcon {
+    right: 20px;
+    bottom: 10px;
+    width: 24px;
+    /* height: 24px; */
+    padding: 5px;
+    margin-left: 95%;
+    border: 1px solid rgba(0, 0, 0, 0.185);
+    position: fixed;
+    background-color: green;
+    color: white;
+    margin-top: 80%;
+    border-radius: 20px;
+    /* color: rgba(0, 0, 0, 0.87); */
+}
+
+
+.deleteIcon:hover {
+    cursor: pointer;
+}
+
+
+
+/* sjdbfsdbfkjdfkjdbfskdjbf */
+.note #notTitle input {
+    /* background-color: red; */
+    width: 95%;
+    border-bottom: .1em solid black ;
+}
+
+.note div {
+    margin: 1em 0em;
+}
+
+.note #noteContent {
+    /* background-color: yellow; */
+    padding: 0em 0em 1em 0em;
+}
+
+.note #noteContent textarea {
+    /* background-color: gray; */
+    height: 50vh;
+    width: 100%;
+}

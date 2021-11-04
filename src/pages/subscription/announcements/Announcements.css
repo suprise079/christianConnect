@@ -1,0 +1,16 @@
+.timeBtn {
+    display: flex;
+    justify-content: space-between;
+}
+
+ion-card-subtitle {
+    margin-top: 10px;
+    
+}
+
+.summary {
+    transition: 10s;
+    height: 5em;
+    overflow: hidden;
+    transition: width 2s, height 4s;
+}
