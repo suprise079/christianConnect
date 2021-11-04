@@ -36,9 +36,11 @@ label {
   width: 90%;
 }
 
+
 .forgotPasswordModal{
   --background: #348d60;
 }
+
 .haveAcc {
   text-align: center;
   width: 100%;

@@ -3,6 +3,10 @@ body{
     font-family: "Poppins",sans-serif;
 }
 
+ion-content{
+    --background: linear-gradient(#348d60 70%, #80b89c, #b3d5c4);
+}
+
 /* make input of type submit to have a pointer for hover. */
 input[type="submit"]:hover, button:hover {
     cursor: pointer;
