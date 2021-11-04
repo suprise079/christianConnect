@@ -164,7 +164,7 @@ const Subscriptions = () => {
               );
             })}
           </IonContent>
-          <div style={{height:"58px",background:"#348d63"}}></div>
+          <div style={{ height: "58px", background: "#348d63" }}></div>
         </IonPage>
       )}
       {!view && (
@@ -194,6 +194,7 @@ const Subscriptions = () => {
               );
             })}
           </IonContent>
+          <div style={{height:"56px"}} className="spacer"></div>
         </IonPage>
       )}
       {console.log("sub home finished rendering")}
