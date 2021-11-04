@@ -18,7 +18,7 @@ const SearchFellowship = ( props ) => {
   const { allFellowships } = useContext( Context );
 
   function summary( t ) {
-    if( t ) return t.split(" ").splice(0, 4).join(" ") + " ........"
+    if( t ) return t.split(" ").splice(0, 5).join(" ") + " ........"
   }
 
   return (
@@ -29,7 +29,7 @@ const SearchFellowship = ( props ) => {
           {/* { "2" + "km " } away */} { props.location }
         </p>
         <p className="subInfo" > { summary( props.about ) } </p>
-        <p className="subInfo" > { props.time } </p>
+        <p className="subInfo" > { props.time } { props.time ? "Hr" : "" } </p>
       </div>
 
       <div className="viewInfo" >

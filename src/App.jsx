@@ -28,7 +28,7 @@ import ViewNote from "./pages/notes/ViewNote";
 import Donations from "./pages/notes/Donations";
 import SignUp from "./pages/Logins/SignUp";
 import Leader from "./pages/LeaderProfile/Leader";
-import EditLeader from "./pages/LeaderProfile/EditLeader";
+// import EditLeader from "./pages/LeaderProfile/EditLeader";
 import Premium from "./pages/LeaderProfile/premium/Premium";
 import UploadAnnouncement from "./pages/LeaderProfile/premium/UploadAnnouncement";
 import UploadSermon from "./pages/LeaderProfile/premium/UploadSermons";
@@ -137,10 +137,7 @@ const App = () => {
             {/* leader home page */}
             <Route exact path="/leader" component={Leader} />
             {/* route to page where leader can edit his details */}
-            <Route exact path="/editleader">
-              {" "}
-              <EditLeader />{" "}
-            </Route>
+            {/* <Route exact path="/editleader"><EditLeader />{" "}</Route> */}
             {/* route to premium page, where user is a premium user. */}
             <Route exact path="/premium">
               <Payment />

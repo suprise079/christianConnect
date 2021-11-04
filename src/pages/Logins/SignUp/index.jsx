@@ -132,7 +132,8 @@ const SignUp = () => {
           phoneNumber,
           uid,
           fsName,
-          wannaBeLeader
+          wannaBeLeader,
+          false,
         ).then((ref) => {
           // console.log(ref);
           if( ref ) {

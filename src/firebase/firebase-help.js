@@ -79,7 +79,8 @@ export const registerUser = async (
   phone,
   uid,
   fsName,
-  wannaBeLeader
+  wannaBeLeader,
+  premiun
 ) => {
   var isReg = false;
   try {
@@ -93,6 +94,7 @@ export const registerUser = async (
       regDate: getCurTimeDate(),
       userId: uid,
       isLeader: wannaBeLeader,
+      isPremiun: premiun
     });
     // console.log(ref);
     isReg = ref.id ?? true;
@@ -291,7 +293,8 @@ export const getUserImg = async( uid ) => {
       data.push( d )
     })
     // console.log( data[0] )
-    return data[0]
+    if( data.length > 0 ) return data[0]
+    else { return false }
   }
   catch( err ) {
     console.error("getting user profile::", err )

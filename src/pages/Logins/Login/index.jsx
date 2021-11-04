@@ -123,8 +123,6 @@ const Login = () => {
     // reset data in the cookie
     Cookies.remove("userData");
     Cookies.remove("allFellowships");
-    Cookies.remove("dummy");
-
   }, [])
 
   // check if the user is logged in
@@ -144,6 +142,7 @@ const Login = () => {
 
     await signInWithEmailAndPassword(auth, email, password)
     .then((result) => {
+      // console.log( result )
       auth.onAuthStateChanged((user) => {
         if (user.email && user.uid ) {
           // pass user id from auth .. get user data from firestore ..
@@ -217,7 +216,7 @@ const Login = () => {
         setEmail(""); setPassword("");
       }
     });
-    console.log("HERE AND HERE")
+    // console.log("HERE AND HERE")
     setLoading( false );
   };
 

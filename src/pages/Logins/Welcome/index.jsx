@@ -60,8 +60,8 @@ const Welcome = () => {
     // reset user's data in auth state....
     auth.signOut().then((res) => {
       console.log( res )
-      Cookies.remove("userData");
-      setCurUser(); 
+      // Cookies.remove("userData");
+      setCurUser(""); 
     })
     .catch((err) => alert(err));
 

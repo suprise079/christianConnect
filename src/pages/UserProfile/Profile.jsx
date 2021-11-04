@@ -45,9 +45,15 @@ import {
 } from "../../firebase/firebase-help";
 import Cookies from 'js-cookie';
 
+import { dummyPhoto } from "../../components/helpFunc";
+
+
+
 
 
 var profileImg = "/assets/icon/prayer.jpeg";
+
+
 
 const appPages = [
   {
@@ -146,7 +152,7 @@ const Profile = () => {
   const { curUser, setCurUser } = useContext( Context );
   const [ userPhoto, setUserPhoto ] = useState();
   const [ user, setUser ] = useState(
-    JSON.parse(Cookies.get("userData") ? Cookies.get("userData") : "" ) ? JSON.parse(Cookies.get("userData")) : "" )
+    JSON.parse(Cookies.get("userData") ? Cookies.get("userData") : "") )
 
 
 
@@ -175,7 +181,7 @@ const Profile = () => {
           /* setTimeout(() => {
               history.push(e.target.id);
             }, 3000); */
-          alert("Successfully signed Out ! ");
+          // alert("Successfully signed Out ! ");
           history.push(e.target.id);
         })
         .catch((err) => alert(err));
@@ -206,7 +212,7 @@ const Profile = () => {
             <div className="infos">
               <div className="profile" >
                 <img
-                  src={ userPhoto ? userPhoto?.photo : "" }
+                  src={ userPhoto ? userPhoto?.photo : dummyPhoto }
                   alt={"photo of " + curUser?.firstname } />
               </div>
               
