@@ -132,7 +132,8 @@ const SignUp = () => {
           phoneNumber,
           uid,
           fsName,
-          wannaBeLeader
+          wannaBeLeader,
+          false,
         ).then((ref) => {
           // console.log(ref);
           if( ref ) {
@@ -187,7 +188,7 @@ const SignUp = () => {
           <IonButtons slot="start">
             <IonBackButton defaultHref="/" />
           </IonButtons>
-          <IonTitle>Register your fellowship</IonTitle>
+          <IonTitle>Register</IonTitle>
         </IonToolbar>
       </IonHeader>
 

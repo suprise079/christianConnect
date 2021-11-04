@@ -60,8 +60,8 @@ const Welcome = () => {
     // reset user's data in auth state....
     auth.signOut().then((res) => {
       console.log( res )
-      Cookies.remove("userData");
-      setCurUser(); 
+      // Cookies.remove("userData");
+      setCurUser(""); 
     })
     .catch((err) => alert(err));
 
@@ -73,7 +73,7 @@ const Welcome = () => {
 
 
     <Body>
-      <img src={logo} alt="Logo" />
+      <img style={{marginTop:"80px"}} src={logo} alt="Logo" />
       <div className="Buttons">
         {/* <Buttons>
           <Link

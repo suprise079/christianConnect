@@ -6,6 +6,7 @@ import React, { useState } from "react";
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
 // import bootstrap css
+import 'bootstrap/dist/css/bootstrap.min.css';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
 // firebase
@@ -28,13 +29,13 @@ import ViewNote from "./pages/notes/ViewNote";
 import Donations from "./pages/notes/Donations";
 import SignUp from "./pages/Logins/SignUp";
 import Leader from "./pages/LeaderProfile/Leader";
-import EditLeader from "./pages/LeaderProfile/EditLeader";
+// import EditLeader from "./pages/LeaderProfile/EditLeader";
 import Premium from "./pages/LeaderProfile/premium/Premium";
 import UploadAnnouncement from "./pages/LeaderProfile/premium/UploadAnnouncement";
 import UploadSermon from "./pages/LeaderProfile/premium/UploadSermons";
 import uploadDevotion from "./pages/LeaderProfile/premium/UploadDevotion";
 import SavedVideos from "./pages/UserProfile/savedVideos/savedVideos";
-import SubscriptionHome from "./pages/subscription/SubscriptionHome"
+// import SubscriptionHome from "./pages/subscription/SubscriptionHome"
 import NoteContent from "./pages/notes/NoteContent";
 import UserHome from "./pages/userHome/userHome";
 import EditFs from "./pages/LeaderProfile/editFs";
@@ -137,10 +138,7 @@ const App = () => {
             {/* leader home page */}
             <Route exact path="/leader" component={Leader} />
             {/* route to page where leader can edit his details */}
-            <Route exact path="/editleader">
-              {" "}
-              <EditLeader />{" "}
-            </Route>
+            {/* <Route exact path="/editleader"><EditLeader />{" "}</Route> */}
             {/* route to premium page, where user is a premium user. */}
             <Route exact path="/premium">
               <Payment />
@@ -154,9 +152,7 @@ const App = () => {
 
 
             {/* Subscription Home page */}
-            <Route exact path="/SubscriptionHome">
-              <SubscriptionHome />
-            </Route>
+            {/* <Route exact path="/SubscriptionHome" component={ SubscriptionHome } /> */}
           </IonRouterOutlet>
         </IonReactRouter>
       </IonApp>

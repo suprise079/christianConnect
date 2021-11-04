@@ -1,4 +1,4 @@
-import { IonContent, IonIcon, IonItem, IonSelect, IonLabel, IonPage, IonTitle, IonTabBar,  } from '@ionic/react';
+import { IonContent, IonIcon, IonItem, IonSelect, IonLabel, IonPage, IonTitle, IonTabBar, IonImg,  } from '@ionic/react';
 import './overviewFs.css';
 import Stars from '../../components/starRating/starRating';
 
@@ -20,6 +20,8 @@ import React, { useContext, useEffect, useState } from 'react'
 // import NavigateFs from '../../components/navigateFs/navigateFs';
 import TopImgFs from '../../components/topImagesFs/topImgFs';
 import TopNavBar from '../../components/topNavBar/topNavBar';
+import { AddReview, getReviews } from '../../firebase/firebase-help';
+import { dummyPhoto } from '../../components/helpFunc';
 
 
 
@@ -66,10 +68,52 @@ const ReviewsFs = ( props ) => {
 
   const [rateTxt, setRateTxt] = useState ();
   const [ stars, setStars ] = useState(0);
+  const { allFellowships, curUser, setCurUser } = useContext( Context );
+  const [ curFs, setCurFs ] = useState();
+  const [ show, setShow ] = useState(0);
+  const [ reviews, setReviews ] = useState();
+
+
+
+  useEffect(() => {
+    // get current user data
+    setCurUser( JSON.parse( Cookies.get("userData") ));
+
+    const url = window.location.search; // get the search part of the local url..
+    const usp = new URLSearchParams( url ); // make obj used to search params in url
+    const fellowshipId = usp.get("fsid"); // get param with the passed name
+   
+    setCurFs(
+      JSON.parse( Cookies.get("allFellowships") ).filter( doc => doc.id===fellowshipId)[0]
+    )
+
+    // get all reviews from reviews collections
+    getReviews().then( doc => {
+      if( doc ) { var rev = doc; setReviews( rev ) }
+      else { console.log("ERROR GETTING REVIEWS"); }
+    })
+  }, [])
   
 
-  function addRev(){
-    // addReview()
+  function addReview(){
+    if( stars > 0 && rateTxt ) {
+      // console.log( stars, rateTxt ); console.log( "USER ID:", curUser?.userId )
+      // console.log( "FS ID:", curFs?.id );
+      // uid, fsid, stars, text
+      AddReview( curUser?.userId, curFs?.id, stars, rateTxt ).then( res=>{
+        if( res ) {
+          alert("Review Added Successfull");
+          setStars(0); setRateTxt("");
+          // get all reviews from reviews collections
+          getReviews().then( doc => {
+            if( doc ) { var rev = doc; setReviews( rev ) }
+            else { console.log("ERROR GETTING REVIEWS"); }
+          })
+        }
+        else { alert("Error Adding Reviews") }
+      })
+    }
+    else { console.error("RATING ERROR: adding review error" ) }
   }
 
   return (
@@ -81,29 +125,31 @@ const ReviewsFs = ( props ) => {
           
           <IonLabel>
             {/* add review container */}
-              
-              <h2>Rate and review</h2> 
+            <h2>Rate and review</h2> 
 
-              <div className='add-review'>                 
-                {/* star rating stars={ stars } setStars={ setStars } */}
-                <Stars hoverValue={ stars } setHoverValue={ setStars } />                            
-              </div>
+            <div className='add-review'>                 
+              {/* star rating stars={ stars } setStars={ setStars } */}
+              <Stars hoverValue={ stars } setHoverValue={ setStars } />                            
+            </div>
 
-              {/* reviews text area */}
-              <textarea className='reviewTextArea' value={rateTxt}  placeholder="How was your experience?"  onChange={(e)=> setRateTxt(e.target.value)}/>
+            {/* reviews text area */}
+            <textarea
+              className='reviewTextArea' value={rateTxt}
+              placeholder="How was your experience?"
+              onChange={(e)=> setRateTxt(e.target.value)}/>
 
-              <br />
-              
-              {/* add review button */}
-              <button className='reviewBtn'>Add review</button>
+            <br />
             
+            {/* add review button */}
+            <button
+              onClick={ e => addReview() }
+              className='reviewBtn'>Add review</button>
            </IonLabel>
 
         </div>
 
         
         <div className="sortBy" >
-
           {/* sort buttons */}
           {/* create functions for them to work */}
               <small>Sort By</small>
@@ -138,7 +184,6 @@ const ReviewsFs = ( props ) => {
 
           </div>
         </div>
-
       </div>
     </>
   )

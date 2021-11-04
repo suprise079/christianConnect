@@ -25,13 +25,13 @@ Link, a {
 
 .tabInfoDiv {
     width: 95%;
-    min-height: 420px;
+    min-height: 80vh;
     margin: auto;
     padding: 15px 10px 0px 10px;
     overflow-y: scroll;
     border-radius: 10px;
     background-color: white;
-    
+    margin-bottom: 160px;
 }
 
 ::-webkit-scrollbar {
@@ -50,7 +50,7 @@ Link, a {
     border-radius: 25px;
     position: absolute;
     right: 30px;
-    bottom: 5%;
+    bottom: 10%;
     cursor: pointer;
     background-color: rgb(25, 177, 223);
     color: white;

@@ -367,92 +367,79 @@ ion-label.sortBy .btn {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* REVIEWS SECTION'S CSS */
-
-/* item */
-/* #reviewsFs { */
-	/* background-color: red; */
-/* } */
-
-/* #reviewsFs .item {
-	color: white;
-	background-color: #127647;
-	background-color: blue;
-	display: flex;
-	flex-direction: column;
-	padding: .5em 0em 0em .5em;
-} */
-
-/* #reviewsFs .item .person {
-	color: #000;
-	font-size: 2em;
-} */
-
-/* #reviewsFs .item div {
-	display: flex;
-	background-color: yellow;
-	padding: 1em 0em;
-}
-
-#reviewsFs .item div i{
-	padding: .4em;
-	font-size: 1.1em;
-}
-
 #reviewsFs #reviews {
-	background-color: red;
-} */
+	/* background-color: red; */
+	margin: 0em 0em 2em 0em;
+	padding: .5em;
+}
 
-/* #reviewsFs #reviews .review {
-	background-color: #127647;
-	display: flex;
-	flex-direction: column;
-	padding: .3em 0em .3em .3em;
+#reviewsFs #reviews .review {
+	/* background-color: yellow; */
+	margin: .9em 0em;
+	padding: .5em;
+	border-radius: .5em;
+	box-shadow: 0em 0em .1em gray;
+}
+
+#reviewsFs #reviews .review:hover,
+#reviewsFs #reviews .review:focus {
+	cursor: pointer;
+	box-shadow: 0em 0em .3em gray;
 
 }
 
-#reviewsFs #reviews .review .userPicName  {
-	background-color: yellow;
-	padding: .3em 0em .3em .3em;
-} */
-
-
-/* #reviewsFs #reviews .review .userPicName img {
-	width: 1em;
-	height: 6em;
+#reviewsFs #reviews .review img.revPic {
+	/* background-color: blue; */
 	border-radius: 50%;
-	background-color: red;
+	height: 4em;
+	width: 4em;
+	box-shadow: 0em 0em .2em gray;
+	margin: 0em .5em 0em 0em;
 }
 
-#reviewsFs #reviews .review .reviewed .icon1,
-#reviewsFs #reviews .review .reviewed .star {
-	font-size: .9em;
-} */
-
-/* #reviewsFs .small {
-	font-size: .78em;
-	color: red;
+#reviewsFs #reviews .review div.infos {
+	/* background-color: blue; */
+	margin: .5em 0em;
+	padding: .3em 0em;
 }
 
-#reviewsFs .sortBy {
-	background-color: yellow;
-	padding: .5em 0em;
+#reviewsFs #reviews .review div.infos span {
+	/* background-color: red; */
+	font-size: .8em;
+	font-weight: bolder;
 }
 
-#reviewsFs .sortBy .btn {
-	background-color: #20704b;
-	padding: .3em .7em;
-	font-size: .9em;
-	margin: .0em .3em;
-	border-radius: .7em;
-	color: white;
+#reviewsFs #reviews .review div.infos p {
+	/* background-color: red; */
+	padding: .5em 0em 0em 0em;
 }
-
-#reviewsFs .avatar p {
-	margin: 0em;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-evenly;
-	font-size: small;
-	background-color: red;
-} */

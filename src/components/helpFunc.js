@@ -1,6 +1,7 @@
 // this file can contain any custom function that can be used to many files.
 
 import { Camera, CameraResultType } from '@capacitor/camera';
+import dummyPicture from '../pages/LeaderProfile/dummy_profile.jpg'
 
 
 
@@ -44,4 +45,6 @@ export const takePicture = async () => {
 };
 
 
+
+export const dummyPhoto = dummyPicture;
 export default getCurTimeDate;

@@ -4,6 +4,7 @@
         "editleader",
         "editprofile",
         "firestore",
+        "firstname",
         "ionicons",
         "Mpumelelo",
         "overviewfs",
@@ -14,5 +15,6 @@
         "setshow",
         "userhome",
         "viewnotes"
-    ]
+    ],
+    "git.ignoreLimitWarning": true
 }
