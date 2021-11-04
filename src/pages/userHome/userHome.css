@@ -2,26 +2,41 @@
 body{
     font-family: "Poppins",sans-serif;
 }
-ion-header {
-    background-color: #348d63;
-    padding: 1em 0em .5em 0em;
-    border-radius: 0em 0em 1.3em 1.3em;
-    border: 0em;
-    box-shadow: 0 0 10px #999;
+.home-header {
+    background-color: white;
+    border: 1px solid white;
+    max-height: 60px;
+    height: 100%;
+    /* padding: 1em 0em .5em 0em; */
+    /* border-radius: 0em 0em 1.3em 1.3em; */
+    /* border: 0em; */
+    /* box-shadow: 0 0 10px #999; */
 }
 .searchField {
-    text-align: center;
-    outline-width: 0em;
-    display: flex;
-    flex-direction: column;
+    background-color: #fefefe;
+    border: 1px solid rgb(236, 236, 236);
+    max-width: 330px;
+    margin-left: 30px;
+    margin-top: 20px;
+    border-radius: 15px;
+    padding: 5px;
+    box-shadow: 0em 0em .3em rgba(206, 206, 206, 0.815)
+    /* text-align: center; */
+    /* outline-width: 0em; */
+    /* display: flex; */
+    /* flex-direction: column; */
 }
 
-.searchField p {
-    /* background-color: red; */
-    margin: 0em;
-    font-size: .9em;
+.searchIcon{
+    /* border: 1px solid black; */
+    /* background-color: yellow; */
+    margin-right: 15px;
+    max-width: 17px;
+    max-height: 17px;
+    width: 100%;
+    height: 100%;  
+    margin-left: -140px;
 }
-
 
 .searchField div#search{
     display: flex;
@@ -32,7 +47,7 @@ ion-header {
     padding: 0;
 }
 .searchField div input::placeholder{
-    color: white;
+    color: rgb(0,0,0);
 }
 .searchField div input:focus {
     border-bottom: 2px solid black;
@@ -76,7 +91,7 @@ ion-content .mapContainer .header {
 
 ion-content .fellowships {
     background-color: white;
-    padding: .2em .8em;
+    padding: 6px 5px;
     padding-bottom:12em;
 }
 
@@ -91,7 +106,8 @@ input:focus {
 }
 
 ion-content .moreFellowshipBtn {
-    background-color: #16e9e6;
+    background-color: white;
+    color: #348d63;
     width: 70%;
     margin: auto;
     position: fixed;
@@ -103,5 +119,6 @@ ion-content .moreFellowshipBtn {
     border-radius: 5em;
     display: flex;
     justify-content: center;
-    box-shadow: 0em 0em .3em rgb(162, 162, 162);
+    border: 1px solid #348d63dc;
+    box-shadow: 0em 0em .3em rgba(206, 206, 206, 0.815);
 }

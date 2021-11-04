@@ -58,7 +58,13 @@ const Body = styled(IonPage)`
     background-size: 42% 100%;
     background-repeat: no-repeat;
     background-position-x: right;
+    background-color:  #fff;
   }
+
+  #logins-cont{
+    background-color:  #fff;
+  }
+
   ion-input {
     border: 1px solid gray;
     width: 70%;
@@ -263,7 +269,7 @@ const Login = () => {
         </IonToolbar>
       </IonHeader>
 
-      <IonContent>
+      <IonContent id='logins-cont'>
         <div id="logins">
           <form
             action="/"

@@ -7,6 +7,7 @@ import React, { useState } from "react";
 import "@ionic/react/css/core.css";
 // import bootstrap css
 import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 
 // firebase
 
@@ -37,6 +38,7 @@ import SavedVideos from "./pages/UserProfile/savedVideos/savedVideos";
 import SubscriptionHome from "./pages/subscription/SubscriptionHome"
 import NoteContent from "./pages/notes/NoteContent";
 import UserHome from "./pages/userHome/userHome";
+import EditFs from "./pages/LeaderProfile/editFs";
 import Payment from "./pages/LeaderProfile/premium/Upgrading/payment";
 
 
@@ -75,6 +77,8 @@ const App = () => {
             <Route exact path="/Donate" component={Donate} />
             <Route exact path="/savedVideos" component={SavedVideos} />
             <Route exact path="/addnote" component={ NoteContent } />
+
+            <Route exact path="/editfs" component={ EditFs } />
 
 
 

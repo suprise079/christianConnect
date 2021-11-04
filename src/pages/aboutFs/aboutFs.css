@@ -1,4 +1,4 @@
-* { --ion-background-color: #348d63; }
+/* * { --ion-background-color: #348d63; } */
 
 p { margin: 0em; }
 
@@ -7,7 +7,7 @@ a {
     color: white;
 }
 
-ion-page { --ion-background-color: #ffffff; }
+/* ion-page { --ion-background-color: #ffffff; } */
 
 .aboutFellowship {
     background-color: #438d63;
