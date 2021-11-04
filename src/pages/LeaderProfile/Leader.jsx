@@ -24,13 +24,13 @@ import {
   walletOutline,
   
 } from "ionicons/icons";
-import {GiUpgrade} from "react-icons/gi"
+import {GiUpgrade } from "react-icons/gi"
 
 
 // import from react modules
 import React, { useContext, useEffect, useState } from "react";
 
-import { FaUserEdit } from "react-icons/fa";
+import { FaUserEdit, FaEdit } from "react-icons/fa";
 
 import TabBar from "../../components/tabBar/tabBar";
 
@@ -40,7 +40,6 @@ import styled from "styled-components";
 // firebase for signOut
 import { auth } from "../../firebase/firebase";
 import { signOut } from "firebase/auth";
-import Context from "../../context/Context";
 // get firebase functions
 import {
   getUserImg
@@ -50,7 +49,8 @@ import Cookies from 'js-cookie';
 import dummyPicture from './dummy_profile.jpg'
 import Premium from "./premium/Premium";
 
-
+// import ... db content
+import Context from "../../context/Context";
 
 var profileImg = "/assets/icon/prayer.jpeg";
 
@@ -122,51 +122,60 @@ const Body = styled(IonPage)`
 
 
 const Leader = () => {
+  // context and global variables....
+  const { curUser, setCurUser, fellowship, setFellowship } = useContext( Context );
   const history = useHistory(); // use this for routing in js codes.
-  const { curUser, setCurUser } = useContext( Context );
   const [ userPhoto, setUserPhoto ] = useState();
   // state to switch between premium features and leader account
   const [page, setPage] = useState(true)
   const [ user, setUser ] = useState(
-    JSON.parse(Cookies.get("userData")) ? JSON.parse(Cookies.get("userData")) : "" )
+    JSON.parse(Cookies.get("userData") ? Cookies.get("userData") : "") );
 
-  console.log("current user details:",user)
-// pages
-const appPages = [
-  {
-    title: "Saved videos",
-    url: "/savedVideos",
-    iosIcon: bookmarkOutline,
-    mdIcon: bookmarkSharp,
-  },
-  {
-    title: "Donate",
-    url: "/Donate",
-    iosIcon: walletOutline,
-    mdIcon: walletSharp,
-  },
-  {
-    title: "Notes",
-    url: "/notes",
-    iosIcon: createOutline,
-    mdIcon: createSharp,
-  },
-  !user.isPremium ? {
-    title: "Upgrade To Premium",
-    url: "/premium",
-    iosIcon: createOutline,
-    mdIcon: createSharp,
-  }:false,
-  {
-    title: "Logout",
-    url: "/",
-    iosIcon: logOutOutline,
-    mdIcon: logOutSharp,
-  },
-];
+  // console.log("current user details:",user)
+  // pages
+  const appPages = [
+    {
+      title: "Saved videos",
+      url: "/savedVideos",
+      iosIcon: bookmarkOutline,
+      mdIcon: bookmarkSharp,
+    },
+    {
+      title: "Donate",
+      url: "/Donate",
+      iosIcon: walletOutline,
+      mdIcon: walletSharp,
+    },
+    {
+      title: "Notes",
+      url: "/notes",
+      iosIcon: createOutline,
+      mdIcon: createSharp,
+    },
+    {
+      title: "Edit",
+      url: "/editfs",
+      // iosIcon: createOutline,
+      mdIcon: createSharp,
+      // iosIcon: i.toString(),
+    },
+    !user.isPremium ? {
+      title: "Upgrade To Premium",
+      url: "/premium",
+      iosIcon: createOutline,
+      mdIcon: createSharp,
+    }:false,
+    {
+      title: "Logout",
+      url: "/",
+      iosIcon: logOutOutline,
+      mdIcon: logOutSharp,
+    },
+  ];
 
   useEffect(() => {
     // console.log( JSON.parse( Cookies.get("userData") ) );
+    setFellowship( JSON.parse(Cookies.get("curLeaderFs")) );
     setCurUser( JSON.parse( Cookies.get("userData") ) );
     
 
@@ -191,7 +200,7 @@ const appPages = [
           /* setTimeout(() => {
               history.push(e.target.id);
             }, 3000); */
-          alert("Successfully signed Out ! ");
+          // alert("Successfully signed Out ! ");
           history.push(e.target.id);
         })
         .catch((err) => alert(err));
@@ -268,7 +277,9 @@ const appPages = [
                     ios={appPage.iosIcon}
                     md={appPage.mdIcon}
                   />
-                  <IonLabel>{appPage.title}</IonLabel>
+                  <IonLabel>{appPage.title} {" "}
+                    { appPage.title === "Edit" ? fellowship?.name : "" }
+                  </IonLabel>
                 </Link>
                 )
               ))}

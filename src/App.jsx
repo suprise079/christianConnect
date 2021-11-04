@@ -6,7 +6,7 @@ import React, { useState } from "react";
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
 // import bootstrap css
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 
 // firebase
 
@@ -37,11 +37,8 @@ import SavedVideos from "./pages/UserProfile/savedVideos/savedVideos";
 import SubscriptionHome from "./pages/subscription/SubscriptionHome"
 import NoteContent from "./pages/notes/NoteContent";
 import UserHome from "./pages/userHome/userHome";
-<<<<<<< HEAD
-import EditFs from "./pages/Leader/editFs";
-=======
+import EditFs from "./pages/LeaderProfile/editFs";
 import Payment from "./pages/LeaderProfile/premium/Upgrading/payment";
->>>>>>> 446f30c6b62f59bd6d96d856071f7bf9311d5e2c
 
 
 
