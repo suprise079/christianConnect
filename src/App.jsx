@@ -35,6 +35,7 @@ import SavedVideos from "./pages/User/savedVideos/savedVideos";
 import SubscriptionHome from "./pages/subscription/SubscriptionHome"
 import NoteContent from "./pages/notes/NoteContent";
 import UserHome from "./pages/userHome/userHome";
+import EditFs from "./pages/Leader/editFs";
 
 
 
@@ -72,6 +73,8 @@ const App = () => {
             <Route exact path="/Donate" component={Donate} />
             <Route exact path="/savedVideos" component={SavedVideos} />
             <Route exact path="/addnote" component={ NoteContent } />
+
+            <Route exact path="/editfs" component={ EditFs } />
 
 
 

@@ -17,15 +17,18 @@ import './searchFellowship.css';
 const SearchFellowship = ( props ) => {
   const { allFellowships } = useContext( Context );
 
+  function summary( t ) {
+    if( t ) return t.split(" ").splice(0, 4).join(" ") + " ........"
+  }
+
   return (
     <div className="searchFellowship" >
-      <div >
+      <div className="info" >
         <p className="fellowshipName" > { props.name } </p>
         <p className="subInfo" >
-          {/* { "2" + "km " } away */}
-          { props.location }
+          {/* { "2" + "km " } away */} { props.location }
         </p>
-        <p className="subInfo" > { props.about } </p>
+        <p className="subInfo" > { summary( props.about ) } </p>
         <p className="subInfo" > { props.time } </p>
       </div>
 

@@ -146,7 +146,7 @@ const Profile = () => {
   const { curUser, setCurUser } = useContext( Context );
   const [ userPhoto, setUserPhoto ] = useState();
   const [ user, setUser ] = useState(
-    JSON.parse(Cookies.get("userData")) ? JSON.parse(Cookies.get("userData")) : "" )
+    JSON.parse(Cookies.get("userData") ? Cookies.get("userData") : "" ) ? JSON.parse(Cookies.get("userData")) : "" )
 
 
 

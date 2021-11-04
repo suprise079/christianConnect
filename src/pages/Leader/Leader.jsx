@@ -14,7 +14,7 @@ import {
 } from "@ionic/react";
 
 // get css
-import "../Profile.css";
+// import "../Profile.css";
 import "./Leader.css"
 
 import {
@@ -33,15 +33,17 @@ import { Link, useHistory } from "react-router-dom";
 import churchImg from "./church.jpeg";
 
 
+
 // get context db
 import Context from "../../context/Context";
 
 // firebase imports
 import { auth } from "../../firebase/firebase";
 import Cookies from 'js-cookie';
+import { getUserImg } from "../../firebase/firebase-help";
 
 
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 
 
@@ -69,6 +71,14 @@ const appPages = [
     mdIcon: "",
   },
   {
+    title: "Edit",
+    url: "/editfs",
+    // iosIcon: createOutline,
+    // mdIcon: createSharp,
+    iosIcon: i.toString(),
+    mdIcon: "",
+  },
+  {
     title: "Upgrade To Premium",
     url: "/premium",
     iosIcon: createOutline,
@@ -85,12 +95,23 @@ const appPages = [
 const Leader = () => {
   const { curUser, setCurUser, fellowship, setFellowship } = useContext( Context );
   const history = useHistory();
+  const [ userPhoto, setUserPhoto ] = useState();
+  const [ user, setUser ] = useState(
+    JSON.parse(Cookies.get("userData") ? Cookies.get("userData") : "" ) )
+
 
 
   useEffect(() => {
     setFellowship( JSON.parse(Cookies.get("curLeaderFs")) );
     setCurUser( JSON.parse( Cookies.get("userData") ) );
+
+    // console.log( user ) // get leader profile image
+    getUserImg( user?.userId ).then( res => {
+      if( res ) { setUserPhoto( res ); }
+      else { setUserPhoto( false ) }
+    })
   },[])
+
 
 
   const goToItem = (e) => {
@@ -121,9 +142,11 @@ const Leader = () => {
       <IonContent >
         <div id="leaderProfile" className="bgColor">
           <IonCard className="nameCard">
-            <IonAvatar className="avatar">
-              <img src={churchImg} alt="" />
-            </IonAvatar>
+            
+            <img // churchImg
+              id="profileImg"
+              src={ userPhoto ? userPhoto.photo : "" }
+              alt={ "photo of " + curUser?.firstname } />
 
             <div className="details">
               <Link to="/editprofile">
@@ -163,7 +186,9 @@ const Leader = () => {
                     md={appPage.mdIcon}
                     color="#000"
                   />
-                  <IonLabel>{appPage.title}</IonLabel>
+                  <IonLabel>{appPage.title} {" "}
+                    { appPage.title === "Edit" ? fellowship?.name : "" }
+                  </IonLabel>
                 </IonItem>
               </IonMenuToggle>
             );

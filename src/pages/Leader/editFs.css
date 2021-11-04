@@ -1,0 +1,53 @@
+
+#editFs {
+  background-color: red;
+}
+
+#editFs h1, #editFs h2, #editFs h3, #editFs h4, #editFs h5 {
+  text-align: center;
+}
+
+
+#editFs .form {
+  /* background-color: red; */
+  padding: 0em .2em;
+}
+
+#editFs .form div.field{
+  background-color: white;
+  margin: 1em 0em;
+  box-shadow: 0em 0em .1em gray;
+}
+
+#editFs .form div input{
+  background-color: white;
+  padding: 1em .5em;
+}
+
+#editFs .form div input[type="time"]{
+  /* background-color: red; */
+  display: flex;
+  width: 96%;
+  justify-content: space-around;
+}
+
+
+#editFs .form div textarea{
+  /* background-color: red; */
+  margin: 0em .5em 0em 0em;
+  padding: 0em .5em;
+  height: 5em;
+}
+
+#editFs .form div.editbtnCont {
+  margin: 1em 0em;
+  /* background-color: red; */
+  text-align: center;
+}
+
+#editFs .form div.editbtnCont .editbtn {
+  background-color: #127647;
+  padding: .9em;
+  font-weight: bolder;
+  color: white;
+}
