@@ -6,9 +6,9 @@ import {
   IonHeader,
   IonToolbar,
   IonTitle,
-  IonSelect,
-  IonSelectOption,
+  IonModal,
   IonContent,
+  IonButton,
 } from "@ionic/react";
 
 import styled from "styled-components";
@@ -21,10 +21,11 @@ import {
   signInWithPopup,
   GoogleAuthProvider,
   signInWithEmailAndPassword,
+  sendPasswordResetEmail,
 } from "firebase/auth";
 
 // import js cookie for holding user data
-import Cookies from 'js-cookie';
+import Cookies from "js-cookie";
 
 // react
 import { Link, useHistory } from "react-router-dom";
@@ -35,7 +36,10 @@ import { FcGoogle } from "react-icons/fc";
 import "../StylesForPages.css";
 import bg from "./bg.png";
 import { useLocation } from "react-router";
-import { getAllFellowships, getLeaderFs, LoginUser
+import {
+  getAllFellowships,
+  getLeaderFs,
+  LoginUser,
 } from "../../../firebase/firebase-help";
 
 const Body = styled(IonPage)`
@@ -58,11 +62,11 @@ const Body = styled(IonPage)`
     background-size: 42% 100%;
     background-repeat: no-repeat;
     background-position-x: right;
-    background-color:  #fff;
+    background-color: #fff;
   }
 
-  #logins-cont{
-    background-color:  #fff;
+  #logins-cont {
+    background-color: #fff;
   }
 
   ion-input {
@@ -115,23 +119,69 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
 
   // user details
-  const { curUser, setCurUser, isLoggedIn, setIsLoggedIn, setFellowship } = useContext(Context);
+  const { curUser, setCurUser, isLoggedIn, setIsLoggedIn, setFellowship } =
+    useContext(Context);
   const [showPassword, setshowPassword] = useState(false);
   const [pswdType, setpswdType] = useState("password");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  // variables for forgot password
+  const [forgotPswdModal, setForgotPswdModal] = useState(false);
+  const handleForgotPassword = async (e) => {
+    e.preventDefault();
+    sendPasswordResetEmail(auth, email)
+      .then(() => {
+        setMessage(
+          <h4
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              border: "1px solid lightgray",
+              background: " #fff",
+              padding: " 20px",
+              borderRadius: "10px",
+              margin: "20vh 10px 0 10px",
+              boxShadow: " 0 0 10px #00000029",
+            }}
+          >
+            <p style={{ textAlign: "center" }}>
+              The email recovery link has been sent successfully, please check
+              your emails and follow the instructions to reset your email.
+            </p>
+            <button
+              style={{
+                margin: "10px",
+                background: "#348d60",
+                padding: "5px",
+                color: "white",
+                borderRadius: "5px",
+                width: "auto",
+                boxShadow: "#0000004a 0px 6px 6px",
+              }}
+              onClick={() => {
+                setForgotPswdModal(false);
+
+              }}
+            >
+              Proceed to Login
+            </button>
+          </h4>
+        );
+      })
+      .catch((err) => alert(err));
+  };
+  const [message, setMessage] = useState("");
+
   // use effect, run when pages loads
   useEffect(() => {
     // alert("login", location.state );
 
-
     // reset data in the cookie
     Cookies.remove("userData");
     Cookies.remove("allFellowships");
-    Cookies.remove("dummy");
-
-  }, [])
+  }, []);
 
   // check if the user is logged in
   const handleChange = (e) => {
@@ -149,84 +199,89 @@ const Login = () => {
     setLoading(true);
 
     await signInWithEmailAndPassword(auth, email, password)
-    .then((result) => {
-      auth.onAuthStateChanged((user) => {
-        if (user.email && user.uid ) {
-          // pass user id from auth .. get user data from firestore ..
-          LoginUser( user.uid ).then( data => {
-            // console.log( data );
-            // if data is true
-            if( data ) {
-              // use cookies js to set user's dats
-              // console.log( data )
-              // set user data to session cookies...
-              Cookies.set("userData", JSON.stringify(data) );
-
-              // then get all fellowships from firebase and set them to
-              // session cookie
-              getAllFellowships().then( fellows => {
-                // console.log( Object.assign({}, fellows ) )
-                var afs = JSON.stringify( fellows );
-                // var afs = JSON.stringify(  Object.assign({}, fellows ) );
-                // console.log( afs )
-                // set to cookies js session var
-                Cookies.set("allFellowships", afs )
-                // console.log( Cookies.get("AllFellowships") )
-
-
-                // get leader's fellowship data... run only user is leader 
-                if( data.isLeader ) {
-                  // get user fellowship data. pass user auth id
-                  getLeaderFs( data.userId ).then( refDoc => {
-                    var fs = refDoc;
-                    if( fs ) { // if user data is valid and available
-                      // set data in global context
-                      setFellowship( fs );
-                      // console.log( fs );
-                      // set current leader fs in session cookie
-                      Cookies.set("curLeaderFs", JSON.stringify( fs ) )
-                    }
-                    console.log("here")
-                    history.push("/userhome?user=" + data.userId ); // route to user page
-                  })
-
-                }
-
+      .then((result) => {
+        // console.log( result )
+        auth.onAuthStateChanged((user) => {
+          if (user.email && user.uid) {
+            // pass user id from auth .. get user data from firestore ..
+            LoginUser(user.uid).then((data) => {
+              // console.log( data );
+              // if data is true
+              if (data) {
+                // use cookies js to set user's dats
                 // console.log( data )
-                setEmail(""); setPassword(""); setLoading(false);
-                history.push("/userhome?user=" + data.userId ); // route to user page
+                // set user data to session cookies...
+                Cookies.set("userData", JSON.stringify(data));
 
-              })
-              
-            }
-          })
-        }else{ history.push("/Login"); }
+                // then get all fellowships from firebase and set them to
+                // session cookie
+                getAllFellowships().then((fellows) => {
+                  // console.log( Object.assign({}, fellows ) )
+                  var afs = JSON.stringify(fellows);
+                  // var afs = JSON.stringify(  Object.assign({}, fellows ) );
+                  // console.log( afs )
+                  // set to cookies js session var
+                  Cookies.set("allFellowships", afs);
+                  // console.log( Cookies.get("AllFellowships") )
+
+                  // get leader's fellowship data... run only user is leader
+                  if (data.isLeader) {
+                    // get user fellowship data. pass user auth id
+                    getLeaderFs(data.userId).then((refDoc) => {
+                      var fs = refDoc;
+                      if (fs) {
+                        // if user data is valid and available
+                        // set data in global context
+                        setFellowship(fs);
+                        // console.log( fs );
+                        // set current leader fs in session cookie
+                        Cookies.set("curLeaderFs", JSON.stringify(fs));
+                      }
+                      console.log("here");
+                      history.push("/userhome?user=" + data.userId); // route to user page
+                    });
+                  }
+
+                  // console.log( data )
+                  setEmail("");
+                  setPassword("");
+                  setLoading(false);
+                  history.push("/userhome?user=" + data.userId); // route to user page
+                });
+              }
+            });
+          } else {
+            history.push("/Login");
+          }
+        });
+      })
+      .catch((err) => {
+        setLoading(false);
+        // error handling
+        if (err.code.includes("invalid-email")) {
+          alert("Invalid User Email");
+          setEmail("");
+          setPassword("");
+        } else if (err.code.includes("auth/user-not-found")) {
+          alert("User Not Found.");
+          setEmail("");
+          setPassword("");
+        } else if (err.code.includes("auth/wrong-password")) {
+          alert("Wrong Password");
+          setPassword("");
+        } else if (err.code.includes("auth/network-request-failed")) {
+          alert("Network Error, Please Check Your Network Connection");
+          setPassword("");
+        } else {
+          alert(err);
+          console.error(err);
+          setEmail("");
+          setPassword("");
+        }
       });
-    })
-    .catch((err) => {
-      setLoading(false);
-      // error handling
-      if( err.code.includes("invalid-email") ) {
-        alert( "Invalid User Email" ); setEmail(""); setPassword("");
-      }
-      else if ( err.code.includes("auth/user-not-found") ) {
-        alert("User Not Found."); setEmail(""); setPassword("");
-      }
-      else if ( err.code.includes("auth/wrong-password") ) {
-        alert("Wrong Password"); setPassword("");
-      }
-      else if ( err.code.includes("auth/network-request-failed") ) {
-        alert("Network Error, Please Check Your Network Connection");
-        setPassword("");
-      }
-      else { alert( err ); console.error( err )
-        setEmail(""); setPassword("");
-      }
-    });
-    console.log("HERE AND HERE")
-    setLoading( false );
+    // console.log("HERE AND HERE")
+    setLoading(false);
   };
-
 
   const loginWithGoogle = () => {
     const provider = new GoogleAuthProvider();
@@ -269,7 +324,7 @@ const Login = () => {
         </IonToolbar>
       </IonHeader>
 
-      <IonContent id='logins-cont'>
+      <IonContent id="logins-cont">
         <div id="logins">
           <form
             action="/"
@@ -315,9 +370,7 @@ const Login = () => {
               }}
             />
             {/* <input type="submit" value={loading ? <span className="loader"></span> : "Login"} /> */}
-            <button
-              onClick={ e => handleSubmit(e) }
-              type="submit">
+            <button onClick={(e) => handleSubmit(e)} type="submit">
               {loading ? (
                 <span
                   style={{ borderColor: "#348d60" }}
@@ -344,12 +397,12 @@ const Login = () => {
           </button>
         </div>
 
-        <div className="haveAcc">
+        <div style={{ textAlign: "center" }} className="haveAcc">
           Don't have an account ?{" "}
           <Link
             className="fromWelcome"
             // to={{ pathname: location.state, state: location.state }}
-            to={ "/SignUp" }
+            to={"/SignUp"}
           >
             Register
           </Link>
@@ -357,17 +410,76 @@ const Login = () => {
           type of user wanna register and determines the exact route accordingly */}
         </div>
 
-        <div className="haveAcc">
+        <div style={{ textAlign: "center" }}>
           {/* set forgot password page */}
-          <Link
+          <span
             className="fromWelcome"
-            onClick={(e) => alert("No Data")}
-            to="/Login"
+            onClick={() => {setForgotPswdModal(true);setMessage("")}}
+            style={{ color: "#348d60" }}
           >
             Forgot password ?
-          </Link>
+          </span>
         </div>
       </IonContent>
+      <IonModal className="forgotPasswordModal" isOpen={forgotPswdModal}>
+        {message ? (
+          message
+        ) : (
+          <form
+            onSubmit={(e) => {
+              handleForgotPassword(e);
+            }}
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              border: "1px solid lightgray",
+              background: " #fff",
+              padding: " 20px",
+              borderRadius: "10px",
+              margin: "20vh 10px 0 10px",
+              boxShadow: " 0 0 10px #00000029",
+            }}
+          >
+            <h1 style={{ textAlign: "center" }}>
+              {`You forgot your password? Don't worry, we got you ;)`}
+            </h1>
+            <IonInput
+              style={{ border: "1px solid #348d60" }}
+              placeholder="Please enter your email"
+              id="ForgotEmail"
+              required
+              autofocus
+              type="email"
+              name="Email address"
+              clearInput="true"
+              className="inputField"
+              value={email}
+              onIonChange={(e) => {
+                handleChange(e);
+              }}
+            />
+            <button
+              style={{
+                margin: "10px",
+                background: "#348d60",
+                padding: "5px",
+                color: "white",
+                borderRadius: "5px",
+                width: "100px",
+                boxShadow: "#0000004a 0px 6px 6px",
+              }}
+              id="forgotPswdButton"
+              type="submit"
+              // onClick={() => {
+
+              // }}
+            >
+              Submit
+            </button>
+          </form>
+        )}
+      </IonModal>
     </Body>
   );
 };

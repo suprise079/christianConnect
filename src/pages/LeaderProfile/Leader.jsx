@@ -176,6 +176,8 @@ const Leader = () => {
     // console.log( JSON.parse( Cookies.get("userData") ) );
     setFellowship( JSON.parse(Cookies.get("curLeaderFs")) );
     setCurUser( JSON.parse( Cookies.get("userData") ) );
+
+    setCurUser( JSON.parse( Cookies.get("curLeaderFs") ) );
     
 
     // console.log( user )
@@ -278,7 +280,7 @@ const Leader = () => {
                     md={appPage.mdIcon}
                   />
                   <IonLabel>{appPage.title} {" "}
-                    { appPage.title === "Edit" ? fellowship?.name : "" }
+                    {/* { appPage.title === "Edit" ? fellowship?.name : "" } */}
                   </IonLabel>
                 </Link>
                 )

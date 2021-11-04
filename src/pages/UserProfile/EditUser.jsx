@@ -25,12 +25,18 @@ import {
 import Cookies from 'js-cookie';
 
 
+
 // import firebase and its modules
 import { auth } from '../../firebase/firebase';
-import {
-  updateProfile, deleteUser
-} from "firebase/auth";
 import { takePicture } from '../../components/helpFunc';
+import {
+  updateProfile,
+  signInWithPopup,
+  GoogleAuthProvider,
+  deleteUser,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+
 
 
 
@@ -67,34 +73,42 @@ const EditUser = () => {
   }, [])
 
 
-  const delUser = () => {
+  const delUser = async () => {
     var isTrue = window.confirm("Continue To Delete Account..?");
 
     if (isTrue) {
       var userId = curUser?.userId;
 
       deleteDocument("Users", curUser.id).then(() => {
-        const user = auth.currentUser; // get the current user
         // delete user from auth
-        deleteUser(user).then(() => {
+        signInWithEmailAndPassword( auth, curUser?.email, curUser?.password )
+        .then(( result ) => {
+          auth.onAuthStateChanged( user => {
+            // const user = auth.currentUser; // get the current user
+            deleteUser(user).then(() => {
+              // delete user profile pic
+              if( phone && phone?.id ) {
+                deleteDocument("userProfilePic", phone?.id )
+              }
+    
+              // delete user delete user fellowship if user is leader
+              if( fellowship && fellowship?.id ) {
+                deleteDocument("Fellowships", fellowship?.id ).then(() => {
+                  alert("Fellowship Deleted.....")
+                })
+              }
+    
+              // Cookies.remove("userData"); // delete user data from session cookie
+              alert("User Account Deleted");
+              history.push("/");
+            }).catch(error => {
+              console.error(error.code);
+              alert( "AUTH DELETE USER:" + error.code);
+            })
+          })
 
-          // delete user profile pic
-          if( phone && phone?.id ) {
-            deleteDocument("userProfilePic", phone?.id )
-          }
-
-          // delete user delete user fellowship if user is leader
-          if( fellowship && fellowship?.id ) {
-            deleteDocument("Fellowships", fellowship?.id )
-          }
-
-          // Cookies.remove("userData"); // delete user data from session cookie
-          alert("User Account Deleted");
-          history.push("/");
-        }).catch(error => {
-          console.error(error.code);
-          alert(error.code);
         })
+        
       })
     }
   }
@@ -154,7 +168,6 @@ const EditUser = () => {
     //   console.log( image )
     // })
   }
-
 
   return (
     <IonPage>

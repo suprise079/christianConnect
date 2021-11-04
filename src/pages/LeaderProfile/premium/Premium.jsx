@@ -56,6 +56,13 @@ const appPages = [
     mdIcon: createSharp,
   },
   {
+    title: "Edit",
+    url: "/editfs",
+    // iosIcon: createOutline,
+    mdIcon: createSharp,
+    // iosIcon: i.toString(),
+  },
+  {
     title: "Logout",
     url: "/Login",
     iosIcon: logOutOutline,
