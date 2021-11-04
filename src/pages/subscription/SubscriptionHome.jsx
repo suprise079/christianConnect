@@ -11,6 +11,7 @@ import {
   IonButton,
   IonIcon,
 } from "@ionic/react";
+import {FiPlayCircle} from 'react-icons/fi'
 import { logoClosedCaptioning, play } from "ionicons/icons";
 import church from "./church.jpeg";
 import hope from "./hope.jpg";
@@ -22,12 +23,72 @@ import { IonReactRouter } from "@ionic/react-router";
 import { Redirect, Route } from "react-router-dom";
 import SubscriptionTabs from "./subscriptionTabs.js";
 import TabBar from "../../components/tabBar/tabBar";
-import { collection, getDocs } from "@firebase/firestore";
-import { firestoreObj } from "../../firebase/firebase";
+import { collection, getDocs, limit, query, where } from "@firebase/firestore";
+import { firestoreObj, storage } from "../../firebase/firebase";
 import React from "react";
-
+import { VideoContext } from "./devotions/VideoContext.js";
+import { useContext } from "react";
 import { IoMdArrowBack } from "react-icons/io";
 import { FiExternalLink } from "react-icons/fi";
+import { getDownloadURL, ref } from "@firebase/storage";
+import ViewVideos from "./devotions/viewVideos.js";
+
+
+const Playlist = () => {
+  const { videos, playingVideo, setPages, setPlayingVideo } = useContext(VideoContext);
+
+    // preview video on hover
+    function startPreview(event) {
+      var video = event.target;
+      video.muted = false;
+      video.currentTime = 1;
+      video.playbackRate = 1.5;
+      // video.style.transform = 'scale(1.1)'
+      video.play();
+    }
+  
+    function stopPreview(event) {
+      var video = event.target;
+      video.currentTime = 0;
+      video.playbackRate = 1;
+      // video.style.transform = 'scale(1)'
+      video.pause();
+    }
+  
+    function handlePlay(video) {
+      setPlayingVideo(video);
+      setPages("2");
+    }
+
+  return (
+    <>
+      {videos.map((video) => {
+        return (
+          <>
+            <div className="trackAlign" onClick={() => setPlayingVideo(video)}>
+              <div className="videoUrl" onClick={() => setPlayingVideo(video)}>
+                <video src={video.url} controls={false}></video>
+              </div>
+              <div className="videoInfo text-center" onClick={() => setPlayingVideo(video)} style={{width:"100%"}}>
+                <b>{video.title}</b><br />
+                <IonButton
+                  color="danger"
+                  expand='block'
+                  onClick={() => {
+                    handlePlay(video);
+                  }}
+                >
+                  Play
+                  <FiPlayCircle />
+                </IonButton>
+              </div>
+            </div>
+          </>
+        );
+      })}
+    </>
+  );
+};
 
 const Subscriptions = () => {
   // eslint-disable-next-line no-sparse-arrays
@@ -36,6 +97,14 @@ const Subscriptions = () => {
   const [view, setView] = useState(true);
   // fellowships
   const [fellowships, setFellowships] = useState([]);
+  
+  // store sermon videos
+  const [videos, setVideos] = useState([]);
+  const fellowshipId = "F0";
+  // keep track to which video is playing
+  const [playingVideo, setPlayingVideo] = useState({});
+  // Router variable for consditional renfering
+  const [pages, setPages] = useState("1");
 
   useEffect(() => {
     // useEffect is already an asynchronous function
@@ -57,8 +126,43 @@ const Subscriptions = () => {
       });
       setFellowships(storeData);
     };
+    const effect = async () => {
+      var videosArr = [];
+      const dbQuery = query(
+        collection(firestoreObj, "videos"),
+        limit(10)
+      );
+      const queryResults = await getDocs(dbQuery);
+      queryResults.forEach((video) => {
+        // Add an ID to video data
+        var data = video.data();
+        data["id"] = video.id;
+        videosArr.push(data);
+      });
+      console.log("videos before lik: ", videosArr);
+      // get videos from firebase storage
+      videosArr.map(async (video) => {
+        const videosRef = ref(
+          storage,"videos/" + video.storageName
+        );
+        await getDownloadURL(videosRef)
+          .then((url) => {
+            // add url to video data
+            var data = video;
+            data["url"] = url;
+          })
+          .catch((err) => {
+            console.log("Error: ", err);
+          });
+      });
+      setVideos(videosArr);
+    };
+    effect();
     temp();
+
+
   }, []);
+
 
   return (
     <>
@@ -89,46 +193,16 @@ const Subscriptions = () => {
                               className="highlightImg"
                               src={hope}
                               // src={fellowship.photo}
-                              alt={`${fellowship.id}`}
+                              alt={`${fellowship.name}`}
                             />
-                            {/* {fellowship.name} */}
+                            {fellowship.name}
                           </Link>
                         </IonCol>
-
-                        {/* <IonCol id={fellowship.id}>
-                          <Link to={url}>
-                            <img
-                              className="highlightImg"
-                              src={fellowship.photo}
-                              alt="fellow1"
-                            />
-                            <br />
-                            Hope fellowship
-                          </Link>
-                        </IonCol>
-                        <IonCol id={fellowship.id}>
-                          <Link to={url}>
-                            <img
-                              className="highlightImg"
-                              src={fellowship.photo}
-                              alt="fellow1"
-                            />
-                            <br />
-                            Hope fellowship
-                          </Link>
-                        </IonCol> */}
                       </>
                     );
                   })}
 
-                  {/* <IonCol id='2'><img className='highlightImg' src={mpumi} alt='fellow2' /><br />Mpumelelo fellowship</IonCol>
-                <IonCol id='1'><img className='highlightImg' src={hope} alt='fellow1' /><br />Hope fellowship</IonCol>
-                <IonCol id='2'><img className='highlightImg' src={mpumi} alt='fellow2' /><br />Mpumelelo fellowship</IonCol>
-                <IonCol id='1'><img className='highlightImg' src={hope} alt='fellow1' /><br />Hope fellowship</IonCol>
-                <IonCol id='2'><img className='highlightImg' src={mpumi} alt='fellow2' /><br />Mpumelelo fellowship</IonCol>
-                <IonCol id='1'><img className='highlightImg' src={hope} alt='fellow1' /><br />Hope fellowship</IonCol>
-                <IonCol id='2'><img className='highlightImg' src={mpumi} alt='fellow2' /><br />Mpumelelo fellowship</IonCol> */}
-                </IonRow>
+                  </IonRow>
               </div>
               {fellowships.length > 2 ? (
                 <button
@@ -146,28 +220,20 @@ const Subscriptions = () => {
 
             {/* <IonButton color='favorite'>View all</IonButton> */}
 
-            {loop.map((announcement) => {
-              return (
-                <div className="ann-container">
-                  {/* image */}
-                  <img className="announceImg" src={hope} alt="announcement" />
-                  {/* content */}
-                  <div className="announceContent">
-                    <h4>Gents Night</h4>
-                    <h6>Mpumelelo Prayer Meeting</h6>
-                    {/* button */}
-                    <IonButton size="small" color="btn" className="btn p-1">
-                      {" "}
-                      Set Reminder{" "}
-                    </IonButton>
-                  </div>
-                </div>
-              );
-            })}
+            {/* random videos */}
+            <VideoContext.Provider value={{ videos, playingVideo,pages, setPages, setPlayingVideo }}>
+              <br />
+             <div style={{clear:"both"}}>
+              {pages === "1" && <Playlist />}
+              {pages === "2" && <ViewVideos />}
+             </div>
+            </VideoContext.Provider>
           </IonContent>
-          <div style={{height:"58px",background:"#348d63"}}></div>
+          <div style={{ height: "58px", background: "#348d63" }}></div>
         </IonPage>
       )}
+
+      {/* view all subscriptions */}
       {!view && (
         <IonPage>
           <IonHeader>
@@ -194,7 +260,8 @@ const Subscriptions = () => {
                 </Link>
               );
             })}
-          </IonContent><div style={{height:"56px"}} className="spacer"></div>
+          </IonContent>
+          <div style={{ height: "56px" }} className="spacer"></div>
         </IonPage>
       )}
       {console.log("sub home finished rendering")}

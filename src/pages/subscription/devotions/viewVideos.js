@@ -33,6 +33,8 @@ const Notes = () => {
           name=""
           id=""
           name="content"
+          color='primary'
+          
           onChange={(e) => handleChange(e)}
           placeholder="Write notes here..."
         ></textarea>

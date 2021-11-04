@@ -37,8 +37,7 @@ const Devotions = () => {
       // get videos from firebase storage
       videosArr.map(async (video) => {
         const videosRef = ref(
-          storage,
-          fellowshipId + "/videos/" + video.storageName
+          storage,"videos/" + video.storageName
         );
         await getDownloadURL(videosRef)
           .then((url) => {

@@ -64,10 +64,6 @@ const DevotionsHome = () => {
     video.pause();
   }
 
-  function videoProfile(video) {
-    video.currentTime = "00:10";
-  }
-
   function handlePlay(video) {
     setPlayingVideo(video);
     setPages("2");

@@ -1,8 +1,8 @@
 /* Please use an ID its ruining other files */
-/* ion-toolbar {
+ion-toolbar {
   --background: #348d60;
   color: white;
-} */
+}
 ion-button {
   --background: white;
   text-transform: unset;
@@ -37,9 +37,12 @@ label {
 }
 
 
+<<<<<<< HEAD
 /* img{
   margin-top: 80px;
 } */
+=======
+>>>>>>> d62993c5ac810b145cb44ada3fdd1804146a216f
 .haveAcc {
   text-align: center;
   width: 100%;
@@ -174,10 +177,10 @@ div.walking-loader span:last-of-type {
   bottom: -5px;
   right: -65px;
 }
-span:last-of-type svg{
+/* span:last-of-type svg{
   height: 4em;
   width: 4em;
-}
+} */
 @keyframes walk {
   from {
     right: 50px;

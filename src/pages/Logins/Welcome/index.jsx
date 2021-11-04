@@ -73,7 +73,7 @@ const Welcome = () => {
 
 
     <Body>
-      <img src={logo} alt="Logo" />
+      <img style={{marginTop:"80px"}} src={logo} alt="Logo" />
       <div className="Buttons">
         {/* <Buttons>
           <Link
