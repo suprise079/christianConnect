@@ -79,11 +79,7 @@
   },
   "devDependencies": {
     "@capacitor/cli": "3.2.0",
-<<<<<<< HEAD
     "react-scripts": "^4.0.3"
-=======
-    "react-scripts": "3.4.4"
->>>>>>> a28e81c90c8ee60fc35eec23eac02f88d5f3ee62
   },
   "description": "Christian Connect"
 }
