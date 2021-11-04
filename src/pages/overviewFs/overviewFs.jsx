@@ -18,7 +18,7 @@ import React, { useContext, useEffect, useState } from 'react'
 
 // import component
 // import NavigateFs from '../../components/navigateFs/navigateFs';
-// import TopImgFs from '../../components/topImagesFs/topImgFs';
+import TopImgFs from '../../components/topImagesFs/topImgFs';
 import TopNavBar from '../../components/topNavBar/topNavBar';
 
 
@@ -32,19 +32,22 @@ const ContactLocAddr = () => {
       <div className="FsButtons" >
         <IonIcon icon={returnUpForward}></IonIcon>
 
+        {/* call fellowship */}
         <Link to="" href="tel:0738189349" >
           <IonIcon icon={call}></IonIcon>
         </Link>
 
+        {/* subscription button */}
         <IonIcon icon = {bookmarkSharp}></IonIcon>
 
+        {/* share fellowship */}
         <IonIcon icon = {shareSocialOutline}></IonIcon>
       </div>
 
       <div className="locaWebTime"  >
         <IonItem  color = " #348D63" lines="none" className="itemBorderTop" >
           <IonIcon icon ={locationSharp} className = "icon"></IonIcon>
-          <IonLabel ><small>{"Landau, Terrace rd"} </small></IonLabel><br></br>
+          <small>{"Landau, Terrace rd"} </small>
         </IonItem>
             
         <IonItem  color = " #348D63" lines="none" className="itemBorderTop time" >
@@ -59,7 +62,7 @@ const ContactLocAddr = () => {
           
         <IonItem  color = " #348D63" lines="none" className="itemBorderTop" >
           <IonIcon icon= {earthSharp} className = "icon"></IonIcon>
-          <IonLabel ><small> {"www.cnxjnsdn.co.za"} </small></IonLabel>
+          <small> {"www.cnxjnsdn.co.za"} </small>
         </IonItem>
       </div>
     </>
@@ -196,7 +199,7 @@ const OverviewFs = () => {
     // it will return an array of one element... get the 1st element of the array
     // and assign to current fellowship[ curFs ] state variable
     // console.log( 
-      // JSON.parse(Cookies.get("allFellowships")).filter( doc=>doc.id===fellowshipId)[0] )
+    // JSON.parse(Cookies.get("allFellowships")).filter( doc=>doc.id===fellowshipId)[0] )
     setCurFs(
       JSON.parse( Cookies.get("allFellowships") ).filter( doc => doc.id===fellowshipId)[0]
     )
@@ -209,69 +212,70 @@ const OverviewFs = () => {
       <IonContent className="overview" fullscreen >
 
         <TopNavBar />
-        
-        {/* delete this at your own risk */}
-        <div className="imagesO" ></div>
-        {/* <div className="imagesO" ></div> */}
-        
 
-        {/* <TopImgFs img1={ "" } img2={ "" } img3={ "" } /> */}
-            
-        <div className = "nameFs">
-          <p id="fsName" > { curFs?.name } </p>
-          <p>
-            <i >{"4.2"}</i> <FaStar className = "icon1" />
-            <FaStar className = "icon1" />
-            <FaStar className = "icon1" />
-            <FaStar className = "icon1" />
-            <FaStarHalfAlt className = "icon1" /> 
-            <i> {"34" } </i>
-          </p>
-        </div>
-
-
-        <div id="navigatorFs" >
-          <span to="#"
-            onClick={ e=> setShow(0) }
-            className="navFsBtn"
-            style={{ borderBottom: "props.pn" ==="overview" ? ".2em solid white" : "" }} > Overview </span>
-
-          <span to="#"
-            onClick={ e=> setShow(1) }
-            className="navFsBtn"
-            style={{ borderBottom: "props.pn" ==="reviews" ? ".2em solid white" : "" }} > Reviews </span> 
-
-          <span to="#"
-            className="navFsBtn"
-            onClick={ e=> setShow(2) }
-            style={{ borderBottom: "props.pn" ==="photo" ? ".2em solid white" : "" }} > Photos </span>
-
-          <span to="#"
-            className="navFsBtn"
-            onClick={ e=> setShow(3) }
-            style={{ borderBottom: "props.pn" ==="about" ? ".2em solid white" : "" }} >
-              About </span> 
-        </div>
-
-        <div >
-          {
-            show === 0 ? (
-              <ContactLocAddr />
-            ) : show === 1 ? (
-              <ReviewsFs name={ curFs?.name }  />
-            ) : show === 2 ? (
-
-              <PhotosFs name={ curFs?.name } />
-            ) : (
-              // pass about a fellow details to this components
-              <AboutFs aboutFs = { curFs?.about } name={ curFs?.name }  />
-            )
-          }
-        </div >
-
-        
-
+        {/* overview container */}
+        {/* <div id='overview-cont' > */}
+          {/* delete this at your own risk */}
+          <div className="imagesO" ></div>
+          {/* <div className="imagesO" ></div> */}
           
+
+          <TopImgFs img1={ "" } img2={ "" } img3={ "" } />
+              
+          <div className = "nameFs">
+            <p id="fsName" > { curFs?.name } </p>
+            <p>
+              <i >{"4.2"}</i> <FaStar className = "icon1" />
+              <FaStar className = "icon1" />
+              <FaStar className = "icon1" />
+              <FaStar className = "icon1" />
+              <FaStarHalfAlt className = "icon1" /> 
+              <i> {"34" } </i>
+            </p>
+          </div>
+
+
+          <div id="navigatorFs" >
+            <span to="#"
+              onClick={ e=> setShow(0) }
+              className="navFsBtn"
+              style={{ borderBottom: "props.pn" ==="overview" ? ".2em solid white" : "" }} > Overview </span>
+
+            <span to="#"
+              onClick={ e=> setShow(1) }
+              className="navFsBtn"
+              style={{ borderBottom: "props.pn" ==="reviews" ? ".2em solid white" : "" }} > Reviews </span> 
+
+            <span to="#"
+              className="navFsBtn"
+              onClick={ e=> setShow(2) }
+              style={{ borderBottom: "props.pn" ==="photo" ? ".2em solid white" : "" }} > Photos </span>
+
+            <span to="#"
+              className="navFsBtn"
+              onClick={ e=> setShow(3) }
+              style={{ borderBottom: "props.pn" ==="about" ? ".2em solid white" : "" }} >
+                About </span> 
+          </div>
+
+          <div >
+            {
+              show === 0 ? (
+                <ContactLocAddr />
+              ) : show === 1 ? (
+                <ReviewsFs name={ curFs?.name }  />
+              ) : show === 2 ? (
+
+                <PhotosFs name={ curFs?.name } />
+              ) : (
+                // pass about a fellow details to this components
+                <AboutFs aboutFs = { curFs?.about } name={ curFs?.name }  />
+              )
+            }
+          </div >
+        {/* </div> */}
+        
+        
 
       </IonContent>
     </IonPage>

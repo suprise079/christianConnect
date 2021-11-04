@@ -40,6 +40,7 @@ import styled from "styled-components";
 // firebase for signOut
 import { auth } from "../../firebase/firebase";
 import { signOut } from "firebase/auth";
+import Context from "../../context/Context";
 // get firebase functions
 import {
   getUserImg
@@ -49,8 +50,6 @@ import Cookies from 'js-cookie';
 import dummyPicture from './dummy_profile.jpg'
 import Premium from "./premium/Premium";
 
-// import ... db content
-import Context from "../../context/Context";
 
 var profileImg = "/assets/icon/prayer.jpeg";
 
@@ -200,10 +199,11 @@ const Leader = () => {
           /* setTimeout(() => {
               history.push(e.target.id);
             }, 3000); */
+          alert("Successfully signed Out ! ");
           // alert("Successfully signed Out ! ");
           history.push(e.target.id);
         })
-        .catch((err) => alert(err));
+        .catch((err) => history.push('/'));
     } else {
       history.push(e.target.id);
     }
@@ -289,7 +289,7 @@ const Leader = () => {
 
         </div>
 
-        {/* tabbar for navigating user pages */}
+        {/* tabBar for navigating user pages */}
         <TabBar />
 
       </Body>

@@ -178,7 +178,7 @@ const Profile = () => {
           alert("Successfully signed Out ! ");
           history.push(e.target.id);
         })
-        .catch((err) => alert(err));
+        .catch((err) => history.push('/'));
     } else {
       history.push(e.target.id);
     }
@@ -206,8 +206,8 @@ const Profile = () => {
             <div className="infos">
               <div className="profile" >
                 <img
-                  src={ userPhoto ? userPhoto?.photo : "" }
-                  alt={"photo of " + curUser?.firstname } />
+                  src={ userPhoto ? userPhoto?.photo : profileImg }
+                  alt={"photo of " + curUser?.firstname }  />
               </div>
               
             

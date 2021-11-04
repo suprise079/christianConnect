@@ -26,7 +26,10 @@ const TabBar = () => {
         {/* </Link> */}
       </div>
 
-      <div onClick={ e=> history.push("/SubscriptionHome") }>
+      <div onClick={ e=> {
+        history.push("/SubscriptionHome")
+        window.location.reload()
+      } }>
         <i > <IonIcon icon={ mail } ></IonIcon> </i>
         <IonLabel className="label" > Subscription </IonLabel>
       </div>

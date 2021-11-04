@@ -1,3 +1,4 @@
+/* Please use an ID its ruining other files */
 ion-toolbar {
   --background: #348d60;
   color: white;
@@ -34,9 +35,8 @@ label {
   align-items: center;
   width: 90%;
 }
-img{
-  margin-top: 80px;
-}
+
+
 .haveAcc {
   text-align: center;
   width: 100%;
@@ -171,10 +171,10 @@ div.walking-loader span:last-of-type {
   bottom: -5px;
   right: -65px;
 }
-span:last-of-type svg{
+/* span:last-of-type svg{
   height: 4em;
   width: 4em;
-}
+} */
 @keyframes walk {
   from {
     right: 50px;
