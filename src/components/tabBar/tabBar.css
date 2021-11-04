@@ -1,0 +1,66 @@
+.tabBarContainer {
+    /* background-color: red; */
+    background-color: #348d63;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    z-index: 12345678;
+    display: flex;
+    justify-content: space-around;
+}
+
+.tabBarContainer div {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    vertical-align: middle;
+    /* background-color: yellow; */
+    /* background-color: #348d63; */
+    padding: .2em 1em;
+}
+
+.tabBarContainer div i {
+    /* color: yellow; */
+    font-size: 1.3em;
+    padding: 0em;
+}
+
+.tabBarContainer div:hover {
+    cursor: pointer;
+    color: white;
+}
+
+div.tabBarContainer div ion-label, 
+div.tabBarContainer div .label {
+    font-size: .8em;
+    padding: 0em;
+
+}
+
+/* 
+.tabBarContainer ion-tab-bar {
+    --ion-tab-bar-background: #348d63;
+    --ion-tab-bar-color: black;
+    --ion-tab-bar-padding: 0em;
+} */
+
+
+/* .tabBarContainer ion-tab-button {
+    --color: black;
+    --background: white;
+    border-top: 0em;
+}
+
+.tabBarContainer ion-tab-button:hover {
+    --color: red;
+    --background: white;
+} */
+
+
+/* 
+.tabBarContainer ion-icon:hover,
+.tabBarContainer ion-label:hover {
+    --background: white;
+    color: white;
+} */
