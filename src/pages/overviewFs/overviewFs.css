@@ -1,4 +1,14 @@
 
+/* ion-page id */
+#overviewFS{
+    background-color: #348D63;
+}
+
+.overview{
+    --background: linear-gradient(#348d60 65%, #80b89c, #b3d5c4);
+}
+
+
 #overviewFS{
     background-color: #348D63;
     /* border: 2px solid yellow; */
@@ -67,15 +77,17 @@
 }
 
 #overviewFS div.nameFs #fsName {
-	background-color:blue;
+	/* background-color:blue; */
+    
 	font-size: 1.09em;
 	padding: 0em 0em 0em 1.1em;
-	color: #127647;
+	/* color: #127647; */
+    color: white;
 	text-transform: capitalize;
 }
 
 #overviewFS ion-content .nameFs p {
-    background-color:orangered;
+    /* background-color:orangered; */
     font-size: .8em;
     padding: .3em 0em 0em 1.6em;
 }

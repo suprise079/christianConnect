@@ -317,13 +317,15 @@ export const editFS = async ( id, name, about, loc, time ) => {
 
 
 // add a review about a fellowship to review collection
-export const AddReview = async( uid, fsid, stars, text ) => {
+export const AddReview = async( uid, fsid, stars, text, ufname, ulname ) => {
   try {
     const refDoc = await addDoc( collection(db, "Reviews"), {
       text: text,
       userId: uid,
       fsId: fsid,
       stars: stars,
+      firstname: ufname,
+      lastname: ulname,
       date: getCurTimeDate(),
     })
     if( refDoc.id ) return true;
@@ -378,7 +380,8 @@ export const AddFsPhotos = async ( uid, fsid, photo ) => {
 // get all fellowship images in the collections
 export const getFsImg = async ( fsid ) => {
   try {
-    const ref = await getDocs( collection(db, "FellowshipImg"));
+    const q = query( collection(db, "FellowshipImg"), where("fsId", "==", fsid) )
+    const ref = await getDocs( q );
     var data = [];
     ref.docs.map( doc => {
       var d = doc.data();
