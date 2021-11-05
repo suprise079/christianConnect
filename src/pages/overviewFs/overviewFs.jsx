@@ -18,9 +18,10 @@ import React, { useContext, useEffect, useState } from 'react'
 
 // import component
 // import NavigateFs from '../../components/navigateFs/navigateFs';
+// getFsImg, paste back later was giving me an error
 import TopImgFs from '../../components/topImagesFs/topImgFs';
 import TopNavBar from '../../components/topNavBar/topNavBar';
-import { AddReview, getFsImg, getReviews } from '../../firebase/firebase-help';
+import { AddReview, getReviews } from '../../firebase/firebase-help';
 import { dummyPhoto } from '../../components/helpFunc';
 
 
@@ -118,7 +119,7 @@ const ReviewsFs = ( props ) => {
 
   return (
     <>
-      <h3 id='fellow-rev' > Review { props.name } fellowship </h3>
+      <h4 id='fellow-rev' > Review { props.name } fellowship </h4>
       
       <div id="reviewsFs" >
         <div  className = "rev-item">
@@ -161,27 +162,27 @@ const ReviewsFs = ( props ) => {
          <div>
             {/* display reviews from datatbase */}
 
-          <div className='reviewCont'>
+          <div id="reviews" > 
+            {
+            reviews && reviews?.length > 0 ? 
+              reviews?.map( (review, ind) => (
+                <div className="review" key={ ind } >
+                  <div style={{ textTransform:"capitalize" }} >
+                    <img className="revPic"
+                      src={ dummyPhoto } alt={"username"} />
+                    { "username" }
+                  </div>
 
-            <div slot=" start" className="avatar1">
-
-              {/* display profile picture */}
-              {/* <img src={img3} /> */}
-
-              {/* name of user */}
-              <p><i> {"Marie Hope"} </i></p>
-            </div>
-
-            {/* display stars */}
-          
-
-            {/* date review created */}
-            <p>{'date'}</p>
-            
-            {/* review content */}
-            <p>I love this app, it has brought me close to God</p>
-
-
+                  <div className="infos" >
+                    <span > Stars: { review?.stars } </span>
+                    <p > { review?.text } </p>
+                  </div>
+                </div>
+              )) : 
+              reviews?.length === 0 ? 
+                ( <h2 >No Reviews For { curFs?.name } </h2> ) : 
+                ( <h2>Loading.....</h2> )
+            }
           </div>
         </div>
       </div>
@@ -194,13 +195,13 @@ const PhotosFs = ( props ) => {
   const [ photos, setPhotos ] = useState();
 
   useEffect(() => {
-    getFsImg( props.fsId ).then( res => {
-      var fss = res;
-      if( fss ) { // console.log( fss );
-        setPhotos( fss );
-      }
-      else { console.error("Error getting fellowships") }
-    })
+    // getFsImg( props.fsId ).then( res => {
+    //   var fss = res;
+    //   if( fss ) { // console.log( fss );
+    //     setPhotos( fss );
+    //   }
+    //   else { console.error("Error getting fellowships") }
+    // })
   }, [])
 
   return (
@@ -275,7 +276,7 @@ const OverviewFs = () => {
           <TopImgFs img1={ "" } img2={ "" } img3={ "" } />
               
           <div className = "nameFs">
-            <p id="fsName" > { curFs?.name } </p>
+            <h3 id="fsName" > { curFs?.name } </h3>
             <p>
               <i >{"4.2"}</i> <FaStar className = "icon1" />
               <FaStar className = "icon1" />

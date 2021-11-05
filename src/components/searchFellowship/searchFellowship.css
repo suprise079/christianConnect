@@ -39,29 +39,15 @@
     justify-content: space-evenly;
 }
 
-/* .searchFellowship .viewInfo ion-tab-button {
-    background-color:#b6f6ff;
-    /* border: 1px solid red;
-    max-height: 40px;
-    max-width: 100px;
-    padding-left: 20 40px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    border-radius: 5px;
-} */
-
-
 #viewinfo-btn {
-    background-color:#b6f6ff;
+    --background:#b6f6ff;
     /* border: 1px solid red; */
     max-height: 40px;
-    max-width: 100px;
-    padding-left: 20 40px;
+    max-width: 90px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    border-radius: 5px;
+    color: black;
 }
 
 
@@ -72,12 +58,3 @@
 .searchFellowship .viewInfo ion-tab-button ion-label {
     font-size: 1.1em;
 }
-
-/* .view-btn{
-    border: 1px solid #348d63;
-    background-color: #348d63;
-    color: white;
-    margin-top: 35px;
-    padding: 5px 15px;
-    border-radius: 8px;
-} */

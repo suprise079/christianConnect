@@ -33,10 +33,9 @@ const SearchFellowship = ( props ) => {
       </div>
 
       <div className="viewInfo" >
-        <button id='viewinfo-btn' href={"/overviewfs?fsid="+ props.fsid } >
+        <IonButton id='viewinfo-btn' href={"/overviewfs?fsid="+ props.fsid }>
           View
-
-        </button>
+        </IonButton>
       </div>
       
     </div>

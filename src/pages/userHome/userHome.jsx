@@ -47,7 +47,7 @@ const UserHome = () => {
               {/* search field */}
               <div id="search">
 
-                <BsSearch className='searchIcon'/>
+                {/* <BsSearch className='searchIcon'/> */}
                 <input id='search-inpt' type="text" placeholder="Search..." />
                
               </div>
