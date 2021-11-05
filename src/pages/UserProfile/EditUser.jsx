@@ -190,7 +190,7 @@ const EditUser = () => {
               id="selectImage"
               onChange={e => EditPhoto(e.target.files[0])}
               placeholder="Select Image"
-              type={{ backgroundColoe: "red" }} type="file" />
+              type="file" />
           </div>
 
           <div >

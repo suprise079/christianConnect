@@ -8,16 +8,19 @@ import './topImgFs.css';
 const TopImgFs = ( props ) => {
 
   return (
-    <div className="photos" >
-      <p > <img className = "img1" src={ img1} /> </p>
+    <div className="over-photos" >
 
-      <div >
-        <p > 
-          <img width="100%" className = "img2" src={ img2}/> 
-        </p>
-        <p className="moreImage" > 
-          <img className = "img3" src={ img3}/>
-        </p>
+      {/* left img */}
+      <img className = "img1" src={ img1} />
+
+      <div id='right-imgs' >
+
+        {/* top-right img */}
+        <img width="100%" className = "img2" src={ img2}/> 
+
+        {/* bottom-right img */}
+        <img className = "img3" src={ img3}/>
+        
       </div>
     </div>
   );

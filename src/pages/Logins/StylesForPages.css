@@ -37,12 +37,10 @@ label {
 }
 
 
-<<<<<<< HEAD
-/* img{
-  margin-top: 80px;
-} */
-=======
->>>>>>> d62993c5ac810b145cb44ada3fdd1804146a216f
+.forgotPasswordModal{
+  --background: #348d60;
+}
+
 .haveAcc {
   text-align: center;
   width: 100%;

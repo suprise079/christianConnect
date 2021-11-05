@@ -33,14 +33,12 @@ const SearchFellowship = ( props ) => {
       </div>
 
       <div className="viewInfo" >
+        <button id='viewinfo-btn' href={"/overviewfs?fsid="+ props.fsid } >
+          View
 
-        <IonTabButton
-          // onClick={ e => fs() }
-          href={"/overviewfs?fsid=" + props.fsid } >
-          {/* <IonIcon icon={ downloadSharp } ></IonIcon> <br /> */}
-          <IonLabel >View</IonLabel>
-        </IonTabButton>
+        </button>
       </div>
+      
     </div>
   );
 
