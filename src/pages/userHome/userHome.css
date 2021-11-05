@@ -4,15 +4,34 @@ body{
 }
 .home-header {
     background-color: white;
-    border: 1px solid white;
+    /* border: 1px solid black; */
     max-height: 60px;
     height: 100%;
-    /* padding: 1em 0em .5em 0em; */
-    /* border-radius: 0em 0em 1.3em 1.3em; */
-    /* border: 0em; */
-    /* box-shadow: 0 0 10px #999; */
+    max-width: 100%;
+
 }
-.searchField {
+
+/* search input */
+
+.home-header #search-inpt{
+    border: 1px solid rgb(230, 230, 230);
+    width: 90%;
+    margin: 20px 20px 7px 20px;
+    border-radius: 18px;
+    height: 35px;
+    box-shadow: 0.5px 0.5px 2px rgb(167, 167, 167);
+
+}
+
+.searchField div input::placeholder{
+    color: rgb(0,0,0);
+}
+.searchField div input:focus {
+    border-bottom: 2px solid black;
+}
+
+
+/* .searchField {
     background-color: #fefefe;
     border: 1px solid rgb(236, 236, 236);
     max-width: 330px;
@@ -21,37 +40,33 @@ body{
     border-radius: 15px;
     padding: 5px;
     box-shadow: 0em 0em .3em rgba(206, 206, 206, 0.815)
-    /* text-align: center; */
-    /* outline-width: 0em; */
-    /* display: flex; */
-    /* flex-direction: column; */
-}
+    text-align: center; 
+    outline-width: 0em;
+    display: flex; 
+    flex-direction: column; 
+} */
 
-.searchIcon{
-    /* border: 1px solid black; */
-    /* background-color: yellow; */
+/* .searchIcon{
+    border: 1px solid black;
+    background-color: yellow;
     margin-right: 15px;
     max-width: 17px;
     max-height: 17px;
     width: 100%;
     height: 100%;  
     margin-left: -140px;
-}
+} */
 
-.searchField div#search{
+/* .searchField div#search{
     display: flex;
     align-items: center;
     justify-content: center;
 }
 .searchField div input{
     padding: 0;
-}
-.searchField div input::placeholder{
-    color: rgb(0,0,0);
-}
-.searchField div input:focus {
-    border-bottom: 2px solid black;
-}
+} */
+
+
 
 button {
     border: 0em;
@@ -63,13 +78,13 @@ button:hover {
 
 /* main content */
 
-ion-content {
+/* ion-content {
     /* --ion-background-color: red; */
     /* --ion-text-color: black; */
-    /* --ion-text-color-rgb: 255, 255, 255; */
+    /* --ion-text-color-rgb: 255, 255, 255; 
     padding: 10em;
     background-color: yellow;
-}
+} */
 
 ion-content .mapContainer {
     background-color: white;

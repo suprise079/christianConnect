@@ -21,6 +21,7 @@ const SearchFellowship = ( props ) => {
     if( t ) return t.split(" ").splice(0, 5).join(" ") + " ........"
   }
 
+
   return (
     <div className="searchFellowship" >
       <div className="info" >
