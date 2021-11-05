@@ -143,6 +143,6 @@ a.item {
 
  /* CROWN */
  svg#crown {
-   color: red;
+   color: yellow !important;
    margin: 0em 0em .5em 0em;
  }
