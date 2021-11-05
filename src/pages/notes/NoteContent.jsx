@@ -69,13 +69,12 @@ function NoteContent() {
 				</IonToolbar>
 			</IonHeader>
 
-			<IonContent >
+			<IonContent id='create-note' >
 				<div className='note'>
 
 					{/* { noteTile } | { noteContent } */}
 
 					<div id="notTitle" >
-						<label >Type title here</label>
 						<input
 							autoFocus
 							value={ noteTile }
@@ -96,7 +95,7 @@ function NoteContent() {
 					{/* <span id='noteText'>Content here</span> */}
 
 					<button id="saveNoteBtn" onClick={ e => addUserNote() } >
-						Save Note <i class="bi bi-save"></i>
+						Save <i class="bi bi-save"></i>
 						{/* <GiSaveArrow className='deleteIcon'/> */}
 					</button>
 

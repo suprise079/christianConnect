@@ -1,31 +1,8 @@
-import {
-  IonToolbar,
-  IonPage,
-  IonCardTitle,
-  IonCardSubtitle,
-  IonLabel,
-  IonIcon,
-  IonImg,
-  IonHeader,
-  IonButtons,
-  IonBackButton,
-  IonTitle,
-} from "@ionic/react";
+import { IonToolbar, IonPage, IonCardTitle, IonCardSubtitle, IonLabel, IonIcon, IonImg, IonHeader, IonButtons, IonBackButton, IonTitle, } from "@ionic/react";
 // import "../Profile.css";
 import "./profile.css";
-import {
-  logOutSharp,
-  logOutOutline,
-  bookmarkSharp,
-  bookmarkOutline,
-  createSharp,
-  createOutline,
-  walletSharp,
-  walletOutline,
-  
-} from "ionicons/icons";
+import { logOutSharp, logOutOutline, bookmarkSharp, bookmarkOutline, createSharp, createOutline, walletSharp, walletOutline, } from "ionicons/icons";
 import {GiUpgrade } from "react-icons/gi"
-
 
 // import from react modules
 import React, { useContext, useEffect, useState } from "react";
@@ -41,10 +18,9 @@ import styled from "styled-components";
 import { auth } from "../../firebase/firebase";
 import { signOut } from "firebase/auth";
 import Context from "../../context/Context";
+
 // get firebase functions
-import {
-  getUserImg
-} from "../../firebase/firebase-help";
+import { getUserImg } from "../../firebase/firebase-help";
 import Cookies from 'js-cookie';
 // default profile image
 import dummyPicture from './dummy_profile.jpg'

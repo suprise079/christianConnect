@@ -1,14 +1,12 @@
 
 div.tabbarContainer {
   position: fixed;
+  max-height: 58px;
   right: 0;
   left: 0;
   margin-bottom: 2em;
-}
-
-div.tabbarContainer .tabbar {
+  /* border: 2px solid red; */
   background-color: #438d63;
-  /* background-color: red; */
   display: flex;
   z-index: 123456;
   flex-direction: row;
@@ -18,12 +16,19 @@ div.tabbarContainer .tabbar {
   margin-bottom: 4em;
 }
 
-div.tabbar .iconHover {
+/* 
+.home-back-btn{
+  border: 1px solid blue;
+  size: 30px;
+  padding-left: 15px;
+} */
+
+/* div.tabbar .home-back-btn {
   padding: 0em .5em;
   color: black;
-}
+} */
 
-div.tabbar .iconHover:hover {
+/* div.tabbar .home-back-btn:hover {
   cursor: pointer;
   color: white;
-}
+} */

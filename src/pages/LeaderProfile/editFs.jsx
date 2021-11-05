@@ -34,7 +34,6 @@ import { Link, useHistory } from "react-router-dom";
 import churchImg from "./church.jpeg";
 
 
-
 // get context db
 import Context from "../../context/Context";
 
@@ -42,9 +41,10 @@ import Context from "../../context/Context";
 import { auth } from "../../firebase/firebase";
 import Cookies from 'js-cookie';
 
+// AddFsPhotos, paste back later was giving me an error
 
 import React, { useContext, useEffect, useState } from "react";
-import { AddFsPhotos, editFS, getLeaderFs } from "../../firebase/firebase-help";
+import { editFS, getLeaderFs } from "../../firebase/firebase-help";
 
 const EditFs = () => {
   const [ toEdit, settoEdit ] = useState(
@@ -102,20 +102,20 @@ const EditFs = () => {
 
       photos.map( (image, ind ) => {
         // uid, fsid, photo
-        AddFsPhotos( image?.userId, image?.fsId, image.photo ).then( res => {
-          // if last pic in the array and return operation
-          if( res && ind === photos.length - 1 ) {
-            // wait secs to allow pics to upload..
-            setTimeout(() => {
-              alert("Photo's Added");
-              setPhotos([]); // reset photos array
-              setPicLoad( false ); // remove loader
-            }, 2000);
-          }
+        // AddFsPhotos( image?.userId, image?.fsId, image.photo ).then( res => {
+        //   // if last pic in the array and return operation
+        //   if( res && ind === photos.length - 1 ) {
+        //     // wait secs to allow pics to upload..
+        //     setTimeout(() => {
+        //       alert("Photo's Added");
+        //       setPhotos([]); // reset photos array
+        //       setPicLoad( false ); // remove loader
+        //     }, 2000);
+        //   }
 
         })
 
-      })
+      // })
     }
     setPicLoad( false )
   }

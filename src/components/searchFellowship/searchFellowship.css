@@ -7,8 +7,6 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    /* border-bottom: .1em solid rgb(92, 92, 92); */
-    /* box-shadow:  3px 5px 4px -5px rgba(94, 94, 94, 0.63); */
 }
 
 .searchFellowship .info {
@@ -41,12 +39,17 @@
     justify-content: space-evenly;
 }
 
-.searchFellowship .viewInfo ion-tab-button {
-    background-color: #348d63;
+#viewinfo-btn {
+    --background:#b6f6ff;
+    /* border: 1px solid red; */
+    max-height: 40px;
+    max-width: 90px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    color: black;
 }
+
 
 .searchFellowship .viewInfo ion-tab-button:hover {
     color: white;
@@ -54,13 +57,4 @@
 
 .searchFellowship .viewInfo ion-tab-button ion-label {
     font-size: 1.1em;
-}
-
-.view-btn{
-    border: 1px solid #348d63;
-    background-color: #348d63;
-    color: white;
-    margin-top: 35px;
-    padding: 5px 15px;
-    border-radius: 8px;
 }

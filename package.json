@@ -79,8 +79,8 @@
     ]
   },
   "devDependencies": {
-    "@capacitor/cli": "^3.2.0",
-    "react-scripts": "^4.0.3"
+    "@capacitor/cli": "3.2.0",
+    "react-scripts": "4.0.3"
   },
   "description": "Christian Connect"
 }

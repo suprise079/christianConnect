@@ -13,8 +13,10 @@ const TopNavBar = () => {
   return (
     <div className="tabbarContainer" > 
       <div className="tabbar" slot="fixed" >
-        <Link to="/userhome" > <FaArrowLeft className="iconHover" /> </Link>
-        <FaEllipsisH className="iconHover" />
+        <Link to="/userhome" > <FaArrowLeft className="home-back-btn" /> </Link>
+
+        {/* <FaEllipsisH className="iconHover" /> */}
+        
       </div>
     </div>
   );
