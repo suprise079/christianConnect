@@ -27,11 +27,6 @@ const TopImgFs = ( props ) => {
         <img className = "img3"  width="100%"
           src={ props.photo2 ? props.photo2?.photo : img3} />
 
-        {/* <img className = "img2" src={ img2}/>  */}
-
-        {/* bottom-right img */}
-        {/* <img className = "img3" src={ img3}/> */}
-        
       </div>
     </div>
   );

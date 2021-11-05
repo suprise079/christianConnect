@@ -406,6 +406,25 @@ export const getFsImg = async ( fsid ) => {
   }
 }
 
+// searchbar function
+export const searchFsBar = async ( {
+  search = ''
+} = {} ) => {
+  const snapshot = await db.collection('Fellowships')
+    .where ('name',search.toLowerCase())
+    .orderBy('name', 'asc')
+    .get();
+
+  return snapshot.docs.reduce(( acc, doc) => {
+    const name = doc.data().name;
+    return acc.concat(`
+    <div>
+      ${name}
+    </div>`);
+  }, " ");
+
+};
+
 
 
 

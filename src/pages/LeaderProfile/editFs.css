@@ -1,6 +1,7 @@
 
 #editFs {
-  background-color: red;
+  /* --background: red; */
+  margin: 15px;
 }
 
 #editFs h1, #editFs h2, #editFs h3, #editFs h4, #editFs h5 {

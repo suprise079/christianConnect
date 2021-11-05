@@ -16,10 +16,12 @@ import './searchFellowship.css';
 
 const SearchFellowship = ( props ) => {
   const { allFellowships } = useContext( Context );
+  // const search
 
   function summary( t ) {
     if( t ) return t.split(" ").splice(0, 5).join(" ") + " ........"
   }
+
 
   return (
     <div className="searchFellowship" >

@@ -1,0 +1,92 @@
+
+.close {
+    display: flex;
+    justify-content: space-between;
+    margin: 0px;
+}
+
+.close button {
+    background: none;
+    border: none;
+    color: black;
+}
+
+.selectedTitle {
+    text-align: center;
+    margin: 0px;
+    background-color: rgb(70, 191, 123);
+}
+
+.playNote {
+    display: flex;
+    justify-content: space-evenly;
+    background-color: rgb(70, 191, 123);
+    margin-bottom: 5px;
+
+}
+
+.playNote button {
+    width: 100%;
+    background-color: rgb(70, 191, 123);
+    border: none;
+    border-radius: 10px 10px 0px 0px;
+    color: black;
+}
+
+.playNote button:nth-child(1) {
+    background-color: white;
+}
+
+.video {
+    width: 100%;
+    height: 35%;
+    text-align: center;
+}
+
+.video video {
+    width: 100%;
+    height: 200px;
+    background-color: white;
+}
+
+.notes textarea{
+    width: 100%;
+    background-color: white;
+    height: 150px;
+    border: none;
+}
+
+.notes ion-button {
+    width: 99%;
+    
+}
+
+#noteTitle {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid grey;
+    outline: none;
+}
+
+.trackAlign {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    border-bottom: 1px solid lightgrey;
+    padding: 1px;
+    margin-top: 5px;
+    padding: 2px;
+}
+
+.trackAlign:hover {
+    background-color: rgba(96, 119, 98, 0.37);
+}
+
+.videoUrl {
+    margin-right: 8px;
+}
+
+.videoUrl video {
+    width: 100%;
+    border-radius: 5px;
+}
