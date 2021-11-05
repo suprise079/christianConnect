@@ -76,7 +76,11 @@ const Notes = () => {
         }
 
         {/* add note button */}
-        <Link to='./addnote'> <GrAdd id='addNote' /> </Link>
+        <button id="addNotesbtn" onClick={ e=> history.push("/addnote") } >
+          Add Note <span className='addNoteIcon' > + </span>
+          {/* <GrAdd className='addNoteIcon' />  */}
+        </button>
+        {/* <Link id="addNotesbtn" to='/addnote'> </Link> */}
 
         </div>
       

@@ -34,20 +34,7 @@
     padding-top: 20px;
 }
 
-#addNote {
-    background-color: #fff;
-    right: 20px;
-    bottom: 10px;
-    width: 24px;
-    height: 24px;
-    padding: 5px;
-    margin-left: 95%;
-    border: 1px solid rgba(0, 0, 0, 0.185);
-    position: fixed;
-    margin-top: 80%;
-    border-radius: 20px;
-    color: rgba(0, 0, 0, 0.87);
-}
+
 
 a{
     text-decoration: none;
@@ -55,5 +42,36 @@ a{
 
 #notesContainer #searchNotes {
     /* background-color: red; */
+    color: black;
+}
+
+
+
+
+/*  */ 
+#notesContainer #addNotesbtn {
+    /* background-color: red; */
+    background-color: #127647;
     color: white;
+    padding: .3em 1em;
+    border-radius: .6em;
+    position: fixed;
+    bottom: 1em;
+    font-weight: bolder;
+    right: .5em;
+	box-shadow: 0em 0em .2em lightgray;
+    /* left: 0; */
+}
+
+#notesContainer #addNotesbtn:hover,
+#notesContainer #addNotesbtn:focus {
+	background-color: #348D63;
+}
+
+#notesContainer .addNoteIcon {
+    color:white;
+		font-size: 1.4em;
+		font-weight: bolder;
+    font-weight: bolder;
+    /* background-color: white; */
 }

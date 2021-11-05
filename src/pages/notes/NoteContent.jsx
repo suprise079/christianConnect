@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { IonHeader, IonTitle, IonToolbar, IonPage, IonContent } from '@ionic/react';
 import { GiSaveArrow } from 'react-icons/gi'
@@ -9,6 +9,8 @@ import './NoteContent.css'
 import { collection, addDoc } from 'firebase/firestore';
 import { db, auth } from '../../firebase/firebase';
 import { addNotes } from '../../firebase/firebase-help';
+import Cookies from 'js-cookie';
+import Context from '../../context/Context';
 
 
 // get helping functions
@@ -17,7 +19,7 @@ import getCurTimeDate from '../../components/helpFunc';
 
 
 function NoteContent() {
-
+  const { curUser, setCurUser } = useContext( Context );
 	const [noteTile, setnoteTile] = useState();
 	const [noteContent, setnoteContent] = useState();
 	const dateObj = new Date();
@@ -28,12 +30,8 @@ function NoteContent() {
 
 
 	useEffect(() => {
-
-
-		// get the value of auth.current user that keeps user's data.
-    var d = auth.currentUser?.providerData[0].displayName;
-    // console.log( JSON.parse( d ) ); // for debuggin purposes
-    setUser( JSON.parse( d ) ) // set user for this page
+		// set and get current user data from cookie manager
+    setCurUser( JSON.parse( Cookies.get("userData") ) );
 	}, [])
 
 
@@ -97,9 +95,11 @@ function NoteContent() {
 
 					{/* <span id='noteText'>Content here</span> */}
 
-					<GiSaveArrow
-						onClick={ e => addUserNote()  }
-						className='deleteIcon'/>
+					<button id="saveNoteBtn" onClick={ e => addUserNote() } >
+						Save Note <i class="bi bi-save"></i>
+						{/* <GiSaveArrow className='deleteIcon'/> */}
+					</button>
+
 						
 				</div>
 			</IonContent>

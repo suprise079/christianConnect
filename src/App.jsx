@@ -40,6 +40,7 @@ import NoteContent from "./pages/notes/NoteContent";
 import UserHome from "./pages/userHome/userHome";
 import EditFs from "./pages/LeaderProfile/editFs";
 import Payment from "./pages/LeaderProfile/premium/Upgrading/payment";
+import SubscriptionHome from './pages/subscription/SubscriptionHome';
 
 
 
@@ -67,34 +68,16 @@ const App = () => {
         <IonReactRouter>
           <IonRouterOutlet>
             
-            <Route exact path="/">
-              {" "}
-              <Redirect to="/home" />{" "}
-            </Route>
-
+            <Route exact path="/"> <Redirect to="/home" /> </Route>
             <Route exact path="/" component={Welcome} />
             <Route exact path="/Login" component={Login} />
             <Route exact path="/Donate" component={Donate} />
             <Route exact path="/savedVideos" component={SavedVideos} />
             <Route exact path="/addnote" component={ NoteContent } />
-
             <Route exact path="/editfs" component={ EditFs } />
-
-
-
-            {/* get the notes route */}
-            <Route exact path="/notes"
-              // component={Notes}
-            >
-              <Notes />
-            </Route>
-
-
-            
-            {/* user home tab pages */}
+            <Route exact path="/subscription" component={SubscriptionHome} />
+            <Route exact path="/notes" component={Notes} />
             <Route exact path="/userhome" component={UserHome} />
-
-
 
             <Route exact path="/aboutFellowship">
               <AboutFellowship />{" "}

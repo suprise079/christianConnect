@@ -66,10 +66,6 @@ const Body = styled(IonPage)`
 `;
 
 
-const handleSubmit = (e) => {
-  e.preventDefault();
-  console.log(e.target);
-};
 
 const Payment = () => {
   const [text, settext] = useState("");
@@ -77,12 +73,19 @@ const Payment = () => {
   const [pswdType, setpswdType] = useState("password");
   const history = useHistory();
 
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(e.target);
+  };
+
   return (
     <Body>
       <IonHeader color="white" className="ion-no-border">
         <IonToolbar color="white">
           <IonButtons slot="start">
-            <IonBackButton defaultHref="/" />
+            <IonBackButton defaultHref="/leader" />
           </IonButtons>
 
           <IonButtons slot="end">

@@ -45,9 +45,28 @@
   text-align: center;
 }
 
+#editFs .form div.editbtnCont .editbtn:hover,
+#editFs .form div.editbtnCont .editbtn:focus {
+  background-color: #033d22;
+  
+}
+
 #editFs .form div.editbtnCont .editbtn {
   background-color: #127647;
-  padding: .9em;
+  padding: .5em .9em;
   font-weight: bolder;
   color: white;
+  border-radius: .8em;
+}
+
+
+
+
+
+
+
+
+#editFs #photos {
+  background-color: yellow;
+  padding: 1em 0em;
 }

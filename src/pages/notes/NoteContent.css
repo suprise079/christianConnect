@@ -21,10 +21,28 @@
     margin-top: 50%;
 }
 
+#saveNoteBtn {
+	background-color: #127647;
+	color: white;
+	padding: .3em 1em;
+	border-radius: .6em;
+	position: fixed;
+	bottom: 1em;
+	font-weight: bolder;
+	right: .8em;
+	box-shadow: 0em 0em .2em lightgray;
+}
+
+#saveNoteBtn:hover,
+#saveNoteBtn:focus {
+	background-color: #348D63;
+}
+
 .deleteIcon {
     right: 20px;
     bottom: 10px;
     width: 24px;
+    font-size: 1.2em;
     /* height: 24px; */
     padding: 5px;
     margin-left: 95%;

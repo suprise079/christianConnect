@@ -20,7 +20,7 @@ import React, { useContext, useEffect, useState } from 'react'
 // import NavigateFs from '../../components/navigateFs/navigateFs';
 import TopImgFs from '../../components/topImagesFs/topImgFs';
 import TopNavBar from '../../components/topNavBar/topNavBar';
-import { AddReview, getReviews } from '../../firebase/firebase-help';
+import { AddReview, getFsImg, getReviews } from '../../firebase/firebase-help';
 import { dummyPhoto } from '../../components/helpFunc';
 
 
@@ -28,7 +28,7 @@ import { dummyPhoto } from '../../components/helpFunc';
 
 // has, location of fellowship, time, websites, contact details
 // able to share to other apps and books marks
-const ContactLocAddr = () => {
+const ContactLocAddr = ( props ) => {
   return (
     <>
       <div className="FsButtons" >
@@ -49,12 +49,12 @@ const ContactLocAddr = () => {
       <div className="locaWebTime"  >
         <IonItem  color = " #348D63" lines="none" className="itemBorderTop" >
           <IonIcon icon ={locationSharp} className = "icon"></IonIcon>
-          <small>{"Landau, Terrace rd"} </small>
+          <small>{ props.location } </small>
         </IonItem>
             
         <IonItem  color = " #348D63" lines="none" className="itemBorderTop time" >
           <IonIcon icon ={timeSharp} className = "icon"></IonIcon>
-          <small> Today {"12:00pm"} </small>
+          <small> { props.time } </small>
 
           <div>
             <small>Schedule</small>
@@ -196,10 +196,34 @@ const ReviewsFs = ( props ) => {
 
 // contains the photo's of a fellowship
 const PhotosFs = ( props ) => {
+  const [ photos, setPhotos ] = useState();
+
+  useEffect(() => {
+    getFsImg( props.fsId ).then( res => {
+      var fss = res;
+      if( fss ) { // console.log( fss );
+        setPhotos( fss );
+      }
+      else { console.error("Error getting fellowships") }
+    })
+  }, [])
+
   return (
     <>
       <h3 > Photos of { props.name } fellowship </h3>
-      Photos Component
+
+      <div id="fsImages" >
+        {
+          photos && photos?.length > 0 ? 
+            photos?.map( (image, ind) => (
+              <img
+                src={ image?.photo } key={ ind } width="130" alt={props.name} />
+            ))
+              : 
+            photos?.length === 0 ? 
+            ( <h2>No FS Images</h2>) : ( <h2>Loading....</h2> )
+        }
+      </div>
     </>
   )
 }
@@ -209,8 +233,9 @@ const PhotosFs = ( props ) => {
 const AboutFs = ( props ) => {
   return (
     <>
-      <h3 > About { props.name } fellowship </h3>
-      <div >
+      <h3 style={{ textAlign:"center"}} >
+        About { props.name } fellowship </h3>
+      <div style={{padding:".5em"}} >
         { props.aboutFs }
       </div>
     </>
@@ -275,34 +300,37 @@ const OverviewFs = () => {
             <span to="#"
               onClick={ e=> setShow(0) }
               className="navFsBtn"
-              style={{ borderBottom: "props.pn" ==="overview" ? ".2em solid white" : "" }} > Overview </span>
+              style={{ borderBottom: show === 0 ? ".2em solid white" : "" }} > Overview </span>
 
             <span to="#"
               onClick={ e=> setShow(1) }
               className="navFsBtn"
-              style={{ borderBottom: "props.pn" ==="reviews" ? ".2em solid white" : "" }} > Reviews </span> 
+              style={{ borderBottom: show === 1 ? ".2em solid white" : "" }} > Reviews </span> 
 
             <span to="#"
               className="navFsBtn"
               onClick={ e=> setShow(2) }
-              style={{ borderBottom: "props.pn" ==="photo" ? ".2em solid white" : "" }} > Photos </span>
+              style={{ borderBottom: show === 2 ? ".2em solid white" : "" }} > Photos </span>
 
             <span to="#"
               className="navFsBtn"
               onClick={ e=> setShow(3) }
-              style={{ borderBottom: "props.pn" ==="about" ? ".2em solid white" : "" }} >
+              style={{ borderBottom: show === 3 ? ".2em solid white" : "" }} >
                 About </span> 
           </div>
 
           <div >
             {
               show === 0 ? (
-                <ContactLocAddr />
+                <ContactLocAddr
+                  location={ curFs?.location }
+                  time = { curFs?.time }
+                />
               ) : show === 1 ? (
                 <ReviewsFs name={ curFs?.name }  />
               ) : show === 2 ? (
 
-                <PhotosFs name={ curFs?.name } />
+                <PhotosFs name={ curFs?.name } fsId={ curFs?.id } />
               ) : (
                 // pass about a fellow details to this components
                 <AboutFs aboutFs = { curFs?.about } name={ curFs?.name }  />

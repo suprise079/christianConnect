@@ -355,9 +355,44 @@ export const getReviews = async() => {
 
 
 
+// add images of a fellowship to collections
+export const AddFsPhotos = async ( uid, fsid, photo ) => {
+
+  try {
+    const ref = await addDoc( collection(db, "FellowshipImg"), {
+      userId: uid,
+      fsId: fsid,
+      photo: photo
+    })
+    if( ref.id ) return true;
+    else { return false }
+  }
+  catch( err ) {
+    console.error("error adding fellowship images", err )
+    return false;
+  }
+} 
 
 
 
+// get all fellowship images in the collections
+export const getFsImg = async ( fsid ) => {
+  try {
+    const ref = await getDocs( collection(db, "FellowshipImg"));
+    var data = [];
+    ref.docs.map( doc => {
+      var d = doc.data();
+      d["id"] = doc.id;
+      data.push( d );
+    })
+    // console.log( doc.data() )
+    if( data.length > 0 ) return data;
+    else return false;
+  }
+  catch( err ) {
+    console.error("getting fellowship images", err ); return false;
+  }
+}
 
 
 

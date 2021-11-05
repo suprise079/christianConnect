@@ -270,6 +270,12 @@ const Subscriptions = () => {
 };
 
 const SubscriptionHome = () => {
+
+  // 
+  useEffect(() => {
+    alert("subs")
+  }, [])
+
   return (
     <>
       <IonReactRouter>

@@ -44,7 +44,7 @@ import Cookies from 'js-cookie';
 
 
 import React, { useContext, useEffect, useState } from "react";
-import { editFS, getLeaderFs } from "../../firebase/firebase-help";
+import { AddFsPhotos, editFS, getLeaderFs } from "../../firebase/firebase-help";
 
 const EditFs = () => {
   const [ toEdit, settoEdit ] = useState(
@@ -57,6 +57,8 @@ const EditFs = () => {
   const [ location, setlocation ] = useState( toEdit?.location );
   const [ about, setabout ] = useState( toEdit?.about );
   const [ isload, setIsload ] = useState( false );
+  const [ photos, setPhotos ] = useState([]);
+  const [ picLoad, setPicLoad ] = useState( false );
 
 
 
@@ -90,6 +92,55 @@ const EditFs = () => {
     })
 
     setIsload( false )
+  }
+
+
+  function addPics() {
+    setPicLoad( true )
+    // if photos length is greater than 0, means it contains some pics
+    if( photos.length > 0 ) {
+
+      photos.map( (image, ind ) => {
+        // uid, fsid, photo
+        AddFsPhotos( image?.userId, image?.fsId, image.photo ).then( res => {
+          // if last pic in the array and return operation
+          if( res && ind === photos.length - 1 ) {
+            // wait secs to allow pics to upload..
+            setTimeout(() => {
+              alert("Photo's Added");
+              setPhotos([]); // reset photos array
+              setPicLoad( false ); // remove loader
+            }, 2000);
+          }
+
+        })
+
+      })
+    }
+    setPicLoad( false )
+  }
+
+  const addPhoto = (fileinput) => {
+    if (fileinput && fileinput != null) {
+      // console.log(fileinput)
+
+      var data = new FileReader()
+      // console.log( data )
+      // data.onload = function(e) {
+      //   console.log( "HERE", e.target.result);
+      // };
+
+      data.addEventListener("load", function (d) {
+        // console.log("FILE READER", d.target.result)
+        setPhotos( photos.concat(
+          { userId: curUser?.userId,
+            fsId: fellowship?.id,
+            photo: d.target.result 
+        })) // add this data to pic
+      })
+      data.readAsDataURL(fileinput);
+    }
+    else { console.error("READ IMG ERROR") }
   }
 
 
@@ -144,8 +195,38 @@ const EditFs = () => {
               { isload ? "LOADING.." : "SAVE CHANGES" }
             </button>
           </div>
-
         </div>
+
+
+        <div id="photos" >
+          
+          <p >
+            <input
+              onChange={ e => addPhoto( e.target.files[0] ) }
+              type="file" placeholder="Select An Image" />
+          </p>
+
+          {/* show the images the user selected here.. */}
+          <p >
+            { 
+              photos && photos.length > 0 ?
+                photos.map( (image, ind) => (
+                  <img
+                    style={{margin:".5em"}}  
+                    src={ image.photo } key={ ind } width="50px" />
+                )) 
+              : ""
+            }
+          </p>
+
+          <div >
+            <button disabled={ picLoad } onClick={ e => addPics() } >
+              { picLoad ? "LOADING...." : "ADD PICTURE" }
+            </button>
+          </div>
+        </div>
+
+
       </IonContent>
     </IonPage>
   );

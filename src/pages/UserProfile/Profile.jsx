@@ -212,13 +212,8 @@ const Profile = () => {
             <div className="infos">
               <div className="profile" >
                 <img
-<<<<<<< HEAD
-                  src={ userPhoto ? userPhoto?.photo : dummyPhoto }
-                  alt={"photo of " + curUser?.firstname } />
-=======
                   src={ userPhoto ? userPhoto?.photo : profileImg }
                   alt={"photo of " + curUser?.firstname }  />
->>>>>>> d62993c5ac810b145cb44ada3fdd1804146a216f
               </div>
               
             
