@@ -49,9 +49,21 @@ const ContactLocAddr = ( props ) => {
 
       <div className="locaWebTime"  >
         <IonItem  color = " #348D63" lines="none" className="itemBorderTop" >
-          <IonIcon icon ={locationSharp} id="icon-location"></IonIcon>
-          <small>{ props.location } </small>
+          <IonIcon icon ={locationSharp} className = "icon"></IonIcon>
+          <small style={{color:"white"}} > { props.location } </small>
         </IonItem>
+            
+        {/* <IonItem  color = " #348D63" lines="none" className="itemBorderTop time" >
+          <IonIcon icon ={timeSharp} className = "icon"></IonIcon>
+          <small> { props.time } </small>
+          <div>
+            <small>Schedule</small>
+            <IonSelect className = "selector" ></IonSelect>
+          </div>
+        </IonItem> */}
+          {/* <IonIcon icon ={locationSharp} id="icon-location"></IonIcon> */}
+          {/* <small>{ props.location } </small> */}
+        {/* </IonItem> */}
             
           
         <IonItem  color = " #348D63" lines="none" className="itemBorderTop" >
@@ -100,8 +112,8 @@ const ReviewsFs = ( props ) => {
     if( stars > 0 && rateTxt ) {
       // console.log( stars, rateTxt ); console.log( "USER ID:", curUser?.userId )
       // console.log( "FS ID:", curFs?.id );
-      // uid, fsid, stars, text
-      AddReview( curUser?.userId, curFs?.id, stars, rateTxt ).then( res=>{
+      // uid, fsid, stars, text, ufname, ulname
+      AddReview( curUser?.userId, curFs?.id, stars, rateTxt, curUser?.firstname, curUser?.lastname ).then( res=>{
         if( res ) {
           alert("Review Added Successfull");
           setStars(0); setRateTxt("");
@@ -146,9 +158,7 @@ const ReviewsFs = ( props ) => {
               onClick={ e => addReview() }
               className='reviewBtn'>Add review</button>
            </IonLabel>
-
         </div>
-
         
         <div className="sortBy" >
           {/* sort buttons */}
@@ -169,8 +179,8 @@ const ReviewsFs = ( props ) => {
                 <div className="review" key={ ind } >
                   <div style={{ textTransform:"capitalize" }} >
                     <img className="revPic"
-                      src={ dummyPhoto } alt={"username"} />
-                    { "username" }
+                      src={ dummyPhoto } alt={ review.firstname } />
+                    { review.firstname } { review.lastname }
                   </div>
 
                   <div className="infos" >
@@ -244,21 +254,40 @@ const OverviewFs = () => {
   const { allFellowships } = useContext( Context );
   const [ curFs, setCurFs ] = useState();
   const [ show, setShow ] = useState(0);
+  const [ photos, setPhotos ] = useState();
+  const [ three, setThree ] = useState([]);
+
 
 
   useEffect(() => {
     const url = window.location.search; // get the search part of the local url..
     const usp = new URLSearchParams( url ); // make obj used to search params in url
-    const fellowshipId = usp.get("fsid"); // get param with the passed name
+    const fsId = usp.get("fsid"); // get param with the passed name
     // console.log( 'URL IS:', fellowshipId ); ///
+
 
     // read all fellowships from firebase... get the 1 that matches the in from url
     // it will return an array of one element... get the 1st element of the array
     // and assign to current fellowship[ curFs ] state variable
     // console.log( 
     // JSON.parse(Cookies.get("allFellowships")).filter( doc=>doc.id===fellowshipId)[0] )
+
+
+    getFsImg( fsId ).then( res => {
+      var fss = res;
+      if( fss ) { // console.log( fss );
+        setPhotos( fss );
+        // setThree( three.concat( p ) )
+        setThree( fss.filter( (p, i) => i < 3 ) )
+      }
+      else { console.error("Error getting fellowships") }
+    })
+
+
+
     setCurFs(
-      JSON.parse( Cookies.get("allFellowships") ).filter( doc => doc.id===fellowshipId)[0]
+      JSON.parse(
+        Cookies.get("allFellowships") ).filter( doc => doc.id===fsId)[0]
     )
   }, [])
 
@@ -273,9 +302,15 @@ const OverviewFs = () => {
           {/* delete this at your own risk */}
           {/* <div className="imagesO" ></div> */}
 
-          <TopImgFs img1={ "" } img2={ "" } img3={ "" } />
+          <TopImgFs
+            photo={ three[0] }
+            photo1={ three[1] }
+            photo2={ three[2] } />
               
           <div className = "nameFs">
+            <p id="fsName" > { curFs?.name } </p>
+            
+            {/* <p>
             <h3 id="fsName" > { curFs?.name } </h3>
             <p>
               <i >{"4.2"}</i> <FaStar className = "icon1" />
@@ -283,8 +318,8 @@ const OverviewFs = () => {
               <FaStar className = "icon1" />
               <FaStar className = "icon1" />
               <FaStarHalfAlt className = "icon1" /> 
-              <i> {"34" } </i>
-            </p>
+              <i> {"34" } </i> */}
+            {/* </p> */}
           </div>
 
           

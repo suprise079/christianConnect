@@ -1,3 +1,14 @@
+
+/* ion-page id */
+#overviewFS{
+    background-color: #348D63;
+}
+
+.overview{
+    --background: linear-gradient(#348d60 65%, #80b89c, #b3d5c4);
+}
+
+
 /* ion-page id */
 #overviewFS{
     background-color: #348D63;
@@ -39,16 +50,25 @@
 	padding: 8px 0px 8px 25px;
 }
 
+#overviewFS div.nameFs #fsName {
+	/* background-color:blue; */
+    
+	font-size: 1.09em;
+	padding: 0em 0em 0em 1.1em;
+	/* color: #127647; */
+    color: white;
 /* name of fellowship container*/
-#fsName {
 	color: black;
     margin-top: 5px;
 	text-transform: capitalize;
     /* border: 1px solid black; */
 }
 
+#overviewFS ion-content .nameFs p {
+    /* background-color:orangered; */
+    font-size: .8em;
+    padding: .3em 0em 0em 1.6em;
 /* stars + avg reviews p tag */
-.nameFs p {
     /* background-color: blue; */
     font-size: 12px;
     padding-top: 4.8px;  
