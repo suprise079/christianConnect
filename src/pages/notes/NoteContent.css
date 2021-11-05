@@ -4,11 +4,16 @@
 #backIcon{
     color: #000;
 }
+
+#create-note {
+    --background:#f6f7f9;
+}
+
 .note {
     background-color: #fff;
     border: 1px solid rgba(0, 0, 0, 0.11);
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
+    /* border-top-left-radius: 20px; */
+    /* border-top-right-radius: 20px; */
     color: #000;
     min-height: 800px;
     margin: 10px;
@@ -25,7 +30,7 @@
 	background-color: #127647;
 	color: white;
 	padding: .3em 1em;
-	border-radius: .6em;
+	/* border-radius: .6em; */
 	position: fixed;
 	bottom: 1em;
 	font-weight: bolder;
@@ -65,21 +70,24 @@
 /* sjdbfsdbfkjdfkjdbfskdjbf */
 .note #notTitle input {
     /* background-color: red; */
-    width: 95%;
-    border-bottom: .1em solid black ;
+    width: 100%;
+    border-bottom: .1em solid rgb(112, 112, 112) ;
+    color: black;
 }
 
 .note div {
     margin: 1em 0em;
 }
 
-.note #noteContent {
-    /* background-color: yellow; */
+/* .note #noteContent {
+    background-color: yellow;
     padding: 0em 0em 1em 0em;
-}
+} */
 
-.note #noteContent textarea {
-    /* background-color: gray; */
-    height: 50vh;
+#noteContent textarea {
+    background-color:white;
+    color: #000;
+    padding: 10px;
+    height: 600px;
     width: 100%;
 }

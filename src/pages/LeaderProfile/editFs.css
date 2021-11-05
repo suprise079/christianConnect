@@ -46,12 +46,14 @@
 }
 
 #editFs .form div.editbtnCont .editbtn:hover,
-#editFs .form div.editbtnCont .editbtn:focus {
+#editFs .form div.editbtnCont .editbtn:focus,
+#photos .editbtn:focus,
+#photos .editbtn:hover {
   background-color: #033d22;
-  
 }
 
-#editFs .form div.editbtnCont .editbtn {
+#editFs .form div.editbtnCont .editbtn,
+#photos .editbtn {
   background-color: #127647;
   padding: .5em .9em;
   font-weight: bolder;
@@ -67,6 +69,7 @@
 
 
 #editFs #photos {
-  background-color: yellow;
+  /* background-color: yellow; */
+  box-shadow: 0em 0em .1em grey;
   padding: 1em 0em;
 }

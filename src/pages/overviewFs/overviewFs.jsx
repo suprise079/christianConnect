@@ -21,7 +21,7 @@ import React, { useContext, useEffect, useState } from 'react'
 // getFsImg, paste back later was giving me an error
 import TopImgFs from '../../components/topImagesFs/topImgFs';
 import TopNavBar from '../../components/topNavBar/topNavBar';
-import { AddReview, getReviews } from '../../firebase/firebase-help';
+import { AddReview, getFsImg, getReviews } from '../../firebase/firebase-help';
 import { dummyPhoto } from '../../components/helpFunc';
 
 
@@ -49,7 +49,7 @@ const ContactLocAddr = ( props ) => {
 
       <div className="locaWebTime"  >
         <IonItem  color = " #348D63" lines="none" className="itemBorderTop" >
-          <IonIcon icon ={locationSharp} className = "icon"></IonIcon>
+          <IonIcon icon ={locationSharp} id="icon-location"></IonIcon>
           <small>{ props.location } </small>
         </IonItem>
             
@@ -195,13 +195,13 @@ const PhotosFs = ( props ) => {
   const [ photos, setPhotos ] = useState();
 
   useEffect(() => {
-    // getFsImg( props.fsId ).then( res => {
-    //   var fss = res;
-    //   if( fss ) { // console.log( fss );
-    //     setPhotos( fss );
-    //   }
-    //   else { console.error("Error getting fellowships") }
-    // })
+    getFsImg( props.fsId ).then( res => {
+      var fss = res;
+      if( fss ) { // console.log( fss );
+        setPhotos( fss );
+      }
+      else { console.error("Error getting fellowships") }
+    })
   }, [])
 
   return (
@@ -229,9 +229,9 @@ const PhotosFs = ( props ) => {
 const AboutFs = ( props ) => {
   return (
     <>
-      <h3 style={{ textAlign:"center"}} >
+      <h3 id='fellow-hding' style={{ textAlign:"center"}} >
         About { props.name } fellowship </h3>
-      <div style={{padding:".5em"}} >
+      <div id='fellow-abt' style={{padding:".5em"}} >
         { props.aboutFs }
       </div>
     </>

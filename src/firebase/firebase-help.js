@@ -325,46 +325,85 @@ export const editFS = async (id, name, about, loc, time) => {
   }
 };
 
+
 // add a review about a fellowship to review collection
-export const AddReview = async (uid, fsid, stars, text) => {
+export const AddReview = async( uid, fsid, stars, text ) => {
   try {
-    const refDoc = await addDoc(collection(db, "Reviews"), {
+    const refDoc = await addDoc( collection(db, "Reviews"), {
       text: text,
       userId: uid,
       fsId: fsid,
       stars: stars,
       date: getCurTimeDate(),
-    });
-    if (refDoc.id) return true;
-    else {
-      return false;
-    }
-  } catch (err) {
-    console.log("adding review ERROR");
+    })
+    if( refDoc.id ) return true;
+    else { return false }
+  }
+  catch( err ) {
+    console.log("adding review ERROR")
     return false;
   }
-};
+}
+
 
 // get all reviews from reviews table.
-export const getReviews = async () => {
+export const getReviews = async() => {
   try {
-    const ref = await getDocs(collection(db, "Reviews"));
+    const ref = await getDocs( collection(db, "Reviews") );
     var data = [];
-    ref.docs.map((doc) => {
+    ref.docs.map( doc => {
       var d = doc.data();
       d["id"] = doc.id;
-      data.push(d);
-    });
+      data.push( d );
+    })
     // console.log( data )
-    if (data.length >= 0) return data;
-    else {
-      return false;
-    }
-  } catch (err) {
-    console.error("get reviews error");
+    if( data.length >= 0 ) return data;
+    else { return false }
+  }
+  catch( err ) { console.error("get reviews error"); return false }
+}
+
+
+// add images of a fellowship to collections
+export const AddFsPhotos = async ( uid, fsid, photo ) => {
+
+  try {
+    const ref = await addDoc( collection(db, "FellowshipImg"), {
+      userId: uid,
+      fsId: fsid,
+      photo: photo
+    })
+    if( ref.id ) return true;
+    else { return false }
+  }
+  catch( err ) {
+    console.error("error adding fellowship images", err )
     return false;
   }
-};
+} 
+
+
+
+// get all fellowship images in the collections
+export const getFsImg = async ( fsid ) => {
+  try {
+    const ref = await getDocs( collection(db, "FellowshipImg"));
+    var data = [];
+    ref.docs.map( doc => {
+      var d = doc.data();
+      d["id"] = doc.id;
+      data.push( d );
+    })
+    // console.log( doc.data() )
+    if( data.length > 0 ) return data;
+    else return false;
+  }
+  catch( err ) {
+    console.error("getting fellowship images", err ); return false;
+  }
+}
+
+
 
 
 export default firebase;
