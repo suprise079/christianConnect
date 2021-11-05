@@ -1,13 +1,16 @@
-import { IonToolbar, IonPage, IonCardTitle, IonCardSubtitle, IonLabel, IonIcon, IonImg, IonHeader, IonButtons, IonBackButton, IonTitle, } from "@ionic/react";
+import { IonToolbar, IonPage, IonCardTitle, IonCardSubtitle, IonLabel, IonIcon, IonImg, IonHeader, IonButtons, IonBackButton, IonTitle, IonContent, } from "@ionic/react";
 // import "../Profile.css";
 import "./profile.css";
-import { logOutSharp, logOutOutline, bookmarkSharp, bookmarkOutline, createSharp, createOutline, walletSharp, walletOutline, } from "ionicons/icons";
+import { logOutSharp, logOutOutline, bookmarkSharp, bookmarkOutline, createSharp, createOutline, walletSharp, walletOutline, documentTextOutline,documentTextSharp,videocamOutline,videocamSharp,calendarNumberOutline,calendarNumberSharp, } from "ionicons/icons";
+
+
 import {GiUpgrade } from "react-icons/gi"
+
 
 // import from react modules
 import React, { useContext, useEffect, useState } from "react";
 
-import { FaUserEdit, FaEdit } from "react-icons/fa";
+import { FaUserEdit, FaEdit, FaCrown } from "react-icons/fa";
 
 import TabBar from "../../components/tabBar/tabBar";
 
@@ -103,6 +106,8 @@ const Leader = () => {
   const [ userPhoto, setUserPhoto ] = useState();
   // state to switch between premium features and leader account
   const [page, setPage] = useState(true)
+  const [Pages, setPages] = useState();
+
   const [ user, setUser ] = useState(
     JSON.parse(Cookies.get("userData") ? Cookies.get("userData") : "") );
 
@@ -114,18 +119,48 @@ const Leader = () => {
       url: "/savedVideos",
       iosIcon: bookmarkOutline,
       mdIcon: bookmarkSharp,
+      p: false
+    },
+    // {
+    //   title: "Donate",
+    //   url: "/Donate",
+    //   iosIcon: walletOutline,
+    //   mdIcon: walletSharp,
+    // },
+    {
+      title: "Upload Sermons",
+      url: "/uploadSermon",
+      iosIcon: videocamOutline,
+      mdIcon: videocamSharp,
+      p: true
     },
     {
-      title: "Donate",
-      url: "/Donate",
-      iosIcon: walletOutline,
-      mdIcon: walletSharp,
+      title: "Post Announcements",
+      url: "/uploadAnnouncement",
+      iosIcon: documentTextOutline,
+      mdIcon: documentTextSharp,
+      p: true
+    },
+    {
+      title: "Upload Daily Devotion",
+      url: "/uploadDevotions",
+      iosIcon: calendarNumberOutline,
+      mdIcon: calendarNumberSharp,
+      p: true
+    },
+    {
+      title: "Post a discussion",
+      url: "/notes",
+      iosIcon: createOutline,
+      mdIcon: createSharp,
+      p: true
     },
     {
       title: "Notes",
       url: "/notes",
       iosIcon: createOutline,
       mdIcon: createSharp,
+      p: false
     },
     {
       title: "Edit",
@@ -134,12 +169,12 @@ const Leader = () => {
       mdIcon: createSharp,
       // iosIcon: i.toString(),
     },
-    !user.isPremium ? {
-      title: "Upgrade To Premium",
-      url: "/premium",
+    {
+      title: "Up/Down Grade Premium",
+      url: "/ispremium",
       iosIcon: createOutline,
       mdIcon: createSharp,
-    }:false,
+    },
     {
       title: "Logout",
       url: "/",
@@ -149,9 +184,24 @@ const Leader = () => {
   ];
 
   useEffect(() => {
+    setPages([])
     // console.log( JSON.parse( Cookies.get("userData") ) );
     setFellowship( JSON.parse(Cookies.get("curLeaderFs")) );
-    setCurUser( JSON.parse( Cookies.get("userData") ) );
+    var data = JSON.parse( Cookies.get("userData") );
+    setCurUser( data );
+
+    if( data.isPremiun ) { // get all pages
+      console.log( data.isPremiun )
+      setPages( appPages )
+    }
+    else { // only pages of normal user
+      console.log( data.isPremiun )
+      setPages( 
+        appPages.filter( app => !["Post a discussion", 
+        "Upload Daily Devotion", "Upload Sermons",
+        "Post Announcements"].includes(app.title) ) )
+    }
+    
 
     // console.log( user )
     getUserImg( user?.userId ).then( res => {
@@ -159,6 +209,7 @@ const Leader = () => {
       if( res ) { setUserPhoto( res ); }
       else { setUserPhoto( false ) }
     })
+
   },[])
 
 
@@ -221,6 +272,10 @@ const Leader = () => {
                 </Link>
                
                 <IonCardTitle style={{textTransform:"capitalize" }} >
+                  <span style={{color:"yellow"}} >
+                  { curUser?.isPremiun ? <FaCrown size="25px" color="yellow" /> : "" }
+                  </span>
+                  
                   { curUser?.firstname } { curUser?.lastname } </IonCardTitle>
 
                 <IonCardSubtitle> { curUser?.email } </IonCardSubtitle>
@@ -228,17 +283,17 @@ const Leader = () => {
             </div>
 
           </div>
-          {
+          {/* {
             user.isPremium && (
               <div className="pageSwitch">
                 <button onClick={() => setPage(true)}>Manage profile</button>
                 <button onClick={() => setPage(false)}>premium features</button>
               </div>
             )
-          }
+          } */}
           <div className="content">
             <div id="profile_items" className="menu">
-              { page && (appPages.map((appPage, index) => (
+              { page && (Pages?.map((appPage, index) => (
                 <Link
                   key={index}
                   id={appPage.url}
@@ -267,6 +322,7 @@ const Leader = () => {
 
         {/* tabBar for navigating user pages */}
         <TabBar />
+
 
       </Body>
 

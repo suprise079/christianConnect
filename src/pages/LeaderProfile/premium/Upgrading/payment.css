@@ -96,3 +96,79 @@ input:focus, input:active {
     outline: 0em;
     border: 0em;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#toPremiun {
+	/* background-color: #348D63; */
+	height: 80vh;
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	justify-content: space-around;
+	color: white;
+	padding: 3em 0em 0em 0em;
+}
+
+#toPremiun div span {
+	/* color: white; */
+	color: #348D63;
+	text-transform: uppercase;
+	cursor: pointer;
+	text-decoration: underline;
+	letter-spacing: .04em;
+	padding: 0em 0em 0em .6em;
+}
+
+#toPremiun div p {
+	color: white;
+}
+
+#toPremiun #btn {
+	/* background-color: red; */
+}
+
+#toPremiun #btn button{
+	background-color: #127647;
+	color: white;
+	font-weight: bolder;
+	padding: .4em 1em;
+	border-radius: .9em;
+}
+
+#toPremiun #btn button:hover,
+#toPremiun #btn button:focus {
+	background-color: #259661;
+	color: black;
+	box-shadow: 0em 0em .2em gray;
+}

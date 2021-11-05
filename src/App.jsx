@@ -16,9 +16,7 @@ import Context from "./context/Context";
 
 
 import AboutFellowship from "./pages/aboutFs/aboutFs";
-import FellowshipPhotos from "./pages/photosFs/photosFs";
 import OverviewFs from "./pages/overviewFs/overviewFs";
-import ReviewFS from "./pages/reviewFs/reviewFs";
 import Welcome from "./pages/Logins/Welcome/index";
 import Login from "./pages/Logins/Login";
 import Donate from "./pages/UserProfile/donate/Donate";
@@ -76,6 +74,8 @@ const App = () => {
             <Route exact path="/savedVideos" component={SavedVideos} />
             <Route exact path="/addnote" component={ NoteContent } />
             <Route exact path="/editfs" component={ EditFs } />
+            <Route exact path="/premiunleader" component={ Premium } />
+
             {/* <Route exact path="/subscriptions" component={SubscriptionHome} /> */}
             <Route exact path="/notes" component={Notes} />
             <Route exact path="/userhome" component={UserHome} />
@@ -84,17 +84,10 @@ const App = () => {
             <Route exact path="/aboutFellowship">
               <AboutFellowship />{" "}
             </Route>
-            <Route exact path="/FellowshipPhotos">
-              {" "}
-              <FellowshipPhotos />{" "}
-            </Route>
+
             <Route exact path="/overviewfs">
               {" "}
               <OverviewFs />{" "}
-            </Route>
-            <Route exact path="/reviewsfs">
-              {" "}
-              <ReviewFS />{" "}
             </Route>
 
             {/* sanah's pages for the user.... */}
@@ -125,7 +118,7 @@ const App = () => {
             {/* route to page where leader can edit his details */}
             {/* <Route exact path="/editleader"><EditLeader />{" "}</Route> */}
             {/* route to premium page, where user is a premium user. */}
-            <Route exact path="/premium">
+            <Route exact path="/ispremium">
               <Payment />
             </Route>
             {/* sign up leader */}
