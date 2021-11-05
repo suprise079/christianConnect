@@ -52,15 +52,6 @@ const ContactLocAddr = ( props ) => {
           <small>{ props.location } </small>
         </IonItem>
             
-        <IonItem  color = " #348D63" lines="none" className="itemBorderTop time" >
-          <IonIcon icon ={timeSharp} className = "icon"></IonIcon>
-          <small> { props.time } </small>
-
-          <div>
-            <small>Schedule</small>
-            <IonSelect className = "selector" ></IonSelect>
-          </div>
-        </IonItem>
           
         <IonItem  color = " #348D63" lines="none" className="itemBorderTop" >
           <IonIcon icon= {earthSharp} className = "icon"></IonIcon>
@@ -127,10 +118,10 @@ const ReviewsFs = ( props ) => {
 
   return (
     <>
-      <h3 > Review { props.name } fellowship </h3>
+      <h3 id='fellow-rev' > Review { props.name } fellowship </h3>
       
       <div id="reviewsFs" >
-        <div  className = "item">
+        <div  className = "rev-item">
           
           <IonLabel>
             {/* add review container */}
@@ -167,27 +158,31 @@ const ReviewsFs = ( props ) => {
               <button className="sort-btn" >Lowest</button>
         </div>
 
-        <div id="reviews" > {/* display reviews from datatbase */}
-          {
-            reviews && reviews?.length > 0 ? 
-              reviews?.map( (review, ind) => (
-                <div className="review" key={ ind } >
-                  <div style={{ textTransform:"capitalize" }} >
-                    <img className="revPic"
-                      src={ dummyPhoto } alt={"username"} />
-                    { "username" }
-                  </div>
+         <div>
+            {/* display reviews from datatbase */}
 
-                  <div className="infos" >
-                    <span > Stars: { review?.stars } </span>
-                    <p > { review?.text } </p>
-                  </div>
-                </div>
-              )) : 
-              reviews?.length === 0 ? 
-                ( <h2 >No Reviews For { curFs?.name } </h2> ) : 
-                ( <h2>Loading.....</h2> )
-          }
+          <div className='reviewCont'>
+
+            <div slot=" start" className="avatar1">
+
+              {/* display profile picture */}
+              {/* <img src={img3} /> */}
+
+              {/* name of user */}
+              <p><i> {"Marie Hope"} </i></p>
+            </div>
+
+            {/* display stars */}
+          
+
+            {/* date review created */}
+            <p>{'date'}</p>
+            
+            {/* review content */}
+            <p>I love this app, it has brought me close to God</p>
+
+
+          </div>
         </div>
       </div>
     </>
@@ -274,12 +269,8 @@ const OverviewFs = () => {
 
         <TopNavBar />
 
-        {/* overview container */}
-        {/* <div id='overview-cont' > */}
           {/* delete this at your own risk */}
-          <div className="imagesO" ></div>
           {/* <div className="imagesO" ></div> */}
-          
 
           <TopImgFs img1={ "" } img2={ "" } img3={ "" } />
               
@@ -295,7 +286,8 @@ const OverviewFs = () => {
             </p>
           </div>
 
-
+          
+          {/* navigation tab */}
           <div id="navigatorFs" >
             <span to="#"
               onClick={ e=> setShow(0) }
@@ -319,6 +311,8 @@ const OverviewFs = () => {
                 About </span> 
           </div>
 
+
+          {/* icon buttons */}
           <div >
             {
               show === 0 ? (
@@ -337,88 +331,11 @@ const OverviewFs = () => {
               )
             }
           </div >
-        {/* </div> */}
         
         
 
       </IonContent>
     </IonPage>
-
-    // malebo's overview code
-
-    // <IonPage className = "overviewFS">
- 
-    //   <IonContent className="overview" fullscreen >
-
-    //     <TopNavBar />
-        
-    //     {/* delete this at your own risk */}
-    //     <div className="imagesO" ></div>
-
-    //     <TopImgFs img1={ "" } img2={ "" } img3={ "" } />
-       
-
-            
-    //     <div className = "nameFs">
-    //       <p> { "Mpumelelo Prayer Meeting" } </p>
-    //       <p>
-    //         <i >{"4.2"}</i> <FaStar className = "icon1" />
-    //         <FaStar className = "icon1" />
-    //         <FaStar className = "icon1" />
-    //         <FaStar className = "icon1" />
-    //         <FaStarHalfAlt className = "icon1" /> 
-    //         <i> {"34" } </i>
-    //       </p>
-    //     </div>
-
-
-    //     <NavigateFs pn={"overview"} />
-
-        
-    //     <div className="buttons" >
-    //       <IonIcon icon={returnUpForward}></IonIcon>
-
-    //       <Link to="" href="tel:0738189349" >
-    //         <IonIcon icon={call}></IonIcon>
-    //       </Link>
-
-    //       <GrAdd id='add-btn'/>
-
-    //       <IonIcon icon = {shareSocialOutline}></IonIcon>
-    //     </div>
-        
-      
-
-    //     <div className="locaWebTime"  >
-    //       <IonItem  color = " #348D63" lines="none" className="itemBorderTop" >
-            
-    //         <IonIcon icon ={locationSharp} className = "icon"></IonIcon>
-    //         <p>{"Landau, Terrace rd"} </p>
-            
-    //       </IonItem>
-              
-    //       <IonItem  color = " #348D63" lines="none" className="itemBorderTop time" >
-
-    //         <IonIcon icon ={timeSharp} className = "icon"></IonIcon>
-    //         <p> Open between {"12:00 - 22:00"} </p>
-
-    //       </IonItem>
-            
-            
-    //       <IonItem  color = " #348D63" lines="none" className="itemBorderTop" >
-
-    //         <IonIcon icon= {earthSharp} className = "icon"></IonIcon>
-    //         <p> {"www.cnxjnsdn.co.za"} </p>
-            
-    //       </IonItem>
-    //     </div>
-          
-
-    //   </IonContent>
-    // </IonPage>
-
-
-
 
   );
 };
