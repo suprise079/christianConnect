@@ -111,6 +111,9 @@ const Leader = () => {
   const [ user, setUser ] = useState(
     JSON.parse(Cookies.get("userData") ? Cookies.get("userData") : "") );
 
+  
+  
+
   // console.log("current user details:",user)
   // pages
   const appPages = [
@@ -271,12 +274,11 @@ const Leader = () => {
                     size="25px"/>
                 </Link>
                
-                <IonCardTitle style={{textTransform:"capitalize" }} >
-                  <span style={{color:"yellow"}} >
-                  { curUser?.isPremiun ? <FaCrown size="25px" color="yellow" /> : "" }
-                  </span>
-                  
-                  { curUser?.firstname } { curUser?.lastname } </IonCardTitle>
+                <IonCardTitle style={{textTransform:"capitalize", }} >
+                  { curUser?.isPremiun ? <FaCrown id="crown" color="red" size="25px" /> : "" }
+                  { " " }
+                  { curUser?.firstname } { curUser?.lastname }
+                </IonCardTitle>
 
                 <IonCardSubtitle> { curUser?.email } </IonCardSubtitle>
               </div>
