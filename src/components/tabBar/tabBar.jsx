@@ -17,30 +17,18 @@ const TabBar = () => {
   return (
     <div className="tabBarContainer">
       <div onClick={(e) => history.push("/userhome")}>
-        {/* <Link to="/userhome" > */}
-        <i>
-          {" "}
-          <FaHome />{" "}
-        </i>
+        <i> <FaHome /></i>
         <IonLabel className="label"> Home </IonLabel>
-        {/* </Link> */}
       </div>
 
-      <div onClick={ e=> {
-        history.push("/subscription")
-        // window.location.reload()
-      } }>
+      <div onClick={ e=> { history.push("/subscriptions") } }>
         <i > <IonIcon icon={ mail } ></IonIcon> </i>
         <IonLabel className="label" > Subscription </IonLabel>
       </div>
 
       <div onClick={(e) => history.push( curUser?.isLeader ? "/leader":"/profile" )}>
-        {/* <Link to="/profile" > */}
-        <i>
-          <IonIcon icon={person}></IonIcon>{" "}
-        </i>
+        <i> <IonIcon icon={person}></IonIcon> </i>
         <IonLabel className="label"> Profile </IonLabel>
-        {/* </Link> */}
       </div>
     </div>
   );

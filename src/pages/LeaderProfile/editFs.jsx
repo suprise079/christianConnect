@@ -148,35 +148,33 @@ const EditFs = () => {
     <IonPage >
       
       
-      
       <IonContent  id="editFs">
         <h1 > Edit { fellowship?.name } </h1>
 
         {/* { fellowship?.name } */}
-
         <div className="form" >
 
           <div className="field" >
-            <input
+            <IonInput
               value={ name }
-              onChange={ e => setname( e.target.value ) }
+              onIonChange={ e => setname( e.target.value ) }
               placeholder="Fellowship Name"
             />
           </div>
 
           <div className="field" >
-            <input
+            <IonInput
               value={ location }
-              onChange={ e => setlocation( e.target.value ) }
+              onIonChange={ e => setlocation( e.target.value ) }
               placeholder="Fellowship Location"
             />
           </div>
 
           <div className="field" >
-            <input
+            <IonInput
               type="time"
               value={ time }
-              onChange={ e => settime( e.target.value ) }
+              onIonChange={ e => settime( e.target.value ) }
               placeholder="Fellowship Time"
             />
           </div>
@@ -199,7 +197,6 @@ const EditFs = () => {
 
 
         <div id="photos" >
-          
           <p >
             <input
               onChange={ e => addPhoto( e.target.files[0] ) }
@@ -208,19 +205,18 @@ const EditFs = () => {
 
           {/* show the images the user selected here.. */}
           <p >
-            { 
-              photos && photos.length > 0 ?
+            { photos && photos.length > 0 ?
                 photos.map( (image, ind) => (
                   <img
                     style={{margin:".5em"}}  
                     src={ image.photo } key={ ind } width="50px" />
                 )) 
-              : ""
-            }
+              : "" }
           </p>
 
-          <div >
-            <button disabled={ picLoad } onClick={ e => addPics() } >
+          <div style={{textAlign:"center", margin:"1em 0em 0em 0em"}} >
+            <button className="editbtn"
+              disabled={ picLoad } onClick={ e => addPics() } >
               { picLoad ? "LOADING...." : "ADD PICTURE" }
             </button>
           </div>
