@@ -1,0 +1,171 @@
+* {
+  font-family: "Poppins", sans-serif;
+}
+.toolbar {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  height: 50px;
+}
+span.backButton {
+  position: absolute;
+  top: 10px;
+  left: 14px;
+  z-index: 10;
+}
+.body {
+  overflow-y: scroll;
+}
+
+/* variables */
+:root {
+  --ion-background-color: #ffffff;
+  --ion-color-favorite: #348d63;
+  --ion-color-btn: #ff5454;
+  --ion-color-tabBtn: #000000;
+  --ion-color-tabBtnHover: #ffffff;
+}
+
+/* subscriptions scroll */
+ion-row {
+  width: 1000px;
+}
+
+::-webkit-scrollbar {
+  width: 0; /* Remove scrollbar space */
+  background: transparent; /* Optional: just make scrollbar invisible */
+}
+ion-grid {
+  --ion-grid-columns: 20;
+}
+
+ion-row {
+  max-width: 200%;
+  text-align: center;
+}
+
+ion-col {
+  height: 60px;
+  width: 30px;
+  font-size: 8pt;
+}
+
+.scrollSubscriptions {
+  height: 6em;
+  overflow-x: scroll;
+  max-width: 85%;
+  float: left;
+}
+
+#viewAll {
+  width: 15%;
+  float: right;
+  clear: right;
+  border: none;
+  height: 5em;
+  color: black;
+  font-size: 12px;
+  border-radius: 10px;
+  /* box-shadow: 0 0 10px 5px rgb(0 0 0 / 27%); */
+  background-color: #fff;
+  -webkit-border-radius: 10px;
+}
+
+/* button color */
+.ion-color-btn {
+  --ion-color-base: var(--ion-color-btn);
+}
+.icons {
+  width: 25px;
+  height: 25px;
+}
+
+/* header */
+.headerTitle {
+  text-align: center;
+}
+
+/* highlights */
+.highlightImg {
+  margin: 0px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  box-shadow: 0 4px 6px 2px #00000026;
+}
+
+.viewBtn {
+  border: 0.5px solid #348d63;
+  background-color: #348d638f;
+  color: #ffffff;
+  width: 20px;
+}
+
+/* announcements */
+
+.ann-container {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  margin: 10px;
+  padding: 5px;
+  border-radius: 10px;
+  /* box-shadow: 3px 6px 8px -1px rgba(0,0,0,0.2); */
+  overflow: hidden;
+  clear: both;
+}
+
+h4 {
+  margin-top: 10px;
+  margin-bottom: 0px;
+}
+
+h5 {
+  margin-top: 5px;
+  margin-bottom: 2px;
+}
+
+.announceImg {
+  margin: 5px;
+  width: 28%;
+  height: 30%;
+  float: left;
+  clear: none;
+  border-radius: 10px;
+}
+
+.announceContent {
+  margin: 2px 2px 0px 5px;
+  float: left;
+  clear: none;
+  width: 65%;
+}
+
+.btn {
+  border-radius: 40%;
+  margin-top: 2px;
+  margin: auto;
+}
+
+.fellowship {
+  display: flex;
+  box-shadow: 2px 3px 6px 3px rgb(0 0 0 / 17%);
+  margin: 10px;
+  padding: 10px;
+  justify-content: left;
+  border-radius: 10px;
+}
+
+.fellowship img {
+  width: 25%;
+  height: 20%;
+}
+
+.fellowshipsContainer {
+  overflow-y: scroll;
+}
+
+.fellowship h4 {
+  min-height: 20px;
+  margin: auto;
+}
