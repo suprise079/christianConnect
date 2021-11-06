@@ -15,6 +15,7 @@ const TopImgFs = ( props ) => {
 
       {/* left img */}
       <img className = "img1" src={ props.photo ? props.photo?.photo : img1} />
+      {/* <img className = "img1" src={ img1} /> */}
 
       <div id='right-imgs' >
 
@@ -23,9 +24,9 @@ const TopImgFs = ( props ) => {
           src={ props.photo1 ? props.photo1?.photo : img2} /> 
 
         {/* bottom-right img */}
-        <img className = "img3"
+        <img className = "img3"  width="100%"
           src={ props.photo2 ? props.photo2?.photo : img3} />
-        
+
       </div>
     </div>
   );

@@ -256,13 +256,34 @@ i {
 
 
 /* sort-by buttons area */
-.sortBy{
-    border: 1px solid #20704b ;
+#reviewsFs .sortBy{
+    display: flex;
+    flex-direction: column;
+    /* background-color: red; */
+    border: 1px solid #20704b;
     margin: 10px 0px;
     max-width: 410px;
     width: 100%;
     padding: 10px;
 }
+
+#reviewsFs .sortBy div#sortBtn {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    /* background-color: white; */
+}
+
+#reviewsFs .sortBy div#sortBtn button {
+    margin: 0em;
+    color: white;
+}
+
+#reviewsFs .sortBy div#sortBtn button:hover,
+#reviewsFs .sortBy div#sortBtn button:focus {
+    color: black;
+}
+
 
 .sort-btn:hover{
     background-color: #71cca2;

@@ -428,4 +428,13 @@ export const getFsImg = async ( fsid ) => {
 
 
 
+
+// updgrade to premuin / down grade from premiun
+export const upDownLeader = async( id, premiun ) => {
+  try {
+    await updateDoc( doc(db, "Users", id ), { isPremiun: premiun })
+  }
+  catch( e ) {  console.error( "ERROR UPDATING USER:", e ) }
+}
+
 export default firebase;

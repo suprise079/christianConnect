@@ -88,6 +88,7 @@ a.item {
 #userProfile #profileContent {
   /* background-color: yellow; */
   font-size: 1em;
+  padding: 0em 0em 6em 0em;
 }
 
 
@@ -124,4 +125,24 @@ a.item {
  ion-title{
    width:100%;
    text-align: center;
+ }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ /* CROWN */
+ svg#crown {
+   color: yellow !important;
+   margin: 0em 0em .5em 0em;
  }

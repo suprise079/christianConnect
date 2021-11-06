@@ -26,7 +26,9 @@ const TabBar = () => {
         <IonLabel className="label" > Subscription </IonLabel>
       </div>
 
-      <div onClick={(e) => history.push( curUser?.isLeader ? "/leader":"/profile" )}>
+      <div
+        onClick={(e) => history.push( curUser?.isLeader ? "/leader" :"/profile" )}>
+
         <i> <IonIcon icon={person}></IonIcon> </i>
         <IonLabel className="label"> Profile </IonLabel>
       </div>

@@ -160,18 +160,18 @@ const ReviewsFs = ( props ) => {
            </IonLabel>
         </div>
         
-        <div className="sortBy" >
-          {/* sort buttons */}
+        <div className="sortBy" > {/* sort buttons */}
           {/* create functions for them to work */}
-              <small>Sort By</small>
-              <button className="sort-btn" >Newest</button>
-              <button className="sort-btn" >Highest</button>
-              <button className="sort-btn" >Lowest</button>
+          <small>Sort By</small>
+          <div id="sortBtn" >
+            {/* <button className="sort-btn" >Newest</button> */}
+            <button className="sort-btn" >Highest</button>
+            <button className="sort-btn" >Lowest</button>
+          </div>
         </div>
 
-         <div>
+        <div>
             {/* display reviews from datatbase */}
-
           <div id="reviews" > 
             {
             reviews && reviews?.length > 0 ? 
@@ -195,6 +195,7 @@ const ReviewsFs = ( props ) => {
             }
           </div>
         </div>
+
       </div>
     </>
   )
