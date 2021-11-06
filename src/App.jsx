@@ -40,8 +40,8 @@ import NoteContent from "./pages/notes/NoteContent";
 import UserHome from "./pages/userHome/userHome";
 import EditFs from "./pages/LeaderProfile/editFs";
 import Payment from "./pages/LeaderProfile/premium/Upgrading/payment";
-// import SubscriptionHome from './pages/subscription/SubscriptionHome';
-// import Announce from "./pages/subscription/announcements/Announcements";
+import SubscriptionHome from './pages/subscription/SubscriptionHome';
+import Announce from "./pages/subscription/announcements/Announcements";
 
 
 
@@ -76,10 +76,10 @@ const App = () => {
             <Route exact path="/savedVideos" component={SavedVideos} />
             <Route exact path="/addnote" component={ NoteContent } />
             <Route exact path="/editfs" component={ EditFs } />
-            {/* <Route exact path="/subscriptions" component={SubscriptionHome} /> */}
+            <Route exact path="/subscriptions" component={SubscriptionHome} />
             <Route exact path="/notes" component={Notes} />
             <Route exact path="/userhome" component={UserHome} />
-            {/* <Route exact path="/subscription" component={ Announce } /> */}
+            <Route exact path="/subscription" component={ Announce } />
 
             <Route exact path="/aboutFellowship">
               <AboutFellowship />{" "}

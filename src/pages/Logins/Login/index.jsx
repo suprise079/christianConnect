@@ -162,7 +162,6 @@ const Login = () => {
               }}
               onClick={() => {
                 setForgotPswdModal(false);
-
               }}
             >
               Proceed to Login
@@ -353,7 +352,7 @@ const Login = () => {
                 }}
               >
                 {showPassword ? (
-                  <AiFillEyeInvisible size="2px" />
+                  <AiFillEyeInvisible size="20px" />
                 ) : (
                   <AiFillEye size="20px" />
                 )}
@@ -414,7 +413,10 @@ const Login = () => {
           {/* set forgot password page */}
           <span
             className="fromWelcome"
-            onClick={() => {setForgotPswdModal(true);setMessage("")}}
+            onClick={() => {
+              setForgotPswdModal(true);
+              setMessage("");
+            }}
             style={{ color: "#348d60" }}
           >
             Forgot password ?
@@ -459,24 +461,45 @@ const Login = () => {
                 handleChange(e);
               }}
             />
-            <button
-              style={{
-                margin: "10px",
-                background: "#348d60",
-                padding: "5px",
-                color: "white",
-                borderRadius: "5px",
-                width: "100px",
-                boxShadow: "#0000004a 0px 6px 6px",
-              }}
-              id="forgotPswdButton"
-              type="submit"
-              // onClick={() => {
+            <div>
+              <button
+                style={{
+                  margin: "10px",
+                  color: "#348d60",
+                  padding: "5px",
+                  background: "white",
+                  borderRadius: "5px",
+                  width: "100px",
+                  border: "1px solid #348d60",
+                  boxShadow: "#0000004a 0px 6px 6px",
+                }}
+                id="forgotPswdButton"
+                type="submit"
+                onClick={() => {
+                  setForgotPswdModal(false);
+                }}
+              >
+                Cancel
+              </button>
+              <button
+                style={{
+                  margin: "10px",
+                  background: "#348d60",
+                  padding: "5px",
+                  color: "white",
+                  borderRadius: "5px",
+                  width: "100px",
+                  boxShadow: "#0000004a 0px 6px 6px",
+                }}
+                id="forgotPswdButton"
+                type="submit"
+                // onClick={() => {
 
-              // }}
-            >
-              Submit
-            </button>
+                // }}
+              >
+                Submit
+              </button>
+            </div>
           </form>
         )}
       </IonModal>

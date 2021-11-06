@@ -28,8 +28,11 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
+
 // export firestore object
 export const db = getFirestore( app );
+// export firestore object please dont remove this its neccessary
+export const firestoreObj = getFirestore( app );
 // export firebase/auth object
 export const auth = getAuth();
 // export firebase storage 

@@ -30,7 +30,7 @@ const UserHome = () =>{
     // const searchBox = document.querySelector('#search-inpt');
     // const searchResults = document.querySelector('#search-results');
 
-    // getting search value
+    // // getting search value
     // searchResults.innerHTML = searchFsBar(searchBox.value);
     // searchBox.addEventListener('keyups',async (e) => searchResults.innerHTML = await searchFsBar(e.target.value.toLowerCase()))
 
@@ -57,7 +57,6 @@ const UserHome = () =>{
 
             {/* <BsSearch className='searchIcon'/> */}
             <input
-              // value={e.target.value} 
               id='search-inpt'
               type="text"
               placeholder="Search..." />
