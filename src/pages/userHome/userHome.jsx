@@ -25,6 +25,10 @@ import { async } from "@firebase/util";
 const UserHome = () =>{
     const { curUser, setCurUser } = useContext(Context);
     const [fellowships, setFellowships] = useState();
+    const [word, setWord] = useState();
+    const [FS, setFS] = useState();
+
+
 
     // search bar variables
     // const searchBox = document.querySelector('#search-inpt');
@@ -39,10 +43,25 @@ const UserHome = () =>{
       setCurUser(JSON.parse(Cookies.get("userData")));
 
       // 
+      // 
       getAllFellowships().then(data => {
         setFellowships(data);
       }); // console.log( fellowships )
     }, []);
+
+    const search_ = ( e ) => {
+      e.preventDefault();
+      console.log( word )
+      // console.log( fellowships )
+      console.log(
+        fellowships.filter( fs => fs.name.toLowerCase().includes(word) ) )
+        
+      setFS( fellowships.filter( fs => fs.name.toLowerCase().includes(word) ) )
+
+      // fs.location.toLoweCase().includes(word) ||
+          // fs.name.toLowerCase().includes(word) ||
+          // fs.about.toLowerCase().includes(word)
+    }
 
 
     return (
@@ -52,58 +71,62 @@ const UserHome = () =>{
 
           {/* header */}
           <div className="home-header">
-
             {/* search field */}
-
-            {/* <BsSearch className='searchIcon'/> */}
+            <form onSubmit={ e => search_( e ) } >
             <input
+              // style={{backgroundColor:"red"}}
+              onChange={ e => setWord( e.target.value ) }
               id='search-inpt'
               type="text"
-              placeholder="Search..." />
-
-
+              placeholder="Search By Name, Please..." />
+            </form>
           </div>
 
           {/* map-container */}
           <div className="mapContainer">
-            <p className="header">Fellowships near you</p>
+            <p style={{textAlign:"center"}} className="header">
+              Fellowships near you</p>
 
             <div className="map">
               <Map />
-
             </div>
           </div>
 
           <div className="fellowships">
 
-            <div id=' search-results'>
-
-            </div>
+            <div id=' search-results'></div>
 
 
             {/* display all fellowships available*/}
-            {fellowships && fellowships.length > 0 ? (
+            {
+              word && word.length > 0 && FS && FS.length > 0 ? (
 
-              fellowships.map((fs, ind) => (
-                <SearchFellowship key={ind}
-                  name={fs.name} about={fs.about}
-                  location={fs.location} time={fs.time} fsid={fs.id} />
-              ))
-            ) : (
-              <h2> Loading.....</h2>
-            )}
+                FS.map((fs, ind) => (
+                  <SearchFellowship key={ind}
+                    name={fs.name} about={fs.about}
+                    location={fs.location} time={fs.time} fsid={fs.id} />
+                ))
+              ) :
+              fellowships && fellowships.length > 0 ? (
+    
+                fellowships.map((fs, ind) => (
+                  <SearchFellowship key={ind}
+                    name={fs.name} about={fs.about}
+                    location={fs.location} time={fs.time} fsid={fs.id} />
+                ))
+              ) : (
+                <h2> Loading.....</h2>
+              )
+            }
+
+            
+
+            
 
           </div>
 
           {/* the button component tab bar for navigation */}
           <TabBar />
-
-          {/* <div className="moreFellowshipBtn" >
-              <button className="moreFellowshipBtn">
-                More Fellowships
-                <IonIcon icon={arrowForward}> </IonIcon>
-              </button>
-            </div> */}
 
         </IonContent>
       </IonPage>

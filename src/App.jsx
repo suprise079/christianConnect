@@ -74,13 +74,10 @@ const App = () => {
             <Route exact path="/savedVideos" component={SavedVideos} />
             <Route exact path="/addnote" component={ NoteContent } />
             <Route exact path="/editfs" component={ EditFs } />
-<<<<<<< HEAD
             <Route exact path="/subscriptions" component={SubscriptionHome} />
-=======
             <Route exact path="/premiunleader" component={ Premium } />
 
             {/* <Route exact path="/subscriptions" component={SubscriptionHome} /> */}
->>>>>>> 5c6b426cbaac6280871ff4c6f517325def31494d
             <Route exact path="/notes" component={Notes} />
             <Route exact path="/userhome" component={UserHome} />
             <Route exact path="/subscription" component={ Announce } />
