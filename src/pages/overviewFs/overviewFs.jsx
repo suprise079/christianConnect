@@ -21,7 +21,7 @@ import React, { useContext, useEffect, useState } from 'react'
 // getFsImg, paste back later was giving me an error
 import TopImgFs from '../../components/topImagesFs/topImgFs';
 import TopNavBar from '../../components/topNavBar/topNavBar';
-import { AddReview, getFsImg, getReviews } from '../../firebase/firebase-help';
+import { AddReview, getFsImg, getReviews, Subs } from '../../firebase/firebase-help';
 import { dummyPhoto } from '../../components/helpFunc';
 
 
@@ -30,21 +30,37 @@ import { dummyPhoto } from '../../components/helpFunc';
 // has, location of fellowship, time, websites, contact details
 // able to share to other apps and books marks
 const ContactLocAddr = ( props ) => {
+  const { allFellowships, curUser, setCurUser } = useContext( Context );
+
+  const subs = () => {
+    Subs( curUser?.id, props.fsid  ).then( ref => {
+      if( ref ) alert("Subscription Added")
+      else { alert("Error Adding Subscription") }
+    })
+  }
+
+  useEffect(()=> {
+    setCurUser( JSON.parse( Cookies.get("userData") ));
+
+  }, [])
+
   return (
     <>
       <div className="FsButtons" >
-        <IonIcon icon={returnUpForward}></IonIcon>
+        {/* <IonIcon icon={returnUpForward}></IonIcon> */}
 
         {/* call fellowship */}
-        <Link to="" href="tel:0738189349" >
+        {/* <Link to="" href={"tel:" + "" } >
           <IonIcon icon={call}></IonIcon>
-        </Link>
+        </Link> */}
 
         {/* subscription button */}
-        <IonIcon icon = {bookmarkSharp}></IonIcon>
+        Subscribe ? <span style={{textDecoration:"underline"}} >
+          { props.name }</span>
+        <IonIcon onClick={e=>subs()} icon = {bookmarkSharp}></IonIcon>
 
         {/* share fellowship */}
-        <IonIcon icon = {shareSocialOutline}></IonIcon>
+        {/* <IonIcon icon = {shareSocialOutline}></IonIcon> */}
       </div>
 
       <div className="locaWebTime"  >
@@ -101,7 +117,7 @@ const ReviewsFs = ( props ) => {
     )
 
     // get all reviews from reviews collections
-    getReviews().then( doc => {
+    getReviews( fellowshipId ).then( doc => {
       if( doc ) { var rev = doc; setReviews( rev ) }
       else { console.log("ERROR GETTING REVIEWS"); }
     })
@@ -118,8 +134,16 @@ const ReviewsFs = ( props ) => {
           alert("Review Added Successfull");
           setStars(0); setRateTxt("");
           // get all reviews from reviews collections
-          getReviews().then( doc => {
-            if( doc ) { var rev = doc; setReviews( rev ) }
+          getReviews( curFs?.id ).then( doc => {
+            if( doc ) { 
+              var rev = doc;
+              setReviews( rev );
+              // console.log("SJKBFKJDBK")
+              // console.log( _.sortBy( rev, 'stars' ).reverse() )
+              // console.log(
+              //   rev.sort((a, b) => a.stars.localeCompare(b.stars))
+              // )
+            }
             else { console.log("ERROR GETTING REVIEWS"); }
           })
         }
@@ -131,7 +155,8 @@ const ReviewsFs = ( props ) => {
 
   return (
     <>
-      <h4 id='fellow-rev' > Review { props.name } fellowship </h4>
+      <h4 id='fellow-rev' > Review <span style={{textDecoration:"underline"}} >
+        { props.name } </span> fellowship </h4>
       
       <div id="reviewsFs" >
         <div  className = "rev-item">
@@ -190,7 +215,8 @@ const ReviewsFs = ( props ) => {
                 </div>
               )) : 
               reviews?.length === 0 ? 
-                ( <h2 >No Reviews For { curFs?.name } </h2> ) : 
+                ( <h2 >No Reviews For <span style={{textDecoration:"underline"}} >
+                    { curFs?.name } </span> </h2> ) : 
                 ( <h2>Loading.....</h2> )
             }
           </div>
@@ -200,6 +226,7 @@ const ReviewsFs = ( props ) => {
     </>
   )
 }
+
 
 // contains the photo's of a fellowship
 const PhotosFs = ( props ) => {
@@ -217,7 +244,8 @@ const PhotosFs = ( props ) => {
 
   return (
     <>
-      <h3 > Photos of { props.name } fellowship </h3>
+      <h3 > Photos of <span style={{textDecoration:"underline"}} >
+        { props.name } </span> fellowship </h3>
 
       <div id="fsImages" >
         {
@@ -241,14 +269,14 @@ const AboutFs = ( props ) => {
   return (
     <>
       <h3 id='fellow-hding' style={{ textAlign:"center"}} >
-        About { props.name } fellowship </h3>
+        About <span style={{textDecoration:"underline"}} >
+        { props.name } </span> fellowship </h3>
       <div id='fellow-abt' style={{padding:".5em"}} >
         { props.aboutFs }
       </div>
     </>
   )
 }
-
 
 
 const OverviewFs = () => {
@@ -356,6 +384,9 @@ const OverviewFs = () => {
                 <ContactLocAddr
                   location={ curFs?.location }
                   time = { curFs?.time }
+                  fsid = { curFs?.id }
+                  name = { curFs?.name }
+                  // user = { curUser }
                 />
               ) : show === 1 ? (
                 <ReviewsFs name={ curFs?.name }  />
@@ -376,5 +407,6 @@ const OverviewFs = () => {
 
   );
 };
+
 
 export default OverviewFs;

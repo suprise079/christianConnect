@@ -349,9 +349,10 @@ export const AddReview = async( uid, fsid, stars, text, ufname, ulname ) => {
 
 
 // get all reviews from reviews table.
-export const getReviews = async() => {
+export const getReviews = async( fsid ) => {
   try {
-    const ref = await getDocs( collection(db, "Reviews") );
+    const q = query( collection(db, "Reviews"), where("fsId", "==", fsid) )
+    const ref = await getDocs( q );
     var data = [];
     ref.docs.map( doc => {
       var d = doc.data();
@@ -436,5 +437,23 @@ export const upDownLeader = async( id, premiun ) => {
   }
   catch( e ) {  console.error( "ERROR UPDATING USER:", e ) }
 }
+
+
+
+
+// make user subscribe
+export const Subs = async(uid, fsid ) => {
+  const ref = await addDoc( 
+    collection(db, "Subs"), {
+      userId: uid,
+      fsId: fsid,
+    }
+  )
+  if( ref.id ) return true
+  else { return false } 
+}
+
+
+
 
 export default firebase;
