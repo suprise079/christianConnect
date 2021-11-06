@@ -21,7 +21,7 @@ const TabBar = () => {
         <IonLabel className="label"> Home </IonLabel>
       </div>
 
-      <div onClick={ e=> { history.push("/subscriptions") } }>
+      <div onClick={ e=> { history.push("/SubscriptionHome") } }>
         <i > <IonIcon icon={ mail } ></IonIcon> </i>
         <IonLabel className="label" > Subscription </IonLabel>
       </div>

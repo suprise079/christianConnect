@@ -19,7 +19,7 @@ import AboutFellowship from "./pages/aboutFs/aboutFs";
 import OverviewFs from "./pages/overviewFs/overviewFs";
 import Welcome from "./pages/Logins/Welcome/index";
 import Login from "./pages/Logins/Login";
-import Donate from "./pages/UserProfile/donate/Donate";
+
 import Profile from "./pages/UserProfile/Profile";
 import EditUser from "./pages/UserProfile/EditUser";
 import Notes from "./pages/notes/Notes";
@@ -33,12 +33,11 @@ import UploadAnnouncement from "./pages/LeaderProfile/premium/UploadAnnouncement
 import UploadSermon from "./pages/LeaderProfile/premium/UploadSermons";
 import uploadDevotion from "./pages/LeaderProfile/premium/UploadDevotion";
 import SavedVideos from "./pages/UserProfile/savedVideos/savedVideos";
-// import SubscriptionHome from "./pages/subscription/SubscriptionHome"
+import SubscriptionHome from "./pages/subscription/SubscriptionHome"
 import NoteContent from "./pages/notes/NoteContent";
 import UserHome from "./pages/userHome/userHome";
 import EditFs from "./pages/LeaderProfile/editFs";
 import Payment from "./pages/LeaderProfile/premium/Upgrading/payment";
-import SubscriptionHome from './pages/subscription/SubscriptionHome';
 import Announce from "./pages/subscription/announcements/Announcements";
 
 
@@ -70,7 +69,6 @@ const App = () => {
             {/* <Route exact path="/"> <Redirect to="/home" /> </Route> */}
             <Route exact path="/" component={Welcome} />
             <Route exact path="/Login" component={Login} />
-            <Route exact path="/Donate" component={Donate} />
             <Route exact path="/savedVideos" component={SavedVideos} />
             <Route exact path="/addnote" component={ NoteContent } />
             <Route exact path="/editfs" component={ EditFs } />
@@ -131,7 +129,7 @@ const App = () => {
 
 
             {/* Subscription Home page */}
-            {/* <Route exact path="/SubscriptionHome" component={ SubscriptionHome } /> */}
+            <Route exact path="/SubscriptionHome" component={ SubscriptionHome } />
           </IonRouterOutlet>
         </IonReactRouter>
       </IonApp>

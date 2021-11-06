@@ -1,0 +1,15 @@
+#donateInfo {
+    background-color: #348D63;
+    font-style: normal;
+    font-size: .8em;
+    color: white;
+    padding: 1em .5em;
+    margin: 0em .4em;
+    border-radius: .7em;
+    text-align: center;
+}
+ion-content#donateModalContent{
+    --padding: 20px;
+
+
+}

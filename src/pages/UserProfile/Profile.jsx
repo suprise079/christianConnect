@@ -5,14 +5,14 @@ import {
   IonCardSubtitle,
   IonLabel,
   IonIcon,
-  IonImg,
+  IonModal,
   IonHeader,
   IonButtons,
   IonBackButton,
   IonTitle,
+  IonContent,
+  IonTextarea,
 } from "@ionic/react";
-// import "../Profile.css";
-import "./profile.css";
 import {
   logOutSharp,
   logOutOutline,
@@ -24,9 +24,10 @@ import {
   walletOutline,
 } from "ionicons/icons";
 
-
 // import from react modules
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import "./profile.css";
+import "./donate.css";
 
 import { FaUserEdit } from "react-icons/fa";
 
@@ -40,20 +41,12 @@ import { auth } from "../../firebase/firebase";
 import { signOut } from "firebase/auth";
 import Context from "../../context/Context";
 // get firebase functions
-import {
-  getUserImg
-} from "../../firebase/firebase-help";
-import Cookies from 'js-cookie';
+import { getUserImg } from "../../firebase/firebase-help";
+import Cookies from "js-cookie";
 
 import { dummyPhoto } from "../../components/helpFunc";
 
-
-
-
-
 var profileImg = "/assets/icon/prayer.jpeg";
-
-
 
 const appPages = [
   {
@@ -133,7 +126,7 @@ const Body = styled(IonPage)`
     width: 90%;
     background-color: white;
     height: 11em;
-    padding: 0em 0em .5em 0em;
+    padding: 0em 0em 0.5em 0em;
     box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.05);
     border-radius: 10px;
   }
@@ -146,36 +139,40 @@ const Body = styled(IonPage)`
   }
 `;
 
-
 const Profile = () => {
+  // Donate variables
+  const [donateModal, setDonateModal] = useState(false);
+  const [text, setText] = useState("");
+  
+
   const history = useHistory(); // use this for routing in js codes.
-  const { curUser, setCurUser } = useContext( Context );
-  const [ userPhoto, setUserPhoto ] = useState();
-  const [ user, setUser ] = useState(
-    JSON.parse(Cookies.get("userData") ? Cookies.get("userData") : "") )
-
-
-
+  const { curUser, setCurUser } = useContext(Context);
+  const [userPhoto, setUserPhoto] = useState();
+  const [user, setUser] = useState(
+    JSON.parse(Cookies.get("userData") ? Cookies.get("userData") : "")
+  );
 
   useEffect(() => {
     // console.log( JSON.parse( Cookies.get("userData") ) );
-    setCurUser( JSON.parse( Cookies.get("userData") ) );
+    setCurUser(JSON.parse(Cookies.get("userData")));
 
     // console.log( user )
-    getUserImg( user?.userId ).then( res => {
-      if( res ) { setUserPhoto( res ); }
-      else { setUserPhoto( false ) }
-    })
-  },[])
-
-
+    getUserImg(user?.userId).then((res) => {
+      if (res) {
+        setUserPhoto(res);
+      } else {
+        setUserPhoto(false);
+      }
+    });
+  }, []);
 
   const goToItem = (e) => {
     // console.log(e.target.id);
     // history.push( `${e.target.id}` );
 
     if (e.target.id === "/") {
-      auth.signOut()
+      auth
+        .signOut()
         .then((res) => {
           // Display a modal saying "User successfully signed out"
           /* setTimeout(() => {
@@ -184,16 +181,14 @@ const Profile = () => {
           // alert("Successfully signed Out ! ");
           history.push(e.target.id);
         })
-        .catch((err) => history.push('/'));
+        .catch((err) => history.push("/"));
     } else {
       history.push(e.target.id);
     }
   };
 
-
   return (
-    <IonPage id="userProfile" >
-
+    <IonPage id="userProfile">
       <Body>
         <IonHeader color="white" className="ion-no-border">
           <IonToolbar color="white">
@@ -205,67 +200,131 @@ const Profile = () => {
         </IonHeader>
 
         <div id="profileContent" className="body">
-
           <div className="container">
             <div className="headerTrail"></div>
 
             <div className="infos">
-              <div className="profile" >
+              <div className="profile">
                 <img
-                  src={ userPhoto ? userPhoto?.photo : profileImg }
-                  alt={"photo of " + curUser?.firstname }  />
+                  src={userPhoto ? userPhoto?.photo : profileImg}
+                  alt={"photo of " + curUser?.firstname}
+                />
               </div>
-              
-            
 
               <div id="details">
-                <Link to="/editprofile" >
+                <Link to="/editprofile">
                   <FaUserEdit
                     className="editButton"
                     // onClick={(e) => history.push("/editprofile")}
-                    size="25px"/>
+                    size="25px"
+                  />
                 </Link>
-               
-                <IonCardTitle style={{textTransform:"capitalize"}} >
-                  { curUser?.firstname } { curUser?.lastname } </IonCardTitle>
-                <IonCardSubtitle> { curUser?.email } </IonCardSubtitle>
+
+                <IonCardTitle style={{ textTransform: "capitalize" }}>
+                  {curUser?.firstname} {curUser?.lastname}{" "}
+                </IonCardTitle>
+                <IonCardSubtitle> {curUser?.email} </IonCardSubtitle>
               </div>
             </div>
-
           </div>
-          
+
           <div className="content">
             <div id="profile_items" className="menu">
-              {appPages.map((appPage, index) => (
-                <Link
-                  key={index}
-                  id={appPage.url}
-                  onClick={(e) => goToItem(e)}
-                  className="item"
-                  to={ appPage?.url }
-                >
-                  <IonIcon
-                    className="icon"
-                    slot="start"
-                    ios={appPage.iosIcon}
-                    md={appPage.mdIcon}
-                  />
-                  <IonLabel>{appPage.title}</IonLabel>
-                </Link>
-                )
-              )}
+              {appPages.map((appPage, index) => {
+                return appPage.url === "/Donate" ? (
+                  <div
+                    key={index}
+                    id={appPage.url}
+                    onClick={(e) => setDonateModal(true)}
+                    className="item"
+                  >
+                    <IonIcon
+                      className="icon"
+                      slot="start"
+                      ios={appPage.iosIcon}
+                      md={appPage.mdIcon}
+                    />
+                    <IonLabel>{appPage.title}</IonLabel>
+                  </div>
+                ) : (
+                  <Link
+                    key={index}
+                    id={appPage.url}
+                    onClick={(e) => goToItem(e)}
+                    className="item"
+                    to={appPage?.url}
+                  >
+                    <IonIcon
+                      className="icon"
+                      slot="start"
+                      ios={appPage.iosIcon}
+                      md={appPage.mdIcon}
+                    />
+                    <IonLabel>{appPage.title}</IonLabel>
+                  </Link>
+                );
+              })}
             </div>
           </div>
-
         </div>
+        <IonModal isOpen={donateModal}>
+          <IonContent class="ion-padding" id="donateModalContent">
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+              }}
+            >
+              <p id="donateInfo">
+                Donate To The Christian Connect Development Team
+              </p>
 
-        {/* tabbar for navigating user pages */}
+              <div id="paymentType">
+                <label>Payment type</label>
+                <p>
+                  Card
+                  <input value="Card" name="payment" type="radio" />
+                  EFT
+                  <input value="EFT" name="payment" type="radio" />
+                </p>
+              </div>
+
+              <div id="donateAmount">
+                <label> Amount </label>
+                <p>
+                  <label>R</label> <input size="7" type="number" />
+                </p>
+              </div>
+
+              <div id="donateMessage">
+                <p> Message </p>
+
+                <IonTextarea
+                  rows="7"
+                  placeholder="Description..."
+                  className="textArea"
+                  value={text}
+                  onIonChange={(e) => setText(e.target.value)}
+                ></IonTextarea>
+              </div>
+
+              <div id="donateAnonymously">
+                <input style={{margin:"0 10px"}} type="checkbox" />
+                <span>Donate Anonymously</span>
+              </div>
+
+              
+              <div>
+                <button onClick={() => setDonateModal(false)}>Cancel</button>
+                <button type="submit">Donate</button>
+              </div>
+            </form>
+          </IonContent>
+        </IonModal>
+
+        {/* tabBar for navigating user pages */}
         <TabBar />
-
       </Body>
-
     </IonPage>
-
   );
 };
 

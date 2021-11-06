@@ -19,7 +19,7 @@
 }
 
 
-a.item {
+a.item,div.item {
   box-shadow: 0px 1px 0px 1px rgb(0 0 0 / 10%);
   display: flex;
   align-items: center;
