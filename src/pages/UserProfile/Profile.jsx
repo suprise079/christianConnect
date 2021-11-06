@@ -8,6 +8,7 @@ import {
   IonModal,
   IonHeader,
   IonButtons,
+  IonCard,
   IonBackButton,
   IonTitle,
   IonContent,
@@ -30,6 +31,7 @@ import "./profile.css";
 import "./donate.css";
 
 import { FaUserEdit } from "react-icons/fa";
+import { BsFillCheckCircleFill } from "react-icons/bs";
 
 import TabBar from "../../components/tabBar/tabBar";
 
@@ -143,7 +145,11 @@ const Profile = () => {
   // Donate variables
   const [donateModal, setDonateModal] = useState(false);
   const [text, setText] = useState("");
-  
+  const [paymentType, setPaymentType] = useState("Card");
+  const [confirmDonation, setConfirmDonation] = useState(false);
+  const [donateAmount, setDonateAmount] = useState("");
+  const [donateAnonymously, setDonateAnonymously] = useState(false);
+  const [donationConfirmed, setDonationConfirmed] = useState(false);
 
   const history = useHistory(); // use this for routing in js codes.
   const { curUser, setCurUser } = useContext(Context);
@@ -193,7 +199,7 @@ const Profile = () => {
         <IonHeader color="white" className="ion-no-border">
           <IonToolbar color="white">
             <IonButtons slot="start">
-              <IonBackButton defaultHref="/" />
+              <IonBackButton defaultHref="/homeTab" />
             </IonButtons>
             <IonTitle>Profile User</IonTitle>
           </IonToolbar>
@@ -272,56 +278,174 @@ const Profile = () => {
             <form
               onSubmit={(e) => {
                 e.preventDefault();
+                setConfirmDonation(true);
               }}
             >
               <p id="donateInfo">
                 Donate To The Christian Connect Development Team
               </p>
 
-              <div id="paymentType">
-                <label>Payment type</label>
-                <p>
-                  Card
-                  <input value="Card" name="payment" type="radio" />
-                  EFT
-                  <input value="EFT" name="payment" type="radio" />
-                </p>
+              <div style={{ margin: "10px" }} id="paymentType">
+                <div>Payment type:</div>
+                <div className="donatePaymentContainer">
+                  <label
+                    className={
+                      paymentType === "Card"
+                        ? "paymentTypeChecked"
+                        : "paymentType"
+                    }
+                    htmlFor="CardMethod"
+                  >
+                    Card
+                  </label>
+                  <input
+                    checked={paymentType === "Card"}
+                    onClick={(e) => setPaymentType(e.target.value)}
+                    value="Card"
+                    name="paymentDonate"
+                    type="radio"
+                    id="CardMethod"
+                  />
+                  <label
+                    className={
+                      paymentType === "EFT"
+                        ? "paymentTypeChecked"
+                        : "paymentType"
+                    }
+                    htmlFor="EFTMethod"
+                  >
+                    EFT
+                  </label>
+                  <input
+                    className="paymentType"
+                    checked={paymentType === "EFT"}
+                    onClick={(e) => setPaymentType(e.target.value)}
+                    value="EFT"
+                    name="paymentDonate"
+                    type="radio"
+                    id="EFTMethod"
+                  />
+                </div>
               </div>
 
-              <div id="donateAmount">
-                <label> Amount </label>
-                <p>
-                  <label>R</label> <input size="7" type="number" />
-                </p>
+              <div style={{ margin: "10px" }} id="donateAmount">
+                <label> Amount(in ZAR): </label>
+                <input
+                  value={parseInt(donateAmount, 10)}
+                  onChange={(e) => {
+                    setDonateAmount(parseInt(e.target.value, 10));
+                  }}
+                  required
+                  style={{ border: "1px solid gray", borderRadius: "5px" }}
+                  size="7"
+                  type="number"
+                />
               </div>
 
-              <div id="donateMessage">
+              <div style={{ margin: "10px" }} id="donateMessage">
                 <p> Message </p>
 
                 <IonTextarea
-                  rows="7"
-                  placeholder="Description..."
-                  className="textArea"
+                  rows="6"
+                  placeholder="A word to accompany your donation..."
+                  className="donateTextArea"
                   value={text}
                   onIonChange={(e) => setText(e.target.value)}
                 ></IonTextarea>
               </div>
 
-              <div id="donateAnonymously">
-                <input style={{margin:"0 10px"}} type="checkbox" />
-                <span>Donate Anonymously</span>
+              <div
+                style={{
+                  margin: "10px",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <input
+                  id="donateAnonymously"
+                  style={{ margin: "0 10px" }}
+                  type="checkbox"
+                  checked={donateAnonymously}
+                  onChange={() => setDonateAnonymously(!donateAnonymously)}
+                />
+                <label htmlFor="donateAnonymously">Donate Anonymously</label>
               </div>
 
-              
-              <div>
+              <div
+                style={{
+                  margin: "10px",
+                  display: "flex",
+                  justifyContent: "center",
+                }}
+                className="donateButtonsContainer"
+              >
                 <button onClick={() => setDonateModal(false)}>Cancel</button>
                 <button type="submit">Donate</button>
               </div>
             </form>
           </IonContent>
         </IonModal>
-
-        {/* tabBar for navigating user pages */}
+        <IonModal isOpen={confirmDonation}>
+          <IonContent className="ion-padding" id="DonateConfirmationContainer">
+            <IonCard className="confirmDonationMessage">
+              {donationConfirmed ? (
+                <p
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    flexDirection: "column-reverse",
+                  }}
+                >
+                  <div>Thank you for you contribution !</div>
+                  <BsFillCheckCircleFill size="4em" color="white" />
+                </p>
+              ) : (
+                <p style={{ textAlign: "center" }}>
+                  Your are about to make a donation of{" "}
+                  <b>
+                    <em>R{donateAmount}</em>
+                  </b>{" "}
+                  <b>{donateAnonymously ? "Anonymously " : ""}</b>
+                  to the Christian Connect Dev Team. Please Confirm
+                </p>
+              )}
+            </IonCard>
+            {donationConfirmed ? (
+              ""
+            ) : (
+              <div
+                style={{
+                  margin: "10px",
+                  display: "flex",
+                  justifyContent: "center",
+                }}
+                className="donateButtonsContainer"
+              >
+                <button
+                  onClick={() => {
+                    setConfirmDonation(false);
+                  }}
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={() => {
+                    setDonationConfirmed(true);
+                    setTimeout(() => {
+                      setConfirmDonation(false);
+                      setDonateModal(false);
+                      setDonateAmount("");
+                    }, 1500);
+                  }}
+                >
+                  Confirm
+                </button>
+              </div>
+            )}
+          </IonContent>
+        </IonModal>
         <TabBar />
       </Body>
     </IonPage>

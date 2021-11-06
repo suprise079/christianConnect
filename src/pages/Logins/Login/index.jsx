@@ -329,7 +329,9 @@ const Login = () => {
             action="/"
             // /* method="post" */ onSubmit={(e) => handleSubmit(e)}
           >
-            <label htmlFor="Email address">Email</label>
+            <label className="loginLabel" htmlFor="Email address">
+              Email
+            </label>
             <IonInput
               id="email"
               required
@@ -343,7 +345,7 @@ const Login = () => {
                 handleChange(e);
               }}
             />
-            <label htmlFor="Password">
+            <label className="loginLabel" htmlFor="Password">
               Password
               <span
                 onClick={() => {

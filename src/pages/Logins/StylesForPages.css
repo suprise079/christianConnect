@@ -28,7 +28,7 @@ ion-button {
   background-color: white;
   height: 40px;
 }
-label {
+label.loginLabel {
   text-shadow: 0 0 5px gray;
   display: flex;
   justify-content: flex-start;

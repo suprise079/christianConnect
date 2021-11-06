@@ -5,6 +5,8 @@ import React, { useState } from "react";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
+import '@ionic/react/css/padding.css';
+import '@ionic/react/css/display.css';
 // import bootstrap css
 import 'bootstrap/dist/css/bootstrap.min.css';
 // import 'bootstrap/dist/css/bootstrap.min.css';
@@ -40,6 +42,8 @@ import EditFs from "./pages/LeaderProfile/editFs";
 import Payment from "./pages/LeaderProfile/premium/Upgrading/payment";
 import Announce from "./pages/subscription/announcements/Announcements";
 
+
+// TODO: change all alerts to messageBox
 
 
 

@@ -1,15 +1,79 @@
 #donateInfo {
-    background-color: #348D63;
-    font-style: normal;
-    font-size: .8em;
-    color: white;
-    padding: 1em .5em;
-    margin: 0em .4em;
-    border-radius: .7em;
-    text-align: center;
+  background-color: #348d63;
+  font-style: normal;
+  font-size: 0.8em;
+  color: white;
+  padding: 1em 0.5em;
+  margin: 0em 0.4em;
+  border-radius: 0.7em;
+  text-align: center;
 }
-ion-content#donateModalContent{
-    --padding: 20px;
+input[name="paymentDonate"] {
+  display: none;
+}
 
-
+div.donatePaymentContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+div.donatePaymentContainer label {
+  transition: 0.5s;
+  margin: 10px;
+  text-align: center;
+  color: #000000;
+  padding: 10px;
+  border: #348d63 1px solid;
+  border-radius: 5px;
+  -webkit-transition: 0.5s;
+  -moz-transition: 0.5s;
+  -ms-transition: 0.5s;
+  -o-transition: 0.5s;
+}
+.donateTextArea {
+  border: 1px solid black;
+  width: 95%;
+  height: 160px;
+  background: white;
+  border-radius: 5px;
+  padding: 0 10px 0 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+}
+label.paymentTypeChecked {
+  color: #fff !important;
+  background-color: #348d63;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+}
+.donateButtonsContainer button {
+  margin: 5px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #348d63;
+  color: #fff;
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+    0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+}
+.donateButtonsContainer button:first-of-type {
+  background-color: #fff;
+  color: #348d63;
+}
+#DonateConfirmationContainer {
+  --padding-top: 35vh;
+}
+.confirmDonationMessage{
+    padding: 10px;
+    background: #348d63;
+    color: #fff;
+    /* border: 1px solid; */
 }
