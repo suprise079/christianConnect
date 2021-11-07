@@ -4,7 +4,7 @@ import logo from "./Logo_transp.png";
 import styled from "styled-components";
 import {BiLoaderAlt} from "react-icons/bi";
 import {FaWalking,FaChurch} from "react-icons/fa";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import React, { useState, useEffect, useContext } from "react";
 
 // import firebase functions and modules here
@@ -75,25 +75,19 @@ const Welcome = () => {
     <Body>
       <img style={{marginTop:"80px"}} src={logo} alt="Logo" />
       <div className="Buttons">
-        {/* <Buttons>
-          <Link
-            className="welcomeLink"
-            to={{ pathname: "/Login", state: "/SignUpU" }}
-          >
-            {clicked ? "Loading..." : "I am just a fellowship member"}
-          </Link>
-        </Buttons> */}
+        
 
 
         
         <Buttons>
-          <Link
+          {/* <Link
             className="welcomeLink"
             to={ "/Login" }
             onClick={()=>setclicked(false)}
           >
             {clicked ? "Loading..." : "Get Started"}
-          </Link>
+          </Link> */}
+          just some button
         </Buttons>
 
 

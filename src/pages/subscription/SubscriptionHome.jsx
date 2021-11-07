@@ -287,7 +287,6 @@ const Subscriptions = () => {
 
 const SubscriptionHome = () => {
   return (
-    <>
       <IonReactRouter>
         <IonRouterOutlet>
           <Route
@@ -307,8 +306,7 @@ const SubscriptionHome = () => {
         </IonRouterOutlet>
         {/* the button component tab bar for navigation */}
       </IonReactRouter>
-      <TabBar />
-    </>
+      // <TabBar />
   );
 };
 
