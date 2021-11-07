@@ -8,7 +8,7 @@ import {
   IonTitle,
   IonModal,
   IonContent,
-  IonButton,
+  IonSpinner,
 } from "@ionic/react";
 
 import styled from "styled-components";
@@ -373,10 +373,7 @@ const Login = () => {
             {/* <input type="submit" value={loading ? <span className="loader"></span> : "Login"} /> */}
             <button onClick={(e) => handleSubmit(e)} type="submit">
               {loading ? (
-                <span
-                  style={{ borderColor: "#348d60" }}
-                  className="loader"
-                ></span>
+                <IonSpinner id="spinner"/>
               ) : (
                 "Login"
               )}

@@ -12,24 +12,39 @@ import Context from "../../context/Context";
 
 const TabBar = () => {
   const history = useHistory();
-  const { curUser } = useContext( Context );
+  const { curUser } = useContext(Context);
 
   return (
     <div className="tabBarContainer">
       <div onClick={(e) => history.push("/userhome")}>
-        <i> <FaHome /></i>
+        <i>
+          {" "}
+          <FaHome />
+        </i>
         <IonLabel className="label"> Home </IonLabel>
       </div>
 
-      <div onClick={ e=> { history.push("/SubscriptionHome") } }>
-        <i > <IonIcon icon={ mail } ></IonIcon> </i>
-        <IonLabel className="label" > Subscription </IonLabel>
+      <div
+        onClick={(e) => {
+          history.push("/SubscriptionHome");
+        }}
+      >
+        <i>
+          {" "}
+          <IonIcon icon={mail}></IonIcon>{" "}
+        </i>
+        <IonLabel className="label"> Subscription </IonLabel>
       </div>
 
       <div
-        onClick={(e) => history.push( curUser?.isLeader ? "/leader" :"/profile" )}>
-
-        <i> <IonIcon icon={person}></IonIcon> </i>
+        onClick={(e) =>
+          history.push(curUser?.isLeader ? "/leader" : "/profile")
+        }
+      >
+        <i>
+          {" "}
+          <IonIcon icon={person}></IonIcon>{" "}
+        </i>
         <IonLabel className="label"> Profile </IonLabel>
       </div>
     </div>

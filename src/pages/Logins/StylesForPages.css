@@ -35,7 +35,9 @@ label.loginLabel {
   align-items: center;
   width: 90%;
 }
-
+#spinner {
+  --color: "#348d63";
+}
 
 .forgotPasswordModal{
   --background: #348d60;

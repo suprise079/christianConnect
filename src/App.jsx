@@ -5,17 +5,16 @@ import React, { useState } from "react";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
-import '@ionic/react/css/padding.css';
-import '@ionic/react/css/display.css';
+import "@ionic/react/css/padding.css";
+import "@ionic/react/css/display.css";
 // import bootstrap css
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
 // firebase
 
 // context for state handling
 import Context from "./context/Context";
-
 
 import AboutFellowship from "./pages/aboutFs/aboutFs";
 import OverviewFs from "./pages/overviewFs/overviewFs";
@@ -35,54 +34,55 @@ import UploadAnnouncement from "./pages/LeaderProfile/premium/UploadAnnouncement
 import UploadSermon from "./pages/LeaderProfile/premium/UploadSermons";
 import uploadDevotion from "./pages/LeaderProfile/premium/UploadDevotion";
 import SavedVideos from "./pages/UserProfile/savedVideos/savedVideos";
-import SubscriptionHome from "./pages/subscription/SubscriptionHome"
+import SubscriptionHome from "./pages/subscription/SubscriptionHome";
 import NoteContent from "./pages/notes/NoteContent";
 import UserHome from "./pages/userHome/userHome";
 import EditFs from "./pages/LeaderProfile/editFs";
 import Payment from "./pages/LeaderProfile/premium/Upgrading/payment";
 import Announce from "./pages/subscription/announcements/Announcements";
 
-
-// TODO: change all alerts to messageBox
-
-
+// TODO: change all alerts to IonToast
 
 const App = () => {
   // check if the user is logged in
-  var [ isLoggedIn, setIsLoggedIn ] = useState(false);
-  var [ curUser, setCurUser ] = useState();
-  var [ fellowship, setFellowship ] = useState();
-  const [ allFellowships, setAllFellowships ] = useState();
-
+  var [isLoggedIn, setIsLoggedIn] = useState(false);
+  var [curUser, setCurUser] = useState();
+  var [fellowship, setFellowship] = useState();
+  const [allFellowships, setAllFellowships] = useState();
 
   return (
-    <Context.Provider value={{
-      curUser, setCurUser,
-      isLoggedIn, setIsLoggedIn,
-      fellowship, setFellowship,
-      allFellowships, setAllFellowships
-      }}>
-      
-     
-
+    <Context.Provider
+      value={{
+        curUser,
+        setCurUser,
+        isLoggedIn,
+        setIsLoggedIn,
+        fellowship,
+        setFellowship,
+        allFellowships,
+        setAllFellowships,
+      }}
+    >
       <IonApp>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" />
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+        />
         <IonReactRouter>
           <IonRouterOutlet>
-            
             {/* <Route exact path="/"> <Redirect to="/home" /> </Route> */}
             <Route exact path="/" component={Welcome} />
             <Route exact path="/Login" component={Login} />
             <Route exact path="/savedVideos" component={SavedVideos} />
-            <Route exact path="/addnote" component={ NoteContent } />
-            <Route exact path="/editfs" component={ EditFs } />
+            <Route exact path="/addnote" component={NoteContent} />
+            <Route exact path="/editfs" component={EditFs} />
             <Route exact path="/subscriptions" component={SubscriptionHome} />
-            <Route exact path="/premiunleader" component={ Premium } />
+            <Route exact path="/premiunleader" component={Premium} />
 
             {/* <Route exact path="/subscriptions" component={SubscriptionHome} /> */}
             <Route exact path="/notes" component={Notes} />
             <Route exact path="/userhome" component={UserHome} />
-            <Route exact path="/subscription" component={ Announce } />
+            <Route exact path="/subscription" component={Announce} />
 
             <Route exact path="/aboutFellowship">
               <AboutFellowship />{" "}
@@ -127,13 +127,20 @@ const App = () => {
             {/* sign up leader */}
             <Route exact path="/SignUp" component={SignUp} />
 
-            <Route exact path="/uploadAnnouncement" component={UploadAnnouncement} />
+            <Route
+              exact
+              path="/uploadAnnouncement"
+              component={UploadAnnouncement}
+            />
             <Route exact path="/uploadSermon" component={UploadSermon} />
             <Route exact path="/uploadDevotions" component={uploadDevotion} />
 
-
             {/* Subscription Home page */}
-            <Route exact path="/SubscriptionHome" component={ SubscriptionHome } />
+            <Route
+              exact
+              path="/SubscriptionHome"
+              component={SubscriptionHome}
+            />
           </IonRouterOutlet>
         </IonReactRouter>
       </IonApp>

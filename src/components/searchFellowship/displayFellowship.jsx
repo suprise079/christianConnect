@@ -27,7 +27,7 @@ const DisplayFellowship = ( props, {fellowshipList=[]} ) => {
             if (data) {
                 return(
                     <div className="info" key={data.name} >
-                        <p className="fellowshipName" > { data.name } </p>
+                        <p className="fellowshipName" > { data.name }</p>
                         <p className="subInfo" >
                             {/* { "2" + "km " } away */} { data.location }
                         </p>

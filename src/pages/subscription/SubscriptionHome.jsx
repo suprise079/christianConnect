@@ -313,20 +313,3 @@ const SubscriptionHome = () => {
 };
 
 export default SubscriptionHome;
-
-// make a function that add two num
-
-// const SubscriptionHome = () => {
-//   return (
-//     <>
-//           <SubscriptionTabs />
-// {/*
-//             <Subscriptions /> */}
-//       <TabBar />
-//     </>
-//   );
-// };
-
-// export default SubscriptionHome;
-
-// // make a function that add two num

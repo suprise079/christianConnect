@@ -132,9 +132,6 @@ const Body = styled(IonPage)`
     box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.05);
     border-radius: 10px;
   }
-  div.content {
-    height: 500px;
-  }
   div.menu {
     margin-top: 40px;
     overflow-y: scroll;
@@ -205,74 +202,76 @@ const Profile = () => {
           </IonToolbar>
         </IonHeader>
 
-        <div id="profileContent" className="body">
-          <div className="container">
-            <div className="headerTrail"></div>
+        <IonContent>
+          <div id="profileContent" className="body">
+            <div className="container">
+              <div className="headerTrail"></div>
 
-            <div className="infos">
-              <div className="profile">
-                <img
-                  src={userPhoto ? userPhoto?.photo : profileImg}
-                  alt={"photo of " + curUser?.firstname}
-                />
-              </div>
-
-              <div id="details">
-                <Link to="/editprofile">
-                  <FaUserEdit
-                    className="editButton"
-                    // onClick={(e) => history.push("/editprofile")}
-                    size="25px"
+              <div className="infos">
+                <div className="profile">
+                  <img
+                    src={userPhoto ? userPhoto?.photo : profileImg}
+                    alt={"photo of " + curUser?.firstname}
                   />
-                </Link>
+                </div>
 
-                <IonCardTitle style={{ textTransform: "capitalize" }}>
-                  {curUser?.firstname} {curUser?.lastname}{" "}
-                </IonCardTitle>
-                <IonCardSubtitle> {curUser?.email} </IonCardSubtitle>
+                <div id="details">
+                  <Link to="/editprofile">
+                    <FaUserEdit
+                      className="editButton"
+                      // onClick={(e) => history.push("/editprofile")}
+                      size="25px"
+                    />
+                  </Link>
+
+                  <IonCardTitle style={{ textTransform: "capitalize" }}>
+                    {curUser?.firstname} {curUser?.lastname}{" "}
+                  </IonCardTitle>
+                  <IonCardSubtitle> {curUser?.email} </IonCardSubtitle>
+                </div>
+              </div>
+            </div>
+
+            <div className="content">
+              <div id="profile_items" className="menu">
+                {appPages.map((appPage, index) => {
+                  return appPage.url === "/Donate" ? (
+                    <div
+                      key={index}
+                      id={appPage.url}
+                      onClick={(e) => setDonateModal(true)}
+                      className="item"
+                    >
+                      <IonIcon
+                        className="icon"
+                        slot="start"
+                        ios={appPage.iosIcon}
+                        md={appPage.mdIcon}
+                      />
+                      <IonLabel>{appPage.title}</IonLabel>
+                    </div>
+                  ) : (
+                    <Link
+                      key={index}
+                      id={appPage.url}
+                      onClick={(e) => goToItem(e)}
+                      className="item"
+                      to={appPage?.url}
+                    >
+                      <IonIcon
+                        className="icon"
+                        slot="start"
+                        ios={appPage.iosIcon}
+                        md={appPage.mdIcon}
+                      />
+                      <IonLabel>{appPage.title}</IonLabel>
+                    </Link>
+                  );
+                })}
               </div>
             </div>
           </div>
-
-          <div className="content">
-            <div id="profile_items" className="menu">
-              {appPages.map((appPage, index) => {
-                return appPage.url === "/Donate" ? (
-                  <div
-                    key={index}
-                    id={appPage.url}
-                    onClick={(e) => setDonateModal(true)}
-                    className="item"
-                  >
-                    <IonIcon
-                      className="icon"
-                      slot="start"
-                      ios={appPage.iosIcon}
-                      md={appPage.mdIcon}
-                    />
-                    <IonLabel>{appPage.title}</IonLabel>
-                  </div>
-                ) : (
-                  <Link
-                    key={index}
-                    id={appPage.url}
-                    onClick={(e) => goToItem(e)}
-                    className="item"
-                    to={appPage?.url}
-                  >
-                    <IonIcon
-                      className="icon"
-                      slot="start"
-                      ios={appPage.iosIcon}
-                      md={appPage.mdIcon}
-                    />
-                    <IonLabel>{appPage.title}</IonLabel>
-                  </Link>
-                );
-              })}
-            </div>
-          </div>
-        </div>
+        </IonContent>
         <IonModal isOpen={donateModal}>
           <IonContent class="ion-padding" id="donateModalContent">
             <form

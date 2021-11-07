@@ -49,7 +49,7 @@ const SavedVideos = () => {
       <IonHeader color="white" className="ion-no-border">
         <IonToolbar color="white">
           <IonButtons slot="start">
-            <IonBackButton defaultHref="/" />
+            <IonBackButton defaultHref="/profile" />
           </IonButtons>
           <IonTitle>Saved videos</IonTitle>
         </IonToolbar>
