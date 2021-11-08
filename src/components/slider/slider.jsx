@@ -18,6 +18,8 @@ export default function Slider() {
             </IonContent>
           </IonSlide>
           <IonSlide>
+            <h1>hey</h1>
+            <SubscriptionHome />
             <IonContent style={{ height: "100vh" }}>
               {/* <SubscriptionHome /> */}
               <h3>Subscriptions</h3>

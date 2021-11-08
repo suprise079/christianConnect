@@ -42,6 +42,7 @@ import EditFs from "./pages/LeaderProfile/editFs";
 import Payment from "./pages/LeaderProfile/premium/Upgrading/payment";
 import Announce from "./pages/subscription/announcements/Announcements";
 import Slider from "./components/slider/slider";
+import Session from "./components/session";
 
 // TODO: change all alerts to IonToast
 
@@ -52,21 +53,6 @@ const SliderMain = () => {
   var [curUser, setCurUser] = useState();
   var [fellowship, setFellowship] = useState();
   const [allFellowships, setAllFellowships] = useState();
-
-  
-  useEffect(() => {
-    const updateLocalStorageUser = () => {
-      let localStorageUser = JSON.parse(localStorage.getItem("currentUser"));
-      console.log(localStorageUser)
-      if ((currentUser !== localStorageUser)) {
-        // setCurrentUser(localStorageUser);
-        console.log("New User");
-      } else {
-        console.log("Nothing has changed");
-      }
-    };
-    updateLocalStorageUser();
-  },[currentUser]);
 
   return (
     <Context.Provider

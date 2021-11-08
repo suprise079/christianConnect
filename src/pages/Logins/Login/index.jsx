@@ -13,6 +13,9 @@ import {
 
 import styled from "styled-components";
 
+// import local user session
+// import Session from "../../../components/session";
+
 // firebase and db func
 import { app, auth } from "../../../firebase/firebase";
 
@@ -41,6 +44,7 @@ import {
   getLeaderFs,
   LoginUser,
 } from "../../../firebase/firebase-help";
+import Session from "../../../components/session";
 
 const Body = styled(IonPage)`
   position: relative;
@@ -198,6 +202,7 @@ const Login = () => {
               localStorage.setItem("currentUser", JSON.stringify(data));
               setCurrentUser(data);
               setCurUser(data);
+              Session.setUser(email)
 
               getAllFellowships().then((fellows) => {
                 var afs = JSON.stringify(fellows);
