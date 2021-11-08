@@ -29,6 +29,7 @@ var Session = (function() {
         sessionStorage.setItem('is_premium', data.isPremium);
         sessionStorage.setItem('user_id', data.userId);
         sessionStorage.setItem('phone_no', data.phoneNumber);
+        sessionStorage.setItem('user_id', user.id);
       });
     };
 
@@ -61,10 +62,6 @@ var Session = (function() {
     var clearUser = function() {
       user_id = sessionStorage.clear()
     };
-
-    var clearUser = function() {
-
-    }
   
     return {
       // get user details functions
@@ -74,7 +71,7 @@ var Session = (function() {
       getIsLeader: getIsLeader,
       getIsPremium: getIsPremium,
       getPhone: getPhone,
-      getUserId: getUserId,
+      // getUserId: getUserId,
 
       // set user details
       setUser: setUser,
