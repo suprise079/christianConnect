@@ -59,8 +59,6 @@ const UserHome = () => {
   return (
     <IonPage className="userHome">
       <IonContent fullscreen className="container">
-        {/* header */}
-        <h1>Home</h1>
         <div className="home-header">
           <IonSearchbar
             value={searchText}

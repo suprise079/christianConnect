@@ -47,7 +47,8 @@ import Session from "./components/session";
 // TODO: change all alerts to IonToast
 
 const SliderMain = () => {
-  var [currentUser, setCurrentUser] = useState(localStorage);
+  var [currentUser, setCurrentUser] = useState("");
+  
   // check if the user is logged in
   var [isLoggedIn, setIsLoggedIn] = useState(false);
   var [curUser, setCurUser] = useState();
@@ -148,9 +149,9 @@ const SliderMain = () => {
           {/* WHEN THERE'S NO COMPONENT IN HERE THE WELCOME PAGE IS SHOWN */}
           {/* If user is SignedIn show the slider else show login page  */}
 
-          {/* {curUser ? <Slider /> : <Login />} */}
+          {Session.getEmail() ? <Slider /> : <Login />}
           {/* <Profile></Profile> */}
-          <Slider></Slider>
+          {/* <Slider></Slider> */}
         </IonPage>
       </IonReactRouter>
     </Context.Provider>

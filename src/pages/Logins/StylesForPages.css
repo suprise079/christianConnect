@@ -3,10 +3,10 @@ ion-toolbar {
   --background: #348d60;
   color: white;
 }
-ion-button {
+/* ion-button {
   --background: white;
   text-transform: unset;
-}
+} */
 
 #backButton {
   color: red;

@@ -1,49 +1,47 @@
-import { IonTabBar, IonTabButton, IonIcon, IonLabel } from "@ionic/react";
-import { home, mail, person, shareSocialOutline } from "ionicons/icons";
-import styled from "styled-components";
+import { IonIcon, IonLabel } from "@ionic/react";
+import { mail, person } from "ionicons/icons";
 import { FaHome } from "react-icons/fa";
-// impor } from 'react-icons/hi';
-
-import { Link, useHistory } from "react-router-dom";
-import React, { useState, useEffect, useContext } from "react";
 
 import "./tabBar.css"; // import css
-import Context from "../../context/Context";
 
-const TabBar = () => {
-  const history = useHistory();
-  const { curUser } = useContext(Context);
-
+const TabBar = ({ active, slideTo }) => {
   return (
     <div className="tabBarContainer">
-      <div onClick={(e) => history.push("/userhome")}>
+      <div
+        style={{ color: active == 0 ? "white" : "" }}
+        onClick={() => slideTo(0)}
+      >
         <i>
           {" "}
-          <FaHome />
+          <FaHome color={active == 0 ? "white" : ""} />
         </i>
         <IonLabel className="label"> Home </IonLabel>
       </div>
 
       <div
-        onClick={(e) => {
-          history.push("/SubscriptionHome");
-        }}
+        style={{ color: active == 1 ? "white" : "" }}
+        onClick={() => slideTo(1)}
       >
         <i>
           {" "}
-          <IonIcon icon={mail}></IonIcon>{" "}
+          <IonIcon
+            icon={mail}
+            color={active == 1 ? "white" : ""}
+          ></IonIcon>{" "}
         </i>
         <IonLabel className="label"> Subscription </IonLabel>
       </div>
 
       <div
-        onClick={(e) =>
-          history.push(curUser?.isLeader ? "/leader" : "/profile")
-        }
+        style={{ color: active == 2 ? "white" : "" }}
+        onClick={() => slideTo(2)}
       >
         <i>
           {" "}
-          <IonIcon icon={person}></IonIcon>{" "}
+          <IonIcon
+            icon={person}
+            color={active == 2 ? "white" : ""}
+          ></IonIcon>{" "}
         </i>
         <IonLabel className="label"> Profile </IonLabel>
       </div>

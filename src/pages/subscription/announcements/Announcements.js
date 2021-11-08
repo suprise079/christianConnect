@@ -34,21 +34,21 @@ const Announce = () => {
   const [announcements, setAnnouncements] = useState([]);
   // currently selected fellowship
   const fellowshipId = useParams();
-  console.log("fellowshipId: ", fellowshipId.fellowshipId);
+
+
   const effect = async () => {
-    console.log("IN DB EFFECT");
+    
     var storeData = [];
     var announcementsRef = collection(db, "announcements");
-    console.log("IN EFFECT WTF:",fellowshipId.fellowshipId)
-    var fID = "   "+fellowshipId.fellowshipId;
-    console.log(fID.length)
-    const dbQuery = query(announcementsRef,where("fellowship","==",fID));
+    var fID = fellowshipId.fellowshipId;
+    const dbQuery = query(announcementsRef,where("fellowshipId","==",fID));
+    console.log("here")
     const querySnapshot = await getDocs(dbQuery)
     querySnapshot.forEach((event) => {
       // doc.data() is never undefined for query doc snapshots
       console.log(event.id, " => ", event.data());
       console.log("LENGTH @2",event.data().fellowshipId.length)
-      var data = {};
+      var data = event.data();
       data["id"] = event.id;
       data["title"] = event.data().title;
       data["content"] = event.data().text;
