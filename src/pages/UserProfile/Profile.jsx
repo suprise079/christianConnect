@@ -45,7 +45,7 @@ import { getUserImg } from "../../firebase/firebase-help";
 
 import { dummyPhoto } from "../../components/helpFunc";
 import NoProfileImg from "./noProfileSet.png"
-
+import EditUser from "./EditUser";
 
 const appPages = [
   {
@@ -145,6 +145,10 @@ const Profile = () => {
   const [donateAmount, setDonateAmount] = useState("");
   const [donateAnonymously, setDonateAnonymously] = useState(false);
   const [donationConfirmed, setDonationConfirmed] = useState(false);
+
+
+  // modals variables
+  const [modalControler,setModalControler] = useState(false);
 
   // Profile Variables
   const { curUser, setCurUser } = useContext(Context);
@@ -424,6 +428,7 @@ const Profile = () => {
             )}
           </IonContent>
         </IonModal>
+        <EditUser isOpen={modalControler} setIsOpen={setModalControler} />
       </Body>
   );
 };

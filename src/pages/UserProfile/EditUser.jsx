@@ -1,24 +1,18 @@
 import {
-  IonPage,
-  IonItem,
   IonTitle,
-  IonLabel,
-  IonCheckbox,
   IonButton,
   IonInput,
-  IonDatetime,
   IonContent,
   IonModal,
 } from "@ionic/react";
 
-import { Camera, CameraResultType } from "@capacitor/camera";
+// import { Camera, CameraResultType } from "@capacitor/camera";
 
 // get css files
 import "./profile.css";
 import "./EditUser.css";
 
 import { useEffect, useContext, useState } from "react";
-import { useHistory } from "react-router";
 
 import profileImg from "./profile.jpeg";
 
@@ -45,6 +39,8 @@ import {
 } from "firebase/auth";
 
 const EditUser = ({ isOpen, setIsOpen }) => {
+
+
   // for editing purposes
   // get data from session
   const [user, setUser] = useState(
