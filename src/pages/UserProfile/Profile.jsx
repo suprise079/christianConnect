@@ -13,6 +13,7 @@ import {
   IonTitle,
   IonContent,
   IonTextarea,
+  useIonToast,
 } from "@ionic/react";
 import {
   logOutSharp,
@@ -27,6 +28,7 @@ import {
 
 // import from react modules
 import { useContext, useEffect, useState } from "react";
+import { confirmAlert } from "react-confirm-alert";
 import "./profile.css";
 import "./donate.css";
 
@@ -38,7 +40,7 @@ import styled from "styled-components";
 
 // firebase for signOut
 import { auth } from "../../firebase/firebase";
-import { signOut } from "firebase/auth";
+// import { signOut } from "firebase/auth";
 import Context from "../../context/Context";
 // get firebase functions
 import { getUserImg } from "../../firebase/firebase-help";
@@ -46,7 +48,8 @@ import { getUserImg } from "../../firebase/firebase-help";
 import { dummyPhoto } from "../../components/helpFunc";
 import NoProfileImg from "./noProfileSet.png";
 import EditUser from "./EditUser";
-import Session from "../../components/session"; 
+import Session from "../../components/session";
+// import { url } from "inspector";
 
 const appPages = [
   {
@@ -151,7 +154,7 @@ const Profile = () => {
   // const [modalControler,setModalControler] = useState(false);
 
   // Profile Variables
-  const { curUser, setCurUser } = useContext(Context);
+  const [present, dismiss] = useIonToast();
   const [userPhoto, setUserPhoto] = useState();
   // const [user, setUser] = useState(
   //   JSON.parse(
@@ -159,7 +162,10 @@ const Profile = () => {
   //   )
   // );
 
-  const goToItem = (e) => {
+  const goToItem = async (e) => {
+    const url = e.target.id;
+    if (url === "/") {
+    }
     // Action to activate a modal
   };
   // useEffect(() => {
@@ -223,6 +229,45 @@ const Profile = () => {
                     key={index}
                     id={appPage.url}
                     onClick={(e) => setDonateModal(true)}
+                    className="item"
+                  >
+                    <IonIcon
+                      className="icon"
+                      slot="start"
+                      ios={appPage.iosIcon}
+                      md={appPage.mdIcon}
+                    />
+                    <IonLabel>{appPage.title}</IonLabel>
+                  </div>
+                ) : appPage.url === "/" ? (
+                  <div
+                    key={index}
+                    id={appPage.url}
+                    onClick={(e) =>
+                      present({
+                        translucent: true,
+                        position: "top",
+                        buttons: [
+                          {
+                            text: "Yes",
+                            handler: async () => {
+                              await auth
+                                .signOut()
+                                .then(() => {
+                                  Session.clearUser();
+                                  console.log("logged out");
+                                  history.push("/");
+                                })
+                                .catch((err) =>
+                                  console.log("Couldn't log out :", err)
+                                );
+                            },
+                          },
+                          { text: "No", handler: () => dismiss() },
+                        ],
+                        message: "LOG OUT ?",
+                      })
+                    }
                     className="item"
                   >
                     <IonIcon

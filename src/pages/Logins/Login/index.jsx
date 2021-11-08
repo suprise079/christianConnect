@@ -228,6 +228,7 @@ const Login = () => {
                 setEmail("");
                 setPassword("");
                 setLoading(false);
+                history.push("/");
               });
             }
           }
@@ -355,7 +356,7 @@ const Login = () => {
             />
             {/* <input type="submit" value={loading ? <span className="loader"></span> : "Login"} /> */}
             <button onClick={(e) => handleSubmit(e)} type="submit">
-              {loading ? <IonSpinner id="spinner" /> : "Login"}
+              {loading ? <IonSpinner id="spinner" name="bubbles" /> : "Login"}
             </button>
           </form>
         </div>
@@ -378,14 +379,11 @@ const Login = () => {
           Don't have an account ?{" "}
           <Link
             className="fromWelcome"
-            // to={{ pathname: location.state, state: location.state }}
             to={"/SignUp"}
           >
             Register
           </Link>
-          {/* The line of code above uses a value from the welcome page to know what 
-          type of user wanna register and determines the exact route accordingly */}
-        </div>
+          </div>
 
         <div style={{ textAlign: "center" }}>
           {/* set forgot password page */}
