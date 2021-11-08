@@ -14,20 +14,19 @@ export default function Slider() {
         <IonSlides pager={false} options={slideOpts}>
           <IonSlide>
             <IonContent style={{ height: "100vh" }}>
-              {/* <h3>UserHome</h3> */}
               <UserHome />
             </IonContent>
           </IonSlide>
           <IonSlide>
             <IonContent style={{ height: "100vh" }}>
-              <SubscriptionHome />
-              {/* <h3>Subscription</h3> */}
+              {/* <SubscriptionHome /> */}
+              <h3>Subscriptions</h3>
             </IonContent>
           </IonSlide>
           <IonSlide>
             <IonContent style={{ height: "100vh" }}>
-              {/* <Profile /> */}
-              <h3>Profile</h3>
+              <Profile />
+              {/* <h3>Profile</h3> */}
             </IonContent>
           </IonSlide>
         </IonSlides>

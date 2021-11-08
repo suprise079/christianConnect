@@ -73,7 +73,7 @@ const Post = ({setPage}) => {
                 <button onClick={Save}>Post</button>
             </div>
 
-            <div className='profile'>
+            <div className='addPostProfile'>
                 <img src={fearless} alt="" />
                 <div>
                     <p>Suprise ngoveni</p><br />

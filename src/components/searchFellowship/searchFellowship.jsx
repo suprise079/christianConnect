@@ -30,11 +30,11 @@ const SearchFellowship = (props) => {
         <div className="subInfo">{props.location}</div>
         <div className="subInfo">{props.time ? props.time + " GTM+2" : ""}</div>
       </div>
-      <div className="viewInfo">
+      {/* <div className="viewInfo">
         <IonButton id="viewinfo-btn" href={"/overviewfs?fsid=" + props.fsid}>
           View
         </IonButton>
-      </div>
+      </div> */}
     </IonCard>
   );
 };
