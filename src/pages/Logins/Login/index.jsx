@@ -117,6 +117,7 @@ const Login = () => {
   const location = useLocation();
   const history = useHistory();
   const [loading, setLoading] = useState(false);
+  const [currentUser, setCurrentUser] = useState();
 
   // user details
   const { curUser, setCurUser, isLoggedIn, setIsLoggedIn, setFellowship } =
@@ -128,6 +129,7 @@ const Login = () => {
 
   // variables for forgot password
   const [forgotPswdModal, setForgotPswdModal] = useState(false);
+  const [message, setMessage] = useState("");
   const handleForgotPassword = async (e) => {
     e.preventDefault();
     sendPasswordResetEmail(auth, email)
@@ -171,16 +173,6 @@ const Login = () => {
       })
       .catch((err) => alert(err));
   };
-  const [message, setMessage] = useState("");
-
-  // use effect, run when pages loads
-  useEffect(() => {
-    // alert("login", location.state );
-
-    // reset data in the cookie
-    Cookies.remove("userData");
-    Cookies.remove("allFellowships");
-  }, []);
 
   // check if the user is logged in
   const handleChange = (e) => {
@@ -194,63 +186,45 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     setLoading(true);
 
     await signInWithEmailAndPassword(auth, email, password)
       .then((result) => {
-        // console.log( result )
-        auth.onAuthStateChanged((user) => {
-          if (user.email && user.uid) {
-            // pass user id from auth .. get user data from firestore ..
-            LoginUser(user.uid).then((data) => {
-              // console.log( data );
-              // if data is true
-              if (data) {
-                // use cookies js to set user's dats
+        let uid = result.user.uid;
+        LoginUser(uid).then((data) => {
+          console.log(data);
+          if (data) {
+            if (data) {
+              localStorage.setItem("currentUser", JSON.stringify(data));
+              setCurrentUser(data);
+              setCurUser(data);
+
+              getAllFellowships().then((fellows) => {
+                var afs = JSON.stringify(fellows);
+                localStorage.setItem("allFellowships", afs);
+
+                // get leader's fellowship data... run only user is leader
+                if (data.isLeader) {
+                  // get user fellowship data. pass user auth id
+                  getLeaderFs(data.userId).then((refDoc) => {
+                    var fs = refDoc;
+                    if (fs) {
+                      // if user data is valid and available
+                      // set data in global context
+                      setFellowship(fs);
+                      // console.log( fs );
+                      // set current leader fs in session cookie
+                      localStorage.setItem("curLeaderFs", JSON.stringify(fs));
+                    }
+                  });
+                }
+
                 // console.log( data )
-                // set user data to session cookies...
-                Cookies.set("userData", JSON.stringify(data));
-
-                // then get all fellowships from firebase and set them to
-                // session cookie
-                getAllFellowships().then((fellows) => {
-                  // console.log( Object.assign({}, fellows ) )
-                  var afs = JSON.stringify(fellows);
-                  // var afs = JSON.stringify(  Object.assign({}, fellows ) );
-                  // console.log( afs )
-                  // set to cookies js session var
-                  Cookies.set("allFellowships", afs);
-                  // console.log( Cookies.get("AllFellowships") )
-
-                  // get leader's fellowship data... run only user is leader
-                  if (data.isLeader) {
-                    // get user fellowship data. pass user auth id
-                    getLeaderFs(data.userId).then((refDoc) => {
-                      var fs = refDoc;
-                      if (fs) {
-                        // if user data is valid and available
-                        // set data in global context
-                        setFellowship(fs);
-                        // console.log( fs );
-                        // set current leader fs in session cookie
-                        Cookies.set("curLeaderFs", JSON.stringify(fs));
-                      }
-                      console.log("here");
-                      history.push("/userhome?user=" + data.userId); // route to user page
-                    });
-                  }
-
-                  // console.log( data )
-                  setEmail("");
-                  setPassword("");
-                  setLoading(false);
-                  history.push("/userhome?user=" + data.userId); // route to user page
-                });
-              }
-            });
-          } else {
-            history.push("/Login");
+                setEmail("");
+                setPassword("");
+                setLoading(false);
+              });
+            }
           }
         });
       })
@@ -278,7 +252,6 @@ const Login = () => {
           setPassword("");
         }
       });
-    // console.log("HERE AND HERE")
     setLoading(false);
   };
 
@@ -311,6 +284,11 @@ const Login = () => {
         // ...
       });
   };
+  // use effect, run when pages loads
+  useEffect(() => {
+    // Cookies.remove("userData");
+    // Cookies.remove("allFellowships");
+  }, []);
 
   return (
     <Body>
@@ -372,11 +350,7 @@ const Login = () => {
             />
             {/* <input type="submit" value={loading ? <span className="loader"></span> : "Login"} /> */}
             <button onClick={(e) => handleSubmit(e)} type="submit">
-              {loading ? (
-                <IonSpinner id="spinner"/>
-              ) : (
-                "Login"
-              )}
+              {loading ? <IonSpinner id="spinner" /> : "Login"}
             </button>
           </form>
         </div>

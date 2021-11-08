@@ -152,22 +152,10 @@ const Profile = () => {
   const { curUser, setCurUser } = useContext(Context);
   const [userPhoto, setUserPhoto] = useState();
   const [user, setUser] = useState(
-    JSON.parse(Cookies.get("userData") ? Cookies.get("userData") : "")
+    JSON.parse(
+      localStorage.getItem("userData") ? localStorage.getItem("userData") : ""
+    )
   );
-
-  useEffect(() => {
-    // console.log( JSON.parse( Cookies.get("userData") ) );
-    setCurUser(JSON.parse(Cookies.get("userData")));
-
-    // console.log( user )
-    getUserImg(user?.userId).then((res) => {
-      if (res) {
-        setUserPhoto(res);
-      } else {
-        setUserPhoto(false);
-      }
-    });
-  }, []);
 
   const goToItem = (e) => {
     // console.log(e.target.id);
@@ -189,6 +177,19 @@ const Profile = () => {
       history.push(e.target.id);
     }
   };
+  useEffect(() => {
+    // console.log( JSON.parse( Cookies.get("userData") ) );
+    setCurUser(JSON.parse(localStorage.getItem("userData")));
+
+    // console.log( user )
+    getUserImg(user?.userId).then((res) => {
+      if (res) {
+        setUserPhoto(res);
+      } else {
+        setUserPhoto(false);
+      }
+    });
+  });
 
   return (
     <IonPage id="userProfile">
@@ -445,7 +446,7 @@ const Profile = () => {
             )}
           </IonContent>
         </IonModal>
-        <TabBar />
+        {/* <TabBar /> */}
       </Body>
     </IonPage>
   );

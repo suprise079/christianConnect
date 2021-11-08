@@ -47,7 +47,7 @@ const UserHome = () => {
     await setFS(res);
   };
   useEffect(() => {
-    setCurUser(JSON.parse(Cookies.get("userData")));
+    setCurUser(JSON.parse(localStorage.getItem("currentUser")));
 
     getAllFellowships().then((data) => {
       setFellowships(data);
@@ -60,6 +60,7 @@ const UserHome = () => {
     <IonPage className="userHome">
       <IonContent fullscreen className="container">
         {/* header */}
+        <h1>Home</h1>
         <div className="home-header">
           <IonSearchbar
             value={searchText}
@@ -123,7 +124,7 @@ const UserHome = () => {
         </div>
 
         {/* the button component tab bar for navigation */}
-        <TabBar />
+        {/* <TabBar /> */}
       </IonContent>
     </IonPage>
   );

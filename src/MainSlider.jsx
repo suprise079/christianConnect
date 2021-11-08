@@ -3,7 +3,7 @@ import { IonRouterOutlet } from "@ionic/react";
 
 import { IonApp, IonPage, IonSlides, IonSlide, IonContent } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -41,23 +41,38 @@ import UserHome from "./pages/userHome/userHome";
 import EditFs from "./pages/LeaderProfile/editFs";
 import Payment from "./pages/LeaderProfile/premium/Upgrading/payment";
 import Announce from "./pages/subscription/announcements/Announcements";
+import Slider from "./components/slider/slider";
 
 // TODO: change all alerts to IonToast
 
 const SliderMain = () => {
+  var [currentUser, setCurrentUser] = useState(localStorage);
   // check if the user is logged in
   var [isLoggedIn, setIsLoggedIn] = useState(false);
   var [curUser, setCurUser] = useState();
   var [fellowship, setFellowship] = useState();
   const [allFellowships, setAllFellowships] = useState();
-  const slideOpts = {
-    initialSlide: 2,
-    speed: 400,
-  };
+
+  
+  useEffect(() => {
+    const updateLocalStorageUser = () => {
+      let localStorageUser = JSON.parse(localStorage.getItem("currentUser"));
+      console.log(localStorageUser)
+      if ((currentUser !== localStorageUser)) {
+        // setCurrentUser(localStorageUser);
+        console.log("New User");
+      } else {
+        console.log("Nothing has changed");
+      }
+    };
+    updateLocalStorageUser();
+  },[currentUser]);
 
   return (
     <Context.Provider
       value={{
+        currentUser,
+        setCurrentUser,
         curUser,
         setCurUser,
         isLoggedIn,
@@ -144,25 +159,9 @@ const SliderMain = () => {
         </IonRouterOutlet>
 
         <IonPage>
-          <IonContent>
-            <IonSlides pager={false} options={slideOpts}>
-              <IonSlide>
-                <IonContent style={{ height: "100vh" }}>
-                  <UserHome />
-                </IonContent>
-              </IonSlide>
-              <IonSlide>
-                <IonContent style={{ height: "100vh" }}>
-                  <SubscriptionHome />
-                </IonContent>
-              </IonSlide>
-              <IonSlide>
-                <IonContent style={{ height: "100vh" }}>
-                  <Profile />
-                </IonContent>
-              </IonSlide>
-            </IonSlides>
-          </IonContent>
+          {/* If user is SignedIn show the slider else show login page  */}
+
+          {curUser ? <Slider /> : <Login />}
         </IonPage>
       </IonReactRouter>
     </Context.Provider>
