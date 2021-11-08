@@ -30,10 +30,8 @@ import { useContext, useEffect, useState } from "react";
 import "./profile.css";
 import "./donate.css";
 
-import { FaUserEdit } from "react-icons/fa";
+import { FaEdit, FaUserEdit } from "react-icons/fa";
 import { BsFillCheckCircleFill } from "react-icons/bs";
-
-import TabBar from "../../components/tabBar/tabBar";
 
 import { useHistory, Link } from "react-router-dom";
 import styled from "styled-components";
@@ -44,11 +42,10 @@ import { signOut } from "firebase/auth";
 import Context from "../../context/Context";
 // get firebase functions
 import { getUserImg } from "../../firebase/firebase-help";
-import Cookies from "js-cookie";
 
 import { dummyPhoto } from "../../components/helpFunc";
+import NoProfileImg from "./noProfileSet.png"
 
-var profileImg = "/assets/icon/prayer.jpeg";
 
 const appPages = [
   {
@@ -106,6 +103,7 @@ const Body = styled(IonPage)`
     overflow-y: scroll;
   }
   div.container {
+    padding:0;
     position: relative;
     height: 30vh;
     // border: 2px solid;
@@ -148,58 +146,38 @@ const Profile = () => {
   const [donateAnonymously, setDonateAnonymously] = useState(false);
   const [donationConfirmed, setDonationConfirmed] = useState(false);
 
-  const history = useHistory(); // use this for routing in js codes.
+  // Profile Variables
   const { curUser, setCurUser } = useContext(Context);
   const [userPhoto, setUserPhoto] = useState();
-  const [user, setUser] = useState(
-    JSON.parse(
-      localStorage.getItem("userData") ? localStorage.getItem("userData") : ""
-    )
-  );
+  // const [user, setUser] = useState(
+  //   JSON.parse(
+  //     localStorage.getItem("userData") ? localStorage.getItem("userData") : ""
+  //   )
+  // );
 
   const goToItem = (e) => {
-    // console.log(e.target.id);
-    // history.push( `${e.target.id}` );
-
-    if (e.target.id === "/") {
-      auth
-        .signOut()
-        .then((res) => {
-          // Display a modal saying "User successfully signed out"
-          /* setTimeout(() => {
-              history.push(e.target.id);
-            }, 3000); */
-          // alert("Successfully signed Out ! ");
-          history.push(e.target.id);
-        })
-        .catch((err) => history.push("/"));
-    } else {
-      history.push(e.target.id);
-    }
+    // Action to activate a modal
   };
-  useEffect(() => {
-    // console.log( JSON.parse( Cookies.get("userData") ) );
-    setCurUser(JSON.parse(localStorage.getItem("userData")));
+  // useEffect(() => {
+  //   setCurUser(JSON.parse(localStorage.getItem("userData")));
 
-    // console.log( user )
-    getUserImg(user?.userId).then((res) => {
-      if (res) {
-        setUserPhoto(res);
-      } else {
-        setUserPhoto(false);
-      }
-    });
-  });
+  //   // console.log( user )
+  //   getUserImg(user?.userId).then((res) => {
+  //     if (res) {
+  //       setUserPhoto(res);
+  //     } else {
+  //       setUserPhoto(false);
+  //     }
+  //   });
+  // });
 
   return (
-    <IonPage id="userProfile">
       <Body>
         <IonHeader color="white" className="ion-no-border">
           <IonToolbar color="white">
             <IonButtons slot="start">
-              <IonBackButton defaultHref="/homeTab" />
             </IonButtons>
-            <IonTitle>Profile User</IonTitle>
+            <IonTitle>Profile</IonTitle>
           </IonToolbar>
         </IonHeader>
 
@@ -209,11 +187,11 @@ const Profile = () => {
               <div className="headerTrail"></div>
 
               <div className="infos">
-                <div className="profile">
-                  <img
-                    src={userPhoto ? userPhoto?.photo : profileImg}
-                    alt={"photo of " + curUser?.firstname}
-                  />
+                <div className="userProfile">
+                  {userPhoto?<img
+                    src={userPhoto?.photo}
+                    alt="profile"
+                  />:<img src={NoProfileImg} alt="No Profile set"/>}
                 </div>
 
                 <div id="details">
@@ -446,9 +424,7 @@ const Profile = () => {
             )}
           </IonContent>
         </IonModal>
-        {/* <TabBar /> */}
       </Body>
-    </IonPage>
   );
 };
 

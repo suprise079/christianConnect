@@ -11,9 +11,9 @@ import { IonPage, IonApp } from "@ionic/react";
 
 ReactDOM.render(
   <React.StrictMode>
-    <IonPage></IonPage>
     <IonApp>
       <SliderMain />
+      
     </IonApp>
   </React.StrictMode>,
   document.getElementById("root")

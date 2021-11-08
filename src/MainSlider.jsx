@@ -145,9 +145,12 @@ const SliderMain = () => {
         </IonRouterOutlet>
 
         <IonPage>
+          {/* WHEN THERE'S NO COMPONENT IN HERE THE WELCOME PAGE IS SHOWN */}
           {/* If user is SignedIn show the slider else show login page  */}
 
-          {Session.getEmail() ? <Slider /> : <Login />}
+          {/* {curUser ? <Slider /> : <Login />} */}
+          {/* <Profile></Profile> */}
+          <Slider></Slider>
         </IonPage>
       </IonReactRouter>
     </Context.Provider>

@@ -15,13 +15,13 @@
     background-color: cadetblue;
 }
 
-.profile {
+.addPostProfile {
     margin-top: 10px;
     display: flex;
     justify-content: left;
 }
 
-.profile img {
+.addPostProfile img {
     width: 30%;
     height: 90px;
     border-radius: 50px;
