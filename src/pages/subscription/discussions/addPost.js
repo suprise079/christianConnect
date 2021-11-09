@@ -76,9 +76,9 @@ const Post = ({setPage}) => {
             </div>
 
             <div className='addPostProfile'>
-                <img src={fearless} alt="" />
+                <img src={Session.getPhoto()} alt="" />
                 <div>
-                    <p>Suprise ngoveni</p><br />
+                    <p>{Session.getFirstName() +" "+Session.getLastName()}</p><br />
                     {/* <select name="category" id="">
                         <option value="">catergory</option>
                         <option value="Relationhip">Relationships</option>

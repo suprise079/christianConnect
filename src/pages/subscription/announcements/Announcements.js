@@ -42,26 +42,26 @@ const Announce = () => {
     var announcementsRef = collection(db, "announcements");
     var fID = fellowshipId.fellowshipId;
     const dbQuery = query(announcementsRef,where("fellowshipId","==",fID));
-    console.log("here")
+    
     const querySnapshot = await getDocs(dbQuery)
     querySnapshot.forEach((event) => {
       // doc.data() is never undefined for query doc snapshots
-      console.log(event.id, " => ", event.data());
-      console.log("LENGTH @2",event.data().fellowshipId.length)
       var data = event.data();
       data["id"] = event.id;
       data["title"] = event.data().title;
       data["content"] = event.data().text;
       data["date"] = event.data().time.toDate().toString().substring(0, 15);
       storeData.push(data);
+      setFound(true)
     });
-    setFound(true)
+    
     setAnnouncements(storeData);
   };
 
   useEffect(() => {
+    setFound(false)
     effect();
-  }, []);
+  }, [fellowshipId]);
 
   function readMore(event, cardId, contentId) {
     var card = document.getElementById(cardId);

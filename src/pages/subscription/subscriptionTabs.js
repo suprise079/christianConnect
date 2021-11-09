@@ -39,7 +39,8 @@ const SubscriptionTabs = () => {
   const loop = [1, 2, 3, 4, 5, 6];
   const [page, setPage] = useState("1");
   const fellowshipId = useParams();
-  const [fellowshipData, setFellowshipData] = useState({}) 
+  const [fellowshipData, setFellowshipData] = useState({})
+  
 
   // switch between announcement, devotions and discussion tabs
   function switchTab(id) {
@@ -56,7 +57,8 @@ const SubscriptionTabs = () => {
 
   useEffect(() => {
     switchTab(page);
-
+    // clear fellowship data
+    setFellowshipData({})
     // get selected fellowship information
     const getData = async function(fellowshipId) {
       const dbQuery = doc(firestoreObj, "Fellowships", fellowshipId);
@@ -64,12 +66,12 @@ const SubscriptionTabs = () => {
       setFellowshipData(queryResults.data())
     };
     getData(fellowshipId.fellowshipId)
-  },[]);
+  },[fellowshipId]);
 
   return (
     <IonPage id="subscribePage">
       <div className="headerSubTab">
-        <IonButton fill="clear" style={{ color: "black", fontSize: "8pt" }} color="transparent">
+        <IonButton fill="clear" style={{ color: "black", fontSize: "8pt", width:'50px' }} color="transparent">
           <Link to="/"  >
             <MdKeyboardArrowLeft size="20" />
             Back

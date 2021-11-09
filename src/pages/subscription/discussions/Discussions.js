@@ -10,13 +10,14 @@ import { firestoreObj } from '../../../firebase/firebase';
 import DisplayReplies from './Replys';
 import AddReply from './addReply';
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md';
+import { useParams } from 'react-router';
 
 
 const Discussions = () => {
 
   const [searchText, setSearchText] = useState('');
   // current fellowshipId
-  const fellowshipId = "F0"
+  const fellowshipId = useParams()
   // set the selected reply
   const [selectedReply, setSelectedReply] = useState("")
   // set selected add reply
@@ -29,7 +30,6 @@ const Discussions = () => {
   function viewRepys(event,id){
     var card = document.getElementById(id)
     if (selectedReply == ""){
-      console.log("button properties",event.target)
       card.style.transform = 'scale(1.06)'
       setSelectedReply(id)
     }
@@ -42,7 +42,7 @@ const Discussions = () => {
   useEffect(async () => {
     var foundDiscussions = []
     const dbQuery = query(collection(firestoreObj, 'discussion'),
-      where("fellowshipId", "==", fellowshipId))
+      where("fellowshipId", "==", fellowshipId.fellowshipId))
     const queryResults = await getDocs(dbQuery)
     
     queryResults.forEach((dis) => {
@@ -83,7 +83,6 @@ const Discussions = () => {
                     <div id='postBtns'>
                       {selectedReply != post.id && <button id='1' onClick={(e) => { viewRepys(e,post.id) }}>View replies<MdKeyboardArrowDown size='20'/></button>}
                       {selectedReply == post.id && <button id='1' onClick={(e) => { viewRepys(e,post.id) }}>Close replies<MdKeyboardArrowUp size='20'/></button>}
-
                       <button onClick={(e) => { setAddReply(post.id); }}>Reply</button>
                     </div>
 

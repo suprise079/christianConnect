@@ -4,8 +4,15 @@ a {
   color: black;
 }
 
+.headerSubTab {
+  display: flex;
+  justify-content:left;
+}
+
 #mainHeading {
-  text-align: center;
+  /* text-align: center; */
+  margin-top: 40px;
+  margin-left: 0px;
   font-weight: bold;
 }
 

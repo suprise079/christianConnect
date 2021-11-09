@@ -12,7 +12,7 @@ const TabBar = ({ active, slideTo }) => {
     <div className="tabBarContainer">
       <div
         style={{ color: active === 0 ? "white" : "black" }}
-        onClick={() => slideTo(0)}
+        onClick={() => {slideTo(0); history.push('/')}}
       >
         <i>
           {" "}
@@ -23,7 +23,7 @@ const TabBar = ({ active, slideTo }) => {
 
       <div
         style={{ color: active === 1 ? "white" : "black" }}
-        onClick={() => slideTo(1)}
+        onClick={() => {slideTo(1); history.push('/')}}
       >
         <i>
           {" "}
@@ -37,7 +37,7 @@ const TabBar = ({ active, slideTo }) => {
 
       <div
         style={{ color: active === 2 ? "white" : "black" }}
-        onClick={() => slideTo(2)}
+        onClick={() => {slideTo(2); history.push('/')}}
       >
         <i>
           {" "}
