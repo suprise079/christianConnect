@@ -296,7 +296,7 @@ const SubscriptionHome = () => {
           />
 
           {/* <Route exact path="/SubscriptionHome"> */}
-          <Route exact path="/SubscriptionHome">
+          <Route exact path="/">
             <Subscriptions />
           </Route>
 

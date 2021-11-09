@@ -21,7 +21,7 @@ export default function Slider() {
             <h1>hey</h1>
             <SubscriptionHome />
             <IonContent style={{ height: "100vh" }}>
-              {/* <SubscriptionHome /> */}
+              <SubscriptionHome />
               <h3>Subscriptions</h3>
             </IonContent>
           </IonSlide>
