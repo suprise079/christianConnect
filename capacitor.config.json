@@ -2,5 +2,6 @@
 	"appId": "io.ionic.starter",
 	"appName": "christianConnect",
 	"webDir": "build",
-	"bundledWebRuntime": false
+	"bundledWebRuntime": false,
+	"linuxAndroidStudioPath":"/snap/bin/android-studio"
 }
