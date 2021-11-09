@@ -61,28 +61,31 @@
 
 .postImg {
     margin-right: 20px;
-    float: left;
-    width: 60px;
-    height: 60px;
+    float: left !important;
+    width: 60px !important;
+    height: 60px !important;
+    text-align: left !important;
     border-radius: 100%;
     border: 0.5px solid rgba(0, 0, 0, 0.1);
     box-shadow: 3px 6px 8px -1px rgba(0,0,0,0.2);
     vertical-align: top;
-}
+} 
 
 .posts h3{
     margin: 0px;
-    
+    text-align: left !important;
 }
 
 .date{
     color: rgba(0, 0, 0, 0.623);
+    text-align: left !important;
 }
 
 .content{
     clear: left;
     margin:50px 0px 20px 0px;
     font-size: 15px;
+    text-align: left !important;
 }
 
 #numOfReplies{
@@ -151,9 +154,12 @@ hr {
     padding-top: 5px;
     width: 100%;
 }
-/* .commentContent{
+
+.commentContent{
     margin: 30px 10px 10px 10px;
+    text-align: left !important;
 }
+/* 
 
 #addComment{
     width: 100%;

@@ -10,7 +10,7 @@ import { useParams } from 'react-router';
 
 
 
-const AddReply = ({discussionId}) => {
+const AddReply = ({discussionId, setAddReply}) => {
     // currently logged user will provided the following data
     const firstName = Session.getFirstName();
     const lastName = Session.getLastName()
@@ -42,6 +42,7 @@ const AddReply = ({discussionId}) => {
             const postData = await setDoc(doc(firestoreObj, "replys", makeid(20)), data)
             .then((response) => {
                 alert("succes full reply")
+                setAddReply('')
                 // put a code to hide the add reply field
             })
             .catch((err) => {

@@ -48,7 +48,8 @@ const Post = ({setPage}) => {
                 picture: picture,
                 text: userText,
                 userId: userId,
-                video:video
+                video:video,
+                userPic:Session.getPhoto()
             }
             const postData = await setDoc(doc(firestoreObj, "discussion", id), data)
             .then((response) => {
@@ -72,24 +73,19 @@ const Post = ({setPage}) => {
 
             <div className="heading">
                 <IoArrowBack size='25' />
-                <button onClick={Save}>Post</button>
+                
             </div>
 
             <div className='addPostProfile'>
                 <img src={Session.getPhoto()} alt="" />
                 <div>
-                    <p>{Session.getFirstName() +" "+Session.getLastName()}</p><br />
-                    {/* <select name="category" id="">
-                        <option value="">catergory</option>
-                        <option value="Relationhip">Relationships</option>
-                        <option value="identity">Identity in Christ</option>
-                        <option value="spitual">Spiritual Warfare</option>
-                    </select> */}
+                    <span>{Session.getFirstName() +" "+Session.getLastName()}</span><br />
+                    <span style={{fontSize:'10pt', color:'grey'}}>{Session.getEmail()}</span>
                 </div>
             </div>
 
             <div className="textarea">
-                <IonTextarea value={userText} onInput={(e) => setUserText(e.target.value)} placeholder="What do you want to talk about?" ></IonTextarea>
+                <IonTextarea value={userText} onInput={(e) => setUserText(e.target.value)} placeholder="What do you want to talk about?" required ></IonTextarea>
                 <div className="addedPhotos"></div>
                 <div className='media'>
                     <div className="addMedia">

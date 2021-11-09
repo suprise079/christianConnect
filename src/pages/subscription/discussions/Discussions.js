@@ -40,6 +40,7 @@ const Discussions = () => {
   }
 
   useEffect(async () => {
+    setPosts([])
     var foundDiscussions = []
     const dbQuery = query(collection(firestoreObj, 'discussion'),
       where("fellowshipId", "==", fellowshipId.fellowshipId))
@@ -53,7 +54,7 @@ const Discussions = () => {
       foundDiscussions.push(data)
     })
     setPosts(foundDiscussions)
-  },[])
+  },[fellowshipId])
 
   
 
@@ -99,7 +100,7 @@ const Discussions = () => {
                     {
                       addReply == post.id &&
                       <div className='addComment' >
-                        <AddReply discussionId={post.id}/>
+                        <AddReply discussionId={post.id} setAddReply={setAddReply}/>
                       </div>
                     }
 
