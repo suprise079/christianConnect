@@ -12,7 +12,7 @@ const TabBar = ({ active, slideTo }) => {
     <div className="tabBarContainer">
       <div
         style={{ color: active === 0 ? "white" : "black" }}
-        onClick={() => slideTo(0); }
+        onClick={() => slideTo(0)}
       >
         <i>
           {" "}
