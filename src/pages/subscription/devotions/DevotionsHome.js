@@ -85,7 +85,7 @@ const DevotionsHome = () => {
       setDailyDevotion(devo);
     };
     ref();
-  }, []);
+  }, [fellowshipId]);
 
   return (
     <div className="body ">
