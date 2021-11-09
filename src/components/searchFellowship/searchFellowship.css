@@ -1,16 +1,11 @@
 .MapCardResultFellowship {
-    border: 1px solid lightgray;
-  padding: 16px;
+  border: 1px solid lightgray;
   color: #000;
-  /* display: flex;
-  align-items: flex-start;
-  justify-content: space-between; */
 }
 .MapCardResultFellowshipInfo {
   display: flex;
   flex-direction: column;
-  align-items: stretch
-  ;
+  align-items: stretch;
   justify-content: center;
 }
 
@@ -25,18 +20,21 @@
 }
 
 .searchFellowship .fellowshipName {
-  /* background-color: blue; */
-  text-transform: capitalize;
+  text-transform: uppercase;
   padding: 0.1em 0em;
 }
 
 .subInfo {
-    text-transform: capitalize;
-    width: 100%;
-    margin: 0px 0;
-    padding: 10px 0;
-    text-align: left;
-    border-bottom: 1px solid #8080805e;
+  text-transform: capitalize;
+  width: 100%;
+  margin: 0px 0;
+  padding: 10px 0;
+  text-align: left;
+  border-bottom: 1px solid #8080805e;
+}
+.subInfo svg {
+  margin: 10px;
+  font-size: 2em;
 }
 
 .searchFellowship .viewInfo {

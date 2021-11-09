@@ -4,6 +4,7 @@ import { firestoreObj } from '../../../firebase/firebase';
 import pic from './men_event.jpg'
 import { IonButton } from '@ionic/react';
 import React from "react";
+import Session from '../../../components/session';
 
 
 
@@ -13,8 +14,8 @@ const AddReply = ({discussionId}) => {
     // currently selected fellowship
     const fellowshipId = 'FO'
     // currently logged user will provided the following data
-    const firstName = 'Tadaa';
-    const lastName = "ngoveni"
+    const firstName = Session.getFirstName();
+    const lastName = Session.getLastName()
     const picture = pic
     // user entered text
     const [text, setText] = useState("")

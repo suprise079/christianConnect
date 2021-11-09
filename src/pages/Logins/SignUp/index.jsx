@@ -8,6 +8,7 @@ import {
   IonTitle,
   IonCheckbox,
   IonLabel,
+  IonSpinner,
 } from "@ionic/react";
 import styled from "styled-components";
 import { Link, useHistory } from "react-router-dom";
@@ -74,7 +75,7 @@ const Content = styled.div`
   form {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
   }
 `;
 
@@ -122,7 +123,7 @@ const SignUp = () => {
       .then((result) => {
         // console.log(result);
         const uid = result.user.uid;
-        
+
         // add to firestore all other user details
         registerUser(
           email,
@@ -133,25 +134,16 @@ const SignUp = () => {
           uid,
           fsName,
           wannaBeLeader,
-          false,
+          false
         ).then((ref) => {
           // console.log(ref);
-          if( ref ) {
+          if (ref) {
             alert("User Successfully registered..");
 
-            addProfileImg( uid, "" ).then( res => {
-              if( !res ) console.error("Error making user profile image");
-            })
+            addProfileImg(uid, "").then((res) => {
+              if (!res) console.error("Error making user profile image");
+            });
 
-            // auth.onAuthStateChanged((user) => {
-            //   console.log("USER IS :", user ? user.email : user);
-            //   if (user) {
-            //     history.push("/userhome");
-            //   } else {
-            //     history.push("/");
-            //   }
-            // });
-            
             setEmail("");
             setFsName("");
             setLastName("");
@@ -162,15 +154,11 @@ const SignUp = () => {
 
             setLoading(false);
             history.push("/Login");
-          }
-          else {
-            alert("Error adding user data to firebase...")
-            console.log("Error adding user data to firebase...")
+          } else {
+            alert("Error adding user data to firebase...");
+            console.log("Error adding user data to firebase...");
           }
         });
-
-
-        
       })
       .catch((err) => {
         // error handling
@@ -186,7 +174,7 @@ const SignUp = () => {
       <IonHeader color="inherit" className="ion-no-border">
         <IonToolbar>
           <IonButtons slot="start">
-            <IonBackButton defaultHref="/" />
+            <IonBackButton defaultHref="/Login" />
           </IonButtons>
           <IonTitle>Register</IonTitle>
         </IonToolbar>
@@ -323,9 +311,11 @@ const SignUp = () => {
               value={confirmPswd}
             />
 
-            <button type="submit">
-              {loading ? <span className="loader"></span> : "Register"}
-            </button>
+            <div style={{display:"flex",justifyContent:"center"}}>
+              <button type="submit">
+                {loading ? <IonSpinner name="bubbles" /> : "Register"}
+              </button>
+            </div>
           </form>
 
           <div style={{ marginTop: "10px" }} className="google-container">

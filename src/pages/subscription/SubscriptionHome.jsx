@@ -183,13 +183,6 @@ const Subscriptions = () => {
     <>
       {view && (
         <IonPage>
-          <IonHeader>
-            <IonToolbar>
-              <IonTitle className="headerTitle" size="large">
-                Subscriptions
-              </IonTitle>
-            </IonToolbar>
-          </IonHeader>
           <IonContent className="body" style={{ overflowY: "scroll" }}>
             <IonGrid>
               <div className="scrollSubscriptions">
@@ -245,7 +238,6 @@ const Subscriptions = () => {
               </div>
             </VideoContext.Provider>
           </IonContent>
-          <div style={{ height: "58px", background: "#348d63" }}></div>
         </IonPage>
       )}
 
@@ -277,7 +269,6 @@ const Subscriptions = () => {
               );
             })}
           </IonContent>
-          <div style={{ height: "56px" }} className="spacer"></div>
         </IonPage>
       )}
       {console.log("sub home finished rendering")}
@@ -287,26 +278,25 @@ const Subscriptions = () => {
 
 const SubscriptionHome = () => {
   return (
-      <IonReactRouter>
-        <IonRouterOutlet>
-          <Route
-            exact
-            path="/subscription/:fellowshipId"
-            component={SubscriptionTabs}
-          />
+    <IonReactRouter>
+      <IonRouterOutlet>
+        <Route
+          exact
+          path="/subscription/:fellowshipId"
+          component={SubscriptionTabs}
+        />
 
-          {/* <Route exact path="/SubscriptionHome"> */}
-          <Route exact path="/">
-            <Subscriptions />
-          </Route>
+        {/* <Route exact path="/SubscriptionHome"> */}
+        <Route exact path="/">
+          <Subscriptions />
+        </Route>
 
-          {/* <Route exact path="/tab3">
+        {/* <Route exact path="/tab3">
               <Tab3 />
             </Route> */}
-        </IonRouterOutlet>
-        {/* the button component tab bar for navigation */}
-      </IonReactRouter>
-      // <TabBar />
+      </IonRouterOutlet>
+      {/* the button component tab bar for navigation */}
+    </IonReactRouter>
   );
 };
 

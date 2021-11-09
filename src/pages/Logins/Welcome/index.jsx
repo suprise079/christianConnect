@@ -1,16 +1,17 @@
-import { IonButton, IonPage } from "@ionic/react";
+import { IonButton, IonPage, IonSpinner } from "@ionic/react";
 import "../StylesForPages.css";
 import logo from "./Logo_transp.png";
 import styled from "styled-components";
-import {BiLoaderAlt} from "react-icons/bi";
-import {FaWalking,FaChurch} from "react-icons/fa";
+import { BiLoaderAlt } from "react-icons/bi";
+import { FaWalking, FaChurch } from "react-icons/fa";
 // import { Link } from "react-router-dom";
 import React, { useState, useEffect, useContext } from "react";
 
 // import firebase functions and modules here
 import { auth } from "../../../firebase/firebase";
-import Cookies from 'js-cookie';
+import Cookies from "js-cookie";
 import Context from "../../../context/Context";
+import { Link, useHistory } from "react-router-dom";
 
 const Body = styled(IonPage)`
   position: relative;
@@ -44,6 +45,8 @@ const Body = styled(IonPage)`
   }
 `;
 const Buttons = styled(IonButton)`
+  --background: white;
+  text-transform: unset;
   height: 35px;
   border-radius: 10px;
   color: #348d63;
@@ -51,56 +54,34 @@ const Buttons = styled(IonButton)`
 `;
 
 const Welcome = () => {
-  const { curUser, setCurUser } = useContext( Context );
   const [clicked, setclicked] = useState(false);
-
-
-  useEffect(() => {
-    // console.log( curUser );
-    // reset user's data in auth state....
-    auth.signOut().then((res) => {
-      console.log( res )
-      // Cookies.remove("userData");
-      setCurUser(""); 
-    })
-    .catch((err) => alert(err));
-
-    // console.log( curUser );
-  }, [])
+  const history = useHistory();
 
   return (
-    <IonPage >
-
-
-    <Body>
-      <img style={{marginTop:"80px"}} src={logo} alt="Logo" />
-      <div className="Buttons">
-        
-
-
-        
-        <Buttons>
-          {/* <Link
-            className="welcomeLink"
-            to={ "/Login" }
-            onClick={()=>setclicked(false)}
-          >
-            {clicked ? "Loading..." : "Get Started"}
-          </Link> */}
-          just some button
-        </Buttons>
-
-
-        {/* THE NEW WALKING LOGO THINGY */}
-        {/* <span className="main-loader"><BiLoaderAlt size="4em"/></span> */}
-        {/* <div className="walking-loader"> */}
-          {/* <span><FaWalking size="2em"/></span><span><FaChurch size="2em"/></span> */}
-        {/* </div> */}
-
-      </div>
-    </Body>
+    <IonPage>
+      <Body>
+        <img style={{ marginTop: "80px" }} src={logo} alt="Logo" />
+        <div className="Buttons">
+          {clicked ? (
+            <IonSpinner name="bubbles" />
+          ) : (
+            <Buttons
+              className="welcomeLink"
+              // to="/Login"
+              onClick={() => {
+                setclicked(true);
+                setTimeout(() => {
+                  history.push("/Login");
+                  setclicked(false);
+                }, 1500);
+              }}
+            >
+              Get Started
+            </Buttons>
+          )}
+        </div>
+      </Body>
     </IonPage>
-
   );
 };
 

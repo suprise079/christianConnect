@@ -30,7 +30,7 @@ import { Link } from "react-router-dom";
 import { IonReactRouter } from "@ionic/react-router";
 import { Redirect, Route } from "react-router-dom";
 import { useParams } from "react-router";
-import { collection, query } from "@firebase/firestore";
+import { collection, doc, getDoc, getDocs, query } from "@firebase/firestore";
 import { firestoreObj } from "../../firebase/firebase";
 import React from "react";
 
@@ -39,7 +39,7 @@ const SubscriptionTabs = () => {
   const loop = [1, 2, 3, 4, 5, 6];
   const [page, setPage] = useState("1");
   const fellowshipId = useParams();
-  console.log(fellowshipId, ":selected fellowship");
+  const [fellowshipData, setFellowshipData] = useState({}) 
 
   // switch between announcement, devotions and discussion tabs
   function switchTab(id) {
@@ -60,21 +60,27 @@ const SubscriptionTabs = () => {
   useEffect(() => {
     switchTab(page);
 
-    // get current selected fellowship
-    // const dbQuery = query(collection(firestoreObj, "fellowships"))
-  });
+    // get selected fellowship information
+    const getData = async function(fellowshipId) {
+      const dbQuery = doc(firestoreObj, "Fellowships", fellowshipId);
+      const queryResults = await getDoc(dbQuery);
+      setFellowshipData(queryResults.data())
+    };
+    getData(fellowshipId.fellowshipId)
+  },[]);
 
   return (
     <IonPage id="subscribePage">
-      <div>
+      <div className="headerSubTab">
         <IonButton fill="clear" style={{ color: "black", fontSize: "8pt" }} color="transparent">
-          <Link to="/SubscriptionHome"  >
+          <Link to="/"  >
             <MdKeyboardArrowLeft size="20" />
             Back
           </Link>
         </IonButton>
-        <IonTitle id="mainHeading">{}</IonTitle>
+        <IonTitle id="mainHeading">{fellowshipData.name}</IonTitle>
       </div>
+      {/* <IonHeader></IonHeader> */}
 
       <div id="tabs">
         <IonButton
@@ -108,7 +114,7 @@ const SubscriptionTabs = () => {
         </IonButton>
       </div>
       {/* <IonContent className='tabInfo' style={{backgroundColor:'inherit'}} > */}
-      <div className="tabInfoDiv">
+      <div className="tabInfoDiv p-9">
         {page === "1" && <Announce />}
         {page === "2" && <Devotions />}
         {page === "3" && (

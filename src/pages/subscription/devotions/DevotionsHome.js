@@ -9,12 +9,13 @@ import fearless from "../fearless.jpg";
 // import Video from "./dummy.mp4"
 import "../devotions/Devotions.css";
 import { useContext, useEffect, useState } from "react";
-import { getDocs, query, collection } from "@firebase/firestore";
+import { getDocs, query, collection, where } from "@firebase/firestore";
 import { firestoreObj, storage } from "../../../firebase/firebase.js";
 import { FiPlayCircle } from "react-icons/fi";
 import { ref, getDownloadURL } from "firebase/storage";
 import { VideoContext } from "./VideoContext";
 import React from "react";
+import { useParams } from "react-router";
 
 
 const DevotionsHome = () => {
@@ -27,6 +28,7 @@ const DevotionsHome = () => {
     useContext(VideoContext);
   // reload states
   const [load, setLoad] = useState(true);
+  const fellowshipId = useParams()
 
   // expand devotional massage
   function readMore(event) {
@@ -72,7 +74,8 @@ const DevotionsHome = () => {
   useEffect( () => {
     // Get devotion from firestore
     const ref = async () => {
-      const dbQuery = query(collection(firestoreObj, "devotions"));
+      const dbQuery = query(collection(firestoreObj, "devotions"),
+                      where("fellowshipId", "==", fellowshipId.fellowshipId));
       // put a where query to get corresponding fellowship data and today's date
       var devo = {};
       const queryResult = await getDocs(dbQuery);

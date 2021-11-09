@@ -13,6 +13,7 @@ import {
   IonTitle,
   IonContent,
   IonTextarea,
+  useIonToast,
 } from "@ionic/react";
 import {
   logOutSharp,
@@ -27,6 +28,7 @@ import {
 
 // import from react modules
 import { useContext, useEffect, useState } from "react";
+import { confirmAlert } from "react-confirm-alert";
 import "./profile.css";
 import "./donate.css";
 
@@ -38,14 +40,18 @@ import styled from "styled-components";
 
 // firebase for signOut
 import { auth } from "../../firebase/firebase";
-import { signOut } from "firebase/auth";
+// import { signOut } from "firebase/auth";
 import Context from "../../context/Context";
 // get firebase functions
 import { getUserImg } from "../../firebase/firebase-help";
 
 import { dummyPhoto } from "../../components/helpFunc";
-import NoProfileImg from "./noProfileSet.png"
-
+import NoProfileImg from "./noProfileSet.png";
+import EditUser from "./EditUser";
+import Session from "../../components/session";
+import { FcAbout } from "react-icons/fc";
+// import { url } from "inspector";
+import About from "../About/About";
 
 const appPages = [
   {
@@ -103,7 +109,7 @@ const Body = styled(IonPage)`
     overflow-y: scroll;
   }
   div.container {
-    padding:0;
+    padding: 0;
     position: relative;
     height: 30vh;
     // border: 2px solid;
@@ -146,8 +152,11 @@ const Profile = () => {
   const [donateAnonymously, setDonateAnonymously] = useState(false);
   const [donationConfirmed, setDonationConfirmed] = useState(false);
 
+  // modals variables
+  const [aboutModal, setAboutModal] = useState(false);
+
   // Profile Variables
-  const { curUser, setCurUser } = useContext(Context);
+  const [present, dismiss] = useIonToast();
   const [userPhoto, setUserPhoto] = useState();
   // const [user, setUser] = useState(
   //   JSON.parse(
@@ -155,8 +164,10 @@ const Profile = () => {
   //   )
   // );
 
-  const goToItem = (e) => {
-    // Action to activate a modal
+  const goToItem = async (e) => {
+    const url = e.target.id;
+    if (url === "/") {
+    }
   };
   // useEffect(() => {
   //   setCurUser(JSON.parse(localStorage.getItem("userData")));
@@ -170,261 +181,307 @@ const Profile = () => {
   //     }
   //   });
   // });
-
+  const history = useHistory();
   return (
-      <Body>
-        <IonHeader color="white" className="ion-no-border">
-          <IonToolbar color="white">
-            <IonButtons slot="start">
-            </IonButtons>
-            <IonTitle>Profile</IonTitle>
-          </IonToolbar>
-        </IonHeader>
+    <Body>
+      <IonHeader color="white" className="ion-no-border">
+        <IonToolbar color="white">
+          <IonButtons slot="start"></IonButtons>
+          <IonTitle>Profile</IonTitle>
+        </IonToolbar>
+      </IonHeader>
 
-        <IonContent>
-          <div id="profileContent" className="body">
-            <div className="container">
-              <div className="headerTrail"></div>
+      <IonContent className="profileIonContent">
+        <div id="profileContent" className="body">
+          <div className="container">
+            <div className="headerTrail"></div>
 
-              <div className="infos">
-                <div className="userProfile">
-                  {userPhoto?<img
-                    src={userPhoto?.photo}
-                    alt="profile"
-                  />:<img src={NoProfileImg} alt="No Profile set"/>}
-                </div>
-
-                <div id="details">
-                  <Link to="/editprofile">
-                    <FaUserEdit
-                      className="editButton"
-                      // onClick={(e) => history.push("/editprofile")}
-                      size="25px"
-                    />
-                  </Link>
-
-                  <IonCardTitle style={{ textTransform: "capitalize" }}>
-                    {curUser?.firstname} {curUser?.lastname}{" "}
-                  </IonCardTitle>
-                  <IonCardSubtitle> {curUser?.email} </IonCardSubtitle>
-                </div>
+            <div className="infos">
+              <div className="userProfile">
+                {userPhoto ? (
+                  <img src={userPhoto?.photo} alt="profile" />
+                ) : (
+                  <img src={NoProfileImg} alt="No Profile set" />
+                )}
               </div>
-            </div>
 
-            <div className="content">
-              <div id="profile_items" className="menu">
-                {appPages.map((appPage, index) => {
-                  return appPage.url === "/Donate" ? (
-                    <div
-                      key={index}
-                      id={appPage.url}
-                      onClick={(e) => setDonateModal(true)}
-                      className="item"
-                    >
-                      <IonIcon
-                        className="icon"
-                        slot="start"
-                        ios={appPage.iosIcon}
-                        md={appPage.mdIcon}
-                      />
-                      <IonLabel>{appPage.title}</IonLabel>
-                    </div>
-                  ) : (
-                    <Link
-                      key={index}
-                      id={appPage.url}
-                      onClick={(e) => goToItem(e)}
-                      className="item"
-                      to={appPage?.url}
-                    >
-                      <IonIcon
-                        className="icon"
-                        slot="start"
-                        ios={appPage.iosIcon}
-                        md={appPage.mdIcon}
-                      />
-                      <IonLabel>{appPage.title}</IonLabel>
-                    </Link>
-                  );
-                })}
+              <div id="details">
+                <Link to="/editprofile">
+                  <FaUserEdit
+                    className="editButton"
+                    onClick={(e) => history.push("/editprofile")}
+                    size="25px"
+                  />
+                </Link>
+
+                <IonCardTitle style={{ textTransform: "capitalize" }}>
+                  {Session.getFirstName()} {Session.getLastName()}
+                </IonCardTitle>
+                <IonCardSubtitle> {Session.getEmail()}</IonCardSubtitle>
               </div>
             </div>
           </div>
-        </IonContent>
-        <IonModal isOpen={donateModal}>
-          <IonContent class="ion-padding" id="donateModalContent">
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                setConfirmDonation(true);
-              }}
-            >
-              <p id="donateInfo">
-                Donate To The Christian Connect Development Team
-              </p>
 
-              <div style={{ margin: "10px" }} id="paymentType">
-                <div>Payment type:</div>
-                <div className="donatePaymentContainer">
-                  <label
-                    className={
-                      paymentType === "Card"
-                        ? "paymentTypeChecked"
-                        : "paymentType"
-                    }
-                    htmlFor="CardMethod"
+          <div className="content">
+            <div id="profile_items" className="menu">
+              {appPages.map((appPage, index) => {
+                return appPage.url === "/Donate" ? (
+                  <div
+                    key={index}
+                    id={appPage.url}
+                    onClick={(e) => setDonateModal(true)}
+                    className="item"
                   >
-                    Card
-                  </label>
-                  <input
-                    checked={paymentType === "Card"}
-                    onClick={(e) => setPaymentType(e.target.value)}
-                    value="Card"
-                    name="paymentDonate"
-                    type="radio"
-                    id="CardMethod"
-                  />
-                  <label
-                    className={
-                      paymentType === "EFT"
-                        ? "paymentTypeChecked"
-                        : "paymentType"
+                    <IonIcon
+                      className="icon"
+                      slot="start"
+                      ios={appPage.iosIcon}
+                      md={appPage.mdIcon}
+                    />
+                    <IonLabel>{appPage.title}</IonLabel>
+                  </div>
+                ) : appPage.url === "/" ? (
+                  <div
+                    key={index}
+                    id={appPage.url}
+                    onClick={(e) =>
+                      present({
+                        translucent: true,
+                        position: "top",
+                        buttons: [
+                          {
+                            text: "Yes",
+                            handler: async () => {
+                              await auth
+                                .signOut()
+                                .then(() => {
+                                  Session.clearUser();
+                                  console.log("logged out");
+                                  history.push("/");
+                                })
+                                .catch((err) =>
+                                  console.log("Couldn't log out :", err)
+                                );
+                            },
+                          },
+                          { text: "No", handler: () => dismiss() },
+                        ],
+                        message: "LOG OUT ?",
+                      })
                     }
-                    htmlFor="EFTMethod"
+                    className="item"
                   >
-                    EFT
-                  </label>
-                  <input
-                    className="paymentType"
-                    checked={paymentType === "EFT"}
-                    onClick={(e) => setPaymentType(e.target.value)}
-                    value="EFT"
-                    name="paymentDonate"
-                    type="radio"
-                    id="EFTMethod"
-                  />
-                </div>
+                    <IonIcon
+                      className="icon"
+                      slot="start"
+                      ios={appPage.iosIcon}
+                      md={appPage.mdIcon}
+                    />
+                    <IonLabel>{appPage.title}</IonLabel>
+                  </div>
+                ) : (
+                  <Link
+                    key={index}
+                    id={appPage.url}
+                    onClick={(e) => goToItem(e)}
+                    className="item"
+                    to={appPage?.url}
+                  >
+                    <IonIcon
+                      className="icon"
+                      slot="start"
+                      ios={appPage.iosIcon}
+                      md={appPage.mdIcon}
+                    />
+                    <IonLabel>{appPage.title}</IonLabel>
+                  </Link>
+                );
+              })}
+              <div onClick={(e) => setAboutModal(true)} className="item">
+                <FcAbout className="profileIcons" size="1.5em" />
+                <IonLabel>About us</IonLabel>
               </div>
+            </div>
+          </div>
+        </div>
+      </IonContent>
+      <div style={{ height: "56px" }}></div>
+      <IonModal isOpen={donateModal}>
+        <IonContent class="ion-padding" id="donateModalContent">
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              setConfirmDonation(true);
+            }}
+          >
+            <p id="donateInfo">
+              Donate To The Christian Connect Development Team
+            </p>
 
-              <div style={{ margin: "10px" }} id="donateAmount">
-                <label> Amount(in ZAR): </label>
+            <div style={{ margin: "10px" }} id="paymentType">
+              <div>Payment type:</div>
+              <div className="donatePaymentContainer">
+                <label
+                  className={
+                    paymentType === "Card"
+                      ? "paymentTypeChecked"
+                      : "paymentType"
+                  }
+                  htmlFor="CardMethod"
+                >
+                  Card
+                </label>
                 <input
-                  value={parseInt(donateAmount, 10)}
-                  onChange={(e) => {
-                    setDonateAmount(parseInt(e.target.value, 10));
-                  }}
-                  required
-                  style={{ border: "1px solid gray", borderRadius: "5px" }}
-                  size="7"
-                  type="number"
+                  checked={paymentType === "Card"}
+                  onClick={(e) => setPaymentType(e.target.value)}
+                  value="Card"
+                  name="paymentDonate"
+                  type="radio"
+                  id="CardMethod"
+                />
+                <label
+                  className={
+                    paymentType === "EFT" ? "paymentTypeChecked" : "paymentType"
+                  }
+                  htmlFor="EFTMethod"
+                >
+                  EFT
+                </label>
+                <input
+                  className="paymentType"
+                  checked={paymentType === "EFT"}
+                  onClick={(e) => setPaymentType(e.target.value)}
+                  value="EFT"
+                  name="paymentDonate"
+                  type="radio"
+                  id="EFTMethod"
                 />
               </div>
+            </div>
 
-              <div style={{ margin: "10px" }} id="donateMessage">
-                <p> Message </p>
+            <div style={{ margin: "10px" }} id="donateAmount">
+              <label> Amount(in ZAR): </label>
+              <input
+                value={parseInt(donateAmount, 10)}
+                onChange={(e) => {
+                  setDonateAmount(parseInt(e.target.value, 10));
+                }}
+                required
+                style={{ border: "1px solid gray", borderRadius: "5px" }}
+                size="7"
+                type="number"
+              />
+            </div>
 
-                <IonTextarea
-                  rows="6"
-                  placeholder="A word to accompany your donation..."
-                  className="donateTextArea"
-                  value={text}
-                  onIonChange={(e) => setText(e.target.value)}
-                ></IonTextarea>
-              </div>
+            <div style={{ margin: "10px" }} id="donateMessage">
+              <p> Message </p>
 
-              <div
+              <IonTextarea
+                rows="6"
+                placeholder="A word to accompany your donation..."
+                className="donateTextArea"
+                value={text}
+                onIonChange={(e) => setText(e.target.value)}
+              ></IonTextarea>
+            </div>
+
+            <div
+              style={{
+                margin: "10px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <input
+                id="donateAnonymously"
+                style={{ margin: "0 10px" }}
+                type="checkbox"
+                checked={donateAnonymously}
+                onChange={() => setDonateAnonymously(!donateAnonymously)}
+              />
+              <label htmlFor="donateAnonymously">Donate Anonymously</label>
+            </div>
+
+            <div
+              style={{
+                margin: "10px",
+                display: "flex",
+                justifyContent: "center",
+              }}
+              className="donateButtonsContainer"
+            >
+              <button onClick={() => setDonateModal(false)}>Cancel</button>
+              <button type="submit">Donate</button>
+            </div>
+          </form>
+        </IonContent>
+      </IonModal>
+      <IonModal isOpen={aboutModal}>
+        <About setIsOpen={setAboutModal} />
+      </IonModal>
+      <IonModal isOpen={confirmDonation}>
+        <IonContent className="ion-padding" id="DonateConfirmationContainer">
+          <IonCard className="confirmDonationMessage">
+            {donationConfirmed ? (
+              <p
                 style={{
-                  margin: "10px",
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
+                  flexDirection: "column-reverse",
                 }}
               >
-                <input
-                  id="donateAnonymously"
-                  style={{ margin: "0 10px" }}
-                  type="checkbox"
-                  checked={donateAnonymously}
-                  onChange={() => setDonateAnonymously(!donateAnonymously)}
-                />
-                <label htmlFor="donateAnonymously">Donate Anonymously</label>
-              </div>
-
-              <div
-                style={{
-                  margin: "10px",
-                  display: "flex",
-                  justifyContent: "center",
-                }}
-                className="donateButtonsContainer"
-              >
-                <button onClick={() => setDonateModal(false)}>Cancel</button>
-                <button type="submit">Donate</button>
-              </div>
-            </form>
-          </IonContent>
-        </IonModal>
-        <IonModal isOpen={confirmDonation}>
-          <IonContent className="ion-padding" id="DonateConfirmationContainer">
-            <IonCard className="confirmDonationMessage">
-              {donationConfirmed ? (
-                <p
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    flexDirection: "column-reverse",
-                  }}
-                >
-                  <div>Thank you for you contribution !</div>
-                  <BsFillCheckCircleFill size="4em" color="white" />
-                </p>
-              ) : (
-                <p style={{ textAlign: "center" }}>
-                  Your are about to make a donation of{" "}
-                  <b>
-                    <em>R{donateAmount}</em>
-                  </b>{" "}
-                  <b>{donateAnonymously ? "Anonymously " : ""}</b>
-                  to the Christian Connect Dev Team. Please Confirm
-                </p>
-              )}
-            </IonCard>
-            {donationConfirmed ? (
-              ""
+                <div>Thank you for you contribution !</div>
+                <BsFillCheckCircleFill size="4em" color="white" />
+              </p>
             ) : (
-              <div
-                style={{
-                  margin: "10px",
-                  display: "flex",
-                  justifyContent: "center",
-                }}
-                className="donateButtonsContainer"
-              >
-                <button
-                  onClick={() => {
-                    setConfirmDonation(false);
-                  }}
-                >
-                  Cancel
-                </button>
-                <button
-                  onClick={() => {
-                    setDonationConfirmed(true);
-                    setTimeout(() => {
-                      setConfirmDonation(false);
-                      setDonateModal(false);
-                      setDonateAmount("");
-                    }, 1500);
-                  }}
-                >
-                  Confirm
-                </button>
-              </div>
+              <p style={{ textAlign: "center" }}>
+                Your are about to make a donation of{" "}
+                <b>
+                  <em>R{donateAmount}</em>
+                </b>{" "}
+                <b>{donateAnonymously ? "Anonymously " : ""}</b>
+                to the Christian Connect Dev Team. Please Confirm
+              </p>
             )}
-          </IonContent>
-        </IonModal>
-      </Body>
+          </IonCard>
+          {donationConfirmed ? (
+            ""
+          ) : (
+            <div
+              style={{
+                margin: "10px",
+                display: "flex",
+                justifyContent: "center",
+              }}
+              className="donateButtonsContainer"
+            >
+              <button
+                onClick={() => {
+                  setConfirmDonation(false);
+                }}
+              >
+                Cancel
+              </button>
+              <button
+                onClick={() => {
+                  setDonationConfirmed(true);
+                  setTimeout(() => {
+                    setConfirmDonation(false);
+                    setDonateModal(false);
+                    setDonateAmount("");
+                  }, 1500);
+                }}
+              >
+                Confirm
+              </button>
+            </div>
+          )}
+        </IonContent>
+      </IonModal>
+      {/* <EditUser isOpen={modalControler} setIsOpen={setModalControler} /> */}
+    </Body>
   );
 };
 

@@ -1,6 +1,8 @@
 import { Redirect, Route } from "react-router-dom";
 import { IonRouterOutlet } from "@ionic/react";
 
+import { auth } from "./firebase/firebase";
+
 import { IonApp, IonPage, IonSlides, IonSlide, IonContent } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 import React, { useState, useEffect } from "react";
@@ -41,18 +43,38 @@ import UserHome from "./pages/userHome/userHome";
 import EditFs from "./pages/LeaderProfile/editFs";
 import Payment from "./pages/LeaderProfile/premium/Upgrading/payment";
 import Announce from "./pages/subscription/announcements/Announcements";
+import LoginHome from "./pages/Logins/LoginHome";
 import Slider from "./components/slider/slider";
 import Session from "./components/session";
 
 // TODO: change all alerts to IonToast
 
 const SliderMain = () => {
-  var [currentUser, setCurrentUser] = useState(localStorage);
+  var [currentUser, setCurrentUser] = useState("");
+
   // check if the user is logged in
   var [isLoggedIn, setIsLoggedIn] = useState(false);
   var [curUser, setCurUser] = useState();
   var [fellowship, setFellowship] = useState();
   const [allFellowships, setAllFellowships] = useState();
+
+  useEffect(() => {
+    // auth.onAuthStateChanged will return a firebase.Unsubscribe function
+    // which you can call to terminate the subscription
+    const unsubscribe = auth.onAuthStateChanged(async (userAuth) => {
+      if (userAuth) {
+        setIsLoggedIn(true);
+      } else {
+        setIsLoggedIn(null);
+      }
+    });
+
+    // return a clean up function that will call unsubscribe to -
+    // terminate the subscription when component unmounts
+    return () => {
+      unsubscribe();
+    };
+  }, []);
 
   return (
     <Context.Provider
@@ -61,8 +83,6 @@ const SliderMain = () => {
         setCurrentUser,
         curUser,
         setCurUser,
-        isLoggedIn,
-        setIsLoggedIn,
         fellowship,
         setFellowship,
         allFellowships,
@@ -148,9 +168,7 @@ const SliderMain = () => {
           {/* WHEN THERE'S NO COMPONENT IN HERE THE WELCOME PAGE IS SHOWN */}
           {/* If user is SignedIn show the slider else show login page  */}
 
-          {/* {curUser ? <Slider /> : <Login />} */}
-          {/* <Profile></Profile> */}
-          <Slider></Slider>
+          {isLoggedIn && Session.getEmail() ? <Slider /> : <LoginHome />}
         </IonPage>
       </IonReactRouter>
     </Context.Provider>
