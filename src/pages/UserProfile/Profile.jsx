@@ -49,7 +49,9 @@ import { dummyPhoto } from "../../components/helpFunc";
 import NoProfileImg from "./noProfileSet.png";
 import EditUser from "./EditUser";
 import Session from "../../components/session";
+import { FcAbout } from "react-icons/fc";
 // import { url } from "inspector";
+import About from "../About/About";
 
 const appPages = [
   {
@@ -151,7 +153,7 @@ const Profile = () => {
   const [donationConfirmed, setDonationConfirmed] = useState(false);
 
   // modals variables
-  // const [modalControler,setModalControler] = useState(false);
+  const [aboutModal, setAboutModal] = useState(false);
 
   // Profile Variables
   const [present, dismiss] = useIonToast();
@@ -190,7 +192,7 @@ const Profile = () => {
         </IonToolbar>
       </IonHeader>
 
-      <IonContent>
+      <IonContent className="profileIonContent">
         <div id="profileContent" className="body">
           <div className="container">
             <div className="headerTrail"></div>
@@ -296,10 +298,15 @@ const Profile = () => {
                   </Link>
                 );
               })}
+              <div onClick={(e) => setAboutModal(true)} className="item">
+                <FcAbout className="profileIcons" size="1.5em" />
+                <IonLabel>About us</IonLabel>
+              </div>
             </div>
           </div>
         </div>
       </IonContent>
+      <div style={{ height: "56px" }}></div>
       <IonModal isOpen={donateModal}>
         <IonContent class="ion-padding" id="donateModalContent">
           <form
@@ -410,6 +417,9 @@ const Profile = () => {
             </div>
           </form>
         </IonContent>
+      </IonModal>
+      <IonModal isOpen={aboutModal}>
+        <About setIsOpen={setAboutModal} />
       </IonModal>
       <IonModal isOpen={confirmDonation}>
         <IonContent className="ion-padding" id="DonateConfirmationContainer">

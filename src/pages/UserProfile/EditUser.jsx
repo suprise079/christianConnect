@@ -239,7 +239,6 @@ const EditUser = () => {
               Register as a leader
             </IonLabel>
           </div>
-
           <div >
             { wannaBeLeader ? (
               <>
@@ -262,9 +261,8 @@ const EditUser = () => {
             <div className="edituserField" lines="full">
               <IonInput
                 value={fname}
-                placeholder="user firstname"
                 className="field"
-                placeholder="Firstname"
+                placeholder="First name"
                 onIonChange={e => setFname(e.detail.value)}
                 clearInput />
             </div>
@@ -273,8 +271,7 @@ const EditUser = () => {
               <IonInput
                 value={lname}
                 className="field"
-                placeholder="user lastname"
-                placeholder="Lastname"
+                placeholder="Last name"
                 onIonChange={e => setLname(e.detail.value)}
                 clearInput />
             </div>
@@ -283,7 +280,6 @@ const EditUser = () => {
               <IonInput
                 value={phone}
                 className="field"
-                placeholder="user phone number"
                 placeholder="Phone number"
                 onIonChange={e => setPhone(e.detail.value)}
                 clearInput />
@@ -320,4 +316,3 @@ const EditUser = () => {
 };
 
 export default EditUser;
-

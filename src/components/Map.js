@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
+import {MdLocationOn} from "react-icons/md";
+// import
 
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
+const AnyReactComponent = ({ object }) => <div>{object}</div>;
 
 class Map extends Component {
   static defaultProps = {
@@ -24,7 +26,7 @@ class Map extends Component {
           <AnyReactComponent
             lat={-26.184520}
             lng={ 28.003930}
-            text="My Marker"
+            object= {<MdLocationOn size="2em" color="red"/>}
           />
         </GoogleMapReact>
       </div>
