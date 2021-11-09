@@ -72,10 +72,6 @@ var Session = (function() {
       phone_no = sessionStorage.getItem('phone_no');
       return phone_no;
     };
-    var getPhone = function() {
-      phone_no = sessionStorage.getItem('phone_no');
-      return phone_no;
-    };
     var getUserId = function() {
       user_id = sessionStorage.getItem('user_id');
       return user_id;

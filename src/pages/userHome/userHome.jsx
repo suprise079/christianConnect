@@ -3,6 +3,7 @@ import {
   IonProgressBar,
   IonPage,
   IonSearchbar,
+  IonRouterOutlet,
 } from "@ionic/react";
 import { BsSearch } from "react-icons/bs";
 import React from "react";
@@ -28,6 +29,9 @@ import SearchFellowship from "../../components/searchFellowship/searchFellowship
 import TabBar from "../../components/tabBar/tabBar";
 import Map from "../../components/Map";
 import { async } from "@firebase/util";
+import { IonReactRouter } from "@ionic/react-router";
+import { Route } from "react-router";
+import OverviewFs from "../overviewFs/overviewFs";
 
 const UserHome = () => {
   const { curUser, setCurUser } = useContext(Context);
@@ -69,14 +73,24 @@ const UserHome = () => {
             }}
             showCancelButton="never"
             cancelButtonText="Cancel"
+            placeholder="Search a fellowship..."
+            className="homePageSearchBar"
           ></IonSearchbar>
         </div>
 
         {/* map-container */}
         <div className="mapContainer">
-          <p style={{ textAlign: "center" }} className="header">
-            Fellowships near you
-          </p>
+          <span
+            style={{
+              textAlign: "left",
+              margin: "0 10px",
+              fontWeight: "lighter",
+              fontSize: "20px",
+            }}
+            className="header"
+          >
+            fellowships near you
+          </span>
 
           <div className="map">
             <Map />
@@ -120,11 +134,18 @@ const UserHome = () => {
             ></IonProgressBar>
           )}
         </div>
-
-        {/* the button component tab bar for navigation */}
-        {/* <TabBar /> */}
       </IonContent>
     </IonPage>
+  );
+};
+const UserHomeRoutes = () => {
+  return (
+    <IonReactRouter>
+      <IonRouterOutlet>
+        <Route exact path="/" component={UserHome}/>
+        <Route exact path="/overviewfs?" component={OverviewFs} />
+      </IonRouterOutlet>
+    </IonReactRouter>
   );
 };
 

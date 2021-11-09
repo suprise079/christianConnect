@@ -7,6 +7,7 @@ import TabBar from "../tabBar/tabBar";
 import { useEffect, useState, useRef } from "react";
 import { async } from "@firebase/util";
 import Session from "../session";
+import UserHomeRoutes from "../../pages/userHome/userHome";
 
 export default function Slider() {
   const [active, setActive] = useState(0);
@@ -43,7 +44,7 @@ export default function Slider() {
         >
           <IonSlide>
             <IonContent style={{ height: "100vh" }}>
-              <UserHome />
+              <UserHomeRoutes />
             </IonContent>
           </IonSlide>
           <IonSlide>
@@ -55,6 +56,7 @@ export default function Slider() {
             <IonContent style={{ height: "100vh" }}>
               {console.log(Session.getIsLeader())}
               {Session.getIsLeader() ? <Leader /> : <Profile />}
+              {/* <Profile /> */}
 
               {/* <h3>Profile</h3> */}
             </IonContent>

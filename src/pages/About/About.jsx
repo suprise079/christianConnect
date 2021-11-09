@@ -13,6 +13,9 @@ import {
 } from "@ionic/react";
 import logo from "../Logins/Welcome/Logo_transp.png";
 import { MdClose } from "react-icons/md";
+import { Link } from "react-router-dom";
+import { BsInstagram } from "react-icons/bs";
+import { FiTwitter } from "react-icons/fi";
 
 function About({ setIsOpen }) {
   return (
@@ -54,7 +57,7 @@ function About({ setIsOpen }) {
 
         <div className="social-media">
           {/* instagram */}
-          <SocialMediaIconsReact
+          {/* <SocialMediaIconsReact
             borderColor="rgba(255,255,255,0.25)"
             borderWidth="5"
             borderStyle="outset"
@@ -65,10 +68,10 @@ function About({ setIsOpen }) {
             roundness="50%"
             url="https://www.instagram.com/christianconnect_app/"
             size="50"
-          />
+          /> */}
 
           {/* twitter */}
-          <SocialMediaIconsReact
+          {/* <SocialMediaIconsReact
             borderColor="rgba(255,255,255,0.25)"
             borderWidth="5"
             borderStyle="outset"
@@ -79,7 +82,22 @@ function About({ setIsOpen }) {
             roundness="50%"
             url="https://twitter.com/ChristianCon_"
             size="50"
-          />
+          /> */}
+          <a
+            target="_blank"
+            rel="noreferrer"
+            href="https://www.instagram.com/christianconnect_app/"
+          >
+            <BsInstagram color="rgb(255 0 140)" size="2em" />
+          </a>
+
+          <a
+            target="_blank"
+            rel="noreferrer"
+            href="https://twitter.com/ChristianCon_"
+          >
+            <FiTwitter color="rgba(26,166,233,1)" size="2em" />
+          </a>
         </div>
         <div
           style={{

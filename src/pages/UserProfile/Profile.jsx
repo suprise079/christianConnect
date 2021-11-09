@@ -297,7 +297,16 @@ const Profile = () => {
                   </Link>
                 );
               })}
-              <div onClick={(e) => setAboutModal(true)} className="item">
+              <div
+                onClick={(e) => {
+                  try {
+                    setAboutModal(true);
+                  } catch (TypeError) {
+                    console.log("err");
+                  }
+                }}
+                className="item"
+              >
                 <FcAbout className="profileIcons" size="1.5em" />
                 <IonLabel>About us</IonLabel>
               </div>

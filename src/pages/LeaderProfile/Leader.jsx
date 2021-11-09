@@ -58,6 +58,8 @@ import Cookies from "js-cookie";
 import dummyPicture from "./dummy_profile.jpg";
 import Premium from "./premium/Premium";
 import Session from "../../components/session";
+import About from "../About/About";
+import { FcAbout } from "react-icons/fc";
 
 var profileImg = "/assets/icon/prayer.jpeg";
 
@@ -137,6 +139,9 @@ const Leader = () => {
   const [donationConfirmed, setDonationConfirmed] = useState(false);
 
   const [present, dismiss] = useIonToast();
+
+  // modal variables
+  const [aboutModal, setAboutModal] = useState(false);
 
   // context and global variables....
   const { fellowship, setFellowship } = useContext(Context);
@@ -399,8 +404,23 @@ const Leader = () => {
                   );
                 })}
               {!page && <Premium />}
+              <div
+                onClick={(e) => {
+                  try {
+                    setAboutModal(true);
+                  } catch (TypeError) {
+                    console.log("err");
+                  }
+                }}
+                className="item"
+              >
+                <FcAbout className="profileIcons" size="1.5em" />
+                <IonLabel>About us</IonLabel>
+              </div>
             </div>
           </div>
+
+          <div style={{ height: "70px" }}></div>
         </div>
 
         <IonModal isOpen={donateModal}>
@@ -515,6 +535,9 @@ const Leader = () => {
               </div>
             </form>
           </IonContent>
+        </IonModal>
+        <IonModal isOpen={aboutModal}>
+          <About setIsOpen={setAboutModal} />
         </IonModal>
       </Body>
     </IonPage>
