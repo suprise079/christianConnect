@@ -168,7 +168,6 @@ const Profile = () => {
     const url = e.target.id;
     if (url === "/") {
     }
-    // Action to activate a modal
   };
   // useEffect(() => {
   //   setCurUser(JSON.parse(localStorage.getItem("userData")));
