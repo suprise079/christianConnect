@@ -11,6 +11,7 @@ var Session = (function() {
     var is_premium = ''
     var phone_no = ''
     var user_id = ''
+    var profile_pic = ''
 
     
     var setUser = async function(email) {
@@ -19,7 +20,7 @@ var Session = (function() {
         where("email", "==", email)
       );
       const queryResults = await getDocs(dbQuery);
-      queryResults.forEach((user) => {
+      queryResults.forEach(async(user) => {
         // Add an ID to video data
         var data = user.data();
         sessionStorage.setItem('email', data.email);
@@ -29,7 +30,19 @@ var Session = (function() {
         sessionStorage.setItem('is_premium', data.isPremium);
         sessionStorage.setItem('user_id', data.userId);
         sessionStorage.setItem('phone_no', data.phoneNumber);
-        sessionStorage.setItem('user_id', user.id);
+  
+        const dbQuery = query(
+          collection(firestoreObj, "userProfilePic"),
+          where("userId", "==", data.userId)
+        );
+        const queryResults = await getDocs(dbQuery);
+        queryResults.forEach((pic) => {
+          sessionStorage.setItem('profile_pic', pic.data().photo);
+        })
+
+
+        
+
       });
     };
 
@@ -59,6 +72,18 @@ var Session = (function() {
       phone_no = sessionStorage.getItem('phone_no');
       return phone_no;
     };
+    var getPhone = function() {
+      phone_no = sessionStorage.getItem('phone_no');
+      return phone_no;
+    };
+    var getUserId = function() {
+      user_id = sessionStorage.getItem('user_id');
+      return user_id;
+    };
+    var getPhoto = function() {
+      profile_pic = sessionStorage.getItem('profile_pic');
+      return profile_pic;
+    };
     var clearUser = function() {
       user_id = sessionStorage.clear()
     };
@@ -71,7 +96,8 @@ var Session = (function() {
       getIsLeader: getIsLeader,
       getIsPremium: getIsPremium,
       getPhone: getPhone,
-      // getUserId: getUserId,
+      getPhoto: getPhoto,
+      getUserId:getUserId,
 
       // set user details
       setUser: setUser,

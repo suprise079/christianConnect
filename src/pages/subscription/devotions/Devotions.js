@@ -7,12 +7,13 @@ import { firestoreObj, storage } from "../../../firebase/firebase.js";
 import { ref, getDownloadURL } from "@firebase/storage";
 import { collection, getDocs, query, where } from "@firebase/firestore";
 import React from "react";
+import { useParams } from "react-router";
 
 
 const Devotions = () => {
   // store sermon videos
   const [videos, setVideos] = useState([]);
-  const fellowshipId = "F0";
+  const fellowshipId = useParams();
   // keep track to which video is playing
   const [playingVideo, setPlayingVideo] = useState({});
   // Router variable for conditional rendering
@@ -24,7 +25,7 @@ const Devotions = () => {
       var videosArr = [];
       const dbQuery = query(
         collection(firestoreObj, "videos"),
-        where("fellowshipId", "==", fellowshipId)
+        where("fellowshipId", "==", fellowshipId.fellowshipId)
       );
       const queryResults = await getDocs(dbQuery);
       queryResults.forEach((video) => {

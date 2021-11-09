@@ -28,7 +28,7 @@ import {
 
 // import from react modules
 import { useContext, useEffect, useState } from "react";
-import { confirmAlert } from "react-confirm-alert";
+// import { confirmAlert } from "react-confirm-alert";
 import "./profile.css";
 import "./donate.css";
 

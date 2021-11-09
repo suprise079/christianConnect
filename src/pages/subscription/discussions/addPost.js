@@ -9,17 +9,19 @@ import { firestoreObj } from "../../../firebase/firebase";
 import firebase from "firebase/compat";
 import { Firestore } from "@firebase/firestore";
 import React from "react";
+import Session from "../../../components/session";
+import { useParams } from "react-router";
 
 
 
 const Post = ({setPage}) => {
 
-    const firstName = "Teagan"
-    const lastName = "Tshikuvhe"
+    const firstName = Session.getFirstName()
+    const lastName = Session.getLastName()
     const [userText,setUserText] = useState('')
-    const picture = ""
+    const picture = Session.getPhoto()
     const [video,setVideo] = useState("")
-    const fellowshipId = "F0"
+    const fellowshipId = useParams()
     const userId = "9KJyDFLkBIfqJI7xgn4PR6TwO982"
 
     function makeid(length) {
@@ -41,7 +43,7 @@ const Post = ({setPage}) => {
                 firstName:firstName,
                 lastName:lastName,
                 date: new Date(),
-                fellowshipId: fellowshipId,
+                fellowshipId: fellowshipId.fellowshipId,
                 id: id,
                 picture: picture,
                 text: userText,

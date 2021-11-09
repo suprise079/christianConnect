@@ -46,14 +46,11 @@ const SubscriptionTabs = () => {
     try {
       // remove background of previously selected menu
       document.getElementById(page).style.backgroundColor = "transparent";
-      console.log("previous: turned off", page);
       setPage(id);
       document.getElementById(id).style.backgroundColor = "white";
-      console.log("current: turned on", id);
     } catch {
       setPage(id);
       document.getElementById(id).style.backgroundColor = "white";
-      console.log("current: turned on", id);
     }
   }
 
@@ -78,6 +75,7 @@ const SubscriptionTabs = () => {
             Back
           </Link>
         </IonButton>
+        {console.log(fellowshipData)}
         <IonTitle id="mainHeading">{fellowshipData.name}</IonTitle>
       </div>
       {/* <IonHeader></IonHeader> */}

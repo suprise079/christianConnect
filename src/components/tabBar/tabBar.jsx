@@ -1,15 +1,18 @@
 import { IonIcon, IonLabel } from "@ionic/react";
 import { mail, person } from "ionicons/icons";
 import { FaHome } from "react-icons/fa";
+import { useHistory } from "react-router";
 
 import "./tabBar.css"; // import css
 
 const TabBar = ({ active, slideTo }) => {
+
+  const history = useHistory()
   return (
     <div className="tabBarContainer">
       <div
         style={{ color: active === 0 ? "white" : "black" }}
-        onClick={() => slideTo(0)}
+        onClick={() => slideTo(0); }
       >
         <i>
           {" "}

@@ -5,18 +5,16 @@ import pic from './men_event.jpg'
 import { IonButton } from '@ionic/react';
 import React from "react";
 import Session from '../../../components/session';
+import { useParams } from 'react-router';
 
 
 
 
 const AddReply = ({discussionId}) => {
-
-    // currently selected fellowship
-    const fellowshipId = 'FO'
     // currently logged user will provided the following data
     const firstName = Session.getFirstName();
     const lastName = Session.getLastName()
-    const picture = pic
+    const picture = Session.getPhoto()
     // user entered text
     const [text, setText] = useState("")
 
