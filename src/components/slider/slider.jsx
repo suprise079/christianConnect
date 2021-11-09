@@ -55,10 +55,8 @@ export default function Slider() {
           <IonSlide>
             <IonContent style={{ height: "100vh" }}>
               {console.log(Session.getIsLeader())}
-              {Session.getIsLeader() ? <Leader /> : <Profile />}
-              {/* <Profile /> */}
-
-              {/* <h3>Profile</h3> */}
+              {/* {Session.getIsLeader() ? <Leader /> : <Profile />} */}
+              <Profile />
             </IonContent>
           </IonSlide>
         </IonSlides>

@@ -18,6 +18,7 @@ import "./EditUser.css";
 
 import React, { useEffect, useContext, useState } from "react";
 import { useHistory } from "react-router";
+import { reauthenticateWithCredential } from "firebase/auth";
 
 import profileImg from "./profile.jpeg";
 
@@ -34,7 +35,7 @@ import Cookies from "js-cookie";
 
 // import firebase and its modules
 import { auth } from "../../firebase/firebase";
-import { takePicture } from "../../components/helpFunc";
+import { dummyPhoto, takePicture } from "../../components/helpFunc";
 import {
   updateProfile,
   signInWithPopup,
@@ -53,93 +54,85 @@ const EditUser = () => {
   );
   const { curUser, setCurUser, fellowship, setFellowship } =
     useContext(Context);
-  const [userPhoto, setUserPhoto] = useState();
+  // const [userPhoto, setUserPhoto] = useState();
   const history = useHistory();
-  const [fname, setFname] = useState(user?.firstname);
-  const [lname, setLname] = useState(user?.lastname);
-  const [phone, setPhone] = useState(user?.phoneNumber);
-  const [image, setImage] = useState(user?.profilePic);
+  const [firstName, setFirstName] = useState(Session.getFirstName());
+  const [lastName, setLastName] = useState(Session.getLastName());
+  const [phone, setPhone] = useState(Session.getPhone());
+  const [image, setImage] = useState(Session.getPhoto());
   // new leader and setting fellowship name
   // const [fsName, setFsName] = useState("");
   // const [wannaBeLeader, setWannaBeLeader] = useState(false);
 
   useEffect(() => {
-    if (Session.getIsLeader) {
+    if (Session.getIsLeader()) {
       // get fellowship data only if user is leader
-      setFellowship(JSON.parse(Cookies.get("curLeaderFs")));
+      setFellowship(JSON.parse(localStorage.getItem("curLeaderFs")));
     }
 
-    setCurUser(JSON.parse(Cookies.get("userData")));
+    setCurUser(JSON.parse(localStorage.getItem("currentUser")));
 
     // console.log( user )
-    getUserImg(user?.userId).then((res) => {
+    getUserImg(Session.getUserId()).then((res) => {
       if (res) {
-        setUserPhoto(res);
+        Session.setUser(Session.getEmail());
       } else {
-        setUserPhoto(false);
+        alert("some thing went wrong setting user's photo");
       }
     });
   }, []);
 
+  const promptForCredentials = async () => {
+    const email = prompt("Please Enter your email :");
+    const password = prompt("Please Enter your password");
+    return { email, password };
+  };
+
   const delUser = async () => {
-    var isTrue = window.confirm("Continue To Delete Account..?");
+    // get the current user
+    const user = auth.currentUser;
+    const credential = promptForCredentials();
 
-    if (isTrue) {
-      var userId = curUser?.userId;
-
-      deleteDocument("Users", curUser.id).then(() => {
-        // delete user from auth
-        signInWithEmailAndPassword(
-          auth,
-          curUser?.email,
-          curUser?.password
-        ).then((result) => {
-          auth.onAuthStateChanged((user) => {
-            // const user = auth.currentUser; // get the current user
-            deleteUser(user)
-              .then(() => {
-                // delete user profile pic
-                if (phone && phone?.id) {
-                  deleteDocument("userProfilePic", phone?.id);
-                }
-
-                // delete user delete user fellowship if user is leader
-                if (fellowship && fellowship?.id) {
-                  deleteDocument("Fellowships", fellowship?.id).then(() => {
-                    alert("Fellowship Deleted.....");
-                  });
-                }
-
-                // Cookies.remove("userData"); // delete user data from session cookie
-                alert("User Account Deleted");
-                history.push("/");
-              })
-              .catch((error) => {
-                console.error(error.code);
-                alert("AUTH DELETE USER:" + error.code);
-              });
-          });
-        });
+    // reauthenticate them before deleting the account
+    reauthenticateWithCredential(user, credential)
+      .then(() => {
+        if (window.confirm("Do you really want to delete your account ?")) {
+          deleteUser(user)
+            .then(() => {
+              console.log("ACCOUNT DELETED !");
+              Session.clearUser();
+            })
+            .catch((error) => {
+              alert(error,
+                " An error ocurred, Ensure your email and password are correct then try again !"
+              );
+            });
+        }
+      })
+      .catch((error) => {
+        alert(error,
+          " An error ocurred, Ensure your email and password are correct then try again !"
+        );
+        // ...
       });
-    }
   };
 
   const EditUser = () => {
-    if (fname && lname && phone) {
-      if (image && image != null && image != undefined) {
-        updateProfileImg(curUser?.userId, image);
+    if (firstName && lastName && phone) {
+      if (image && image != null && image !== undefined) {
+        updateProfileImg(Session.getUserId(), image);
       }
 
-      var res = window.confirm("Continue..?");
+      var res = window.confirm("Continue...?");
 
       if (res) {
-        editUser(fname, lname, phone, curUser.id).then(() => {
+        editUser(firstName, lastName, phone, curUser.id).then(() => {
           LoginUser(curUser.userId)
             .then((data) => {
               if (data) {
                 Cookies.remove("userData"); // remove current user data
                 Cookies.set("userData", JSON.stringify(data)); // set new user data from fb
-                setCurUser(JSON.parse(Cookies.get("userData"))); // set user in Context
+                setCurUser(JSON.parse(localStorage.getItem("currentUser"))); // set user in Context
                 history.push(data?.isLeader ? "/leader" : "/profile"); // redirect user to homepage
               }
             })
@@ -186,15 +179,15 @@ const EditUser = () => {
           <div className="editProfileImg">
             <img
               // onClick={ e=> EditPhoto() }
-              src={userPhoto ? userPhoto.photo : ""}
-              alt={"photo of " + curUser?.firstname + " " + curUser?.lastname}
+              src={Session.getPhoto()}
+              alt="User"
             />
             <br />
             <label id="editPhotoBtn" htmlFor="selectImage">
               Select Image
             </label>
             <input
-              style={{ display: "none" }}
+              // style={{ display: "none" }}
               id="selectImage"
               onChange={(e) => EditPhoto(e.target.files[0])}
               placeholder="Select Image"
@@ -278,20 +271,20 @@ const EditUser = () => {
 
             <div className="edituserField" lines="full">
               <IonInput
-                value={fname}
+                value={firstName}
                 className="field"
                 placeholder="First name"
-                onIonChange={(e) => setFname(e.detail.value)}
+                onIonChange={(e) => setFirstName(e.detail.value)}
                 clearInput
               />
             </div>
 
             <div className="edituserField" lines="full">
               <IonInput
-                value={lname}
+                value={lastName}
                 className="field"
                 placeholder="Last name"
-                onIonChange={(e) => setLname(e.detail.value)}
+                onIonChange={(e) => setLastName(e.detail.value)}
                 clearInput
               />
             </div>

@@ -198,8 +198,8 @@ const Profile = () => {
 
             <div className="infos">
               <div className="userProfile">
-                {userPhoto ? (
-                  <img src={userPhoto?.photo} alt="profile" />
+                {Session.getPhoto() ? (
+                  <img src={Session.getPhoto()} alt="profile" />
                 ) : (
                   <img src={NoProfileImg} alt="No Profile set" />
                 )}
