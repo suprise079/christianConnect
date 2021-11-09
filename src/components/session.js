@@ -27,7 +27,7 @@ var Session = (function() {
         sessionStorage.setItem('first_name', data.firstname);
         sessionStorage.setItem('last_name', data.lastname);
         sessionStorage.setItem('is_leader', data.isLeader)
-        sessionStorage.setItem('is_premium', data.isPremium);
+        sessionStorage.setItem('is_premium', data.isPremiun);
         sessionStorage.setItem('user_id', data.userId);
         sessionStorage.setItem('phone_no', data.phoneNumber);
   
