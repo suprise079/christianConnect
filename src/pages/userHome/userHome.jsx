@@ -61,92 +61,97 @@ const UserHome = () => {
   }, [setCurUser, word, FS]);
 
   return (
-    <IonPage className="userHome">
-      <IonContent fullscreen className="container">
-        <div className="home-header">
-          <IonSearchbar
-            value={searchText}
-            onIonChange={(e) => {
-              setSearchText(e.target.value);
-              search_(e);
-              setWord(e.target.value);
-            }}
-            showCancelButton="never"
-            cancelButtonText="Cancel"
-            placeholder="Search a fellowship..."
-            className="homePageSearchBar"
-          ></IonSearchbar>
-        </div>
-
-        {/* map-container */}
-        <div className="mapContainer">
-          <span
-            style={{
-              textAlign: "left",
-              margin: "0 10px",
-              fontWeight: "lighter",
-              fontSize: "20px",
-            }}
-            className="header"
-          >
-            fellowships near you
-          </span>
-
-          <div className="map">
-            <Map />
+    <>
+      <IonPage className="userHome">
+        <IonContent fullscreen className="container">
+          <div className="home-header">
+            <IonSearchbar
+              value={searchText}
+              onIonChange={(e) => {
+                setSearchText(e.target.value);
+                search_(e);
+                setWord(e.target.value);
+              }}
+              showCancelButton="never"
+              cancelButtonText="Cancel"
+              placeholder="Search a fellowship..."
+              className="homePageSearchBar"
+            ></IonSearchbar>
           </div>
-        </div>
 
-        <div className="fellowships">
-          <div id=" search-results"></div>
-          {console.log(typeof FS)}
-          {/* display all fellowships available*/}
-          {word && FS && FS.length ? (
-            FS.map((fs, ind) => (
-              <SearchFellowship
-                key={ind}
-                name={fs.name}
-                about={fs.about}
-                location={fs.location}
-                time={fs.time}
-                fsid={fs.id}
-              />
-            ))
-          ) : word && word.length <= 2 && FS.length === 0 ? (
-            <h3>Please enter at least 3 letters!</h3>
-          ) : word && word.length > 2 && FS.length === 0 ? (
-            <h3>{word} Not Found !</h3>
-          ) : fellowships ? (
-            fellowships.map((fs, ind) => (
-              <SearchFellowship
-                key={ind}
-                name={fs.name}
-                about={fs.about}
-                location={fs.location}
-                time={fs.time}
-                fsid={fs.id}
-              />
-            ))
-          ) : (
-            <IonProgressBar
-              id="progressBar"
-              type="indeterminate"
-            ></IonProgressBar>
-          )}
-        </div>
-      </IonContent>
-    </IonPage>
+          {/* map-container */}
+          <div className="mapContainer">
+            <span
+              style={{
+                textAlign: "left",
+                margin: "0 10px",
+                fontWeight: "lighter",
+                fontSize: "20px",
+              }}
+              className="header"
+            >
+              fellowships near you
+            </span>
+
+            <div className="map">
+              <Map />
+            </div>
+          </div>
+
+          <div className="fellowships">
+            <div id=" search-results"></div>
+            {console.log(typeof FS)}
+            {/* display all fellowships available*/}
+            {word && FS && FS.length ? (
+              FS.map((fs, ind) => (
+                <SearchFellowship
+                  key={ind}
+                  name={fs.name}
+                  about={fs.about}
+                  location={fs.location}
+                  time={fs.time}
+                  fsid={fs.id}
+                />
+              ))
+            ) : word && word.length <= 2 && FS.length === 0 ? (
+              <h3>Please enter at least 3 letters!</h3>
+            ) : word && word.length > 2 && FS.length === 0 ? (
+              <h3>{word} Not Found !</h3>
+            ) : fellowships ? (
+              fellowships.map((fs, ind) => (
+                <SearchFellowship
+                  key={ind}
+                  name={fs.name}
+                  about={fs.about}
+                  location={fs.location}
+                  time={fs.time}
+                  fsid={fs.id}
+                />
+              ))
+            ) : (
+              <IonProgressBar
+                id="progressBar"
+                type="indeterminate"
+              ></IonProgressBar>
+            )}
+          </div>
+        </IonContent>
+      </IonPage>
+    </>
   );
 };
 const UserHomeRoutes = () => {
   return (
-    <IonReactRouter>
-      <IonRouterOutlet>
-        <Route exact path="/" component={UserHome}/>
-        <Route exact path="/overviewfs?" component={OverviewFs} />
-      </IonRouterOutlet>
-    </IonReactRouter>
+    <>
+      {/* <IonReactRouter>
+        <IonRouterOutlet>
+          <Route exact path="/" component={UserHome} />
+          <Route exact path="/overviewfs?" component={OverviewFs} />
+        </IonRouterOutlet>
+      </IonReactRouter> */}
+        <UserHome />
+    </>
   );
 };
 
-export default UserHome;
+export default UserHomeRoutes;

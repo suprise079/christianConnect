@@ -8,6 +8,7 @@ import {
   IonTitle,
   IonTabBar,
   IonImg,
+  IonProgressBar,
 } from "@ionic/react";
 import "./overviewFs.css";
 import Stars from "../../components/starRating/starRating";
@@ -53,15 +54,16 @@ import {
   Subs,
 } from "../../firebase/firebase-help";
 import { dummyPhoto } from "../../components/helpFunc";
+import Session from "../../components/session";
 
 // has, location of fellowship, time, websites, contact details
 // able to share to other apps and books marks
 const ContactLocAddr = (props) => {
-  const { allFellowships, curUser, setCurUser } = useContext(Context);
-  const [al,setAllFellowships] = useState(localStorage.getItem("allFellowships"))
+  const { curUser, setCurUser } = useContext(Context);
+  const [allFellowships,setAllFellowships] = useState(localStorage.getItem("allFellowships"))
 
   const subs = () => {
-    Subs(curUser?.id, props.fsid).then((ref) => {
+    Subs(Session.getUserId(), props.fsid).then((ref) => {
       if (ref) alert("Subscription Added");
       else {
         alert("Error Adding Subscription");
@@ -70,8 +72,8 @@ const ContactLocAddr = (props) => {
   };
 
   useEffect(() => {
-    setCurUser(JSON.parse(Cookies.get("userData")));
-  }, []);
+    setCurUser(JSON.parse(localStorage.getItem("current")));
+  });
 
   return (
     <>
@@ -120,7 +122,7 @@ const ContactLocAddr = (props) => {
 const ReviewsFs = (props) => {
   const [rateTxt, setRateTxt] = useState();
   const [stars, setStars] = useState(0);
-  const { allFellowships, curUser, setCurUser } = useContext(Context);
+  const {  curUser, setCurUser } = useContext(Context);
   const [curFs, setCurFs] = useState();
   const [show, setShow] = useState(0);
   const [reviews, setReviews] = useState();
@@ -152,16 +154,14 @@ const ReviewsFs = (props) => {
 
   function addReview() {
     if (stars > 0 && rateTxt) {
-      // console.log( stars, rateTxt ); console.log( "USER ID:", curUser?.userId )
-      // console.log( "FS ID:", curFs?.id );
-      // uid, fsid, stars, text, ufname, ulname
+    
       AddReview(
-        curUser?.userId,
+        Session.getUserId(),
         curFs?.id,
         stars,
         rateTxt,
-        curUser?.firstname,
-        curUser?.lastname
+        Session.getFirstName(),
+        Session.getLastName()
       ).then((res) => {
         if (res) {
           alert("Review Added Successfull");
@@ -268,7 +268,7 @@ const ReviewsFs = (props) => {
                 </span>{" "}
               </h2>
             ) : (
-              <h2>Loading.....</h2>
+              <IonProgressBar type="indeterminate"></IonProgressBar>
             )}
           </div>
         </div>
@@ -310,7 +310,7 @@ const PhotosFs = (props) => {
         ) : photos?.length === 0 ? (
           <h2>No FS Images</h2>
         ) : (
-          <h2>Loading....</h2>
+          <IonProgressBar type="indeterminate"></IonProgressBar>
         )}
       </div>
     </>
@@ -333,7 +333,7 @@ const AboutFs = (props) => {
 };
 
 const OverviewFs = () => {
-  const { allFellowships } = useContext(Context);
+  // const { allFellowships } = useContext(Context);
   const [curFs, setCurFs] = useState();
   const [show, setShow] = useState(0);
   const [photos, setPhotos] = useState();
@@ -364,7 +364,7 @@ const OverviewFs = () => {
     });
 
     setCurFs(
-      JSON.parse(Cookies.get("allFellowships")).filter(
+      JSON.parse(localStorage.getItem("allFellowships")).filter(
         (doc) => doc.id === fsId
       )[0]
     );
