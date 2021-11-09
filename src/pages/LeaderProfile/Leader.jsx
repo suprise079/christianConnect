@@ -60,6 +60,13 @@ import Premium from "./premium/Premium";
 import Session from "../../components/session";
 import About from "../About/About";
 import { FcAbout } from "react-icons/fc";
+import SavedVideos from "../UserProfile/savedVideos/savedVideos";
+import Donate from "../UserProfile/Donate";
+import UploadAnnouncement from "./premium/UploadAnnouncement";
+import UploadSermon from "./premium/UploadSermons";
+import UploadDevotions from "./premium/UploadDevotion";
+import Post from "../subscription/discussions/addPost";
+import Notes from "../notes/Notes";
 
 var profileImg = "/assets/icon/prayer.jpeg";
 
@@ -131,12 +138,9 @@ const Body = styled(IonPage)`
 const Leader = () => {
   // Donate variables
   const [donateModal, setDonateModal] = useState(false);
-  const [text, setText] = useState("");
-  const [paymentType, setPaymentType] = useState("Card");
-  const [confirmDonation, setConfirmDonation] = useState(false);
-  const [donateAmount, setDonateAmount] = useState("");
-  const [donateAnonymously, setDonateAnonymously] = useState(false);
-  const [donationConfirmed, setDonationConfirmed] = useState(false);
+  const [modal, setModal] = useState(false)
+  const [modalContent, setModalContent] = useState(0)
+  
 
   const [present, dismiss] = useIonToast();
 
@@ -263,6 +267,16 @@ const Leader = () => {
     });
   }, []);
 
+  function openModal(number) {
+    setModal(true)
+    setModalContent(number)
+  }
+
+  function closeModal(){
+    setModal(false)
+    setModalContent(0)
+  }
+
   const goToItem = (e) => {
     if (e.target.id === "/") {
     } else {
@@ -326,20 +340,9 @@ const Leader = () => {
             <div id="profile_items" className="menu">
               {page &&
                 Pages?.map((appPage, index) => {
-                  return appPage.url === "/Donate" ? (
-                    <div
-                      key={index}
-                      id={appPage.url}
-                      onClick={(e) => setDonateModal(true)}
-                      className="item"
-                      style={{ display: !appPage ? "none" : "" }}
-                    >
-                      <IonIcon
-                        className="icon"
-                        slot="start"
-                        ios={appPage.iosIcon}
-                        md={appPage.mdIcon}
-                      />
+                  return appPage.url != "/" ? (
+                    <div key={index} id={appPage.url} onClick={(e) => openModal(index+1)} className="item" style={{ display: !appPage ? "none" : "" }}>
+                      <IonIcon className="icon" slot="start" ios={appPage.iosIcon} md={appPage.mdIcon} />
                       <IonLabel>{appPage.title}</IonLabel>
                     </div>
                   ) : appPage.url === "/" ? (
@@ -424,120 +427,18 @@ const Leader = () => {
         </div>
 
         <IonModal isOpen={donateModal}>
-          <IonContent class="ion-padding" id="donateModalContent">
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                setConfirmDonation(true);
-              }}
-            >
-              <p id="donateInfo">
-                Donate To The Christian Connect Development Team
-              </p>
-
-              <div style={{ margin: "10px" }} id="paymentType">
-                <div>Payment type:</div>
-                <div className="donatePaymentContainer">
-                  <label
-                    className={
-                      paymentType === "Card"
-                        ? "paymentTypeChecked"
-                        : "paymentType"
-                    }
-                    htmlFor="CardMethod"
-                  >
-                    Card
-                  </label>
-                  <input
-                    checked={paymentType === "Card"}
-                    onClick={(e) => setPaymentType(e.target.value)}
-                    value="Card"
-                    name="paymentDonate"
-                    type="radio"
-                    id="CardMethod"
-                  />
-                  <label
-                    className={
-                      paymentType === "EFT"
-                        ? "paymentTypeChecked"
-                        : "paymentType"
-                    }
-                    htmlFor="EFTMethod"
-                  >
-                    EFT
-                  </label>
-                  <input
-                    className="paymentType"
-                    checked={paymentType === "EFT"}
-                    onClick={(e) => setPaymentType(e.target.value)}
-                    value="EFT"
-                    name="paymentDonate"
-                    type="radio"
-                    id="EFTMethod"
-                  />
-                </div>
-              </div>
-
-              <div style={{ margin: "10px" }} id="donateAmount">
-                <label> Amount(in ZAR): </label>
-                <input
-                  value={parseInt(donateAmount, 10)}
-                  onChange={(e) => {
-                    setDonateAmount(parseInt(e.target.value, 10));
-                  }}
-                  required
-                  style={{ border: "1px solid gray", borderRadius: "5px" }}
-                  size="7"
-                  type="number"
-                />
-              </div>
-
-              <div style={{ margin: "10px" }} id="donateMessage">
-                <p> Message </p>
-
-                <IonTextarea
-                  rows="6"
-                  placeholder="A word to accompany your donation..."
-                  className="donateTextArea"
-                  value={text}
-                  onIonChange={(e) => setText(e.target.value)}
-                ></IonTextarea>
-              </div>
-
-              <div
-                style={{
-                  margin: "10px",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <input
-                  id="donateAnonymously"
-                  style={{ margin: "0 10px" }}
-                  type="checkbox"
-                  checked={donateAnonymously}
-                  onChange={() => setDonateAnonymously(!donateAnonymously)}
-                />
-                <label htmlFor="donateAnonymously">Donate Anonymously</label>
-              </div>
-
-              <div
-                style={{
-                  margin: "10px",
-                  display: "flex",
-                  justifyContent: "center",
-                }}
-                className="donateButtonsContainer"
-              >
-                <button onClick={() => setDonateModal(false)}>Cancel</button>
-                <button type="submit">Donate</button>
-              </div>
-            </form>
-          </IonContent>
+          
         </IonModal>
-        <IonModal isOpen={aboutModal}>
-          <About setIsOpen={setAboutModal} />
+        <IonModal isOpen={modal}>
+          {modalContent == 1 && <SavedVideos closeModal={closeModal}/>}
+          {modalContent == 2 && <Donate closeModal={closeModal} />}
+          {modalContent == 3 && <UploadSermon closeModal={closeModal} />}
+          {modalContent == 4 && <UploadAnnouncement closeModal={closeModal} />}
+          {modalContent == 5 && <UploadDevotions closeModal={closeModal} />}
+          {modalContent == 6 && <Post closeModal={closeModal} />}
+          {modalContent == 7 && <Notes closeModal={closeModal} />}
+
+          {/* <About setIsOpen={setAboutModal} /> */}
         </IonModal>
       </Body>
     </IonPage>
